@@ -39,7 +39,8 @@ const eventData = [
                 },
                 "composition_date": "1920-12-04T00:00:00.000Z",
                 "larger_work": "Die tote Stadt",
-                "character_that_sings_it": "Fritz"
+                "character_that_sings_it": "Fritz",
+                "type": "ITEM_TYPES.PIECE"
             }
         ]
     },
@@ -110,7 +111,8 @@ const eventData = [
                     "first_name": "Alex",
                     "surname": "Ashworth",
                     "role": "Teacher"
-                }
+                },
+                "type": "ITEM_TYPES.EXERCISE"
             }
         ]
     },
