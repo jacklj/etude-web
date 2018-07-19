@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import People from './People';
+
 class Event extends Component {
   render() {
     return (
       <div>
-        <div>{this.props.name}</div>
-        <div>{this.props.type}</div>
-        <div>{this.props.start}-{this.props.end}</div>
-        <div>{this.props.rating}</div>
+        <div>
+          <div>{this.props.name}</div>
+          <div>{this.props.type}</div>
+          <div>{this.props.start}-{this.props.end}</div>
+          <div>{this.props.rating}</div>
+        </div>
+        <People people={this.props.people} />
       </div>
     );
   }
