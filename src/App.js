@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import eventData from './eventData';
+import Event from './components/Event';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Singprocess</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div>
+          {eventData.map(event => <Event
+            name={event.name}
+            start={event.start}
+            end={event.end}
+            type={event.type}
+            rating={event.rating}
+            location={event.location}
+            people={event.people}
+            items={event.items}
+          />)}
+        </div>
       </div>
     );
   }
