@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import People from './People';
+import Items from './Items';
 import { renderDuration } from '../services/datetime';
 
 class Event extends Component {
@@ -17,6 +18,7 @@ class Event extends Component {
           <div>{this.props.rating}</div>
         </div>
         <People people={this.props.people} />
+        <Items items={this.props.items} />
       </div>
     );
   }
