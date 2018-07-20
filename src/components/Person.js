@@ -5,21 +5,32 @@ import styled from 'styled-components';
 import personPlaceholderImage from '../assets/personPlaceholderImage.png'
 
 const Avatar = styled.img`
-  width:50px;
+  width: 50px;
   height: 50px;
   border-radius: 25px;
   display: block;
 `;
 
+const Container = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+`;
+
+const Role = styled.div`
+  font-size: 0.9em;
+  color: rgb(70,70,70);
+`;
+
 class Person extends Component {
   render() {
     return (
-      <div>
-        <b>People</b>
+      <Container>
         <Avatar src={personPlaceholderImage} />
         <div>{this.props.firstName} {this.props.surname}</div>
-        <div>{this.props.role}</div>
-      </div>
+        <Role>{this.props.role}</Role>
+      </Container>
     );
   }
 }
