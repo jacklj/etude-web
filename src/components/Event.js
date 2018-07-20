@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import StarRatingComponent from 'react-star-rating-component';
 
 import People from './People';
 import Items from './Items';
@@ -40,7 +41,13 @@ class Event extends Component {
             <Title>{this.props.name}</Title>
             <Type>{eventType}</Type>
             <div>{duration}</div>
-            <div>{this.props.rating}</div>
+            <Duration>{duration}</Duration>
+            <StarRatingComponent
+              name={'EventRating'} /* name of the radio input, it is required */
+              value={this.props.rating} /* number of selected icon (`0` - none, `1` - first) */
+              starCount={5} /* number of icons in rating, default `5` */
+              editing={false} /* is component available for editing, default `true` */
+            />
           </div>
           <People people={this.props.people} />
           <Items items={this.props.items} />
