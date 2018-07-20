@@ -5,6 +5,12 @@ import eventData from './eventData';
 import Event from './components/Event';
 import { sortEventsReverseChronological } from './services/datetime';
 
+
+const Container = styled.div`
+  background-color: rgb(238, 238, 238);
+  padding-bottom: 50px;
+`;
+
 const Title = styled.h1`
   font-size: 1.5em;
   color: palevioletred;
@@ -21,7 +27,7 @@ class App extends Component {
   render() {
     const eventDataReverseChronological = sortEventsReverseChronological(eventData);
     return (
-      <div className="App">
+      <Container>
         <Header>
           <Title>Stanza</Title>
         </Header>
@@ -37,7 +43,7 @@ class App extends Component {
             items={event.items}
           />)}
         </div>
-      </div>
+      </Container>
     );
   }
 }
