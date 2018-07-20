@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import People from './People';
 import Items from './Items';
 import { renderDuration } from '../services/datetime';
+import { renderEventType } from '../services/display';
 
 const Card = styled.div`
   background-color: rgb(255, 255, 255);
@@ -17,15 +18,27 @@ const Card = styled.div`
   min-height: 150px;
 `;
 
+const Title = styled.h1`
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 400;
+`;
+
+const Type = styled.div`
+  color: rgb(90,90,90);
+  font-size: 1.1em;
+`
+
 class Event extends Component {
   render() {
     const duration = renderDuration(this.props.start, this.props.end);
+    const eventType = renderEventType(this.props.type);
 
     return (
         <Card>
           <div>
-            <div>{this.props.name}</div>
-            <div>{this.props.type}</div>
+            <Title>{this.props.name}</Title>
+            <Type>{eventType}</Type>
             <div>{duration}</div>
             <div>{this.props.rating}</div>
           </div>
