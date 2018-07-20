@@ -22,6 +22,7 @@ class Items extends Component {
                   key={exercise.name}
                   name={exercise.name}
                   details={exercise.details}
+                  score={exercise.score}
                   teacherWhoCreatedItFirstName={
                     exercise.teacher_who_created_it.first_name
                   }

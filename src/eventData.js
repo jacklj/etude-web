@@ -104,7 +104,14 @@ const eventData = [
         id: 52,
         exercise_id: 52,
         item_id: 83,
-        name: 'Humming 5th scale',
+        name: 'Humming 5th pattern',
+        score: `options space=20
+        tabstave
+        notation=true tablature=false
+
+        notes :q G-F-E-F-G-F-E-D-C/4
+
+        options space=5`,
         details: 'down 3rd, up 3rd, down 5th',
         teacher_who_created_it: {
           id: 154,
