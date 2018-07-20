@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Person from './Person';
+import { Title } from './common/itemSections';
 
 class People extends Component {
   render() {
     return (
       <div>
-        <b>People</b>
+        <Title>People</Title>
         {this.props.people.map(person => <Person
           key={`${this.props.first_name} ${this.props.surname}`}
           firstName={person.first_name}

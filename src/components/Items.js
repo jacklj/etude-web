@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import { ITEM_TYPES } from '../constants';
 import Exercise from './Exercise';
 import Piece from './Piece';
+import { Title } from './common/itemSections';
 
 class Items extends Component {
   render() {
     return (
       <div>
+        <Title>Items</Title>
         {this.props.items.map(item => {
           if (!item) return undefined;
           let jsx;
