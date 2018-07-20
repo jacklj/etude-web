@@ -20,3 +20,13 @@ export const renderDuration = (startDateTime, endDateTime) => {
   }
   return startEndRender;
 };
+
+export const sortEventsReverseChronological = (events) => events.sort((a,b) => {
+  if(moment(a.end).isBefore(moment(b.end))) {
+    return 1;
+  } else if (moment(a.end).isAfter(moment(b.end))) {
+    return -1;
+  } else {
+    return 0; // leave order as is
+  }
+});

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import eventData from './eventData';
 import Event from './components/Event';
+import { sortEventsReverseChronological } from './services/datetime';
+
 const Title = styled.h1`
   font-size: 1.5em;
   color: palevioletred;
@@ -17,13 +19,14 @@ const Header = styled.header`
 
 class App extends Component {
   render() {
+    const eventDataReverseChronological = sortEventsReverseChronological(eventData);
     return (
       <div className="App">
         <Header>
           <Title>Stanza</Title>
         </Header>
         <div>
-          {eventData.map(event => <Event
+          {eventDataReverseChronological.map(event => <Event
             name={event.name}
             start={event.start}
             end={event.end}
