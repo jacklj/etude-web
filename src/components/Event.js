@@ -29,6 +29,10 @@ const Type = styled.div`
   color: rgb(90,90,90);
   font-size: 1.1em;
 `
+const Duration = styled.div`
+  color: rgb(90,90,90);
+  font-size: 1.1em;
+`;
 
 class Event extends Component {
   render() {
@@ -40,7 +44,6 @@ class Event extends Component {
           <div>
             <Title>{this.props.name}</Title>
             <Type>{eventType}</Type>
-            <div>{duration}</div>
             <Duration>{duration}</Duration>
             <StarRatingComponent
               name={'EventRating'} /* name of the radio input, it is required */
