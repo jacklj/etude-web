@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Card, Name, TeacherWhoCreatedIt } from './common/itemCards';
+
 class Exercise extends Component {
   render() {
     return (
-      <div>
-        <div>{this.props.name}</div>
+      <Card>
+        <Name>{this.props.name}</Name>
+        <TeacherWhoCreatedIt>{`${this.props.teacherWhoCreatedItFirstName} ${this.props.teacherWhoCreatedItSurname}`}</TeacherWhoCreatedIt>
         <div>{this.props.details}</div>
-        <div>{`${this.props.teacherWhoCreatedItFirstName} ${this.props.teacherWhoCreatedItSurname}`}</div>
-      </div>
+      </Card>
     );
   }
 }

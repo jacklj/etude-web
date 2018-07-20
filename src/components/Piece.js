@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Card, Name, Composer} from './common/itemCards';
+
 class Piece extends Component {
   render() {
     return (
-      <div>
-        <div>{this.props.name}</div>
-        <div>{`${this.props.composerFirstName} ${this.props.composerSurname}`}</div>
-        <div>{this.props.largerWork}</div>
-      </div>
+      <Card>
+        <Name>{this.props.name}</Name>
+        <Composer>{`${this.props.largerWork} - ${this.props.composerFirstName} ${this.props.composerSurname}`}</Composer>
+      </Card>
     );
   }
 }

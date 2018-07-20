@@ -9,7 +9,7 @@ import { renderDuration } from '../services/datetime';
 import { renderEventType } from '../services/display';
 
 const Card = styled.div`
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(250, 250, 250);
   display: block;
   padding: 10px;
   margin: 20px;
