@@ -5,8 +5,8 @@ import {
   Link,
 } from 'react-router-dom';
 import styled from 'styled-components';
-import Home from './components/Home';
 import Timeline from './components/Timeline';
+import UpcomingRep from './components/UpcomingRep';
 
 const Container = styled.div`
   background-color: rgb(238, 238, 238);
@@ -33,11 +33,11 @@ const App = () => (
       </Header>
       <nav>
         <Link to="/">Home</Link>
-        <Link to="/timeline">Timeline</Link>
+        <Link to="/upcoming-rep">Upcoming rep</Link>
       </nav>
       <hr />
-      <Route exact path="/" component={Home} />
-      <Route path="/timeline" component={Timeline} />
+      <Route exact path="/" component={Timeline} />
+      <Route path="/upcoming-rep" component={UpcomingRep} />
     </Container>
   </Router>
 );
