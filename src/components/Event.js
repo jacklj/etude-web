@@ -28,7 +28,8 @@ const Title = styled.h1`
 const Type = styled.div`
   color: rgb(90,90,90);
   font-size: 1.1em;
-`
+`;
+
 const Duration = styled.div`
   color: rgb(90,90,90);
   font-size: 1.1em;
