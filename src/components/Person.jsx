@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import personPlaceholderImage from '../assets/personPlaceholderImage.png'
+import personPlaceholderImage from '../assets/personPlaceholderImage.png';
 
 const Avatar = styled.img`
   width: 50px;
@@ -23,17 +23,13 @@ const Role = styled.div`
   color: rgb(70,70,70);
 `;
 
-class Person extends Component {
-  render() {
-    return (
-      <Container>
-        <Avatar src={personPlaceholderImage} />
-        <div>{this.props.firstName} {this.props.surname}</div>
-        <Role>{this.props.role}</Role>
-      </Container>
-    );
-  }
-}
+const Person = ({ firstName, role, surname }) => (
+  <Container>
+    <Avatar src={personPlaceholderImage} />
+    <div>{firstName} {surname}</div>
+    <Role>{role}</Role>
+  </Container>
+);
 
 Person.defaultProps = {
   role: undefined,

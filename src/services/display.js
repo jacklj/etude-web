@@ -8,4 +8,6 @@ const eventTypeDisplayMap = {
   'EVENT_TYPES.OTHER': 'Other',
 };
 
-export const renderEventType = (eventTypeConstant) => eventTypeDisplayMap[eventTypeConstant];
+export const renderEventType = ( // eslint-disable-line import/prefer-default-export
+  eventTypeConstant,
+) => eventTypeDisplayMap[eventTypeConstant];
