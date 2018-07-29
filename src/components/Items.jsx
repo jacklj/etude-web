@@ -56,7 +56,7 @@ const Items = ({ items }) => (
 );
 
 Items.defaultProps = {
-  items: undefined,
+  items: [],
 };
 
 Items.propTypes = {

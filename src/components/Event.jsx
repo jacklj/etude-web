@@ -19,12 +19,6 @@ const Card = styled.div`
   min-height: 150px;
 `;
 
-const Title = styled.h1`
-  margin: 0;
-  font-size: 1.5em;
-  font-weight: 400;
-`;
-
 const Type = styled.div`
   color: rgb(90, 90, 90);
   font-size: 1.1em;
@@ -41,7 +35,7 @@ const Location = styled.div`
 `;
 
 const Event = ({
-  end, items, location, name, people, rating, start, type,
+  end, items, location, people, rating, start, type,
 }) => {
   const duration = renderDuration(start, end);
   const eventType = renderEventType(type);
@@ -49,7 +43,6 @@ const Event = ({
   return (
     <Card>
       <div>
-        <Title>{name}</Title>
         <Type>{eventType}</Type>
         <Duration>{duration}</Duration>
         <Location>{location.name}</Location>
@@ -75,7 +68,6 @@ Event.defaultProps = {
 };
 
 Event.propTypes = {
-  name: PropTypes.string.isRequired,
   start: PropTypes.string.isRequired,
   end: PropTypes.string,
   type: PropTypes.string.isRequired,

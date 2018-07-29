@@ -19,7 +19,7 @@ const People = ({ people }) => (
 );
 
 People.defaultProps = {
-  people: undefined,
+  people: [],
 };
 
 People.propTypes = {
