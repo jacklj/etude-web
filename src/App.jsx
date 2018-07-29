@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 import Timeline from './components/Timeline';
-import UpcomingRep from './components/UpcomingRep';
+import UpcomingRep from './components/upcomingRep/UpcomingRep';
 
 const Container = styled.div`
   background-color: rgb(238, 238, 238);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { getUpcomingRepertoire } from '../services/api';
-import Piece from './Piece';
+import { getUpcomingRepertoire } from '../../services/api';
+import UpcomingPiece from './UpcomingPiece';
 
 class UpcomingRep extends Component {
   constructor(props) {
@@ -20,12 +20,13 @@ class UpcomingRep extends Component {
     return (
       <div>
         {upcomingRep.map(piece => (
-          <Piece
+          <UpcomingPiece
             key={`${piece.name}, ${piece.deadline}`}
             name={piece.name}
             composerFirstName={piece.composer.first_name}
             composerSurname={piece.composer.surname}
             largerWork={piece.larger_work}
+            deadline={piece.deadline}
           />
         ))}
       </div>
