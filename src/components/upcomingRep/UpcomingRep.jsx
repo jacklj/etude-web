@@ -12,7 +12,9 @@ class UpcomingRep extends Component {
   }
 
   componentDidMount() {
-    getUpcomingRepertoire().then(upcomingRep => this.setState({ upcomingRep }));
+    getUpcomingRepertoire().then(
+      upcomingRep => Array.isArray(upcomingRep) && this.setState({ upcomingRep }),
+    );
   }
 
   render() {

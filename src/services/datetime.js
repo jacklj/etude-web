@@ -23,11 +23,14 @@ export const renderDuration = (startDateTime, endDateTime) => {
   return startEndRender;
 };
 
-export const sortEventsReverseChronological = events => events.sort((a, b) => {
-  if (moment(a.end).isBefore(moment(b.end))) {
-    return 1;
-  } if (moment(a.end).isAfter(moment(b.end))) {
-    return -1;
-  }
-  return 0; // leave order as is
-});
+export const sortEventsReverseChronological = events => {
+  if (!Array.isArray(events)) return [];
+  return events.sort((a, b) => {
+    if (moment(a.end).isBefore(moment(b.end))) {
+      return 1;
+    } if (moment(a.end).isAfter(moment(b.end))) {
+      return -1;
+    }
+    return 0; // leave order as is
+  });
+};

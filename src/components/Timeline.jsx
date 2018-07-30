@@ -12,7 +12,7 @@ class Timeline extends Component {
   }
 
   componentDidMount() {
-    getTimeline().then(timeline => this.setState({ timeline }));
+    getTimeline().then(timeline => Array.isArray(timeline) && this.setState({ timeline }));
   }
 
   render() {
