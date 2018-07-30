@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 import Timeline from './components/Timeline';
+import AddLesson from './components/AddLesson';
 import UpcomingRep from './components/upcomingRep/UpcomingRep';
 
 const Container = styled.div`
@@ -45,10 +46,12 @@ const App = () => (
       <Nav>
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/upcoming-rep">Upcoming rep</StyledLink>
+        <StyledLink to="/add-lesson">Add lesson</StyledLink>
       </Nav>
       <hr />
       <Route exact path="/" component={Timeline} />
       <Route path="/upcoming-rep" component={UpcomingRep} />
+      <Route path="/add-lesson" component={AddLesson} />
     </Container>
   </Router>
 );
