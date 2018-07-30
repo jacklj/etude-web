@@ -25,16 +25,27 @@ const Header = styled.header`
   color: white;
 `;
 
+const Nav = styled.nav`
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+`;
+
+const StyledLink = styled(Link)`
+  margin-right: 20px;
+  font-size: 1.2em;
+`;
+
 const App = () => (
   <Router>
     <Container>
       <Header>
         <Title>Stanza</Title>
       </Header>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/upcoming-rep">Upcoming rep</Link>
-      </nav>
+      <Nav>
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/upcoming-rep">Upcoming rep</StyledLink>
+      </Nav>
       <hr />
       <Route exact path="/" component={Timeline} />
       <Route path="/upcoming-rep" component={UpcomingRep} />
