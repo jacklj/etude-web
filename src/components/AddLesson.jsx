@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import moment from 'moment';
 import StarRatingComponent from 'react-star-rating-component';
 import DateTime from 'react-datetime';
+import Select from 'react-select';
 
-import { createLesson, editLesson } from '../services/api';
+import { createLesson, editLesson, getLocations } from '../services/api';
 
 const Label = styled.label`
   display: block;
@@ -14,17 +15,28 @@ const Label = styled.label`
 class AddLesson extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      allLocations: [],
+      selectedLocation: undefined,
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onStarClick = this.onStarClick.bind(this);
     this.handleStartChange = this.handleStartChange.bind(this);
     this.handleEndChange = this.handleEndChange.bind(this);
+    this.handleLocationChange = this.handleLocationChange.bind(this);
   }
 
   componentDidMount() {
     createLesson().then(lesson => this.setState({ ...lesson }));
+
+    getLocations()
+      .then(allLocations => allLocations.map(location => ({
+        value: location.id,
+        label: location.name,
+      })))
+      .then(allLocations => this.setState({ allLocations }));
   }
 
   onStarClick(nextValue) {
@@ -40,9 +52,12 @@ class AddLesson extends Component {
     });
   }
 
+  handleLocationChange(newLocation) {
+    this.setState({ selectedLocation: newLocation });
+  }
+
   handleStartChange(newDateTime) {
     const start = moment(newDateTime).format();
-    console.log(`HANDLE start: ${start}`);
     this.setState({
       start,
     });
@@ -50,7 +65,6 @@ class AddLesson extends Component {
 
   handleEndChange(newDateTime) {
     const end = moment(newDateTime).format();
-    console.log(`end: ${end}`);
     this.setState({
       end,
     });
@@ -59,27 +73,40 @@ class AddLesson extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const {
-      event_id, start, end, type, rating, location_id, teacher_id,
+      allLocations,
+      event_id,
+      start,
+      end,
+      type,
+      rating,
+      selectedLocation,
+      teacher_id,
     } = this.state;
-
 
     const newLesson = {
       start,
       end,
       type,
       rating: Number(rating),
-      location_id: Number(location_id),
+      location_id: selectedLocation.value,
       teacher_id: Number(teacher_id),
     };
-    editLesson(newLesson, event_id).then(lesson => this.setState({ ...lesson }));
+
+    editLesson(newLesson, event_id).then(lesson => {
+      this.setState({ ...lesson });
+      // set selectedLocation from the returned lesson_id
+      const newSelectedLocation = allLocations.filter(
+        location => location.value === lesson.lesson_id,
+      )[0];
+      this.setState({ selectedLocation: newSelectedLocation });
+    });
   }
 
   render() {
     const {
-      start, end, type, rating, location_id, teacher_id,
+      allLocations, selectedLocation, start, end, type, rating, teacher_id,
     } = this.state;
 
-    console.log(`RENDER start: ${start}`);
     // need to wrap start and end in moment(), or DateTime component doesn't work
     const startMoment = moment(start);
     const endMoment = moment(end);
@@ -110,11 +137,11 @@ class AddLesson extends Component {
           </Label>
           <Label>
             location:
-            <input
-              type="text"
+            <Select
               name="location_id"
-              value={location_id}
-              onChange={this.handleChange}
+              value={selectedLocation}
+              onChange={this.handleLocationChange}
+              options={allLocations}
             />
           </Label>
           <Label>
