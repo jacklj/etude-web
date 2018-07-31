@@ -83,11 +83,21 @@ class AddLesson extends Component {
           </Label>
           <Label>
             location:
-            <input type="text" name="location_id" value={location_id} onChange={this.handleChange} />
+            <input
+              type="text"
+              name="location_id"
+              value={location_id}
+              onChange={this.handleChange}
+            />
           </Label>
           <Label>
             teacher:
-            <input type="number" name="teacher_id" value={teacher_id} onChange={this.handleChange} />
+            <input
+              type="number"
+              name="teacher_id"
+              value={teacher_id}
+              onChange={this.handleChange}
+            />
           </Label>
           <input type="submit" value="Save" />
         </form>
