@@ -13,8 +13,17 @@ export const getUpcomingRepertoire = () => fetch(`${baseURL}/api/repertoire/upco
 
 export const createLesson = (lesson) => fetch(`${baseURL}/api/lessons`, {
   method: 'POST',
-  body: JSON.stringify(lesson), // body data type must match "Content-Type" header
+  body: JSON.stringify(lesson),
 })
   .then(response => response.json())
-  .catch(error => console.error('Fetch Error =\n', error));
+  .catch(error => console.error('createLesson Fetch Error =\n', error));
 
+export const editLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/${eventId}`, {
+  method: 'PUT',
+  body: JSON.stringify(lesson),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8', // need this for PUT or server thinks body is blank
+  },
+})
+  .then(response => response.json())
+  .catch(error => console.error('editLesson Fetch Error =\n', error));
