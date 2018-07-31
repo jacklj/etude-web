@@ -23,7 +23,7 @@ class AddLesson extends Component {
     createLesson().then(lesson => this.setState({ ...lesson }));
   }
 
-  onStarClick(nextValue, prevValue) {
+  onStarClick(nextValue) {
     this.setState({ rating: nextValue });
   }
 
