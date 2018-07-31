@@ -1,7 +1,9 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import StarRatingComponent from 'react-star-rating-component';
+import DateTime from 'react-datetime';
 
 import { createLesson, editLesson } from '../services/api';
 
@@ -17,6 +19,8 @@ class AddLesson extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onStarClick = this.onStarClick.bind(this);
+    this.handleStartChange = this.handleStartChange.bind(this);
+    this.handleEndChange = this.handleEndChange.bind(this);
   }
 
   componentDidMount() {
@@ -36,11 +40,28 @@ class AddLesson extends Component {
     });
   }
 
+  handleStartChange(newDateTime) {
+    const start = moment(newDateTime).format();
+    console.log(`HANDLE start: ${start}`);
+    this.setState({
+      start,
+    });
+  }
+
+  handleEndChange(newDateTime) {
+    const end = moment(newDateTime).format();
+    console.log(`end: ${end}`);
+    this.setState({
+      end,
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const {
       event_id, start, end, type, rating, location_id, teacher_id,
     } = this.state;
+
 
     const newLesson = {
       start,
@@ -57,16 +78,22 @@ class AddLesson extends Component {
     const {
       start, end, type, rating, location_id, teacher_id,
     } = this.state;
+
+    console.log(`RENDER start: ${start}`);
+    // need to wrap start and end in moment(), or DateTime component doesn't work
+    const startMoment = moment(start);
+    const endMoment = moment(end);
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <Label>
             start:
-            <input type="text" name="start" value={start} onChange={this.handleChange} />
+            <DateTime value={startMoment} onChange={this.handleStartChange} />
           </Label>
           <Label>
             end:
-            <input type="text" name="end" value={end} onChange={this.handleChange} />
+            <DateTime value={endMoment} onChange={this.handleEndChange} />
           </Label>
           <Label>
             type:
