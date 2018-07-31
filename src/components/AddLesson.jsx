@@ -1,7 +1,12 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
 import { createLesson, editLesson } from '../services/api';
+
+const Label = styled.label`
+  display: block;
+`;
 
 class AddLesson extends Component {
   constructor(props) {
@@ -49,30 +54,30 @@ class AddLesson extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>
+          <Label>
             start:
             <input type="text" name="start" value={start} onChange={this.handleChange} />
-          </label>
-          <label>
+          </Label>
+          <Label>
             end:
             <input type="text" name="end" value={end} onChange={this.handleChange} />
-          </label>
-          <label>
+          </Label>
+          <Label>
             type:
             <input type="text" name="type" value={type} onChange={this.handleChange} />
-          </label>
-          <label>
+          </Label>
+          <Label>
             rating:
             <input type="text" name="rating" value={rating} onChange={this.handleChange} />
-          </label>
-          <label>
+          </Label>
+          <Label>
             location:
             <input type="text" name="location_id" value={location_id} onChange={this.handleChange} />
-          </label>
-          <label>
+          </Label>
+          <Label>
             teacher:
             <input type="number" name="teacher_id" value={teacher_id} onChange={this.handleChange} />
-          </label>
+          </Label>
           <input type="submit" value="Save" />
         </form>
       </div>
