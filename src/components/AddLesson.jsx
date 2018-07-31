@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import StarRatingComponent from 'react-star-rating-component';
 
 import { createLesson, editLesson } from '../services/api';
 
@@ -15,10 +16,15 @@ class AddLesson extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onStarClick = this.onStarClick.bind(this);
   }
 
   componentDidMount() {
     createLesson().then(lesson => this.setState({ ...lesson }));
+  }
+
+  onStarClick(nextValue, prevValue) {
+    this.setState({ rating: nextValue });
   }
 
   handleChange(event) {
@@ -68,7 +74,12 @@ class AddLesson extends Component {
           </Label>
           <Label>
             rating:
-            <input type="text" name="rating" value={rating} onChange={this.handleChange} />
+            <StarRatingComponent
+              name="rating"
+              value={rating}
+              starCount={5}
+              onStarClick={this.onStarClick}
+            />
           </Label>
           <Label>
             location:
