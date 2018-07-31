@@ -27,3 +27,6 @@ export const editLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/${e
 })
   .then(response => response.json())
   .catch(error => console.error('editLesson Fetch Error =\n', error));
+
+export const getLocations = () => fetch(`${baseURL}/api/locations`)
+  .then(response => response.json());
