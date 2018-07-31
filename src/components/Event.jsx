@@ -45,7 +45,7 @@ const Event = ({
       <div>
         <Type>{eventType}</Type>
         <Duration>{duration}</Duration>
-        <Location>{location.name}</Location>
+        {location && <Location>{location.name}</Location>}
         <StarRatingComponent
           name="EventRating" /* name of the radio input, it is required */
           value={rating} /* number of selected icon (`0` - none, `1` - first) */
