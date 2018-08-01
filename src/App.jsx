@@ -7,6 +7,7 @@ import {
 import styled from 'styled-components';
 import Timeline from './components/Timeline';
 import AddLesson from './components/AddLesson';
+import EditLesson from './components/EditLesson';
 import UpcomingRep from './components/upcomingRep/UpcomingRep';
 
 const Container = styled.div`
@@ -52,6 +53,7 @@ const App = () => (
       <Route exact path="/" component={Timeline} />
       <Route path="/upcoming-rep" component={UpcomingRep} />
       <Route path="/add-lesson" component={AddLesson} />
+      <Route path="/edit-lesson/:id" component={EditLesson} />
     </Container>
   </Router>
 );
