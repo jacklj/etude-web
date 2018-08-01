@@ -34,8 +34,6 @@ class AddLesson extends Component {
   }
 
   componentDidMount() {
-    createLesson().then(lesson => this.setState({ ...lesson }));
-
     getLocations()
       .then(allLocations => allLocations.map(location => ({
         value: location.id,
@@ -109,8 +107,10 @@ class AddLesson extends Component {
       teacher_id: selectedTeacher.value,
     };
 
-    editLesson(newLesson, event_id) // PUT edited lesson
+    createLesson(newLesson)
       .then(lesson => {
+        // repopulate state with lesson details returned from server, to ensure
+        // they are synchronised
         this.setState({ ...lesson });
         // set selectedLocation from the returned lesson_id
         const newSelectedLocation = allLocations.filter(
@@ -184,7 +184,7 @@ class AddLesson extends Component {
               options={allTeachers}
             />
           </Label>
-          <input type="submit" value="Save" />
+          <input type="submit" value="Add lesson" />
         </form>
       </div>
     );

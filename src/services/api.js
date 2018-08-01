@@ -14,6 +14,9 @@ export const getUpcomingRepertoire = () => fetch(`${baseURL}/api/repertoire/upco
 export const createLesson = (lesson) => fetch(`${baseURL}/api/lessons`, {
   method: 'POST',
   body: JSON.stringify(lesson),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8', // need this for PUT or server thinks body is blank
+  },
 })
   .then(response => response.json())
   .catch(error => console.error('createLesson Fetch Error =\n', error));
