@@ -6,7 +6,9 @@ import StarRatingComponent from 'react-star-rating-component';
 import DateTime from 'react-datetime';
 import Select from 'react-select';
 
-import { createLesson, editLesson, getLocations } from '../services/api';
+import {
+  createLesson, editLesson, getLocations, getTeachers,
+} from '../services/api';
 
 const Label = styled.label`
   display: block;
@@ -18,6 +20,8 @@ class AddLesson extends Component {
     this.state = {
       allLocations: [],
       selectedLocation: undefined,
+      allTeachers: [],
+      selectedTeacher: undefined,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,6 +30,7 @@ class AddLesson extends Component {
     this.handleStartChange = this.handleStartChange.bind(this);
     this.handleEndChange = this.handleEndChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handleTeacherChange = this.handleTeacherChange.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +42,13 @@ class AddLesson extends Component {
         label: location.name,
       })))
       .then(allLocations => this.setState({ allLocations }));
+
+    getTeachers()
+      .then(allTeachers => allTeachers.map(teacher => ({
+        value: teacher.id,
+        label: `${teacher.first_name} ${teacher.surname}`,
+      })))
+      .then(allTeachers => this.setState({ allTeachers }));
   }
 
   onStarClick(nextValue) {
@@ -52,8 +64,12 @@ class AddLesson extends Component {
     });
   }
 
-  handleLocationChange(newLocation) {
-    this.setState({ selectedLocation: newLocation });
+  handleLocationChange(selectedLocation) {
+    this.setState({ selectedLocation });
+  }
+
+  handleTeacherChange(selectedTeacher) {
+    this.setState({ selectedTeacher });
   }
 
   handleStartChange(newDateTime) {
@@ -74,13 +90,14 @@ class AddLesson extends Component {
     event.preventDefault();
     const {
       allLocations,
+      allTeachers,
       event_id,
       start,
       end,
       type,
       rating,
       selectedLocation,
-      teacher_id,
+      selectedTeacher,
     } = this.state;
 
     const newLesson = {
@@ -89,22 +106,36 @@ class AddLesson extends Component {
       type,
       rating: Number(rating),
       location_id: selectedLocation.value,
-      teacher_id: Number(teacher_id),
+      teacher_id: selectedTeacher.value,
     };
 
-    editLesson(newLesson, event_id).then(lesson => {
-      this.setState({ ...lesson });
-      // set selectedLocation from the returned lesson_id
-      const newSelectedLocation = allLocations.filter(
-        location => location.value === lesson.lesson_id,
-      )[0];
-      this.setState({ selectedLocation: newSelectedLocation });
-    });
+    editLesson(newLesson, event_id) // PUT edited lesson
+      .then(lesson => {
+        this.setState({ ...lesson });
+        // set selectedLocation from the returned lesson_id
+        const newSelectedLocation = allLocations.filter(
+          location => location.value === lesson.location_id,
+        )[0];
+        this.setState({ selectedLocation: newSelectedLocation });
+
+        // set selectedTeacher from the returned teacher_id
+        const newSelectedTeacher = allTeachers.filter(
+          teacher => teacher.value === lesson.teacher_id,
+        )[0];
+        this.setState({ selectedTeacher: newSelectedTeacher });
+      });
   }
 
   render() {
     const {
-      allLocations, selectedLocation, start, end, type, rating, teacher_id,
+      allLocations,
+      selectedTeacher,
+      selectedLocation,
+      allTeachers,
+      start,
+      end,
+      type,
+      rating,
     } = this.state;
 
     // need to wrap start and end in moment(), or DateTime component doesn't work
@@ -146,11 +177,11 @@ class AddLesson extends Component {
           </Label>
           <Label>
             teacher:
-            <input
-              type="number"
+            <Select
               name="teacher_id"
-              value={teacher_id}
-              onChange={this.handleChange}
+              value={selectedTeacher}
+              onChange={this.handleTeacherChange}
+              options={allTeachers}
             />
           </Label>
           <input type="submit" value="Save" />

@@ -30,3 +30,9 @@ export const editLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/${e
 
 export const getLocations = () => fetch(`${baseURL}/api/locations`)
   .then(response => response.json());
+
+export const getPeople = () => fetch(`${baseURL}/api/people`)
+  .then(response => response.json());
+
+export const getTeachers = () => fetch(`${baseURL}/api/people/teachers`)
+  .then(response => response.json());
