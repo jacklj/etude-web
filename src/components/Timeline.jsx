@@ -22,6 +22,7 @@ class Timeline extends Component {
         {timeline.map(event => (
           <Event
             key={`${event.start} - ${event.end}`}
+            id={event.id}
             start={event.start}
             end={event.end}
             type={event.type}

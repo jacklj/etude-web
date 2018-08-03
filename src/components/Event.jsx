@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatingComponent from 'react-star-rating-component';
+import { Link } from 'react-router-dom';
 
 import People from './People';
 import Items from './Items';
@@ -19,7 +20,7 @@ const Card = styled.div`
   min-height: 150px;
 `;
 
-const Type = styled.div`
+const TitleLink = styled(Link)`
   color: rgb(90, 90, 90);
   font-size: 1.1em;
 `;
@@ -35,7 +36,7 @@ const Location = styled.div`
 `;
 
 const Event = ({
-  end, items, location, people, rating, start, type,
+  id, end, items, location, people, rating, start, type,
 }) => {
   const duration = renderDuration(start, end);
   const eventType = renderEventType(type);
@@ -43,7 +44,7 @@ const Event = ({
   return (
     <Card>
       <div>
-        <Type>{eventType}</Type>
+        <TitleLink to={`/edit-lesson/${id}`}>{eventType}</TitleLink>
         <Duration>{duration}</Duration>
         {location && <Location>{location.name}</Location>}
         <StarRatingComponent
@@ -68,6 +69,7 @@ Event.defaultProps = {
 };
 
 Event.propTypes = {
+  id: PropTypes.number.isRequired,
   start: PropTypes.string.isRequired,
   end: PropTypes.string,
   type: PropTypes.string.isRequired,
