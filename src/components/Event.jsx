@@ -44,7 +44,7 @@ const Event = ({
   return (
     <Card>
       <div>
-        <TitleLink to={`/edit-lesson/${id}`}>{eventType}</TitleLink>
+        <TitleLink to={`/lesson/${id}`}>{eventType}</TitleLink>
         <Duration>{duration}</Duration>
         {location && <Location>{location.name}</Location>}
         <StarRatingComponent

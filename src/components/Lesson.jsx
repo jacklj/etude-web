@@ -15,7 +15,7 @@ const Label = styled.label`
   display: block;
 `;
 
-class EditLesson extends Component {
+class Lesson extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -140,6 +140,8 @@ class EditLesson extends Component {
 
   render() {
     const {
+      event_id,
+      lesson_id,
       allLocations,
       selectedTeacher,
       selectedLocation,
@@ -156,6 +158,20 @@ class EditLesson extends Component {
 
     return (
       <div>
+        <h3>View lesson</h3>
+        <div>
+          {JSON.stringify({
+            event_id,
+            lesson_id,
+            selectedTeacher,
+            selectedLocation,
+            start,
+            end,
+            type,
+            rating,
+          })
+          }
+        </div>
         <form onSubmit={this.handleSubmit}>
           <Label>
             start:
@@ -203,8 +219,8 @@ class EditLesson extends Component {
   }
 }
 
-EditLesson.propTypes = {
+Lesson.propTypes = {
   match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default EditLesson;
+export default Lesson;
