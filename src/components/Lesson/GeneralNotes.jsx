@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Card } from '../common/itemCards';
+import Note from './Note';
 
 const GeneralNotes = ({ notes }) => (
   <div>
     <h3>Notes</h3>
     {notes && Array.isArray(notes) && notes.map(note => (
-      <Card key={`${note}`}>
-        <div>{note.note}</div>
-        <div>{note.score}</div>
-        <div>{note.type}</div>
-      </Card>
+      <Note key={note.note} note={note.note} score={note.score} type={note.type} />
     ))}
   </div>
 );
