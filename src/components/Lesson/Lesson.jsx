@@ -7,11 +7,13 @@ import StarRatingComponent from 'react-star-rating-component';
 import DateTime from 'react-datetime';
 import Select from 'react-select';
 
-import Items from './Items';
+import Items from '../Items';
+import AddGeneralNote from './AddGeneralNote';
+import GeneralNotes from './GeneralNotes';
 import {
   editLesson, getLesson, getLocations, getTeachers,
-} from '../services/api';
-import { renderDuration } from '../services/datetime';
+} from '../../services/api';
+import { renderDuration } from '../../services/datetime';
 
 const Label = styled.label`
   display: block;
@@ -38,7 +40,7 @@ class Lesson extends Component {
   }
 
   componentDidMount() {
-    const event_id = this.props.match.params.id;
+    const event_id = this.props.match.params.id; // eslint-disable-line
     this.setState({ event_id });
 
     getLocations()
@@ -142,6 +144,7 @@ class Lesson extends Component {
 
   render() {
     const {
+      event_id,
       allLocations,
       selectedTeacher,
       selectedLocation,
@@ -152,6 +155,7 @@ class Lesson extends Component {
       type,
       rating,
       items,
+      general_notes,
     } = this.state;
 
     // need to wrap start and end in moment(), or DateTime component doesn't work
@@ -206,6 +210,9 @@ class Lesson extends Component {
           </Label>
           <input type="submit" value="Save details" />
         </form>
+        <h3>General lesson notes</h3>
+        <AddGeneralNote eventId={event_id} />
+        <GeneralNotes notes={general_notes} />
         <Items items={items} />
       </div>
     );

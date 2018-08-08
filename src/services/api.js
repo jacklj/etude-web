@@ -42,3 +42,13 @@ export const getPeople = () => fetch(`${baseURL}/api/people`)
 
 export const getTeachers = () => fetch(`${baseURL}/api/people/teachers`)
   .then(response => response.json());
+
+export const createNote = (note) => fetch(`${baseURL}/api/notes/`, {
+  method: 'POST',
+  body: JSON.stringify(note),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8', // need this for PUT or server thinks body is blank
+  },
+})
+  .then(response => response.json())
+  .catch(error => console.error('createNote Fetch Error =\n', error));

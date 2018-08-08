@@ -7,7 +7,7 @@ import {
 import styled from 'styled-components';
 import Timeline from './components/Timeline';
 import AddLesson from './components/AddLesson';
-import Lesson from './components/Lesson';
+import Lesson from './components/Lesson/Lesson';
 import UpcomingRep from './components/upcomingRep/UpcomingRep';
 
 const Container = styled.div`
