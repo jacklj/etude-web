@@ -7,6 +7,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import DateTime from 'react-datetime';
 import Select from 'react-select';
 
+import Items from './Items';
 import {
   editLesson, getLesson, getLocations, getTeachers,
 } from '../services/api';
@@ -150,6 +151,7 @@ class Lesson extends Component {
       end,
       type,
       rating,
+      items,
     } = this.state;
 
     // need to wrap start and end in moment(), or DateTime component doesn't work
@@ -202,8 +204,9 @@ class Lesson extends Component {
               options={allTeachers}
             />
           </Label>
-          <input type="submit" value="Save lesson" />
+          <input type="submit" value="Save details" />
         </form>
+        <Items items={items} />
       </div>
     );
   }
