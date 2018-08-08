@@ -10,6 +10,7 @@ import Select from 'react-select';
 import {
   editLesson, getLesson, getLocations, getTeachers,
 } from '../services/api';
+import { renderDuration } from '../services/datetime';
 
 const Label = styled.label`
   display: block;
@@ -157,7 +158,7 @@ class Lesson extends Component {
 
     return (
       <div>
-        <h3>Lesson{teacher && ` with ${teacher.first_name} ${teacher.surname}`}</h3>
+        <h3>Lesson{teacher && ` with ${teacher.first_name} ${teacher.surname}`}, {renderDuration(start, end)}</h3>
         <div>
           {JSON.stringify(this.state)}
         </div>
