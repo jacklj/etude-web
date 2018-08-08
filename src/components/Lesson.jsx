@@ -127,26 +127,25 @@ class Lesson extends Component {
     this.setState({ ...lesson });
     // set selectedLocation from the returned lesson_id
     const newSelectedLocation = allLocations.filter(
-      location => location.value === lesson.location_id,
+      location => location.value === lesson.location.id,
     )[0];
     this.setState({ selectedLocation: newSelectedLocation });
 
     // set selectedTeacher from the returned teacher_id
     const newSelectedTeacher = allTeachers.filter(
-      teacher => teacher.value === lesson.teacher_id,
+      teacher => teacher.value === lesson.teacher.id,
     )[0];
     this.setState({ selectedTeacher: newSelectedTeacher });
   }
 
   render() {
     const {
-      event_id,
-      lesson_id,
       allLocations,
       selectedTeacher,
       selectedLocation,
       allTeachers,
       start,
+      teacher,
       end,
       type,
       rating,
@@ -158,19 +157,9 @@ class Lesson extends Component {
 
     return (
       <div>
-        <h3>View lesson</h3>
+        <h3>Lesson{teacher && ` with ${teacher.first_name} ${teacher.surname}`}</h3>
         <div>
-          {JSON.stringify({
-            event_id,
-            lesson_id,
-            selectedTeacher,
-            selectedLocation,
-            start,
-            end,
-            type,
-            rating,
-          })
-          }
+          {JSON.stringify(this.state)}
         </div>
         <form onSubmit={this.handleSubmit}>
           <Label>
