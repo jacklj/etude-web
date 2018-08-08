@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import moment from 'moment';
 import StarRatingComponent from 'react-star-rating-component';
 import DateTime from 'react-datetime';
@@ -10,14 +9,11 @@ import Select from 'react-select';
 import Items from '../Items';
 import AddGeneralNote from './AddGeneralNote';
 import GeneralNotes from './GeneralNotes';
+import { Label } from '../common/itemSections';
 import {
   editLesson, getLesson, getLocations, getTeachers,
 } from '../../services/api';
 import { renderDuration } from '../../services/datetime';
-
-const Label = styled.label`
-  display: block;
-`;
 
 class Lesson extends Component {
   constructor(props) {

@@ -5,3 +5,7 @@ export const Title = styled.h3`
   font-size: 1.1em;
   margin-bottom: 10px;
 `;
+
+export const Label = styled.label`
+  display: block;
+`;

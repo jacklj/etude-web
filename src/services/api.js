@@ -52,3 +52,13 @@ export const createNote = (note) => fetch(`${baseURL}/api/notes/`, {
 })
   .then(response => response.json())
   .catch(error => console.error('createNote Fetch Error =\n', error));
+
+export const editNote = (note, nodeId) => fetch(`${baseURL}/api/notes/${nodeId}`, {
+  method: 'PUT',
+  body: JSON.stringify(note),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8', // need this for PUT or server thinks body is blank
+  },
+})
+  .then(response => response.json())
+  .catch(error => console.error('editNote Fetch Error =\n', error));
