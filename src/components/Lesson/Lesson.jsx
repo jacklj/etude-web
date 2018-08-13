@@ -15,6 +15,7 @@ import { locationsFetchRequest } from '../../redux/locations/locations.actions';
 import { peopleFetchRequest } from '../../redux/people/people.actions';
 import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
 import { selectTeachersForDropdown } from '../../redux/people/people.selectors';
+import { selectEvent } from '../../redux/events/events.selectors';
 import {
   editLesson, getLesson,
 } from '../../services/api';
@@ -39,13 +40,14 @@ class Lesson extends Component {
   }
 
   componentDidMount() {
-    const event_id = this.props.match.params.id; // eslint-disable-line
-    this.setState({ event_id });
+    const { eventId } = this.props;
+    this.setState({ event_id: eventId });
 
     this.props.locationsFetchRequest();
     this.props.peopleFetchRequest();
 
-    getLesson(event_id).then(this.transformServerDataIntoState);
+    // getLesson to ensure it's up to date in the store
+    this.transformServerDataIntoState(this.props.lesson);
   }
 
   onStarClick(nextValue) {
@@ -201,16 +203,20 @@ class Lesson extends Component {
 }
 
 Lesson.propTypes = {
+  eventId: PropTypes.number.isRequired,
+  lesson: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   locations: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   locationsFetchRequest: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   peopleFetchRequest: PropTypes.func.isRequired,
   teachers: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
+  // ownProps isn't recursive - just props supplied from 'above'
+  eventId: ownProps.match.params.id,
   locations: selectLocationsForDropdown(state),
   teachers: selectTeachersForDropdown(state),
+  lesson: selectEvent(state, ownProps),
 });
 
 const mapDispatchToProps = {

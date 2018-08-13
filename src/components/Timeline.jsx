@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Event from './Event';
 import { allEventsFetchRequest } from '../redux/events/events.actions';
-import { getAllEvents } from '../redux/events/events.selectors';
+import { selectAllEvents } from '../redux/events/events.selectors';
 
 class Timeline extends Component {
   componentDidMount() {
@@ -39,7 +39,7 @@ Timeline.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  allEvents: getAllEvents(state),
+  allEvents: selectAllEvents(state),
 });
 
 const mapDispatchToProps = {
