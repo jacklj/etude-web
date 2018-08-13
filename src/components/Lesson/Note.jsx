@@ -18,6 +18,7 @@ class Note extends Component {
     this.editNote = this.editNote.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.cancelEditingNote = this.cancelEditingNote.bind(this);
   }
 
   editNote() {
@@ -55,6 +56,11 @@ class Note extends Component {
       .then(() => this.setState({ editing: false }));
   }
 
+  cancelEditingNote() {
+    // don't update note and score in state
+    this.setState({ editing: false });
+  }
+
   render() {
     const { note, score, type } = this.props;
     const { editing, editingNote, editingScore } = this.state;
@@ -72,6 +78,7 @@ class Note extends Component {
               <textarea name="editingScore" value={editingScore} onChange={this.handleChange} />
             </Label>
             <input type="submit" value="Save" />
+            <button type="button" onClick={this.cancelEditingNote}>Cancel</button>
           </form>
         ) : (
           <div>
