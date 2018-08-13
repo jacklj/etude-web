@@ -7,7 +7,7 @@ import DateTime from 'react-datetime';
 import Select from 'react-select';
 
 import {
-  createLesson, editLesson, getLocations, getTeachers,
+  createLesson, getLocations, getTeachers,
 } from '../services/api';
 
 const Label = styled.label`
@@ -89,7 +89,6 @@ class AddLesson extends Component {
     const {
       allLocations,
       allTeachers,
-      event_id,
       start,
       end,
       type,
