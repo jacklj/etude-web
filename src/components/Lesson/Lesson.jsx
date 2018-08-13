@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import StarRatingComponent from 'react-star-rating-component';
@@ -10,8 +11,10 @@ import Items from '../Items';
 import AddGeneralNote from './AddGeneralNote';
 import GeneralNotes from './GeneralNotes';
 import { Label } from '../common/itemSections';
+import { locationsFetchRequest } from '../../redux/locations/locations.actions';
+import { selectlocationsForDropdown } from '../../redux/locations/locations.selectors';
 import {
-  editLesson, getLesson, getLocations, getTeachers,
+  editLesson, getLesson, getTeachers,
 } from '../../services/api';
 import { renderDuration } from '../../services/datetime';
 
@@ -39,12 +42,7 @@ class Lesson extends Component {
     const event_id = this.props.match.params.id; // eslint-disable-line
     this.setState({ event_id });
 
-    getLocations()
-      .then(allLocations => allLocations.map(location => ({
-        value: location.id,
-        label: location.name,
-      })))
-      .then(allLocations => this.setState({ allLocations }));
+    this.props.locationsFetchRequest();
 
     getTeachers()
       .then(allTeachers => allTeachers.map(teacher => ({
@@ -118,7 +116,6 @@ class Lesson extends Component {
 
   transformServerDataIntoState(lesson) {
     const {
-      allLocations,
       allTeachers,
     } = this.state;
 
@@ -126,7 +123,7 @@ class Lesson extends Component {
     // they are synchronised
     this.setState({ ...lesson });
     // set selectedLocation from the returned lesson_id
-    const newSelectedLocation = allLocations.filter(
+    const newSelectedLocation = this.props.locations.filter(
       location => location.value === lesson.location.id,
     )[0];
     this.setState({ selectedLocation: newSelectedLocation });
@@ -141,7 +138,6 @@ class Lesson extends Component {
   render() {
     const {
       event_id,
-      allLocations,
       selectedTeacher,
       selectedLocation,
       allTeachers,
@@ -192,7 +188,7 @@ class Lesson extends Component {
               name="location_id"
               value={selectedLocation}
               onChange={this.handleLocationChange}
-              options={allLocations}
+              options={this.props.locations}
             />
           </Label>
           <Label>
@@ -216,7 +212,17 @@ class Lesson extends Component {
 }
 
 Lesson.propTypes = {
+  locations: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+  locationsFetchRequest: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default Lesson;
+const mapStateToProps = state => ({
+  locations: selectlocationsForDropdown(state),
+});
+
+const mapDispatchToProps = {
+  locationsFetchRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Lesson);
