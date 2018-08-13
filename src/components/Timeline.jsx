@@ -3,28 +3,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Event from './Event';
-import { getTimeline } from '../services/api';
 import { allEventsFetchRequest } from '../redux/events/events.actions';
 import { getAllEvents } from '../redux/events/events.selectors';
 
 class Timeline extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      timeline: [],
-    };
-  }
-
   componentDidMount() {
     this.props.allEventsFetchRequest();
-    getTimeline().then(timeline => Array.isArray(timeline) && this.setState({ timeline }));
   }
 
   render() {
-    const { timeline } = this.state;
     return (
       <div>
-        {timeline.map(event => (
+        {this.props.allEvents.map(event => (
           <Event
             key={`${event.start} - ${event.end}`}
             id={event.id}
@@ -44,10 +34,12 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   allEventsFetchRequest: PropTypes.func.isRequired,
+  allEvents: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+  // TODO 13/8/2018 JackLJ improve proptype definitions
 };
 
 const mapStateToProps = state => ({
-  events: getAllEvents(state),
+  allEvents: getAllEvents(state),
 });
 
 const mapDispatchToProps = {
