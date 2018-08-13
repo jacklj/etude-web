@@ -46,7 +46,9 @@ Timeline.propTypes = {
   allEventsFetchRequest: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  events: getAllEvents(state),
+});
 
 const mapDispatchToProps = {
   allEventsFetchRequest,
