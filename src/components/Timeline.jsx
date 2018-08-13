@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Event from './Event';
 import { getTimeline } from '../services/api';
+import { allEventsFetchRequest } from '../redux/actions/events';
 
 class Timeline extends Component {
   constructor(props) {
@@ -12,6 +15,7 @@ class Timeline extends Component {
   }
 
   componentDidMount() {
+    this.props.allEventsFetchRequest();
     getTimeline().then(timeline => Array.isArray(timeline) && this.setState({ timeline }));
   }
 
@@ -37,4 +41,14 @@ class Timeline extends Component {
   }
 }
 
-export default Timeline;
+Timeline.propTypes = {
+  allEventsFetchRequest: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = {
+  allEventsFetchRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timeline);
