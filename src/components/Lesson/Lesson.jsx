@@ -12,9 +12,11 @@ import AddGeneralNote from './AddGeneralNote';
 import GeneralNotes from './GeneralNotes';
 import { Label } from '../common/itemSections';
 import { locationsFetchRequest } from '../../redux/locations/locations.actions';
-import { selectlocationsForDropdown } from '../../redux/locations/locations.selectors';
+import { peopleFetchRequest } from '../../redux/people/people.actions';
+import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
+import { selectTeachersForDropdown } from '../../redux/people/people.selectors';
 import {
-  editLesson, getLesson, getTeachers,
+  editLesson, getLesson,
 } from '../../services/api';
 import { renderDuration } from '../../services/datetime';
 
@@ -22,9 +24,7 @@ class Lesson extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allLocations: [],
       selectedLocation: undefined,
-      allTeachers: [],
       selectedTeacher: undefined,
     };
 
@@ -43,13 +43,7 @@ class Lesson extends Component {
     this.setState({ event_id });
 
     this.props.locationsFetchRequest();
-
-    getTeachers()
-      .then(allTeachers => allTeachers.map(teacher => ({
-        value: teacher.id,
-        label: `${teacher.first_name} ${teacher.surname}`,
-      })))
-      .then(allTeachers => this.setState({ allTeachers }));
+    this.props.peopleFetchRequest();
 
     getLesson(event_id).then(this.transformServerDataIntoState);
   }
@@ -115,10 +109,6 @@ class Lesson extends Component {
   }
 
   transformServerDataIntoState(lesson) {
-    const {
-      allTeachers,
-    } = this.state;
-
     // repopulate state with lesson details returned from server, to ensure
     // they are synchronised
     this.setState({ ...lesson });
@@ -129,7 +119,7 @@ class Lesson extends Component {
     this.setState({ selectedLocation: newSelectedLocation });
 
     // set selectedTeacher from the returned teacher_id
-    const newSelectedTeacher = allTeachers.filter(
+    const newSelectedTeacher = this.props.teachers.filter(
       teacher => teacher.value === lesson.teacher.id,
     )[0];
     this.setState({ selectedTeacher: newSelectedTeacher });
@@ -140,7 +130,6 @@ class Lesson extends Component {
       event_id,
       selectedTeacher,
       selectedLocation,
-      allTeachers,
       start,
       teacher,
       end,
@@ -197,7 +186,7 @@ class Lesson extends Component {
               name="teacher_id"
               value={selectedTeacher}
               onChange={this.handleTeacherChange}
-              options={allTeachers}
+              options={this.props.teachers}
             />
           </Label>
           <input type="submit" value="Save details" />
@@ -215,14 +204,18 @@ Lesson.propTypes = {
   locations: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   locationsFetchRequest: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  peopleFetchRequest: PropTypes.func.isRequired,
+  teachers: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 const mapStateToProps = state => ({
-  locations: selectlocationsForDropdown(state),
+  locations: selectLocationsForDropdown(state),
+  teachers: selectTeachersForDropdown(state),
 });
 
 const mapDispatchToProps = {
   locationsFetchRequest,
+  peopleFetchRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Lesson);

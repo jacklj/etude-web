@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 
 const selectLocations = state => state.locations.locations;
 
-export const selectlocationsForDropdown = createSelector(
+export const selectLocationsForDropdown = createSelector(
   selectLocations,
   locations => locations.map(location => ({
     value: location.id,
