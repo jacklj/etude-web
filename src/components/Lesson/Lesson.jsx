@@ -17,7 +17,7 @@ import { selectLocationsForDropdown } from '../../redux/locations/locations.sele
 import { selectTeachersForDropdown } from '../../redux/people/people.selectors';
 import { selectEvent } from '../../redux/events/events.selectors';
 import {
-  editLesson, getLesson,
+  editLesson,
 } from '../../services/api';
 import { renderDuration } from '../../services/datetime';
 
@@ -213,7 +213,7 @@ Lesson.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   // ownProps isn't recursive - just props supplied from 'above'
-  eventId: ownProps.match.params.id,
+  eventId: Number(ownProps.match.params.id),
   locations: selectLocationsForDropdown(state),
   teachers: selectTeachersForDropdown(state),
   lesson: selectEvent(state, ownProps),

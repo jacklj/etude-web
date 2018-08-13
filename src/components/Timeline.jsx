@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Event from './Event';
 import { allEventsFetchRequest } from '../redux/events/events.actions';
-import { selectAllEvents } from '../redux/events/events.selectors';
+import { selectAllEventsAsArray } from '../redux/events/events.selectors';
 
 class Timeline extends Component {
   componentDidMount() {
@@ -17,7 +17,7 @@ class Timeline extends Component {
         {this.props.allEvents.map(event => (
           <Event
             key={`${event.start} - ${event.end}`}
-            id={event.id}
+            id={event.event_id}
             start={event.start}
             end={event.end}
             type={event.type}
@@ -39,7 +39,7 @@ Timeline.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  allEvents: selectAllEvents(state),
+  allEvents: selectAllEventsAsArray(state),
 });
 
 const mapDispatchToProps = {
