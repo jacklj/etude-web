@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 import Event from './Event';
 import { getTimeline } from '../services/api';
-import { allEventsFetchRequest } from '../redux/actions/events';
+import { allEventsFetchRequest } from '../redux/events/events.actions';
+import { getAllEvents } from '../redux/events/events.selectors';
 
 class Timeline extends Component {
   constructor(props) {

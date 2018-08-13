@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
-import rootReducer from './redux/reducers';
-import rootSaga from './redux/sagas';
+import rootReducer from './redux/rootReducer';
+import rootSaga from './redux/rootSaga';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
