@@ -4,7 +4,10 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
 import Timeline from './components/Timeline';
 import AddLesson from './components/AddLesson';
 import Lesson from './components/Lesson/Lesson';
@@ -38,24 +41,30 @@ const StyledLink = styled(Link)`
   font-size: 1.2em;
 `;
 
-const App = () => (
-  <Router>
-    <Container>
-      <Header>
-        <Title>Stanza</Title>
-      </Header>
-      <Nav>
-        <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/upcoming-rep">Upcoming rep</StyledLink>
-        <StyledLink to="/add-lesson">Add lesson</StyledLink>
-      </Nav>
-      <hr />
-      <Route exact path="/" component={Timeline} />
-      <Route path="/upcoming-rep" component={UpcomingRep} />
-      <Route path="/add-lesson" component={AddLesson} />
-      <Route path="/lesson/:id" component={Lesson} />
-    </Container>
-  </Router>
+const App = ({ store }) => (
+  <Provider store={store}>
+    <Router>
+      <Container>
+        <Header>
+          <Title>Stanza</Title>
+        </Header>
+        <Nav>
+          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/upcoming-rep">Upcoming rep</StyledLink>
+          <StyledLink to="/add-lesson">Add lesson</StyledLink>
+        </Nav>
+        <hr />
+        <Route exact path="/" component={Timeline} />
+        <Route path="/upcoming-rep" component={UpcomingRep} />
+        <Route path="/add-lesson" component={AddLesson} />
+        <Route path="/lesson/:id" component={Lesson} />
+      </Container>
+    </Router>
+  </Provider>
 );
+
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+};
 
 export default App;
