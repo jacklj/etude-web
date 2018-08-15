@@ -1,4 +1,5 @@
 import { ACTION_TYPES } from './events.actions';
+import { ACTION_TYPES as notesActionTypes } from '../notes/notes.actions';
 
 const initialState = {
   events: {}, // indexed by eventId
@@ -66,6 +67,23 @@ const eventsReducer = (state = initialState, action) => {
         ...state,
         updatingEvent: false,
       };
+    case notesActionTypes.NOTE.GENERAL.CREATE.SUCCESS: {
+      const { note } = action;
+      const eventId = note.event_id;
+      return {
+        ...state,
+        events: {
+          ...state.events,
+          [eventId]: {
+            ...state.events[eventId],
+            notes: {
+              ...state.events[eventId].notes,
+              [note.note_id]: note,
+            },
+          },
+        },
+      };
+    }
     default:
       return state;
   }

@@ -6,9 +6,16 @@ import Note from './Note';
 const GeneralNotes = ({ notes }) => (
   <div>
     <h3>Notes</h3>
-    {notes && Object.values(notes).map(note => (
-      <Note key={note.note} note={note.note} score={note.score} type={note.type} id={note.id} />
-    ))}
+    {notes
+      && Object.values(notes).map(note => (
+        <Note
+          key={note.note_id}
+          note={note.note}
+          score={note.score}
+          type={note.type}
+          id={note.note_id}
+        />
+      ))}
   </div>
 );
 
@@ -17,7 +24,7 @@ GeneralNotes.defaultProps = {
 };
 
 GeneralNotes.propTypes = {
-  notes: PropTypes.object,
+  notes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
 export default GeneralNotes;

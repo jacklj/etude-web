@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { createNote } from '../../services/api';
+import { generalNoteCreateRequest } from '../../redux/notes/notes.actions';
 
 class AddGeneralNote extends Component {
   constructor(props) {
@@ -20,10 +21,13 @@ class AddGeneralNote extends Component {
     const { note, score } = this.state;
     const { eventId } = this.props;
     const type = 'NOTE_TYPES.TECHNICAL'; // TODO 8/8/2018 all general notes technical atm
-    createNote({
-      note, score, type, event_id: eventId,
-    }).then(res => alert(`Note submitted! ${res}`));
-    console.log(event);
+    const newNote = {
+      note,
+      score,
+      type,
+      event_id: eventId,
+    };
+    this.props.generalNoteCreateRequest(newNote, eventId);
   }
 
   handleChange(event) {
@@ -47,12 +51,19 @@ class AddGeneralNote extends Component {
   }
 }
 
-AddGeneralNote.propTypes = {
+AddGeneralNote.defaultProps = {
   eventId: undefined,
 };
 
 AddGeneralNote.propTypes = {
   eventId: PropTypes.number,
+  generalNoteCreateRequest: PropTypes.func.isRequired,
 };
 
-export default AddGeneralNote;
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = {
+  generalNoteCreateRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddGeneralNote);
