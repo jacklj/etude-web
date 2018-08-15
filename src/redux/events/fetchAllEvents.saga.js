@@ -14,7 +14,7 @@ function* fetchAllEvents() {
 }
 
 function* fetchAllEventsSaga() {
-  yield takeLatest(ACTION_TYPES.ALL_EVENTS_FETCH.REQUEST, fetchAllEvents);
+  yield takeLatest(ACTION_TYPES.EVENT.FETCH_ALL.REQUEST, fetchAllEvents);
 }
 
 export default fetchAllEventsSaga;

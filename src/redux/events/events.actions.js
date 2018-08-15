@@ -1,13 +1,15 @@
 export const ACTION_TYPES = {
-  ALL_EVENTS_FETCH: {
-    REQUEST: 'ALL_EVENTS_FETCH.REQUEST',
-    SUCCESS: 'ALL_EVENTS_FETCH.SUCCESS',
-    FAILURE: 'ALL_EVENTS_FETCH.FAILURE',
-  },
-  EVENT_FETCH: {
-    REQUEST: 'EVENT_FETCH.REQUEST',
-    SUCCESS: 'EVENT_FETCH.SUCCESS',
-    FAILURE: 'EVENT_FETCH.FAILURE',
+  EVENT: {
+    FETCH: {
+      REQUEST: 'EVENT.FETCH.REQUEST',
+      SUCCESS: 'EVENT.FETCH.SUCCESS',
+      FAILURE: 'EVENT.FETCH.FAILURE',
+    },
+    FETCH_ALL: {
+      REQUEST: 'EVENT.FETCH_ALL.REQUEST',
+      SUCCESS: 'EVENT.FETCH_ALL.SUCCESS',
+      FAILURE: 'EVENT.FETCH_ALL.FAILURE',
+    },
   },
   LESSON: {
     UPDATE: {
@@ -19,31 +21,31 @@ export const ACTION_TYPES = {
 };
 
 export const allEventsFetchRequest = () => ({
-  type: ACTION_TYPES.ALL_EVENTS_FETCH.REQUEST,
+  type: ACTION_TYPES.EVENT.FETCH_ALL.REQUEST,
 });
 
 export const allEventsFetchSuccess = events => ({
-  type: ACTION_TYPES.ALL_EVENTS_FETCH.SUCCESS,
+  type: ACTION_TYPES.EVENT.FETCH_ALL.SUCCESS,
   events,
 });
 
 export const allEventsFetchFailure = error => ({
-  type: ACTION_TYPES.ALL_EVENTS_FETCH.FAILURE,
+  type: ACTION_TYPES.EVENT.FETCH_ALL.FAILURE,
   error,
 });
 
 export const eventFetchRequest = eventId => ({
-  type: ACTION_TYPES.EVENT_FETCH.REQUEST,
+  type: ACTION_TYPES.EVENT.FETCH.REQUEST,
   eventId,
 });
 
 export const eventFetchSuccess = event => ({
-  type: ACTION_TYPES.EVENT_FETCH.SUCCESS,
+  type: ACTION_TYPES.EVENT.FETCH.SUCCESS,
   event,
 });
 
 export const eventFetchFailure = error => ({
-  type: ACTION_TYPES.EVENT_FETCH.FAILURE,
+  type: ACTION_TYPES.EVENT.FETCH.FAILURE,
   error,
 });
 

@@ -9,12 +9,12 @@ const initialState = {
 
 const eventsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION_TYPES.ALL_EVENTS_FETCH.REQUEST:
+    case ACTION_TYPES.EVENT.FETCH_ALL.REQUEST:
       return {
         ...state,
         fetchingAllEvents: true,
       };
-    case ACTION_TYPES.ALL_EVENTS_FETCH.SUCCESS: {
+    case ACTION_TYPES.EVENT.FETCH_ALL.SUCCESS: {
       // transform events from array to object, indexed by event_id
       const events = {};
       action.events.forEach(event => {
@@ -27,17 +27,17 @@ const eventsReducer = (state = initialState, action) => {
         fetchingAllEvents: false,
       };
     }
-    case ACTION_TYPES.ALL_EVENTS_FETCH.FAILURE:
+    case ACTION_TYPES.EVENT.FETCH_ALL.FAILURE:
       return {
         ...state,
         fetchingAllEvents: false,
       };
-    case ACTION_TYPES.EVENT_FETCH.REQUEST:
+    case ACTION_TYPES.EVENT.FETCH.REQUEST:
       return {
         ...state,
         fetchingEvent: true,
       };
-    case ACTION_TYPES.EVENT_FETCH.SUCCESS:
+    case ACTION_TYPES.EVENT.FETCH.SUCCESS:
       return {
         ...state,
         fetchingEvent: false,
@@ -46,7 +46,7 @@ const eventsReducer = (state = initialState, action) => {
           [action.event.event_id]: action.event,
         },
       };
-    case ACTION_TYPES.EVENT_FETCH.FAILURE:
+    case ACTION_TYPES.EVENT.FETCH.FAILURE:
       return {
         ...state,
         fetchingEvent: false,
