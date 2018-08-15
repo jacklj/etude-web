@@ -163,27 +163,27 @@ class LessonDetails extends Component {
         <form>
           <Label>
             start:
-            <DateTime value={start} />
+            <DateTime value={start} readOnly />
           </Label>
           <Label>
             end:
-            <DateTime value={end} />
+            <DateTime value={end} readOnly />
           </Label>
           <Label>
             type:
-            <input type="text" name="type" value={type} />
+            <input type="text" name="type" value={type} readOnly />
           </Label>
           <Label>
             rating:
-            <StarRatingComponent name="rating" value={rating} starCount={5} />
+            <StarRatingComponent name="rating" value={rating} starCount={5} readOnly />
           </Label>
           <Label>
             location:
-            <Select name="location_id" value={location} options={this.props.locations} />
+            <Select name="location_id" value={location} options={this.props.locations} readOnly />
           </Label>
           <Label>
             teacher:
-            <Select name="teacher_id" value={teacher} options={this.props.teachers} />
+            <Select name="teacher_id" value={teacher} options={this.props.teachers} readOnly />
           </Label>
           <button type="button" onClick={this.updateLessonDetails}>
             Edit
