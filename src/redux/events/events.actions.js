@@ -9,6 +9,13 @@ export const ACTION_TYPES = {
     SUCCESS: 'EVENT_FETCH.SUCCESS',
     FAILURE: 'EVENT_FETCH.FAILURE',
   },
+  LESSON: {
+    UPDATE: {
+      REQUEST: 'LESSON.UPDATE.REQUEST',
+      SUCCESS: 'LESSON.UPDATE.SUCCESS',
+      FAILURE: 'LESSON.UPDATE.FAILURE',
+    },
+  },
 };
 
 export const allEventsFetchRequest = () => ({
@@ -37,5 +44,21 @@ export const eventFetchSuccess = event => ({
 
 export const eventFetchFailure = error => ({
   type: ACTION_TYPES.EVENT_FETCH.FAILURE,
+  error,
+});
+
+export const lessonUpdateRequest = (lesson, eventId) => ({
+  type: ACTION_TYPES.LESSON.UPDATE.REQUEST,
+  lesson,
+  eventId,
+});
+
+export const lessonUpdateSuccess = lesson => ({
+  type: ACTION_TYPES.LESSON.UPDATE.SUCCESS,
+  lesson,
+});
+
+export const lessonUpdateFailure = error => ({
+  type: ACTION_TYPES.LESSON.UPDATE.FAILURE,
   error,
 });

@@ -21,7 +21,7 @@ export const createLesson = (lesson) => fetch(`${baseURL}/api/lessons`, {
   .then(response => response.json())
   .catch(error => console.error('createLesson Fetch Error =\n', error));
 
-export const editLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/${eventId}`, {
+export const updateLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/${eventId}`, {
   method: 'PUT',
   body: JSON.stringify(lesson),
   headers: {
@@ -29,7 +29,7 @@ export const editLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/${e
   },
 })
   .then(response => response.json())
-  .catch(error => console.error('editLesson Fetch Error =\n', error));
+  .catch(error => console.error('updateLesson Fetch Error =\n', error));
 
 export const getLesson = (eventId) => fetch(`${baseURL}/api/lessons/${eventId}`)
   .then(response => response.json());

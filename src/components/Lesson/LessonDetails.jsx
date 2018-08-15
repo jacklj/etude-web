@@ -8,11 +8,11 @@ import DateTime from 'react-datetime';
 import Select from 'react-select';
 
 import { Label } from '../common/itemSections';
+import { lessonUpdateRequest } from '../../redux/events/events.actions';
 import { locationsFetchRequest } from '../../redux/locations/locations.actions';
 import { peopleFetchRequest } from '../../redux/people/people.actions';
 import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
 import { selectTeachersForDropdown } from '../../redux/people/people.selectors';
-import { editLesson } from '../../services/api';
 
 const getSelectOption = (objectFromServer, selectOptions) => selectOptions.filter(
   option => option.value === objectFromServer.id,
@@ -34,7 +34,7 @@ class LessonDetails extends Component {
     this.handleHTMLElementChange = this.handleHTMLElementChange.bind(this);
     this.handleCustomComponentChange = this.handleCustomComponentChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.editLessonDetails = this.editLessonDetails.bind(this);
+    this.updateLessonDetails = this.updateLessonDetails.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class LessonDetails extends Component {
     this.props.peopleFetchRequest();
   }
 
-  editLessonDetails() {
+  updateLessonDetails() {
     // set the editing state to be equal to the lesson data in redux (via this.props)
     const editingLocation = getSelectOption(this.props.location, this.props.locations);
     const editingTeacher = getSelectOption(this.props.teacher, this.props.teachers);
@@ -84,22 +84,15 @@ class LessonDetails extends Component {
       location_id: this.state.editingLocation.value,
       teacher_id: this.state.editingTeacher.value,
     };
-
-    editLesson(newLesson, this.props.eventId); // PUT edited lesson
-    // TODO replace editLesson with:
-    //   1. dispatching an action editLessonRequest
-    //   2. when the api call responds with new lesson details,
-    //      update that lesson in the store.
-    //   3. while the api call is in progress, display UI feedback
+    this.props.lessonUpdateRequest(newLesson, this.props.eventId);
     this.setState({
       isEditing: false,
     });
   }
 
   render() {
-    // current values
     let jsx;
-    if (this.state.isEditing) {
+    if (this.state.isEditing || this.props.isLessonUpdating) {
       const editingStart = moment(this.state.editingStart);
       const editingEnd = moment(this.state.editingEnd);
       const {
@@ -156,7 +149,7 @@ class LessonDetails extends Component {
               options={this.props.teachers}
             />
           </Label>
-          <input type="submit" value="Save details" />
+          {this.props.isLessonUpdating ? <div>Updating...</div> : <input type="submit" value="Save details" />}
         </form>
       );
     } else {
@@ -192,7 +185,7 @@ class LessonDetails extends Component {
             teacher:
             <Select name="teacher_id" value={teacher} options={this.props.teachers} />
           </Label>
-          <button type="button" onClick={this.editLessonDetails}>
+          <button type="button" onClick={this.updateLessonDetails}>
             Edit
           </button>
         </form>
@@ -210,7 +203,9 @@ LessonDetails.propTypes = {
   rating: PropTypes.number.isRequired,
   location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   teacher: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  isLessonUpdating: PropTypes.bool.isRequired,
   locations: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+  lessonUpdateRequest: PropTypes.func.isRequired,
   locationsFetchRequest: PropTypes.func.isRequired,
   peopleFetchRequest: PropTypes.func.isRequired,
   teachers: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -220,9 +215,11 @@ const mapStateToProps = state => ({
   // ownProps isn't recursive - just props supplied from 'above'
   locations: selectLocationsForDropdown(state),
   teachers: selectTeachersForDropdown(state),
+  isLessonUpdating: state.events.updatingEvent,
 });
 
 const mapDispatchToProps = {
+  lessonUpdateRequest,
   locationsFetchRequest,
   peopleFetchRequest,
 };
