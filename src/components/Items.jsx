@@ -9,7 +9,7 @@ import { Title } from './common/itemSections';
 const Items = ({ items }) => (
   <div>
     <Title>Items</Title>
-    {items.map(item => {
+    {items && Object.values(items).map(item => {
       if (!item) return undefined;
       let jsx;
       switch (item.type) {
@@ -56,12 +56,12 @@ const Items = ({ items }) => (
 );
 
 Items.defaultProps = {
-  items: [],
+  items: undefined,
 };
 
 Items.propTypes = {
   // TODO 28/7/2018 improve proptype definitions
-  items: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  items: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
 export default Items;

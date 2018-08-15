@@ -26,7 +26,7 @@ class Lesson extends Component {
       jsx = <div>Loading</div>;
     } else {
       const {
-        start, end, type, rating, location, teacher, general_notes, items,
+        start, end, type, rating, location, teacher, notes, items,
       } = this.props.lesson;
       const title = `Lesson${teacher && ` with ${teacher.first_name} ${teacher.surname}`}, ${renderDuration(start, end)}`;
       jsx = (
@@ -43,7 +43,7 @@ class Lesson extends Component {
           />
           <h3>General lesson notes</h3>
           <AddGeneralNote eventId={eventId} />
-          <GeneralNotes notes={general_notes} />
+          <GeneralNotes notes={notes} />
           <Items items={items} />
         </div>
       );

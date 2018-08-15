@@ -16,11 +16,7 @@ const eventsReducer = (state = initialState, action) => {
       };
     case ACTION_TYPES.EVENT.FETCH_ALL.SUCCESS: {
       // transform events from array to object, indexed by event_id
-      const events = {};
-      action.events.forEach(event => {
-        const eventId = event.event_id;
-        events[eventId] = event;
-      });
+      const { events } = action;
       return {
         ...state,
         events,

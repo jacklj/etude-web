@@ -77,7 +77,7 @@ Event.propTypes = {
   // TODO 28/7/2018 improve proptype definitions
   location: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   people: PropTypes.array, // eslint-disable-line react/forbid-prop-types
-  items: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  items: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
 export default Event;
