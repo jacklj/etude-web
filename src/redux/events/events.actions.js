@@ -25,13 +25,14 @@ export const allEventsFetchFailure = error => ({
   error,
 });
 
-export const eventFetchRequest = () => ({
+export const eventFetchRequest = eventId => ({
   type: ACTION_TYPES.EVENT_FETCH.REQUEST,
+  eventId,
 });
 
-export const eventFetchSuccess = events => ({
+export const eventFetchSuccess = event => ({
   type: ACTION_TYPES.EVENT_FETCH.SUCCESS,
-  events,
+  event,
 });
 
 export const eventFetchFailure = error => ({

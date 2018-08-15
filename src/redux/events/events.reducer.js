@@ -21,6 +21,7 @@ const eventsReducer = (state = initialState, action) => {
         events[eventId] = event;
       });
       return {
+        ...state,
         events,
         fetchingAllEvents: false,
       };
@@ -37,11 +38,12 @@ const eventsReducer = (state = initialState, action) => {
       };
     case ACTION_TYPES.EVENT_FETCH.SUCCESS:
       return {
+        ...state,
+        fetchingEvent: false,
         events: {
           ...state.events,
           [action.event.event_id]: action.event,
         },
-        fetchingEvent: false,
       };
     case ACTION_TYPES.EVENT_FETCH.FAILURE:
       return {
