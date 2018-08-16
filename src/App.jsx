@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Timeline from './components/Timeline';
-import AddLesson from './components/AddLesson';
+import AddLesson from './components/AddLesson/AddLesson';
 import Lesson from './components/Lesson/Lesson';
 import UpcomingRep from './components/upcomingRep/UpcomingRep';
 

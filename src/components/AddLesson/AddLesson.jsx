@@ -8,7 +8,7 @@ import Select from 'react-select';
 
 import {
   createLesson, getLocations, getTeachers,
-} from '../services/api';
+} from '../../services/api';
 
 const Label = styled.label`
   display: block;
