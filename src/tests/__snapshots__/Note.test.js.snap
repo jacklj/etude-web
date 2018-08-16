@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Note renders correctly 1`] = `
+<div
+  className="sc-bdVaJa jqsMAW"
+>
+  <div>
+    <div>
+      A note
+    </div>
+    <div>
+      a b c
+    </div>
+    <div>
+      TECHNICAL
+    </div>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Edit
+    </button>
+  </div>
+</div>
+`;

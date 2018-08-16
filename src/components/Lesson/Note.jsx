@@ -7,7 +7,7 @@ import { Label } from '../common/itemSections';
 
 import { generalNoteUpdateRequest } from '../../redux/notes/notes.actions';
 
-class Note extends Component {
+export class Note extends Component {
   constructor(props) {
     super(props);
     this.state = {
