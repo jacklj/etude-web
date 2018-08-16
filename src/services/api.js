@@ -59,3 +59,9 @@ export const updateNote = (note, noteId) => fetch(`${baseURL}/api/notes/${noteId
 })
   .then(response => response.json())
   .catch(error => console.error('editNote Fetch Error =\n', error));
+
+export const deleteNote = noteId => fetch(`${baseURL}/api/notes/${noteId}`, {
+  method: 'DELETE',
+})
+  .then(response => response.json())
+  .catch(error => console.error('editNote Fetch Error =\n', error));

@@ -2,15 +2,20 @@ export const ACTION_TYPES = {
   NOTE: {
     GENERAL: {
       CREATE: {
-        REQUEST: 'NOTE.CREATE.REQUEST',
-        SUCCESS: 'NOTE.CREATE.SUCCESS',
-        FAILURE: 'NOTE.CREATE.FAILURE',
+        REQUEST: 'NOTE.GENERAL.CREATE.REQUEST',
+        SUCCESS: 'NOTE.GENERAL.CREATE.SUCCESS',
+        FAILURE: 'NOTE.GENERAL.CREATE.FAILURE',
       },
       UPDATE: {
-        REQUEST: 'NOTE.UPDATE.REQUEST',
-        SUCCESS: 'NOTE.UPDATE.SUCCESS',
-        FAILURE: 'NOTE.UPDATE.FAILURE',
+        REQUEST: 'NOTE.GENERAL.UPDATE.REQUEST',
+        SUCCESS: 'NOTE.GENERAL.UPDATE.SUCCESS',
+        FAILURE: 'NOTE.GENERAL.UPDATE.FAILURE',
       },
+    },
+    DELETE: {
+      REQUEST: 'NOTE.DELETE.REQUEST',
+      SUCCESS: 'NOTE.DELETE.SUCCESS',
+      FAILURE: 'NOTE.DELETE.FAILURE',
     },
   },
 };
@@ -44,5 +49,22 @@ export const generalNoteUpdateSuccess = note => ({
 
 export const generalNoteUpdateFailure = error => ({
   type: ACTION_TYPES.NOTE.GENERAL.UPDATE.FAILURE,
+  error,
+});
+
+export const noteDeleteRequest = (noteId, eventId) => ({
+  type: ACTION_TYPES.NOTE.DELETE.REQUEST,
+  noteId,
+  eventId,
+});
+
+export const noteDeleteSuccess = (noteId, eventId) => ({
+  type: ACTION_TYPES.NOTE.DELETE.SUCCESS,
+  noteId,
+  eventId,
+});
+
+export const noteDeleteFailure = error => ({
+  type: ACTION_TYPES.NOTE.DELETE.FAILURE,
   error,
 });

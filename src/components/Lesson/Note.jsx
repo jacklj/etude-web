@@ -5,27 +5,48 @@ import { connect } from 'react-redux';
 import { Card } from '../common/itemCards';
 import { Label } from '../common/itemSections';
 
-import { generalNoteUpdateRequest } from '../../redux/notes/notes.actions';
+import { generalNoteUpdateRequest, noteDeleteRequest } from '../../redux/notes/notes.actions';
+
+const VIEW = {
+  DISPLAY: 'VIEW.DISPLAY',
+  EDIT: 'VIEW.EDIT',
+  DELETE: 'VIEW.DELETE',
+};
 
 export class Note extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editing: false,
+      currentView: VIEW.DISPLAY,
       editingNote: '',
       editingScore: '',
     };
 
-    this.editNote = this.editNote.bind(this);
+    this.showDeleteNote = this.showDeleteNote.bind(this);
+    this.showEditNote = this.showEditNote.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.cancelEditingNote = this.cancelEditingNote.bind(this);
+    this.deleteNote = this.deleteNote.bind(this);
+    this.editNoteSubmit = this.editNoteSubmit.bind(this);
+    this.cancelEditingOrDeletingNote = this.cancelEditingOrDeletingNote.bind(this);
   }
 
-  editNote() {
+  showDeleteNote() {
+    this.setState({
+      currentView: VIEW.DELETE,
+    });
+  }
+
+  deleteNote(event) {
+    event.preventDefault();
+    const { id: noteId, eventId } = this.props;
+    this.props.noteDeleteRequest(noteId, eventId);
+    // no need to change the view, as this component will disappear!
+  }
+
+  showEditNote() {
     const { note, score } = this.props;
     this.setState({
-      editing: true,
+      currentView: VIEW.EDIT,
       editingNote: note,
       editingScore: score,
     });
@@ -40,7 +61,7 @@ export class Note extends Component {
     });
   }
 
-  handleSubmit(event) {
+  editNoteSubmit(event) {
     event.preventDefault();
     const {
       editingNote,
@@ -57,20 +78,33 @@ export class Note extends Component {
     };
 
     this.props.generalNoteUpdateRequest(updatedNote, id);
-    this.setState({ editing: false });
+    this.setState({ currentView: VIEW.DISPLAY });
   }
 
-  cancelEditingNote() {
-    this.setState({ editing: false });
+  cancelEditingOrDeletingNote() {
+    this.setState({ currentView: VIEW.DISPLAY });
   }
 
   render() {
     const { note, score, type } = this.props;
-    const { editing, editingNote, editingScore } = this.state;
-    return (
-      <Card>
-        {editing ? (
-          <form onSubmit={this.handleSubmit}>
+    const { currentView, editingNote, editingScore } = this.state;
+
+    let jsx;
+    switch (currentView) {
+      case VIEW.DISPLAY:
+        jsx = (
+          <div>
+            <div>{note}</div>
+            <div>{score}</div>
+            <div>{type}</div>
+            <button type="button" onClick={this.showEditNote}>Edit</button>
+            <button type="button" onClick={this.showDeleteNote}>Delete</button>
+          </div>
+        );
+        break;
+      case VIEW.EDIT:
+        jsx = (
+          <form onSubmit={this.editNoteSubmit}>
             <div>editing</div>
             <Label>
               note:
@@ -81,17 +115,24 @@ export class Note extends Component {
               <textarea name="editingScore" value={editingScore} onChange={this.handleChange} />
             </Label>
             <input type="submit" value="Save" />
-            <button type="button" onClick={this.cancelEditingNote}>Cancel</button>
+            <button type="button" onClick={this.cancelEditingOrDeletingNote}>Cancel</button>
           </form>
-        ) : (
+        );
+        break;
+      case VIEW.DELETE:
+        jsx = (
           <div>
-            <div>{note}</div>
-            <div>{score}</div>
-            <div>{type}</div>
-            <button type="button" onClick={this.editNote}>Edit</button>
+            <button type="button" onClick={this.cancelEditingOrDeletingNote}>Cancel</button>
+            <button type="button" onClick={this.deleteNote}>Delete</button>
           </div>
-        )
-        }
+        );
+        break;
+      default:
+        break;
+    }
+    return (
+      <Card>
+        {jsx}
       </Card>
     );
   }
@@ -108,12 +149,14 @@ Note.propTypes = {
   id: PropTypes.number.isRequired,
   eventId: PropTypes.number.isRequired,
   generalNoteUpdateRequest: PropTypes.func.isRequired,
+  noteDeleteRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
   generalNoteUpdateRequest,
+  noteDeleteRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Note);

@@ -3,6 +3,7 @@ import { ACTION_TYPES } from './notes.actions';
 const initialState = {
   creatingNote: false,
   updatingNote: false,
+  deletingNote: false,
 };
 
 const locations = (state = initialState, action) => {
@@ -28,6 +29,17 @@ const locations = (state = initialState, action) => {
       return {
         ...state,
         updatingNote: false,
+      };
+    case ACTION_TYPES.NOTE.DELETE.REQUEST:
+      return {
+        ...state,
+        deletingNote: true,
+      };
+    case ACTION_TYPES.NOTE.DELETE.SUCCESS:
+    case ACTION_TYPES.NOTE.DELETE.FAILURE:
+      return {
+        ...state,
+        deletingNote: false,
       };
     default:
       return state;

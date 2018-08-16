@@ -85,6 +85,21 @@ const eventsReducer = (state = initialState, action) => {
         },
       };
     }
+    case notesActionTypes.NOTE.DELETE.SUCCESS: {
+      const { noteId, eventId } = action;
+      const newNotes = { ...(state.events[eventId].notes) };
+      delete newNotes[noteId];
+      return {
+        ...state,
+        events: {
+          ...state.events,
+          [eventId]: {
+            ...state.events[eventId],
+            notes: newNotes,
+          },
+        },
+      };
+    }
     default:
       return state;
   }
