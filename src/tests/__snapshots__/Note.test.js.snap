@@ -20,6 +20,12 @@ exports[`Note renders correctly 1`] = `
     >
       Edit
     </button>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
   </div>
 </div>
 `;
