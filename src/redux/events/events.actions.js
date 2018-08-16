@@ -17,6 +17,11 @@ export const ACTION_TYPES = {
       SUCCESS: 'LESSON.UPDATE.SUCCESS',
       FAILURE: 'LESSON.UPDATE.FAILURE',
     },
+    CREATE: {
+      REQUEST: 'LESSON.CREATE.REQUEST',
+      SUCCESS: 'LESSON.CREATE.SUCCESS',
+      FAILURE: 'LESSON.CREATE.FAILURE',
+    },
   },
 };
 
@@ -62,5 +67,20 @@ export const lessonUpdateSuccess = lesson => ({
 
 export const lessonUpdateFailure = error => ({
   type: ACTION_TYPES.LESSON.UPDATE.FAILURE,
+  error,
+});
+
+export const lessonCreateRequest = lesson => ({
+  type: ACTION_TYPES.LESSON.CREATE.REQUEST,
+  lesson,
+});
+
+export const lessonCreateSuccess = lesson => ({
+  type: ACTION_TYPES.LESSON.CREATE.SUCCESS,
+  lesson,
+});
+
+export const lessonCreateFailure = error => ({
+  type: ACTION_TYPES.LESSON.CREATE.FAILURE,
   error,
 });

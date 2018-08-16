@@ -1,59 +1,49 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import StarRatingComponent from 'react-star-rating-component';
 import DateTime from 'react-datetime';
 import Select from 'react-select';
 
-import {
-  createLesson, getLocations, getTeachers,
-} from '../../services/api';
+import { locationsFetchRequest } from '../../redux/locations/locations.actions';
+import { peopleFetchRequest } from '../../redux/people/people.actions';
+import { lessonCreateRequest } from '../../redux/events/events.actions';
+import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
+import { selectTeachersForDropdown } from '../../redux/people/people.selectors';
+
 
 const Label = styled.label`
   display: block;
 `;
 
+const initialState = {
+  start: '',
+  end: '',
+  type: '',
+  rating: null,
+  location: null,
+  teacher: null,
+};
+
 class AddLesson extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      allLocations: [],
-      selectedLocation: undefined,
-      allTeachers: [],
-      selectedTeacher: undefined,
-    };
+    this.state = { ...initialState };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleHTMLElementChange = this.handleHTMLElementChange.bind(this);
+    this.handleCustomComponentChange = this.handleCustomComponentChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onStarClick = this.onStarClick.bind(this);
-    this.handleStartChange = this.handleStartChange.bind(this);
-    this.handleEndChange = this.handleEndChange.bind(this);
-    this.handleLocationChange = this.handleLocationChange.bind(this);
-    this.handleTeacherChange = this.handleTeacherChange.bind(this);
   }
 
   componentDidMount() {
-    getLocations()
-      .then(allLocations => allLocations.map(location => ({
-        value: location.id,
-        label: location.name,
-      })))
-      .then(allLocations => this.setState({ allLocations }));
-
-    getTeachers()
-      .then(allTeachers => allTeachers.map(teacher => ({
-        value: teacher.id,
-        label: `${teacher.first_name} ${teacher.surname}`,
-      })))
-      .then(allTeachers => this.setState({ allTeachers }));
+    this.props.locationsFetchRequest();
+    this.props.peopleFetchRequest();
   }
 
-  onStarClick(nextValue) {
-    this.setState({ rating: nextValue });
-  }
-
-  handleChange(event) {
+  handleHTMLElementChange(event) {
     const { target } = event;
     const { name, value } = target;
 
@@ -62,39 +52,22 @@ class AddLesson extends Component {
     });
   }
 
-  handleLocationChange(selectedLocation) {
-    this.setState({ selectedLocation });
-  }
-
-  handleTeacherChange(selectedTeacher) {
-    this.setState({ selectedTeacher });
-  }
-
-  handleStartChange(newDateTime) {
-    const start = moment(newDateTime).format();
-    this.setState({
-      start,
-    });
-  }
-
-  handleEndChange(newDateTime) {
-    const end = moment(newDateTime).format();
-    this.setState({
-      end,
+  handleCustomComponentChange(name) {
+    return value => this.setState({
+      [name]: value,
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
+
     const {
-      allLocations,
-      allTeachers,
       start,
       end,
       type,
       rating,
-      selectedLocation,
-      selectedTeacher,
+      location,
+      teacher,
     } = this.state;
 
     const newLesson = {
@@ -102,59 +75,46 @@ class AddLesson extends Component {
       end,
       type,
       rating: Number(rating),
-      location_id: selectedLocation.value,
-      teacher_id: selectedTeacher.value,
+      location_id: location.value,
+      teacher_id: teacher.value,
     };
 
-    createLesson(newLesson)
-      .then(lesson => {
-        // repopulate state with lesson details returned from server, to ensure
-        // they are synchronised
-        this.setState({ ...lesson });
-        // set selectedLocation from the returned lesson_id
-        const newSelectedLocation = allLocations.filter(
-          location => location.value === lesson.location_id,
-        )[0];
-        this.setState({ selectedLocation: newSelectedLocation });
-
-        // set selectedTeacher from the returned teacher_id
-        const newSelectedTeacher = allTeachers.filter(
-          teacher => teacher.value === lesson.teacher_id,
-        )[0];
-        this.setState({ selectedTeacher: newSelectedTeacher });
-      });
+    this.props.lessonCreateRequest(newLesson);
+    this.setState({ ...initialState });
   }
 
   render() {
+    const start = moment(this.state.start);
+    const end = moment(this.state.end);
     const {
-      allLocations,
-      selectedTeacher,
-      selectedLocation,
-      allTeachers,
-      start,
-      end,
-      type,
-      rating,
+      type, rating, location, teacher,
     } = this.state;
-
-    // need to wrap start and end in moment(), or DateTime component doesn't work
-    const startMoment = moment(start);
-    const endMoment = moment(end);
 
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <Label>
             start:
-            <DateTime value={startMoment} onChange={this.handleStartChange} />
+            <DateTime
+              value={start}
+              onChange={this.handleCustomComponentChange('start')}
+            />
           </Label>
           <Label>
             end:
-            <DateTime value={endMoment} onChange={this.handleEndChange} />
+            <DateTime
+              value={end}
+              onChange={this.handleCustomComponentChange('end')}
+            />
           </Label>
           <Label>
             type:
-            <input type="text" name="type" value={type} onChange={this.handleChange} />
+            <input
+              type="text"
+              name="type"
+              value={type}
+              onChange={this.handleHTMLElementChange}
+            />
           </Label>
           <Label>
             rating:
@@ -162,32 +122,55 @@ class AddLesson extends Component {
               name="rating"
               value={rating}
               starCount={5}
-              onStarClick={this.onStarClick}
+              onStarClick={this.handleCustomComponentChange('rating')}
             />
           </Label>
           <Label>
             location:
             <Select
-              name="location_id"
-              value={selectedLocation}
-              onChange={this.handleLocationChange}
-              options={allLocations}
+              value={location}
+              onChange={this.handleCustomComponentChange('location')}
+              options={this.props.locations}
             />
           </Label>
           <Label>
             teacher:
             <Select
-              name="teacher_id"
-              value={selectedTeacher}
-              onChange={this.handleTeacherChange}
-              options={allTeachers}
+              value={teacher}
+              onChange={this.handleCustomComponentChange('teacher')}
+              options={this.props.teachers}
             />
           </Label>
-          <input type="submit" value="Add lesson" />
+          {this.props.isLessonBeingCreated ? <div>Creating..</div> : <input type="submit" value="Add lesson" />}
         </form>
       </div>
     );
   }
 }
 
-export default AddLesson;
+AddLesson.propTypes = {
+  locations: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+  locationsFetchRequest: PropTypes.func.isRequired,
+  peopleFetchRequest: PropTypes.func.isRequired,
+  lessonCreateRequest: PropTypes.func.isRequired,
+  teachers: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+  isLessonBeingCreated: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = state => ({
+  // ownProps isn't recursive - just props supplied from 'above'
+  locations: selectLocationsForDropdown(state),
+  teachers: selectTeachersForDropdown(state),
+  isLessonBeingCreated: state.events.creatingLesson,
+});
+
+const mapDispatchToProps = {
+  locationsFetchRequest,
+  peopleFetchRequest,
+  lessonCreateRequest,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AddLesson);

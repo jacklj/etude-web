@@ -6,6 +6,7 @@ const initialState = {
   fetchingAllEvents: false,
   fetchingEvent: false,
   updatingEvent: false,
+  creatingLesson: false,
 };
 
 const eventsReducer = (state = initialState, action) => {
@@ -66,6 +67,25 @@ const eventsReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingEvent: false,
+      };
+    case ACTION_TYPES.LESSON.CREATE.REQUEST:
+      return {
+        ...state,
+        creatingLesson: true,
+      };
+    case ACTION_TYPES.LESSON.CREATE.SUCCESS:
+      return {
+        ...state,
+        creatingLesson: false,
+        events: {
+          ...state.events,
+          [action.lesson.event_id]: action.lesson,
+        },
+      };
+    case ACTION_TYPES.LESSON.CREATE.FAILURE:
+      return {
+        ...state,
+        creatingLesson: false,
       };
     case notesActionTypes.NOTE.GENERAL.UPDATE.SUCCESS:
     case notesActionTypes.NOTE.GENERAL.CREATE.SUCCESS: {
