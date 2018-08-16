@@ -14,6 +14,7 @@ const GeneralNotes = ({ notes }) => (
           score={note.score}
           type={note.type}
           id={note.note_id}
+          eventId={note.event_id}
         />
       ))}
   </div>

@@ -6,6 +6,7 @@ import updateLessonSaga from './events/updateLesson.saga';
 import fetchLocationsSaga from './locations/locations.saga';
 import fetchPeopleSaga from './people/people.saga';
 import createGeneralNoteSaga from './notes/createGeneralNote.saga';
+import updateGeneralNoteSaga from './notes/updateGeneralNote.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -15,5 +16,6 @@ export default function* rootSaga() {
     fetchLocationsSaga(),
     fetchPeopleSaga(),
     createGeneralNoteSaga(),
+    updateGeneralNoteSaga(),
   ]);
 }

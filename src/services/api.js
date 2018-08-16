@@ -53,7 +53,7 @@ export const createNote = (note) => fetch(`${baseURL}/api/notes/`, {
   .then(response => response.json())
   .catch(error => console.error('createNote Fetch Error =\n', error));
 
-export const editNote = (note, nodeId) => fetch(`${baseURL}/api/notes/${nodeId}`, {
+export const updateNote = (note, noteId) => fetch(`${baseURL}/api/notes/${noteId}`, {
   method: 'PUT',
   body: JSON.stringify(note),
   headers: {

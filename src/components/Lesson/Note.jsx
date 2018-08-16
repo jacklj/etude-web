@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { Card } from '../common/itemCards';
 import { Label } from '../common/itemSections';
 
-import { editNote } from '../../services/api';
+import { generalNoteUpdateRequest } from '../../redux/notes/notes.actions';
 
 class Note extends Component {
   constructor(props) {
@@ -50,14 +51,16 @@ class Note extends Component {
     const updatedNote = {
       note: editingNote,
       score: editingScore,
+      type: this.props.type,
+      id: this.props.id,
+      event_id: this.props.eventId,
     };
 
-    editNote(updatedNote, id) // PUT edited lesson
-      .then(() => this.setState({ editing: false }));
+    this.props.generalNoteUpdateRequest(updatedNote, id);
+    this.setState({ editing: false });
   }
 
   cancelEditingNote() {
-    // don't update note and score in state
     this.setState({ editing: false });
   }
 
@@ -103,6 +106,14 @@ Note.propTypes = {
   score: PropTypes.string,
   type: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  eventId: PropTypes.number.isRequired,
+  generalNoteUpdateRequest: PropTypes.func.isRequired,
 };
 
-export default Note;
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = {
+  generalNoteUpdateRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Note);

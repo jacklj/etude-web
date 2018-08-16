@@ -67,6 +67,7 @@ const eventsReducer = (state = initialState, action) => {
         ...state,
         updatingEvent: false,
       };
+    case notesActionTypes.NOTE.GENERAL.UPDATE.SUCCESS:
     case notesActionTypes.NOTE.GENERAL.CREATE.SUCCESS: {
       const { note } = action;
       const eventId = note.event_id;
