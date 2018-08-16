@@ -16,7 +16,7 @@ class Timeline extends Component {
       <div>
         {this.props.allEvents.map(event => (
           <Event
-            key={`${event.start} - ${event.end}`}
+            key={event.event_id}
             id={event.event_id}
             start={event.start}
             end={event.end}
