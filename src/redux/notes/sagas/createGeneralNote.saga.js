@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { createNote } from '../../services/api';
-import { generalNoteCreateSuccess, generalNoteCreateFailure, ACTION_TYPES } from './notes.actions';
+import { createNote } from '../../../services/api';
+import { generalNoteCreateSuccess, generalNoteCreateFailure, ACTION_TYPES } from '../notes.actions';
 
 function* createGeneralNoteGenerator(action) {
   const { note, eventId } = action;

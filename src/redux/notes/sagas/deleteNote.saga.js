@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { deleteNote } from '../../services/api';
-import { noteDeleteSuccess, noteDeleteFailure, ACTION_TYPES } from './notes.actions';
+import { deleteNote } from '../../../services/api';
+import { noteDeleteSuccess, noteDeleteFailure, ACTION_TYPES } from '../notes.actions';
 
 function* deleteNoteGenerator(action) {
   const { noteId, eventId } = action;

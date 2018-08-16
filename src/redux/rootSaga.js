@@ -1,14 +1,14 @@
 import { all } from 'redux-saga/effects';
 
-import fetchAllEventsSaga from './events/fetchAllEvents.saga';
-import fetchEventSaga from './events/fetchEvent.saga';
-import updateLessonSaga from './events/updateLesson.saga';
-import createLessonSaga from './events/createLesson.saga';
+import fetchAllEventsSaga from './events/sagas/fetchAllEvents.saga';
+import fetchEventSaga from './events/sagas/fetchEvent.saga';
+import updateLessonSaga from './events/sagas/updateLesson.saga';
+import createLessonSaga from './events/sagas/createLesson.saga';
 import fetchLocationsSaga from './locations/locations.saga';
 import fetchPeopleSaga from './people/people.saga';
-import createGeneralNoteSaga from './notes/createGeneralNote.saga';
-import updateGeneralNoteSaga from './notes/updateGeneralNote.saga';
-import deleteNoteSaga from './notes/deleteNote.saga';
+import createGeneralNoteSaga from './notes/sagas/createGeneralNote.saga';
+import updateGeneralNoteSaga from './notes/sagas/updateGeneralNote.saga';
+import deleteNoteSaga from './notes/sagas/deleteNote.saga';
 
 export default function* rootSaga() {
   yield all([

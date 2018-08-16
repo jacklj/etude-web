@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { createLesson } from '../../services/api';
-import { lessonCreateSuccess, lessonCreateFailure, ACTION_TYPES } from './events.actions';
+import { createLesson } from '../../../services/api';
+import { lessonCreateSuccess, lessonCreateFailure, ACTION_TYPES } from '../events.actions';
 
 function* createLessonGenerator(action) {
   const { lesson } = action;

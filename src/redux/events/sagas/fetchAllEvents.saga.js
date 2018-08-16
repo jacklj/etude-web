@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getTimeline } from '../../services/api';
-import { allEventsFetchSuccess, allEventsFetchFailure, ACTION_TYPES } from './events.actions';
+import { getTimeline } from '../../../services/api';
+import { allEventsFetchSuccess, allEventsFetchFailure, ACTION_TYPES } from '../events.actions';
 
 function* fetchAllEvents() {
   try {
