@@ -2,7 +2,7 @@ import { sortEventsReverseChronological } from './datetime';
 
 const env = process.env.NODE_ENV || 'development';
 
-const baseURL = env === 'development' ? 'http://localhost:8080' : 'http://singprocess.herokuapp.com';
+const baseURL = env === 'development' ? 'http://localhost:8080' : 'https://singprocess.herokuapp.com';
 
 export const getTimeline = () => fetch(`${baseURL}/api/events`)
   .then(response => response.json())
