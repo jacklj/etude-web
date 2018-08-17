@@ -108,7 +108,7 @@ const eventsReducer = (state = initialState, action) => {
     }
     case notesActionTypes.NOTE.DELETE.SUCCESS: {
       const { noteId, eventId } = action;
-      const newNotes = { ...(state.events[eventId].notes) };
+      const newNotes = { ...state.events[eventId].notes };
       delete newNotes[noteId];
       return {
         ...state,

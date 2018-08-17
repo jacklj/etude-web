@@ -3,8 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 
-import { fetchAllRepertoireRequest, fetchAllExercisesRequest, createRepertoireInstanceRequest, createExerciseInstanceRequest } from '../../redux/items/items.actions';
-import { selectRepertoireForDropdown, selectExercisesForDropdown } from '../../redux/items/items.selectors';
+import {
+  fetchAllRepertoireRequest,
+  fetchAllExercisesRequest,
+  createRepertoireInstanceRequest,
+  createExerciseInstanceRequest,
+} from '../../redux/items/items.actions';
+import {
+  selectRepertoireForDropdown,
+  selectExercisesForDropdown,
+} from '../../redux/items/items.selectors';
 
 const VIEW = {
   DEFAULT: 'VIEW.DEFAULT',
@@ -83,16 +91,26 @@ class AddItem extends Component {
       case VIEW.DEFAULT:
         jsx = (
           <div>
-            <button type="button" onClick={this.showAddPiece}>Add piece</button>
-            <button type="button" onClick={this.showAddExercise}>Add exercise</button>
+            <button type="button" onClick={this.showAddPiece}>
+              Add piece
+            </button>
+            <button type="button" onClick={this.showAddExercise}>
+              Add exercise
+            </button>
           </div>
         );
         break;
       case VIEW.ADD_PIECE:
         jsx = (
           <form onSubmit={this.handlePieceInstanceSubmit}>
-            <Select value={piece} options={repertoire} onChange={this.handleCustomComponentChange('piece')} />
-            <button type="button" onClick={this.cancelAddingItem}>Cancel</button>
+            <Select
+              value={piece}
+              options={repertoire}
+              onChange={this.handleCustomComponentChange('piece')}
+            />
+            <button type="button" onClick={this.cancelAddingItem}>
+              Cancel
+            </button>
             <input type="submit" value="Add Piece" />
           </form>
         );
@@ -100,8 +118,14 @@ class AddItem extends Component {
       case VIEW.ADD_EXERCISE:
         jsx = (
           <form onSubmit={this.handleExerciseInstanceSubmit}>
-            <Select value={exercise} options={exercises} onChange={this.handleCustomComponentChange('exercise')} />
-            <button type="button" onClick={this.cancelAddingItem}>Cancel</button>
+            <Select
+              value={exercise}
+              options={exercises}
+              onChange={this.handleCustomComponentChange('exercise')}
+            />
+            <button type="button" onClick={this.cancelAddingItem}>
+              Cancel
+            </button>
             <input type="submit" value="Add Exercise" />
           </form>
         );
@@ -139,4 +163,7 @@ const mapDispatchToProps = {
   createExerciseInstanceRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AddItem);
