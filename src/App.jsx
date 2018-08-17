@@ -64,7 +64,7 @@ const App = ({ store }) => (
 );
 
 App.propTypes = {
-  store: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default App;
