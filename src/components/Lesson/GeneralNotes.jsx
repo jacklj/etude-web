@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Note from './Note';
+import NoteContainer from './Note';
 
 const GeneralNotes = ({ notes }) => (
   <div>
     <h3>Notes</h3>
     {notes
       && Object.values(notes).map(note => (
-        <Note
+        <NoteContainer
           key={note.note_id}
           note={note.note}
           score={note.score}
