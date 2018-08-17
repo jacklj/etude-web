@@ -14,7 +14,7 @@ const Card = styled.div`
   padding: 10px;
   margin: 20px;
   border-radius: 3px;
-  box-shadow: 0px 8px 10px 0px grey;
+  box-shadow: 0px 2px 5px 0px grey;
   width: 400px;
 `;
 
@@ -37,7 +37,7 @@ const renderName = person => `${person.first_name} ${person.surname}`;
 
 const Event = ({ event }) => {
   const {
-    id, end, location, rating, start, type,
+    event_id: eventId, end, location, rating, start, type,
   } = event;
   const duration = renderDuration(start, end);
   let jsx;
@@ -45,7 +45,7 @@ const Event = ({ event }) => {
   switch (type) {
     case EVENT_TYPES.LESSON: {
       jsx = (
-        <TitleLink to={`/lesson/${id}`}>{`Lesson with ${renderName(event.teacher)} `}</TitleLink>
+        <TitleLink to={`/lesson/${eventId}`}>{`Lesson with ${renderName(event.teacher)} `}</TitleLink>
       );
       break;
     }
