@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import StarRatingComponent from 'react-star-rating-component';
 import { Link } from 'react-router-dom';
 
-import People from '../common/People/People';
+import { EVENT_TYPES } from '../../constants';
+import { Title } from '../common/itemSections';
 import { renderDuration } from '../../services/datetime';
-import { renderEventType } from '../../services/display';
 
 const Card = styled.div`
   background-color: rgb(250, 250, 250);
@@ -16,7 +16,6 @@ const Card = styled.div`
   border-radius: 3px;
   box-shadow: 0px 8px 10px 0px grey;
   width: 400px;
-  min-height: 150px;
 `;
 
 const TitleLink = styled(Link)`
@@ -34,16 +33,54 @@ const Location = styled.div`
   font-size: 1.1em;
 `;
 
-const Event = ({
-  id, end, location, people, rating, start, type,
-}) => {
+const renderName = person => `${person.first_name} ${person.surname}`;
+
+const Event = ({ event }) => {
+  const {
+    id, end, location, rating, start, type,
+  } = event;
   const duration = renderDuration(start, end);
-  const eventType = renderEventType(type);
+  let jsx;
+
+  switch (type) {
+    case EVENT_TYPES.LESSON: {
+      jsx = (
+        <TitleLink to={`/lesson/${id}`}>{`Lesson with ${renderName(event.teacher)} `}</TitleLink>
+      );
+      break;
+    }
+    case EVENT_TYPES.MASTERCLASS: {
+      jsx = <Title>{`Masterclass with ${renderName(event.teacher)} `}</Title>;
+      break;
+    }
+    case EVENT_TYPES.PRACTICE: {
+      jsx = <Title>{`Practice at ${event.location.name}`}</Title>;
+      break;
+    }
+    case EVENT_TYPES.CONCERT: {
+      jsx = <Title>{`Concert: ${event.name}`}</Title>;
+      break;
+    }
+    case EVENT_TYPES.OPERA: {
+      jsx = <Title>{`Opera: ${event.name}`}</Title>;
+      break;
+    }
+    case EVENT_TYPES.RECITAL: {
+      jsx = <Title>{`Recital: ${event.name}`}</Title>;
+      break;
+    }
+    case EVENT_TYPES.OTHER: {
+      jsx = <Title>{`Other: ${event.name}`}</Title>;
+      break;
+    }
+    default:
+      break;
+  }
 
   return (
     <Card>
       <div>
-        <TitleLink to={`/lesson/${id}`}>{eventType}</TitleLink>
+        {jsx}
         <Duration>{duration}</Duration>
         {location && <Location>{location.name}</Location>}
         <StarRatingComponent
@@ -53,27 +90,12 @@ const Event = ({
           editing={false} /* is component available for editing, default `true` */
         />
       </div>
-      <People people={people} />
     </Card>
   );
 };
 
-Event.defaultProps = {
-  end: undefined,
-  rating: undefined,
-  location: undefined,
-  people: undefined,
-};
-
 Event.propTypes = {
-  id: PropTypes.number.isRequired,
-  start: PropTypes.string.isRequired,
-  end: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  rating: PropTypes.number,
-  // TODO 28/7/2018 improve proptype definitions
-  location: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  people: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  event: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default Event;
