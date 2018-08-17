@@ -121,6 +121,21 @@ const eventsReducer = (state = initialState, action) => {
         },
       };
     }
+    case itemsActionTypes.ITEM.DELETE.SUCCESS: {
+      const { itemId, eventId } = action;
+      const newItems = { ...state.events[eventId].items };
+      delete newItems[itemId];
+      return {
+        ...state,
+        events: {
+          ...state.events,
+          [eventId]: {
+            ...state.events[eventId],
+            items: newItems,
+          },
+        },
+      };
+    }
     case itemsActionTypes.REPERTOIRE_INSTANCE.CREATE.SUCCESS: {
       const { repertoireInstance } = action;
       const itemId = repertoireInstance.item_id;

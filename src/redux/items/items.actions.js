@@ -27,6 +27,13 @@ export const ACTION_TYPES = {
       FAILURE: 'EXERCISE_INSTANCE.CREATE.FAILURE',
     },
   },
+  ITEM: {
+    DELETE: {
+      REQUEST: 'ITEM.DELETE.REQUEST',
+      SUCCESS: 'ITEM.DELETE.SUCCESS',
+      FAILURE: 'ITEM.DELETE.FAILURE',
+    },
+  },
 };
 
 export const fetchAllRepertoireRequest = () => ({
@@ -86,5 +93,22 @@ export const createExerciseInstanceSuccess = exerciseInstance => ({
 
 export const createExerciseInstanceFailure = error => ({
   type: ACTION_TYPES.EXERCISE_INSTANCE.CREATE.FAILURE,
+  error,
+});
+
+export const deleteItemRequest = (itemId, eventId) => ({
+  type: ACTION_TYPES.ITEM.DELETE.REQUEST,
+  itemId,
+  eventId,
+});
+
+export const deleteItemSuccess = (itemId, eventId) => ({
+  type: ACTION_TYPES.ITEM.DELETE.SUCCESS,
+  itemId,
+  eventId,
+});
+
+export const deleteItemFailure = error => ({
+  type: ACTION_TYPES.ITEM.DELETE.FAILURE,
   error,
 });

@@ -47,7 +47,7 @@ class Lesson extends Component {
           <GeneralNotes notes={notes} />
           <h3>Items</h3>
           <AddItem eventId={eventId} />
-          <Items items={items} />
+          <Items items={items} eventId={eventId} />
         </div>
       );
     }

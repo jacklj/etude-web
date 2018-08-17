@@ -57,8 +57,7 @@ export const updateNote = (note, noteId) => fetch(`${baseURL}/api/notes/${noteId
 export const deleteNote = noteId => fetch(`${baseURL}/api/notes/${noteId}`, {
   method: 'DELETE',
 })
-  .then(response => response.json())
-  .catch(error => console.error('editNote Fetch Error =\n', error));
+  .catch(error => console.error('deleteNote Fetch Error =\n', error));
 
 export const getRepertoire = () => fetch(`${baseURL}/api/repertoire`).then(response => response.json());
 
@@ -83,3 +82,8 @@ export const createExerciseInstance = (exerciseId, eventId) => fetch(`${baseURL}
 })
   .then(response => response.json())
   .catch(error => console.error('createExerciseInstance Fetch Error =\n', error));
+
+export const deleteItem = itemId => fetch(`${baseURL}/api/items/${itemId}`, {
+  method: 'DELETE',
+})
+  .catch(error => console.error('deleteItem Fetch Error =\n', error));

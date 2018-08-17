@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Card, Name, Composer } from '../../common/itemCards';
+import { Name, Composer } from '../../common/itemCards';
 
 const Piece = ({
   composerFirstName, composerSurname, largerWork, name,
 }) => (
-  <Card>
+  <div>
     <Name>{name}</Name>
     <Composer>{`${largerWork} - ${composerFirstName} ${composerSurname}`}</Composer>
-  </Card>
+  </div>
 );
 
 Piece.defaultProps = {

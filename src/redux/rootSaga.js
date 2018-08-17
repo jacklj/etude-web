@@ -13,6 +13,7 @@ import fetchRepertoireSaga from './items/sagas/fetchRepertoire.saga';
 import fetchExercisesSaga from './items/sagas/fetchExercises.saga';
 import createRepertoireInstanceSaga from './items/sagas/createRepertoireInstance.saga';
 import createExerciseInstanceSaga from './items/sagas/createExerciseInstance.saga';
+import deleteItemSaga from './items/sagas/deleteItem.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -29,5 +30,6 @@ export default function* rootSaga() {
     fetchExercisesSaga(),
     createRepertoireInstanceSaga(),
     createExerciseInstanceSaga(),
+    deleteItemSaga(),
   ]);
 }

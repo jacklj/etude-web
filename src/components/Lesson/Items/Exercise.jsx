@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import vextab from 'vextab/releases/vextab-div'; // eslint-disable-line no-unused-vars
 
-import { Card, Name, TeacherWhoCreatedIt } from '../../common/itemCards';
+import { Name, TeacherWhoCreatedIt } from '../../common/itemCards';
 
 const Exercise = ({
   details,
@@ -11,7 +11,7 @@ const Exercise = ({
   teacherWhoCreatedItFirstName,
   teacherWhoCreatedItSurname,
 }) => (
-  <Card>
+  <div>
     <Name>{name}</Name>
     <TeacherWhoCreatedIt>
       {`${teacherWhoCreatedItFirstName} ${teacherWhoCreatedItSurname}`}
@@ -22,7 +22,7 @@ const Exercise = ({
       </div>
     )}
     <div>{details}</div>
-  </Card>
+  </div>
 );
 
 Exercise.defaultProps = {

@@ -7,6 +7,7 @@ const initialState = {
   fetchingExercises: false,
   creatingRepertoireInstance: false,
   creatingExerciseInstance: false,
+  deletingItem: false,
 };
 
 const locations = (state = initialState, action) => {
@@ -64,6 +65,17 @@ const locations = (state = initialState, action) => {
       return {
         ...state,
         creatingExerciseInstance: false,
+      };
+    case ACTION_TYPES.ITEM.DELETE.REQUEST:
+      return {
+        ...state,
+        deletingItem: true,
+      };
+    case ACTION_TYPES.ITEM.DELETE.SUCCESS:
+    case ACTION_TYPES.ITEM.DELETE.FAILURE:
+      return {
+        ...state,
+        deletingItem: false,
       };
     default:
       return state;
