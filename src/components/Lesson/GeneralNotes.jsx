@@ -5,7 +5,6 @@ import NoteContainer from './Note';
 
 const GeneralNotes = ({ notes }) => (
   <div>
-    <h3>Notes</h3>
     {notes
       && Object.values(notes).map(note => (
         <NoteContainer

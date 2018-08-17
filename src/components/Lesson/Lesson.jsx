@@ -41,7 +41,7 @@ class Lesson extends Component {
             location={location}
             teacher={teacher}
           />
-          <h3>General lesson notes</h3>
+          <h3>Notes</h3>
           <AddGeneralNote eventId={eventId} />
           <GeneralNotes notes={notes} />
           <Items items={items} />
