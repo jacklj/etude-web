@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ITEM_TYPES } from '../constants';
+import { ITEM_TYPES } from '../../../constants';
 import Exercise from './Exercise';
 import Piece from './Piece';
 

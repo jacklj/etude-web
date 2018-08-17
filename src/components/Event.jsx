@@ -5,7 +5,6 @@ import StarRatingComponent from 'react-star-rating-component';
 import { Link } from 'react-router-dom';
 
 import People from './People';
-import Items from './Items';
 import { renderDuration } from '../services/datetime';
 import { renderEventType } from '../services/display';
 
@@ -36,7 +35,7 @@ const Location = styled.div`
 `;
 
 const Event = ({
-  id, end, items, location, people, rating, start, type,
+  id, end, location, people, rating, start, type,
 }) => {
   const duration = renderDuration(start, end);
   const eventType = renderEventType(type);
@@ -55,7 +54,6 @@ const Event = ({
         />
       </div>
       <People people={people} />
-      <Items items={items} />
     </Card>
   );
 };
@@ -65,7 +63,6 @@ Event.defaultProps = {
   rating: undefined,
   location: undefined,
   people: undefined,
-  items: undefined,
 };
 
 Event.propTypes = {
@@ -77,7 +74,6 @@ Event.propTypes = {
   // TODO 28/7/2018 improve proptype definitions
   location: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   people: PropTypes.array, // eslint-disable-line react/forbid-prop-types
-  items: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
 export default Event;

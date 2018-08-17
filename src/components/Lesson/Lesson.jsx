@@ -7,7 +7,7 @@ import LessonDetails from './LessonDetails';
 import AddGeneralNote from './AddGeneralNote';
 import GeneralNotes from './GeneralNotes';
 import AddItem from './AddItem';
-import Items from '../Items';
+import Items from './Items/Items';
 import { eventFetchRequest } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
 import { renderDuration } from '../../services/datetime';
