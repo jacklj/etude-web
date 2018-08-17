@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import LessonDetails from './LessonDetails';
-import Items from '../Items';
 import AddGeneralNote from './AddGeneralNote';
 import GeneralNotes from './GeneralNotes';
+import AddItem from './AddItem';
+import Items from '../Items';
 import { eventFetchRequest } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
 import { renderDuration } from '../../services/datetime';
@@ -44,6 +45,8 @@ class Lesson extends Component {
           <h3>Notes</h3>
           <AddGeneralNote eventId={eventId} />
           <GeneralNotes notes={notes} />
+          <h3>Items</h3>
+          <AddItem eventId={eventId} />
           <Items items={items} />
         </div>
       );

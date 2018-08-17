@@ -65,3 +65,9 @@ export const deleteNote = noteId => fetch(`${baseURL}/api/notes/${noteId}`, {
 })
   .then(response => response.json())
   .catch(error => console.error('editNote Fetch Error =\n', error));
+
+export const getRepertoire = () => fetch(`${baseURL}/api/repertoire`)
+  .then(response => response.json());
+
+export const getExercises = () => fetch(`${baseURL}/api/exercises`)
+  .then(response => response.json());

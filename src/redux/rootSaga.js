@@ -9,6 +9,9 @@ import fetchPeopleSaga from './people/people.saga';
 import createGeneralNoteSaga from './notes/sagas/createGeneralNote.saga';
 import updateGeneralNoteSaga from './notes/sagas/updateGeneralNote.saga';
 import deleteNoteSaga from './notes/sagas/deleteNote.saga';
+import fetchRepertoireSaga from './items/sagas/fetchRepertoire.saga';
+import fetchExercisesSaga from './items/sagas/fetchExercises.saga';
+
 
 export default function* rootSaga() {
   yield all([
@@ -21,5 +24,7 @@ export default function* rootSaga() {
     createGeneralNoteSaga(),
     updateGeneralNoteSaga(),
     deleteNoteSaga(),
+    fetchRepertoireSaga(),
+    fetchExercisesSaga(),
   ]);
 }

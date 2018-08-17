@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import { ITEM_TYPES } from '../constants';
 import Exercise from './Exercise';
 import Piece from './Piece';
-import { Title } from './common/itemSections';
 
 const Items = ({ items }) => (
   <div>
-    <Title>Items</Title>
     {items && Object.values(items).map(item => {
       if (!item) return undefined;
       let jsx;
