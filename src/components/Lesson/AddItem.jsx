@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 
-import { fetchAllRepertoireRequest, fetchAllExercisesRequest, createRepertoireInstanceRequest } from '../../redux/items/items.actions';
+import { fetchAllRepertoireRequest, fetchAllExercisesRequest, createRepertoireInstanceRequest, createExerciseInstanceRequest } from '../../redux/items/items.actions';
 import { selectRepertoireForDropdown, selectExercisesForDropdown } from '../../redux/items/items.selectors';
 
 const VIEW = {
@@ -28,6 +28,7 @@ class AddItem extends Component {
     this.cancelAddingItem = this.cancelAddingItem.bind(this);
     this.handleCustomComponentChange = this.handleCustomComponentChange.bind(this);
     this.handlePieceInstanceSubmit = this.handlePieceInstanceSubmit.bind(this);
+    this.handleExerciseInstanceSubmit = this.handleExerciseInstanceSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +49,16 @@ class AddItem extends Component {
     const repertoireId = this.state.piece.value;
 
     this.props.createRepertoireInstanceRequest(repertoireId, eventId);
+    this.setState({ ...initialState });
+  }
+
+  handleExerciseInstanceSubmit(event) {
+    event.preventDefault();
+
+    const { eventId } = this.props;
+    const exerciseId = this.state.exercise.value;
+
+    this.props.createExerciseInstanceRequest(exerciseId, eventId);
     this.setState({ ...initialState });
   }
 
@@ -113,6 +124,7 @@ AddItem.propTypes = {
   fetchAllRepertoireRequest: PropTypes.func.isRequired,
   fetchAllExercisesRequest: PropTypes.func.isRequired,
   createRepertoireInstanceRequest: PropTypes.func.isRequired,
+  createExerciseInstanceRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -124,6 +136,7 @@ const mapDispatchToProps = {
   fetchAllRepertoireRequest,
   fetchAllExercisesRequest,
   createRepertoireInstanceRequest,
+  createExerciseInstanceRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddItem);

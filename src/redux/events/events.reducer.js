@@ -140,6 +140,25 @@ const eventsReducer = (state = initialState, action) => {
         },
       };
     }
+    case itemsActionTypes.EXERCISE_INSTANCE.CREATE.SUCCESS: {
+      const { exerciseInstance } = action;
+      const itemId = exerciseInstance.item_id;
+      const eventId = exerciseInstance.event_id;
+
+      return {
+        ...state,
+        events: {
+          ...state.events,
+          [eventId]: {
+            ...state.events[eventId],
+            items: {
+              ...state.events[eventId].items,
+              [itemId]: exerciseInstance,
+            },
+          },
+        },
+      };
+    }
     default:
       return state;
   }

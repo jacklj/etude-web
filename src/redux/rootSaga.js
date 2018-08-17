@@ -12,6 +12,7 @@ import deleteNoteSaga from './notes/sagas/deleteNote.saga';
 import fetchRepertoireSaga from './items/sagas/fetchRepertoire.saga';
 import fetchExercisesSaga from './items/sagas/fetchExercises.saga';
 import createRepertoireInstanceSaga from './items/sagas/createRepertoireInstance.saga';
+import createExerciseInstanceSaga from './items/sagas/createExerciseInstance.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     fetchRepertoireSaga(),
     fetchExercisesSaga(),
     createRepertoireInstanceSaga(),
+    createExerciseInstanceSaga(),
   ]);
 }
