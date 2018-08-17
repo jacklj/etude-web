@@ -9,8 +9,8 @@ import {
 function* createRepertoireInstanceGenerator(action) {
   const { repertoireId, eventId } = action;
   try {
-    const newNote = yield call(createRepertoireInstance, repertoireId, eventId);
-    const actionToDispatch = createRepertoireInstanceSuccess(newNote);
+    const newRepertoireInstance = yield call(createRepertoireInstance, repertoireId, eventId);
+    const actionToDispatch = createRepertoireInstanceSuccess(newRepertoireInstance);
     yield put(actionToDispatch);
   } catch (e) {
     const actionToDispatch = createRepertoireInstanceFailure(e);
