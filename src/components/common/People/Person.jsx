@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import personPlaceholderImage from '../assets/personPlaceholderImage.png';
+import personPlaceholderImage from '../../../assets/personPlaceholderImage.png';
 
 const Avatar = styled.img`
   width: 50px;

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Event from './Event';
-import { allEventsFetchRequest } from '../redux/events/events.actions';
-import { selectAllEventsAsArray } from '../redux/events/events.selectors';
+import { allEventsFetchRequest } from '../../redux/events/events.actions';
+import { selectAllEventsAsArray } from '../../redux/events/events.selectors';
 
 class Timeline extends Component {
   componentDidMount() {

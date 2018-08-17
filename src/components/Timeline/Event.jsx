@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import StarRatingComponent from 'react-star-rating-component';
 import { Link } from 'react-router-dom';
 
-import People from './People';
-import { renderDuration } from '../services/datetime';
-import { renderEventType } from '../services/display';
+import People from '../common/People/People';
+import { renderDuration } from '../../services/datetime';
+import { renderEventType } from '../../services/display';
 
 const Card = styled.div`
   background-color: rgb(250, 250, 250);
