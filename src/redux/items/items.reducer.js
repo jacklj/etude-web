@@ -5,7 +5,7 @@ const initialState = {
   exercises: {},
   fetchingRepertoire: false,
   fetchingExercises: false,
-
+  creatingRepertoireInstance: false,
 };
 
 const locations = (state = initialState, action) => {
@@ -41,6 +41,17 @@ const locations = (state = initialState, action) => {
       return {
         ...state,
         fetchingExercises: false,
+      };
+    case ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.REQUEST:
+      return {
+        ...state,
+        creatingRepertoireInstance: true,
+      };
+    case ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.SUCCESS:
+    case ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.FAILURE:
+      return {
+        ...state,
+        creatingRepertoireInstance: false,
       };
     default:
       return state;

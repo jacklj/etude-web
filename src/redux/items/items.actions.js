@@ -6,6 +6,13 @@ export const ACTION_TYPES = {
       FAILURE: 'REPERTOIRE.FETCH_ALL.FAILURE',
     },
   },
+  REPERTOIRE_INSTANCE: {
+    CREATE: {
+      REQUEST: 'REPERTOIRE_INSTANCE.CREATE.REQUEST',
+      SUCCESS: 'REPERTOIRE_INSTANCE.CREATE.SUCCESS',
+      FAILURE: 'REPERTOIRE_INSTANCE.CREATE.FAILURE',
+    },
+  },
   EXERCISES: {
     FETCH_ALL: {
       REQUEST: 'EXERCISES.FETCH_ALL.REQUEST',
@@ -40,5 +47,21 @@ export const fetchAllExercisesSuccess = exercises => ({
 
 export const fetchAllExercisesFailure = error => ({
   type: ACTION_TYPES.EXERCISES.FETCH_ALL.FAILURE,
+  error,
+});
+
+export const createRepertoireInstanceRequest = (repertoireId, eventId) => ({
+  type: ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.REQUEST,
+  repertoireId,
+  eventId,
+});
+
+export const createRepertoireInstanceSuccess = repertoireInstance => ({
+  type: ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.SUCCESS,
+  repertoireInstance,
+});
+
+export const createRepertoireInstanceFailure = error => ({
+  type: ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.FAILURE,
   error,
 });

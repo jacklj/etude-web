@@ -15,7 +15,7 @@ const Items = ({ items }) => (
           const exercise = item;
           jsx = (
             <Exercise
-              key={exercise.name}
+              key={exercise.item_id}
               name={exercise.name}
               details={exercise.details}
               score={exercise.score}
@@ -33,7 +33,7 @@ const Items = ({ items }) => (
           const piece = item;
           jsx = (
             <Piece
-              key={piece.name}
+              key={piece.item_id}
               name={piece.name}
               composerFirstName={piece.composer.first_name}
               composerSurname={piece.composer.surname}

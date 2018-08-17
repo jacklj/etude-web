@@ -1,5 +1,6 @@
 import { ACTION_TYPES } from './events.actions';
 import { ACTION_TYPES as notesActionTypes } from '../notes/notes.actions';
+import { ACTION_TYPES as itemsActionTypes } from '../items/items.actions';
 
 const initialState = {
   events: {}, // indexed by eventId
@@ -116,6 +117,25 @@ const eventsReducer = (state = initialState, action) => {
           [eventId]: {
             ...state.events[eventId],
             notes: newNotes,
+          },
+        },
+      };
+    }
+    case itemsActionTypes.REPERTOIRE_INSTANCE.CREATE.SUCCESS: {
+      const { repertoireInstance } = action;
+      const itemId = repertoireInstance.item_id;
+      const eventId = repertoireInstance.event_id;
+
+      return {
+        ...state,
+        events: {
+          ...state.events,
+          [eventId]: {
+            ...state.events[eventId],
+            items: {
+              ...state.events[eventId].items,
+              [itemId]: repertoireInstance,
+            },
           },
         },
       };

@@ -12,7 +12,7 @@ export const createLesson = (lesson) => fetch(`${baseURL}/api/lessons`, {
   method: 'POST',
   body: JSON.stringify(lesson),
   headers: {
-    'Content-Type': 'application/json; charset=utf-8', // need this for PUT or server thinks body is blank
+    'Content-Type': 'application/json; charset=utf-8',
   },
 })
   .then(response => response.json())
@@ -44,7 +44,7 @@ export const createNote = (note) => fetch(`${baseURL}/api/notes/`, {
   method: 'POST',
   body: JSON.stringify(note),
   headers: {
-    'Content-Type': 'application/json; charset=utf-8', // need this for PUT or server thinks body is blank
+    'Content-Type': 'application/json; charset=utf-8',
   },
 })
   .then(response => response.json())
@@ -71,3 +71,13 @@ export const getRepertoire = () => fetch(`${baseURL}/api/repertoire`)
 
 export const getExercises = () => fetch(`${baseURL}/api/exercises`)
   .then(response => response.json());
+
+export const createRepertoireInstance = (repertoireId, eventId) => fetch(`${baseURL}/api/events/${eventId}/repertoire`, {
+  method: 'POST',
+  body: JSON.stringify({ repertoireId }),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+})
+  .then(response => response.json())
+  .catch(error => console.error('createRepertoireInstance Fetch Error =\n', error));

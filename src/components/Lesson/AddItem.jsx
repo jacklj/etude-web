@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 
-import { fetchAllRepertoireRequest, fetchAllExercisesRequest } from '../../redux/items/items.actions';
+import { fetchAllRepertoireRequest, fetchAllExercisesRequest, createRepertoireInstanceRequest } from '../../redux/items/items.actions';
 import { selectRepertoireForDropdown, selectExercisesForDropdown } from '../../redux/items/items.selectors';
 
 const VIEW = {
@@ -27,6 +27,7 @@ class AddItem extends Component {
     this.showAddExercise = this.showAddExercise.bind(this);
     this.cancelAddingItem = this.cancelAddingItem.bind(this);
     this.handleCustomComponentChange = this.handleCustomComponentChange.bind(this);
+    this.handlePieceInstanceSubmit = this.handlePieceInstanceSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +39,16 @@ class AddItem extends Component {
     return value => this.setState({
       [name]: value,
     });
+  }
+
+  handlePieceInstanceSubmit(event) {
+    event.preventDefault();
+
+    const { eventId } = this.props;
+    const repertoireId = this.state.piece.value;
+
+    this.props.createRepertoireInstanceRequest(repertoireId, eventId);
+    this.setState({ ...initialState });
   }
 
   showAddPiece() {
@@ -68,23 +79,19 @@ class AddItem extends Component {
         break;
       case VIEW.ADD_PIECE:
         jsx = (
-          <form>
+          <form onSubmit={this.handlePieceInstanceSubmit}>
             <Select value={piece} options={repertoire} onChange={this.handleCustomComponentChange('piece')} />
             <button type="button" onClick={this.cancelAddingItem}>Cancel</button>
-            <button type="button" onClick={this.addPiece}>
-              Add Piece
-            </button>
+            <input type="submit" value="Add Piece" />
           </form>
         );
         break;
       case VIEW.ADD_EXERCISE:
         jsx = (
-          <form>
+          <form onSubmit={this.handleExerciseInstanceSubmit}>
             <Select value={exercise} options={exercises} onChange={this.handleCustomComponentChange('exercise')} />
             <button type="button" onClick={this.cancelAddingItem}>Cancel</button>
-            <button type="button" onClick={this.addExercise}>
-              Add Piece
-            </button>
+            <input type="submit" value="Add Exercise" />
           </form>
         );
         break;
@@ -105,6 +112,7 @@ AddItem.propTypes = {
   exercises: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   fetchAllRepertoireRequest: PropTypes.func.isRequired,
   fetchAllExercisesRequest: PropTypes.func.isRequired,
+  createRepertoireInstanceRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -115,6 +123,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchAllRepertoireRequest,
   fetchAllExercisesRequest,
+  createRepertoireInstanceRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddItem);
