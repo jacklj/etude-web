@@ -7,7 +7,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import DateTime from 'react-datetime';
 import Select from 'react-select';
 
-import { Label } from '../common/itemSections';
+import { Label } from '../common/styledComponents';
 import { lessonUpdateRequest } from '../../redux/events/events.actions';
 import { locationsFetchRequest } from '../../redux/locations/locations.actions';
 import { peopleFetchRequest } from '../../redux/people/people.actions';

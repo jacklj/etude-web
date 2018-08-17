@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import NoteContainer from './Note';
+import Note from './Note';
+import { ItemsOrNotesContainer } from '../common/styledComponents';
 
 const GeneralNotes = ({ notes }) => (
-  <div>
+  <ItemsOrNotesContainer>
     {notes
       && Object.values(notes).map(note => (
-        <NoteContainer
+        <Note
           key={note.note_id}
           note={note.note}
           score={note.score}
@@ -16,7 +17,7 @@ const GeneralNotes = ({ notes }) => (
           eventId={note.event_id}
         />
       ))}
-  </div>
+  </ItemsOrNotesContainer>
 );
 
 GeneralNotes.defaultProps = {

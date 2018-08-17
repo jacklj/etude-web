@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Card } from '../common/itemCards';
-import { Label } from '../common/itemSections';
+import { Card, Label } from '../common/styledComponents';
 
 import { generalNoteUpdateRequest, noteDeleteRequest } from '../../redux/notes/notes.actions';
 

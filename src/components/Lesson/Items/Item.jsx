@@ -4,7 +4,7 @@ import vextab from 'vextab/releases/vextab-div'; // eslint-disable-line no-unuse
 import { connect } from 'react-redux';
 
 import { ITEM_TYPES } from '../../../constants';
-import { Card } from '../../common/itemCards';
+import { Card } from '../../common/styledComponents';
 import Exercise from './Exercise';
 import Piece from './Piece';
 import { deleteItemRequest } from '../../../redux/items/items.actions';
@@ -19,7 +19,6 @@ class Item extends Component {
   removeItemFromEvent() {
     const itemId = this.props.item.item_id;
     const { eventId } = this.props;
-    console.log(this.props.item, itemId, eventId)
     this.props.deleteItemRequest(itemId, eventId);
   }
 

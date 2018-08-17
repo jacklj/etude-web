@@ -1,12 +1,25 @@
 import styled from 'styled-components';
 
+export const Title = styled.h3`
+  font-size: 1.1em;
+  margin-bottom: 10px;
+`;
+
+export const Label = styled.label`
+  display: block;
+`;
+
+export const ItemsOrNotesContainer = styled.div`
+  max-width: 600px;
+`;
+
 export const Card = styled.div`
   background-color: rgb(255, 255, 255);
-  display: inline-block;
+  display: block;
   padding: 10px;
   margin: 10px;
-  border-radius: 15px;
-  box-shadow: 0px 3px 5px 0px grey;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px 0px grey;
 `;
 
 export const Name = styled.div`

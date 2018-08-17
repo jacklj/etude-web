@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Item from './Item';
+import { ItemsOrNotesContainer } from '../../common/styledComponents';
 
 const Items = ({ eventId, items }) => (
-  <div>
+  <ItemsOrNotesContainer>
     {items
       && Object.values(items)
         .map(item => <Item item={item} key={item.item_id} eventId={eventId} />)}
-  </div>
+  </ItemsOrNotesContainer>
 );
 
 Items.defaultProps = {

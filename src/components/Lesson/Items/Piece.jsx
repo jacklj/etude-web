@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Name, Composer } from '../../common/itemCards';
+import { Name, Composer } from '../../common/styledComponents';
 
 const Piece = ({
   composerFirstName, composerSurname, largerWork, name,

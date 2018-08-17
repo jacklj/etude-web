@@ -5,7 +5,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import { Link } from 'react-router-dom';
 
 import { EVENT_TYPES } from '../../constants';
-import { Title } from '../common/itemSections';
+import { Title } from '../common/styledComponents';
 import { renderDuration } from '../../services/datetime';
 
 const Card = styled.div`

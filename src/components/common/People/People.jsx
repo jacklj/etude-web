@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Person from './Person';
-import { Title } from '../itemSections';
+import { Title } from '../styledComponents';
 
 const People = ({ people }) => (
   <div>
