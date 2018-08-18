@@ -1,13 +1,14 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Link,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { ConnectedRouter } from 'connected-react-router';
 
+import { history } from './redux/store';
 import Timeline from './components/Timeline/Timeline';
 import AddLesson from './components/AddLesson/AddLesson';
 import Lesson from './components/Lesson/Lesson';
@@ -43,7 +44,7 @@ const StyledLink = styled(Link)`
 
 const App = ({ store }) => (
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <Container>
         <Header>
           <Title>Etude</Title>
@@ -59,7 +60,7 @@ const App = ({ store }) => (
         <Route path="/add-lesson" component={AddLesson} />
         <Route path="/lesson/:id" component={Lesson} />
       </Container>
-    </Router>
+    </ConnectedRouter>
   </Provider>
 );
 
