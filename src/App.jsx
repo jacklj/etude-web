@@ -46,7 +46,7 @@ const App = ({ store }) => (
     <Router>
       <Container>
         <Header>
-          <Title>Stanza</Title>
+          <Title>Etude</Title>
         </Header>
         <Nav>
           <StyledLink to="/">Home</StyledLink>
