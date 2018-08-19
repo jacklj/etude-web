@@ -16,6 +16,16 @@ export const createLesson = lesson => fetch(`${baseURL}/api/lessons`, {
   .then(response => response.json())
   .catch(error => console.error('createLesson Fetch Error =\n', error));
 
+export const createPracticeSession = practiceSession => fetch(`${baseURL}/api/practice_sessions`, {
+  method: 'POST',
+  body: JSON.stringify(practiceSession),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+})
+  .then(response => response.json())
+  .catch(error => console.error('createPracticeSession Fetch Error =\n', error));
+
 export const updateLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/${eventId}`, {
   method: 'PUT',
   body: JSON.stringify(lesson),
@@ -26,7 +36,7 @@ export const updateLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/$
   .then(response => response.json())
   .catch(error => console.error('updateLesson Fetch Error =\n', error));
 
-export const getLesson = eventId => fetch(`${baseURL}/api/lessons/${eventId}`).then(response => response.json());
+export const getEvent = eventId => fetch(`${baseURL}/api/events/${eventId}`).then(response => response.json());
 
 export const getLocations = () => fetch(`${baseURL}/api/locations`).then(response => response.json());
 

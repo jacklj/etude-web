@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getLesson } from '../../../services/api';
+import { getEvent } from '../../../services/api';
 import { eventFetchSuccess, eventFetchFailure, ACTION_TYPES } from '../events.actions';
 
 function* fetchEvent(action) {
   const { eventId } = action;
   try {
-    const event = yield call(getLesson, eventId);
+    const event = yield call(getEvent, eventId);
     const actionToDispatch = eventFetchSuccess(event);
     yield put(actionToDispatch);
   } catch (e) {

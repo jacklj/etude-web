@@ -54,7 +54,7 @@ const Event = ({ event }) => {
       break;
     }
     case EVENT_TYPES.PRACTICE: {
-      jsx = <Title>{`Practice at ${event.location.name}`}</Title>;
+      jsx = <Title>{`Practice${event.location ? ` at ${event.location.name}` : ''}`}</Title>;
       break;
     }
     case EVENT_TYPES.CONCERT: {

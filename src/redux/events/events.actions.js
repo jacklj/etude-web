@@ -23,6 +23,13 @@ export const ACTION_TYPES = {
       FAILURE: 'LESSON.CREATE.FAILURE',
     },
   },
+  PRACTICE: {
+    START: {
+      REQUEST: 'PRACTICE.START.REQUEST',
+      SUCCESS: 'PRACTICE.START.SUCCESS',
+      FAILURE: 'PRACTICE.START.FAILURE',
+    },
+  },
 };
 
 export const allEventsFetchRequest = () => ({
@@ -82,5 +89,19 @@ export const lessonCreateSuccess = lesson => ({
 
 export const lessonCreateFailure = error => ({
   type: ACTION_TYPES.LESSON.CREATE.FAILURE,
+  error,
+});
+
+export const startPracticingRequest = () => ({
+  type: ACTION_TYPES.PRACTICE.START.REQUEST,
+});
+
+export const startPracticingSuccess = practiceSession => ({
+  type: ACTION_TYPES.PRACTICE.START.SUCCESS,
+  practiceSession,
+});
+
+export const startPracticingFailure = error => ({
+  type: ACTION_TYPES.PRACTICE.START.FAILURE,
   error,
 });
