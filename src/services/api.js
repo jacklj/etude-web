@@ -1,12 +1,13 @@
 const env = process.env.NODE_ENV || 'development';
 
-const baseURL = env === 'development' ? 'http://localhost:8080' : 'https://singprocess.herokuapp.com';
+const baseUrl = env === 'development' ? 'http://localhost:8080' : 'https://singprocess.herokuapp.com';
+const baseApiUrl = `${baseUrl}/api`;
 
-export const getTimeline = () => fetch(`${baseURL}/api/events`).then(response => response.json());
+export const getTimeline = () => fetch(`${baseApiUrl}/events`).then(response => response.json());
 
-export const getUpcomingRepertoire = () => fetch(`${baseURL}/api/repertoire/upcoming`).then(response => response.json());
+export const getUpcomingRepertoire = () => fetch(`${baseApiUrl}/repertoire/upcoming`).then(response => response.json());
 
-export const createLesson = lesson => fetch(`${baseURL}/api/lessons`, {
+export const createLesson = lesson => fetch(`${baseApiUrl}/events/lessons`, {
   method: 'POST',
   body: JSON.stringify(lesson),
   headers: {
@@ -16,7 +17,7 @@ export const createLesson = lesson => fetch(`${baseURL}/api/lessons`, {
   .then(response => response.json())
   .catch(error => console.error('createLesson Fetch Error =\n', error));
 
-export const createPracticeSession = practiceSession => fetch(`${baseURL}/api/practice_sessions`, {
+export const createPracticeSession = practiceSession => fetch(`${baseApiUrl}/events/practice_sessions`, {
   method: 'POST',
   body: JSON.stringify(practiceSession),
   headers: {
@@ -26,7 +27,7 @@ export const createPracticeSession = practiceSession => fetch(`${baseURL}/api/pr
   .then(response => response.json())
   .catch(error => console.error('createPracticeSession Fetch Error =\n', error));
 
-export const updateLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/${eventId}`, {
+export const updateLesson = (lesson, eventId) => fetch(`${baseApiUrl}/events/lessons/${eventId}`, {
   method: 'PUT',
   body: JSON.stringify(lesson),
   headers: {
@@ -36,15 +37,15 @@ export const updateLesson = (lesson, eventId) => fetch(`${baseURL}/api/lessons/$
   .then(response => response.json())
   .catch(error => console.error('updateLesson Fetch Error =\n', error));
 
-export const getEvent = eventId => fetch(`${baseURL}/api/events/${eventId}`).then(response => response.json());
+export const getEvent = eventId => fetch(`${baseApiUrl}/events/${eventId}`).then(response => response.json());
 
-export const getLocations = () => fetch(`${baseURL}/api/locations`).then(response => response.json());
+export const getLocations = () => fetch(`${baseApiUrl}/locations`).then(response => response.json());
 
-export const getPeople = () => fetch(`${baseURL}/api/people`).then(response => response.json());
+export const getPeople = () => fetch(`${baseApiUrl}/people`).then(response => response.json());
 
-export const getTeachers = () => fetch(`${baseURL}/api/people/teachers`).then(response => response.json());
+export const getTeachers = () => fetch(`${baseApiUrl}/people/teachers`).then(response => response.json());
 
-export const createNote = note => fetch(`${baseURL}/api/notes/`, {
+export const createNote = note => fetch(`${baseApiUrl}/notes/`, {
   method: 'POST',
   body: JSON.stringify(note),
   headers: {
@@ -54,7 +55,7 @@ export const createNote = note => fetch(`${baseURL}/api/notes/`, {
   .then(response => response.json())
   .catch(error => console.error('createNote Fetch Error =\n', error));
 
-export const updateNote = (note, noteId) => fetch(`${baseURL}/api/notes/${noteId}`, {
+export const updateNote = (note, noteId) => fetch(`${baseApiUrl}/notes/${noteId}`, {
   method: 'PUT',
   body: JSON.stringify(note),
   headers: {
@@ -64,16 +65,16 @@ export const updateNote = (note, noteId) => fetch(`${baseURL}/api/notes/${noteId
   .then(response => response.json())
   .catch(error => console.error('editNote Fetch Error =\n', error));
 
-export const deleteNote = noteId => fetch(`${baseURL}/api/notes/${noteId}`, {
+export const deleteNote = noteId => fetch(`${baseApiUrl}/notes/${noteId}`, {
   method: 'DELETE',
 })
   .catch(error => console.error('deleteNote Fetch Error =\n', error));
 
-export const getRepertoire = () => fetch(`${baseURL}/api/repertoire`).then(response => response.json());
+export const getRepertoire = () => fetch(`${baseApiUrl}/repertoire`).then(response => response.json());
 
-export const getExercises = () => fetch(`${baseURL}/api/exercises`).then(response => response.json());
+export const getExercises = () => fetch(`${baseApiUrl}/exercises`).then(response => response.json());
 
-export const createRepertoireInstance = (repertoireId, eventId) => fetch(`${baseURL}/api/events/${eventId}/repertoire`, {
+export const createRepertoireInstance = (repertoireId, eventId) => fetch(`${baseApiUrl}/events/${eventId}/repertoire`, {
   method: 'POST',
   body: JSON.stringify({ repertoireId }),
   headers: {
@@ -83,7 +84,7 @@ export const createRepertoireInstance = (repertoireId, eventId) => fetch(`${base
   .then(response => response.json())
   .catch(error => console.error('createRepertoireInstance Fetch Error =\n', error));
 
-export const createExerciseInstance = (exerciseId, eventId) => fetch(`${baseURL}/api/events/${eventId}/exercises`, {
+export const createExerciseInstance = (exerciseId, eventId) => fetch(`${baseApiUrl}/events/${eventId}/exercises`, {
   method: 'POST',
   body: JSON.stringify({ exerciseId }),
   headers: {
@@ -93,7 +94,7 @@ export const createExerciseInstance = (exerciseId, eventId) => fetch(`${baseURL}
   .then(response => response.json())
   .catch(error => console.error('createExerciseInstance Fetch Error =\n', error));
 
-export const deleteItem = itemId => fetch(`${baseURL}/api/items/${itemId}`, {
+export const deleteItem = itemId => fetch(`${baseApiUrl}/items/${itemId}`, {
   method: 'DELETE',
 })
   .catch(error => console.error('deleteItem Fetch Error =\n', error));
