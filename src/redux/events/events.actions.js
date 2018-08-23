@@ -23,16 +23,21 @@ export const ACTION_TYPES = {
       FAILURE: 'LESSON.CREATE.FAILURE',
     },
   },
-  PRACTICE: {
+  PRACTICE_SESSION: {
+    CREATE: {
+      REQUEST: 'PRACTICE_SESSION.CREATE.REQUEST',
+      SUCCESS: 'PRACTICE_SESSION.CREATE.SUCCESS',
+      FAILURE: 'PRACTICE_SESSION.CREATE.FAILURE',
+    },
     START: {
-      REQUEST: 'PRACTICE.START.REQUEST',
-      SUCCESS: 'PRACTICE.START.SUCCESS',
-      FAILURE: 'PRACTICE.START.FAILURE',
+      REQUEST: 'PRACTICE_SESSION.START.REQUEST',
+      SUCCESS: 'PRACTICE_SESSION.START.SUCCESS',
+      FAILURE: 'PRACTICE_SESSION.START.FAILURE',
     },
     FINISH: {
-      REQUEST: 'PRACTICE.FINISH.REQUEST',
-      SUCCESS: 'PRACTICE.FINISH.SUCCESS',
-      FAILURE: 'PRACTICE.FINISH.FAILURE',
+      REQUEST: 'PRACTICE_SESSION.FINISH.REQUEST',
+      SUCCESS: 'PRACTICE_SESSION.FINISH.SUCCESS',
+      FAILURE: 'PRACTICE_SESSION.FINISH.FAILURE',
     },
   },
 };
@@ -97,31 +102,47 @@ export const lessonCreateFailure = error => ({
   error,
 });
 
-export const startPracticingRequest = () => ({
-  type: ACTION_TYPES.PRACTICE.START.REQUEST,
+export const createPracticeSessionRequest = practiceSession => ({
+  type: ACTION_TYPES.PRACTICE_SESSION.CREATE.REQUEST,
+  practiceSession,
+});
+
+export const createPracticeSessionSuccess = practiceSession => ({
+  type: ACTION_TYPES.PRACTICE_SESSION.CREATE.SUCCESS,
+  practiceSession,
+});
+
+export const createPracticeSessionFailure = error => ({
+  type: ACTION_TYPES.PRACTICE_SESSION.CREATE.FAILURE,
+  error,
+});
+
+export const startPracticingRequest = eventId => ({
+  type: ACTION_TYPES.PRACTICE_SESSION.START.REQUEST,
+  eventId,
 });
 
 export const startPracticingSuccess = practiceSession => ({
-  type: ACTION_TYPES.PRACTICE.START.SUCCESS,
+  type: ACTION_TYPES.PRACTICE_SESSION.START.SUCCESS,
   practiceSession,
 });
 
 export const startPracticingFailure = error => ({
-  type: ACTION_TYPES.PRACTICE.START.FAILURE,
+  type: ACTION_TYPES.PRACTICE_SESSION.START.FAILURE,
   error,
 });
 
 export const finishPracticingRequest = eventId => ({
-  type: ACTION_TYPES.PRACTICE.FINISH.REQUEST,
+  type: ACTION_TYPES.PRACTICE_SESSION.FINISH.REQUEST,
   eventId,
 });
 
 export const finishPracticingSuccess = practiceSession => ({
-  type: ACTION_TYPES.PRACTICE.FINISH.SUCCESS,
+  type: ACTION_TYPES.PRACTICE_SESSION.FINISH.SUCCESS,
   practiceSession,
 });
 
 export const finishPracticingFailure = error => ({
-  type: ACTION_TYPES.PRACTICE.FINISH.FAILURE,
+  type: ACTION_TYPES.PRACTICE_SESSION.FINISH.FAILURE,
   error,
 });

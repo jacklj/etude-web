@@ -8,6 +8,7 @@ const initialState = {
   fetchingEvent: false,
   updatingEvent: false,
   creatingLesson: false,
+  creatingPracticeSession: false,
 };
 
 const eventsReducer = (state = initialState, action) => {
@@ -83,18 +84,37 @@ const eventsReducer = (state = initialState, action) => {
           [action.lesson.event_id]: action.lesson,
         },
       };
-    case ACTION_TYPES.PRACTICE.FINISH.SUCCESS:
+    case ACTION_TYPES.LESSON.CREATE.FAILURE:
+      return {
+        ...state,
+        creatingLesson: false,
+      };
+    case ACTION_TYPES.PRACTICE_SESSION.CREATE.REQUEST:
+      return {
+        ...state,
+        creatingPracticeSession: true,
+      };
+    case ACTION_TYPES.PRACTICE_SESSION.CREATE.SUCCESS:
+      return {
+        ...state,
+        creatingPracticeSession: false,
+        events: {
+          ...state.events,
+          [action.practiceSession.event_id]: action.practiceSession,
+        },
+      };
+    case ACTION_TYPES.PRACTICE_SESSION.CREATE.FAILURE:
+      return {
+        ...state,
+        creatingPracticeSession: false,
+      };
+    case ACTION_TYPES.PRACTICE_SESSION.FINISH.SUCCESS:
       return {
         ...state,
         events: {
           ...state.events,
           [action.practiceSession.event_id]: action.practiceSession,
         },
-      };
-    case ACTION_TYPES.LESSON.CREATE.FAILURE:
-      return {
-        ...state,
-        creatingLesson: false,
       };
     case notesActionTypes.NOTE.GENERAL.UPDATE.SUCCESS:
     case notesActionTypes.NOTE.GENERAL.CREATE.SUCCESS: {
