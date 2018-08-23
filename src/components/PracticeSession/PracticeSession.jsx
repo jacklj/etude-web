@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 
-import { eventFetchRequest } from '../../redux/events/events.actions';
+import { eventFetchRequest, finishPracticingRequest } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
 
 momentDurationFormatSetup(moment);
@@ -17,19 +17,28 @@ class PracticeSession extends Component {
       elapsed: undefined,
     };
 
+    this.finishPracticeSession = this.finishPracticeSession.bind(this);
     this.tick = this.tick.bind(this);
   }
 
   componentDidMount() {
     // getPracticeSession to ensure it's up to date in the store (e.g. if user navigates
-    // directly to a specific lesson page, so all lessons aren't already in the
-    // store)
+    // directly to a specific practice session page)
     this.props.eventFetchRequest(this.props.eventId);
-    this.timer = setInterval(this.tick, 50);
+    // only start the timer if the practice session isn't already finished
+    if (!(this.props.practiceSession && this.props.practiceSession.end)) {
+      this.timer = setInterval(this.tick, 50);
+    }
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
+  }
+
+  finishPracticeSession() {
+    const { practiceSession } = this.props;
+    clearInterval(this.timer);
+    this.props.finishPracticingRequest(practiceSession.event_id);
   }
 
   tick() {
@@ -49,12 +58,15 @@ class PracticeSession extends Component {
     if (!this.props.practiceSession) {
       jsx = <div>Loading</div>;
     } else {
-      const { start } = this.props.practiceSession;
+      const { start, end } = this.props.practiceSession;
       jsx = (
         <div>
           <h3>Practice session</h3>
-          {start}
-          <div>{elapsed ? elapsed.format('h:m:ss') : null}</div>
+          <div>Start: {start}</div>
+          <div>{elapsed ? elapsed.format('h:mm:ss') : null}</div>
+          <div>End: {end}</div>
+
+          {end ? <div>Finished.</div> : <button type="button" onClick={this.finishPracticeSession}>Finish</button>}
         </div>
       );
     }
@@ -70,6 +82,7 @@ PracticeSession.propTypes = {
   eventId: PropTypes.number.isRequired,
   practiceSession: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   eventFetchRequest: PropTypes.func.isRequired,
+  finishPracticingRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -80,6 +93,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   eventFetchRequest,
+  finishPracticingRequest,
 };
 
 export default connect(

@@ -83,6 +83,14 @@ const eventsReducer = (state = initialState, action) => {
           [action.lesson.event_id]: action.lesson,
         },
       };
+    case ACTION_TYPES.PRACTICE.FINISH.SUCCESS:
+      return {
+        ...state,
+        events: {
+          ...state.events,
+          [action.practiceSession.event_id]: action.practiceSession,
+        },
+      };
     case ACTION_TYPES.LESSON.CREATE.FAILURE:
       return {
         ...state,

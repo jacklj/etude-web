@@ -98,3 +98,21 @@ export const deleteItem = itemId => fetch(`${baseApiUrl}/items/${itemId}`, {
   method: 'DELETE',
 })
   .catch(error => console.error('deleteItem Fetch Error =\n', error));
+
+export const startPracticeSession = () => fetch(`${baseApiUrl}/events/practice_sessions/start`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+})
+  .then(response => response.json())
+  .catch(error => console.error('startPracticeSession Fetch Error =\n', error));
+
+export const finishPracticeSession = id => fetch(`${baseApiUrl}/events/practice_sessions/${id}/finish`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+})
+  .then(response => response.json())
+  .catch(error => console.error('finishPracticeSession Fetch Error =\n', error));

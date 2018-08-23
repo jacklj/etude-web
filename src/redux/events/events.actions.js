@@ -29,6 +29,11 @@ export const ACTION_TYPES = {
       SUCCESS: 'PRACTICE.START.SUCCESS',
       FAILURE: 'PRACTICE.START.FAILURE',
     },
+    FINISH: {
+      REQUEST: 'PRACTICE.FINISH.REQUEST',
+      SUCCESS: 'PRACTICE.FINISH.SUCCESS',
+      FAILURE: 'PRACTICE.FINISH.FAILURE',
+    },
   },
 };
 
@@ -103,5 +108,20 @@ export const startPracticingSuccess = practiceSession => ({
 
 export const startPracticingFailure = error => ({
   type: ACTION_TYPES.PRACTICE.START.FAILURE,
+  error,
+});
+
+export const finishPracticingRequest = eventId => ({
+  type: ACTION_TYPES.PRACTICE.FINISH.REQUEST,
+  eventId,
+});
+
+export const finishPracticingSuccess = practiceSession => ({
+  type: ACTION_TYPES.PRACTICE.FINISH.SUCCESS,
+  practiceSession,
+});
+
+export const finishPracticingFailure = error => ({
+  type: ACTION_TYPES.PRACTICE.FINISH.FAILURE,
   error,
 });
