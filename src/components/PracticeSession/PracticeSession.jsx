@@ -59,12 +59,16 @@ class PracticeSession extends Component {
       jsx = <div>Loading</div>;
     } else {
       const { start, end } = this.props.practiceSession;
+
+      const startFormatted = moment(start).format('H:mm dddd Do MMMM');
+      const endFormatted = end && moment(end).format('H:mm dddd Do MMMM');
+
       jsx = (
         <div>
           <h3>Practice session</h3>
-          <div>Start: {start}</div>
-          <div>{elapsed ? elapsed.format('h:mm:ss') : null}</div>
-          <div>End: {end}</div>
+          <div>Start: {startFormatted}</div>
+          <div>{elapsed ? elapsed.format('hh:mm:ss') : null}</div>
+          <div>End: {endFormatted}</div>
 
           {end ? <div>Finished.</div> : <button type="button" onClick={this.finishPracticeSession}>Finish</button>}
         </div>
