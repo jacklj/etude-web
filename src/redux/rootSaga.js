@@ -15,6 +15,8 @@ import createRepertoireInstanceSaga from './items/sagas/createRepertoireInstance
 import createExerciseInstanceSaga from './items/sagas/createExerciseInstance.saga';
 import deleteItemSaga from './items/sagas/deleteItem.saga';
 import createPracticeSessionSaga from './events/sagas/createPracticeSession.saga';
+import startPracticeSessionSaga from './events/sagas/startPracticeSession.saga';
+import finishPracticeSessionSaga from './events/sagas/finishPracticeSession.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -33,5 +35,7 @@ export default function* rootSaga() {
     createExerciseInstanceSaga(),
     deleteItemSaga(),
     createPracticeSessionSaga(),
+    startPracticeSessionSaga(),
+    finishPracticeSessionSaga(),
   ]);
 }

@@ -108,6 +108,7 @@ const eventsReducer = (state = initialState, action) => {
         ...state,
         creatingPracticeSession: false,
       };
+    case ACTION_TYPES.PRACTICE_SESSION.START.SUCCESS:
     case ACTION_TYPES.PRACTICE_SESSION.FINISH.SUCCESS:
       return {
         ...state,

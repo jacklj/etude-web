@@ -99,8 +99,8 @@ export const deleteItem = itemId => fetch(`${baseApiUrl}/items/${itemId}`, {
 })
   .catch(error => console.error('deleteItem Fetch Error =\n', error));
 
-export const startPracticeSession = () => fetch(`${baseApiUrl}/events/practice_sessions/start`, {
-  method: 'POST',
+export const startPracticeSession = id => fetch(`${baseApiUrl}/events/practice_sessions/${id}/start`, {
+  method: 'PUT',
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
   },
