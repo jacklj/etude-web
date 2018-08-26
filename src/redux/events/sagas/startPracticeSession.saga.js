@@ -11,9 +11,16 @@ function* practiceFlow() {
   while (true) {
     const action = yield take(ACTION_TYPES.PRACTICE_SESSION.START.REQUEST);
     try {
-      const inProgressPracticeSession = yield call(startPracticeSession, action.eventId);
-      const actionToDispatch = startPracticingSuccess(inProgressPracticeSession);
-      yield put(actionToDispatch);
+      const response = yield call(startPracticeSession, action.eventId);
+      const body = yield response.json();
+      if (response.status === 200) {
+        const actionToDispatch = startPracticingSuccess(body);
+        yield put(actionToDispatch);
+      } else {
+        const actionToDispatch = startPracticingFailure(body);
+        yield put(actionToDispatch);
+        alert('A previous practice session is still in progress');
+      }
     } catch (e) {
       const actionToDispatch = startPracticingFailure(e);
       yield put(actionToDispatch);

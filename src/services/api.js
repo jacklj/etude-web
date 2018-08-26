@@ -105,7 +105,6 @@ export const startPracticeSession = id => fetch(`${baseApiUrl}/events/practice_s
     'Content-Type': 'application/json; charset=utf-8',
   },
 })
-  .then(response => response.json())
   .catch(error => console.error('startPracticeSession Fetch Error =\n', error));
 
 export const finishPracticeSession = id => fetch(`${baseApiUrl}/events/practice_sessions/${id}/finish`, {

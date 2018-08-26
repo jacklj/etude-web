@@ -44,9 +44,7 @@ class PracticeSession extends Component {
 
   startPracticeSession() {
     const { practiceSession } = this.props;
-    // clearInterval(this.timer);
     this.props.startPracticingRequest(practiceSession.event_id);
-    this.timer = setInterval(this.tick, 50);
   }
 
   tick() {
@@ -61,7 +59,7 @@ class PracticeSession extends Component {
   }
 
   render() {
-    // start the timer immediately if the session has previously been started (and
+    // start the timer immediately if the session has previously (or just) been started (and
     // is in progress i.e. not finished)
     if (
       this.props.practiceSession
