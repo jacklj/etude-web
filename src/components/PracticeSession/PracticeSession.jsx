@@ -6,6 +6,7 @@ import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 
 import {
+  deleteEventRequest,
   eventFetchRequest,
   finishPracticingRequest,
   startPracticingRequest,
@@ -21,6 +22,7 @@ class PracticeSession extends Component {
       elapsed: undefined,
     };
 
+    this.deletePracticeSession = this.deletePracticeSession.bind(this);
     this.finishPracticeSession = this.finishPracticeSession.bind(this);
     this.startPracticeSession = this.startPracticeSession.bind(this);
     this.tick = this.tick.bind(this);
@@ -34,6 +36,14 @@ class PracticeSession extends Component {
 
   componentWillUnmount() {
     clearInterval(this.timer);
+  }
+
+  deletePracticeSession() {
+    if (window.confirm("Delete this practice session? (you will be sent back to the Timeline)")) {
+      const { practiceSession } = this.props;
+      clearInterval(this.timer); // in case the timer is running
+      this.props.deleteEventRequest(practiceSession.event_id);
+    }
   }
 
   finishPracticeSession() {
@@ -101,6 +111,11 @@ class PracticeSession extends Component {
               Finish
             </button>
           )}
+          <div>
+            <button type="button" onClick={this.deletePracticeSession}>
+              Delete practice session
+            </button>
+          </div>
         </div>
       );
     }
@@ -116,8 +131,9 @@ PracticeSession.propTypes = {
   eventId: PropTypes.number.isRequired,
   practiceSession: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   eventFetchRequest: PropTypes.func.isRequired,
-  startPracticingRequest: PropTypes.func.isRequired,
+  deleteEventRequest: PropTypes.func.isRequired,
   finishPracticingRequest: PropTypes.func.isRequired,
+  startPracticingRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -127,6 +143,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = {
+  deleteEventRequest,
   eventFetchRequest,
   startPracticingRequest,
   finishPracticingRequest,
