@@ -7,6 +7,7 @@ const initialState = {
   fetchingAllEvents: false,
   fetchingEvent: false,
   updatingEvent: false,
+  deletingEvent: false,
   creatingLesson: false,
   creatingPracticeSession: false,
 };
@@ -50,6 +51,25 @@ const eventsReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingEvent: false,
+      };
+    case ACTION_TYPES.EVENT.DELETE.REQUEST:
+      return {
+        ...state,
+        deletingEvent: true,
+      };
+    case ACTION_TYPES.EVENT.DELETE.SUCCESS: {
+      const newEvents = { ...state.events };
+      delete newEvents[action.eventId];
+      return {
+        ...state,
+        deletingEvent: false,
+        events: newEvents,
+      };
+    }
+    case ACTION_TYPES.EVENT.DELETE.FAILURE:
+      return {
+        ...state,
+        deletingEvent: false,
       };
     case ACTION_TYPES.LESSON.UPDATE.REQUEST:
       return {

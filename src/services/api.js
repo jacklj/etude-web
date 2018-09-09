@@ -114,3 +114,8 @@ export const finishPracticeSession = id => fetch(`${baseApiUrl}/events/practice_
   },
 })
   .catch(error => console.error('finishPracticeSession Fetch Error =\n', error));
+
+export const deleteEvent = eventId => fetch(`${baseApiUrl}/events/${eventId}`, {
+  method: 'DELETE',
+})
+  .catch(error => console.error('deleteEvent Fetch Error =\n', error));

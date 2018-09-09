@@ -10,6 +10,11 @@ export const ACTION_TYPES = {
       SUCCESS: 'EVENT.FETCH_ALL.SUCCESS',
       FAILURE: 'EVENT.FETCH_ALL.FAILURE',
     },
+    DELETE: {
+      REQUEST: 'EVENT.DELETE.REQUEST',
+      SUCCESS: 'EVENT.DELETE.SUCCESS',
+      FAILURE: 'EVENT.DELETE.FAILURE',
+    },
   },
   LESSON: {
     UPDATE: {
@@ -68,6 +73,21 @@ export const eventFetchSuccess = event => ({
 
 export const eventFetchFailure = error => ({
   type: ACTION_TYPES.EVENT.FETCH.FAILURE,
+  error,
+});
+
+export const deleteEventRequest = eventId => ({
+  type: ACTION_TYPES.EVENT.DELETE.REQUEST,
+  eventId,
+});
+
+export const deleteEventSuccess = eventId => ({
+  type: ACTION_TYPES.EVENT.DELETE.SUCCESS,
+  eventId,
+});
+
+export const deleteEventFailure = error => ({
+  type: ACTION_TYPES.EVENT.DELETE.FAILURE,
   error,
 });
 
