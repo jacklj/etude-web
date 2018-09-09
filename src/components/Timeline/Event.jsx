@@ -45,16 +45,22 @@ const Event = ({ event }) => {
   switch (type) {
     case EVENT_TYPES.LESSON: {
       jsx = (
-        <TitleLink to={`/lesson/${eventId}`}>{`Lesson with ${renderName(event.teacher)} `}</TitleLink>
+        <TitleLink to={`/lesson/${eventId}`}>
+          {`Lesson with ${renderName(event.teacher)} `}
+        </TitleLink>
       );
       break;
     }
     case EVENT_TYPES.MASTERCLASS: {
-      jsx = <Title>{`Masterclass with ${renderName(event.teacher)} `}</Title>;
+      jsx = <Title>{`Masterclass with ${renderName(event.teacher)}`}</Title>;
       break;
     }
     case EVENT_TYPES.PRACTICE: {
-      jsx = <Title>{`Practice${event.location ? ` at ${event.location.name}` : ''}`}</Title>;
+      jsx = (
+        <TitleLink to={`/practice_session/${eventId}`}>
+          {`Practice${event.location ? ` at ${event.location.name}` : ''}`}
+        </TitleLink>
+      );
       break;
     }
     case EVENT_TYPES.CONCERT: {
