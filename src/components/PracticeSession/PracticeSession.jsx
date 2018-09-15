@@ -39,7 +39,7 @@ class PracticeSession extends Component {
   }
 
   deletePracticeSession() {
-    if (window.confirm("Delete this practice session? (you will be sent back to the Timeline)")) {
+    if (window.confirm('Delete this practice session? (you will be sent back to the Timeline)')) {
       const { practiceSession } = this.props;
       clearInterval(this.timer); // in case the timer is running
       this.props.deleteEventRequest(practiceSession.event_id);
