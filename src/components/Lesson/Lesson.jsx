@@ -8,16 +8,29 @@ import AddGeneralNote from './AddGeneralNote';
 import GeneralNotes from './GeneralNotes';
 import AddItem from './AddItem';
 import Items from './Items/Items';
-import { eventFetchRequest } from '../../redux/events/events.actions';
+import { eventFetchRequest, deleteEventRequest } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
 import { renderDuration } from '../../services/datetime';
 
 class Lesson extends Component {
+  constructor(props) {
+    super(props);
+
+    this.deleteLesson = this.deleteLesson.bind(this);
+  }
+
   componentDidMount() {
     // getLesson to ensure it's up to date in the store (e.g. if user navigates
     // directly to a specific lesson page, so all lessons aren't already in the
     // store)
     this.props.eventFetchRequest(this.props.eventId);
+  }
+
+  deleteLesson() {
+    if (window.confirm('Delete this lesson? (you will be sent back to the Timeline)')) {
+      const { eventId } = this.props;
+      this.props.deleteEventRequest(eventId);
+    }
   }
 
   render() {
@@ -42,6 +55,11 @@ class Lesson extends Component {
             location={location}
             teacher={teacher}
           />
+          <div>
+            <button type="button" onClick={this.deleteLesson}>
+              Delete lesson
+            </button>
+          </div>
           <h3>Notes</h3>
           <AddGeneralNote eventId={eventId} />
           <GeneralNotes notes={notes} />
@@ -63,6 +81,7 @@ Lesson.propTypes = {
   eventId: PropTypes.number.isRequired,
   lesson: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   eventFetchRequest: PropTypes.func.isRequired,
+  deleteEventRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -73,6 +92,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   eventFetchRequest,
+  deleteEventRequest,
 };
 
 export default connect(
