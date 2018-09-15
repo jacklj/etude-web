@@ -1,11 +1,12 @@
 import { call, put, take } from 'redux-saga/effects';
 
-import { finishPracticeSession } from '../../../services/api';
+import { finishPracticeSession } from '../../../../services/api';
 import {
   finishPracticingSuccess,
   finishPracticingFailure,
+  stopPracticeTimer,
   ACTION_TYPES,
-} from '../events.actions';
+} from '../../events.actions';
 
 function* finishPracticeSessionSaga() {
   while (true) {
@@ -16,6 +17,8 @@ function* finishPracticeSessionSaga() {
       if (response.status === 200) {
         const actionToDispatch = finishPracticingSuccess(body);
         yield put(actionToDispatch);
+        const action2 = stopPracticeTimer();
+        yield put(action2);
       } else {
         const actionToDispatch = finishPracticingFailure(body);
         yield put(actionToDispatch);

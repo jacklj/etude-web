@@ -3,29 +3,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import momentDurationFormatSetup from 'moment-duration-format';
 
 import {
   deleteEventRequest,
   eventFetchRequest,
   finishPracticingRequest,
   startPracticingRequest,
+  startPracticeTimer,
 } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
-
-momentDurationFormatSetup(moment);
+import { toHHMMSS } from '../../services/datetime';
 
 class PracticeSession extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      elapsed: undefined,
-    };
 
     this.deletePracticeSession = this.deletePracticeSession.bind(this);
     this.finishPracticeSession = this.finishPracticeSession.bind(this);
     this.startPracticeSession = this.startPracticeSession.bind(this);
-    this.tick = this.tick.bind(this);
   }
 
   componentDidMount() {
@@ -34,21 +29,32 @@ class PracticeSession extends Component {
     this.props.eventFetchRequest(this.props.eventId);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
+  componentDidUpdate(prevProps) {
+    if (
+      // if the practiceSession object has just been got...
+      this.props.practiceSession !== prevProps.practiceSession
+      // .. then, if the practice session is in progress (previously started and
+      // not finished), then start the timer immediately
+      && this.props.practiceSession
+      && this.props.practiceSession.start
+      && !this.props.practiceSession.end
+    ) {
+      const { start } = this.props.practiceSession;
+      const now = moment();
+      const initialTimeElapsed = now.diff(start, 'seconds');
+      this.props.startPracticeTimer(initialTimeElapsed);
+    }
   }
 
   deletePracticeSession() {
     if (window.confirm('Delete this practice session? (you will be sent back to the Timeline)')) {
       const { practiceSession } = this.props;
-      clearInterval(this.timer); // in case the timer is running
       this.props.deleteEventRequest(practiceSession.event_id);
     }
   }
 
   finishPracticeSession() {
     const { practiceSession } = this.props;
-    clearInterval(this.timer);
     this.props.finishPracticingRequest(practiceSession.event_id);
   }
 
@@ -57,30 +63,8 @@ class PracticeSession extends Component {
     this.props.startPracticingRequest(practiceSession.event_id);
   }
 
-  tick() {
-    const { practiceSession } = this.props;
-    if (practiceSession) {
-      const start = moment(this.props.practiceSession.start);
-      const now = moment();
-      const diff = now.diff(start);
-      const elapsed = moment.duration(diff);
-      this.setState({ elapsed });
-    }
-  }
-
   render() {
-    // start the timer immediately if the session has previously (or just) been started (and
-    // is in progress i.e. not finished)
-    if (
-      this.props.practiceSession
-      && this.props.practiceSession.start
-      && !this.props.practiceSession.end
-      && !this.timer
-    ) {
-      this.timer = setInterval(this.tick, 50);
-    }
-
-    const { elapsed } = this.state;
+    const { practiceSessionTimer } = this.props;
     let jsx;
     if (!this.props.practiceSession) {
       jsx = <div>Loading</div>;
@@ -89,6 +73,8 @@ class PracticeSession extends Component {
 
       const startFormatted = start && moment(start).format('H:mm dddd Do MMMM');
       const endFormatted = end && moment(end).format('H:mm dddd Do MMMM');
+
+      const timer = typeof practiceSessionTimer === 'undefined' ? undefined : toHHMMSS(practiceSessionTimer);
 
       jsx = (
         <div>
@@ -101,7 +87,7 @@ class PracticeSession extends Component {
             </button>
           )}
           <div>Start: {startFormatted}</div>
-          <div>{elapsed ? elapsed.format('hh:mm:ss') : null}</div>
+          <div>{timer}</div>
           <div>End: {endFormatted}</div>
 
           {end ? (
@@ -134,12 +120,15 @@ PracticeSession.propTypes = {
   deleteEventRequest: PropTypes.func.isRequired,
   finishPracticingRequest: PropTypes.func.isRequired,
   startPracticingRequest: PropTypes.func.isRequired,
+  startPracticeTimer: PropTypes.func.isRequired,
+  practiceSessionTimer: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
   // ownProps isn't recursive - just props supplied from 'above'
   eventId: Number(ownProps.match.params.id),
   practiceSession: selectEvent(state, ownProps),
+  practiceSessionTimer: state.events.practiceSessionTimer,
 });
 
 const mapDispatchToProps = {
@@ -147,6 +136,7 @@ const mapDispatchToProps = {
   eventFetchRequest,
   startPracticingRequest,
   finishPracticingRequest,
+  startPracticeTimer,
 };
 
 export default connect(

@@ -1,12 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
-import { createPracticeSession } from '../../../services/api';
+import { createPracticeSession } from '../../../../services/api';
 import {
   createPracticeSessionSuccess,
   createPracticeSessionFailure,
   ACTION_TYPES,
-} from '../events.actions';
+} from '../../events.actions';
 
 function* createPracticeSessionGenerator() {
   try {

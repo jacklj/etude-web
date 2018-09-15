@@ -44,6 +44,11 @@ export const ACTION_TYPES = {
       SUCCESS: 'PRACTICE_SESSION.FINISH.SUCCESS',
       FAILURE: 'PRACTICE_SESSION.FINISH.FAILURE',
     },
+    TIMER: {
+      START: 'PRACTICE_SESSION.TIMER.START',
+      STOP: 'PRACTICE_SESSION.TIMER.STOP',
+      TICK: 'PRACTICE_SESSION.TIMER.TICK',
+    },
   },
 };
 
@@ -165,4 +170,17 @@ export const finishPracticingSuccess = practiceSession => ({
 export const finishPracticingFailure = error => ({
   type: ACTION_TYPES.PRACTICE_SESSION.FINISH.FAILURE,
   error,
+});
+
+export const startPracticeTimer = initialTimeElapsed => ({
+  type: ACTION_TYPES.PRACTICE_SESSION.TIMER.START,
+  initialTimeElapsed,
+});
+
+export const stopPracticeTimer = () => ({
+  type: ACTION_TYPES.PRACTICE_SESSION.TIMER.STOP,
+});
+
+export const tickPracticeTimer = () => ({
+  type: ACTION_TYPES.PRACTICE_SESSION.TIMER.TICK,
 });

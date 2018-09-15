@@ -10,6 +10,7 @@ const initialState = {
   deletingEvent: false,
   creatingLesson: false,
   creatingPracticeSession: false,
+  practiceSessionTimer: undefined,
 };
 
 const eventsReducer = (state = initialState, action) => {
@@ -136,6 +137,23 @@ const eventsReducer = (state = initialState, action) => {
           ...state.events,
           [action.practiceSession.event_id]: action.practiceSession,
         },
+      };
+    case ACTION_TYPES.PRACTICE_SESSION.TIMER.START: {
+      const practiceSessionTimer = action.initialTimeElapsed ? action.initialTimeElapsed : 0;
+      return {
+        ...state,
+        practiceSessionTimer,
+      };
+    }
+    case ACTION_TYPES.PRACTICE_SESSION.TIMER.TICK:
+      return {
+        ...state,
+        practiceSessionTimer: state.practiceSessionTimer + 1,
+      };
+    case ACTION_TYPES.PRACTICE_SESSION.TIMER.STOP:
+      return {
+        ...state,
+        practiceSessionTimer: undefined,
       };
     case notesActionTypes.NOTE.GENERAL.UPDATE.SUCCESS:
     case notesActionTypes.NOTE.GENERAL.CREATE.SUCCESS: {

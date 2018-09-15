@@ -15,9 +15,10 @@ import fetchExercisesSaga from './items/sagas/fetchExercises.saga';
 import createRepertoireInstanceSaga from './items/sagas/createRepertoireInstance.saga';
 import createExerciseInstanceSaga from './items/sagas/createExerciseInstance.saga';
 import deleteItemSaga from './items/sagas/deleteItem.saga';
-import createPracticeSessionSaga from './events/sagas/createPracticeSession.saga';
-import startPracticeSessionSaga from './events/sagas/startPracticeSession.saga';
-import finishPracticeSessionSaga from './events/sagas/finishPracticeSession.saga';
+import createPracticeSessionSaga from './events/sagas/practice/createPracticeSession.saga';
+import startPracticeSessionSaga from './events/sagas/practice/startPracticeSession.saga';
+import finishPracticeSessionSaga from './events/sagas/practice/finishPracticeSession.saga';
+import timerSaga from './events/sagas/practice/timer.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -39,5 +40,6 @@ export default function* rootSaga() {
     createPracticeSessionSaga(),
     startPracticeSessionSaga(),
     finishPracticeSessionSaga(),
+    timerSaga(),
   ]);
 }
