@@ -130,30 +130,33 @@ const eventsReducer = (state = initialState, action) => {
         creatingPracticeSession: false,
       };
     case ACTION_TYPES.PRACTICE_SESSION.START.SUCCESS:
-    case ACTION_TYPES.PRACTICE_SESSION.FINISH.SUCCESS:
       return {
         ...state,
+        practiceSessionTimer: 0,
         events: {
           ...state.events,
           [action.practiceSession.event_id]: action.practiceSession,
         },
       };
-    case ACTION_TYPES.PRACTICE_SESSION.TIMER.START: {
-      const practiceSessionTimer = action.initialTimeElapsed ? action.initialTimeElapsed : 0;
+    case ACTION_TYPES.PRACTICE_SESSION.FINISH.SUCCESS:
       return {
         ...state,
-        practiceSessionTimer,
+        practiceSessionTimer: undefined,
+        events: {
+          ...state.events,
+          [action.practiceSession.event_id]: action.practiceSession,
+        },
+      };
+    case ACTION_TYPES.PRACTICE_SESSION.RESTART: {
+      return {
+        ...state,
+        practiceSessionTimer: action.initialTimeElapsed,
       };
     }
     case ACTION_TYPES.PRACTICE_SESSION.TIMER.TICK:
       return {
         ...state,
         practiceSessionTimer: state.practiceSessionTimer + 1,
-      };
-    case ACTION_TYPES.PRACTICE_SESSION.TIMER.STOP:
-      return {
-        ...state,
-        practiceSessionTimer: undefined,
       };
     case notesActionTypes.NOTE.GENERAL.UPDATE.SUCCESS:
     case notesActionTypes.NOTE.GENERAL.CREATE.SUCCESS: {

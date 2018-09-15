@@ -9,7 +9,7 @@ import {
   eventFetchRequest,
   finishPracticingRequest,
   startPracticingRequest,
-  startPracticeTimer,
+  restartPracticeSession,
 } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
 import { toHHMMSS } from '../../services/datetime';
@@ -42,7 +42,7 @@ class PracticeSession extends Component {
       const { start } = this.props.practiceSession;
       const now = moment();
       const initialTimeElapsed = now.diff(start, 'seconds');
-      this.props.startPracticeTimer(initialTimeElapsed);
+      this.props.restartPracticeSession(initialTimeElapsed);
     }
   }
 
@@ -121,7 +121,7 @@ PracticeSession.propTypes = {
   deleteEventRequest: PropTypes.func.isRequired,
   finishPracticingRequest: PropTypes.func.isRequired,
   startPracticingRequest: PropTypes.func.isRequired,
-  startPracticeTimer: PropTypes.func.isRequired,
+  restartPracticeSession: PropTypes.func.isRequired,
   practiceSessionTimer: PropTypes.number,
 };
 
@@ -137,7 +137,7 @@ const mapDispatchToProps = {
   eventFetchRequest,
   startPracticingRequest,
   finishPracticingRequest,
-  startPracticeTimer,
+  restartPracticeSession,
 };
 
 export default connect(

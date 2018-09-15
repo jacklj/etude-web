@@ -44,9 +44,8 @@ export const ACTION_TYPES = {
       SUCCESS: 'PRACTICE_SESSION.FINISH.SUCCESS',
       FAILURE: 'PRACTICE_SESSION.FINISH.FAILURE',
     },
+    RESTART: 'PRACTICE_SESSION.RESTART',
     TIMER: {
-      START: 'PRACTICE_SESSION.TIMER.START',
-      STOP: 'PRACTICE_SESSION.TIMER.STOP',
       TICK: 'PRACTICE_SESSION.TIMER.TICK',
     },
   },
@@ -172,13 +171,9 @@ export const finishPracticingFailure = error => ({
   error,
 });
 
-export const startPracticeTimer = initialTimeElapsed => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.TIMER.START,
+export const restartPracticeSession = initialTimeElapsed => ({
+  type: ACTION_TYPES.PRACTICE_SESSION.RESTART,
   initialTimeElapsed,
-});
-
-export const stopPracticeTimer = () => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.TIMER.STOP,
 });
 
 export const tickPracticeTimer = () => ({
