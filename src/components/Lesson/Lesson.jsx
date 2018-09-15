@@ -42,7 +42,7 @@ class Lesson extends Component {
       const {
         start, end, type, rating, location, teacher, notes, items,
       } = this.props.lesson;
-      const title = `Lesson${teacher && ` with ${teacher.first_name} ${teacher.surname}`}, ${renderDuration(start, end)}`;
+      const title = `Lesson${teacher ? ` with ${teacher.first_name} ${teacher.surname}` : ''}${start ? `, ${renderDuration(start, end)}` : ''}`;
       jsx = (
         <div>
           <h3>{title}</h3>

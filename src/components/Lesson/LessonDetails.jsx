@@ -41,8 +41,8 @@ class LessonDetails extends Component {
 
   updateLessonDetails() {
     // set the editing state to be equal to the lesson data in redux (via this.props)
-    const editingLocation = getSelectOption(this.props.location, this.props.locations);
-    const editingTeacher = getSelectOption(this.props.teacher, this.props.teachers);
+    const editingLocation = this.props.location && getSelectOption(this.props.location, this.props.locations);
+    const editingTeacher = this.props.teacher && getSelectOption(this.props.teacher, this.props.teachers);
 
     this.setState({
       isEditing: true,
@@ -146,15 +146,19 @@ class LessonDetails extends Component {
               options={this.props.teachers}
             />
           </Label>
-          {this.props.isLessonUpdating ? <div>Updating...</div> : <input type="submit" value="Save details" />}
+          {this.props.isLessonUpdating ? (
+            <div>Updating...</div>
+          ) : (
+            <input type="submit" value="Save details" />
+          )}
         </form>
       );
     } else {
       const start = moment(this.props.start); // need to wrap start and end in moment(), ...
       const end = moment(this.props.end); // or DateTime component doesn't work
       const { rating, type } = this.props;
-      const teacher = getSelectOption(this.props.teacher, this.props.teachers);
-      const location = getSelectOption(this.props.location, this.props.locations);
+      const teacher = this.props.teacher && getSelectOption(this.props.teacher, this.props.teachers);
+      const location = this.props.location && getSelectOption(this.props.location, this.props.locations);
 
       jsx = (
         <form>
@@ -192,14 +196,22 @@ class LessonDetails extends Component {
   }
 }
 
+LessonDetails.defaultProps = {
+  start: undefined,
+  end: undefined,
+  rating: undefined,
+  location: undefined,
+  teacher: undefined,
+};
+
 LessonDetails.propTypes = {
   eventId: PropTypes.number.isRequired,
-  start: PropTypes.string.isRequired,
-  end: PropTypes.string.isRequired,
+  start: PropTypes.string,
+  end: PropTypes.string,
   type: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-  location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  teacher: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  rating: PropTypes.number,
+  location: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  teacher: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   isLessonUpdating: PropTypes.bool.isRequired,
   locations: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   lessonUpdateRequest: PropTypes.func.isRequired,

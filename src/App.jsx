@@ -8,7 +8,6 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from './redux/store';
 import Navigation from './components/Navigation';
 import Timeline from './components/Timeline/Timeline';
-import AddLesson from './components/AddLesson/AddLesson';
 import Lesson from './components/Lesson/Lesson';
 import PracticeSession from './components/PracticeSession/PracticeSession';
 import UpcomingRep from './components/upcomingRep/UpcomingRep';
@@ -41,7 +40,6 @@ const App = ({ store }) => (
         <hr />
         <Route exact path="/" component={Timeline} />
         <Route path="/upcoming-rep" component={UpcomingRep} />
-        <Route path="/add-lesson" component={AddLesson} />
         <Route path="/lesson/:id" component={Lesson} />
         <Route path="/practice_session/:id" component={PracticeSession} />
       </Container>

@@ -1,13 +1,18 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
+
 import { createLesson } from '../../../services/api';
 import { lessonCreateSuccess, lessonCreateFailure, ACTION_TYPES } from '../events.actions';
 
-function* createLessonGenerator(action) {
-  const { lesson } = action;
+function* createLessonGenerator() {
   try {
-    const createdLesson = yield call(createLesson, lesson);
-    const actionToDispatch = lessonCreateSuccess(createdLesson);
+    const newLesson = yield call(createLesson);
+    const actionToDispatch = lessonCreateSuccess(newLesson);
     yield put(actionToDispatch);
+
+    // navigate to lesson page
+    const { event_id: eventId } = newLesson;
+    yield put(push(`/lesson/${eventId}`));
   } catch (e) {
     const actionToDispatch = lessonCreateFailure(e);
     yield put(actionToDispatch);

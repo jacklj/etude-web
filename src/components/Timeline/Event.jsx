@@ -39,14 +39,14 @@ const Event = ({ event }) => {
   const {
     event_id: eventId, end, location, rating, start, type,
   } = event;
-  const duration = renderDuration(start, end);
+  const duration = start ? renderDuration(start, end) : undefined;
   let jsx;
 
   switch (type) {
     case EVENT_TYPES.LESSON: {
       jsx = (
         <TitleLink to={`/lesson/${eventId}`}>
-          {`Lesson with ${renderName(event.teacher)} `}
+          {`Lesson${event.teacher ? ` with ${renderName(event.teacher)}` : ''}`}
         </TitleLink>
       );
       break;
@@ -87,14 +87,16 @@ const Event = ({ event }) => {
     <Card>
       <div>
         {jsx}
-        <Duration>{duration}</Duration>
+        {duration && <Duration>{duration}</Duration>}
         {location && <Location>{location.name}</Location>}
-        <StarRatingComponent
-          name="EventRating" /* name of the radio input, it is required */
-          value={rating} /* number of selected icon (`0` - none, `1` - first) */
-          starCount={5} /* number of icons in rating, default `5` */
-          editing={false} /* is component available for editing, default `true` */
-        />
+        <div>
+          <StarRatingComponent
+            name="EventRating" /* name of the radio input, it is required */
+            value={rating} /* number of selected icon (`0` - none, `1` - first) */
+            starCount={5} /* number of icons in rating, default `5` */
+            editing={false} /* is component available for editing, default `true` */
+          />
+        </div>
       </div>
     </Card>
   );

@@ -3,19 +3,24 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Nav, StyledLink } from './common/styledComponents';
-import { createPracticeSessionRequest } from '../redux/events/events.actions';
+import { createPracticeSessionRequest, lessonCreateRequest } from '../redux/events/events.actions';
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
-    this.goToNewPracticeSession = this.goToNewPracticeSession.bind(this);
+    this.createThenGoToNewPracticeSession = this.createThenGoToNewPracticeSession.bind(this);
+    this.createThenGoToNewLesson = this.createThenGoToNewLesson.bind(this);
   }
 
-  goToNewPracticeSession() {
+  createThenGoToNewPracticeSession() {
     // dispatch createPracticeSession action
     // saga creates a new practice session
     // and routes us to its page (when it's been created)
     this.props.createPracticeSessionRequest();
+  }
+
+  createThenGoToNewLesson() {
+    this.props.lessonCreateRequest();
   }
 
   render() {
@@ -24,8 +29,8 @@ class Navigation extends Component {
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/upcoming-rep">Upcoming rep</StyledLink>
         | New:
-        <StyledLink to="/add-lesson">Add lesson</StyledLink>
-        <button type="button" onClick={this.goToNewPracticeSession}>Add Practice</button>
+        <button type="button" onClick={this.createThenGoToNewLesson}>Add lesson</button>
+        <button type="button" onClick={this.createThenGoToNewPracticeSession}>Add practice session</button>
       </Nav>
     );
   }
@@ -33,12 +38,14 @@ class Navigation extends Component {
 
 Navigation.propTypes = {
   createPracticeSessionRequest: PropTypes.func.isRequired,
+  lessonCreateRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
   createPracticeSessionRequest,
+  lessonCreateRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
