@@ -111,6 +111,7 @@ class PracticeSession extends Component {
 
 PracticeSession.defaultProps = {
   practiceSession: undefined,
+  practiceSessionTimer: undefined,
 };
 
 PracticeSession.propTypes = {
@@ -121,7 +122,7 @@ PracticeSession.propTypes = {
   finishPracticingRequest: PropTypes.func.isRequired,
   startPracticingRequest: PropTypes.func.isRequired,
   startPracticeTimer: PropTypes.func.isRequired,
-  practiceSessionTimer: PropTypes.number.isRequired,
+  practiceSessionTimer: PropTypes.number,
 };
 
 const mapStateToProps = (state, ownProps) => ({
