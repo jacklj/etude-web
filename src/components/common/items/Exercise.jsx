@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import vextab from 'vextab/releases/vextab-div'; // eslint-disable-line no-unused-vars
 
-import { Name, TeacherWhoCreatedIt } from '../../common/styledComponents';
+import { Name, TeacherWhoCreatedIt } from '../styledComponents';
 
 const Exercise = ({
   details,

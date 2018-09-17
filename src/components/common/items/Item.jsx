@@ -4,7 +4,7 @@ import vextab from 'vextab/releases/vextab-div'; // eslint-disable-line no-unuse
 import { connect } from 'react-redux';
 
 import { ITEM_TYPES } from '../../../constants';
-import { Card } from '../../common/styledComponents';
+import { Card } from '../styledComponents';
 import Exercise from './Exercise';
 import Piece from './Piece';
 import { deleteItemRequest } from '../../../redux/items/items.actions';

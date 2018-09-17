@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Card, Label } from '../common/styledComponents';
+import { Card, Label } from '../styledComponents';
 
-import { generalNoteUpdateRequest, noteDeleteRequest } from '../../redux/notes/notes.actions';
+import { generalNoteUpdateRequest, noteDeleteRequest } from '../../../redux/notes/notes.actions';
 
 const VIEW = {
   DISPLAY: 'VIEW.DISPLAY',

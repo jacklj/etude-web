@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import LessonDetails from './LessonDetails';
-import AddGeneralNote from './AddGeneralNote';
-import GeneralNotes from './GeneralNotes';
-import AddItem from './AddItem';
-import Items from './Items/Items';
+import AddGeneralNote from '../common/notes/AddGeneralNote';
+import GeneralNotes from '../common/notes/GeneralNotes';
+import AddItem from '../common/items/AddItem';
+import Items from '../common/items/Items';
 import { eventFetchRequest, deleteEventRequest } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
 import { renderDuration } from '../../services/datetime';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Item from './Item';
-import { ItemsOrNotesContainer } from '../../common/styledComponents';
+import { ItemsOrNotesContainer } from '../styledComponents';
 
 const Items = ({ eventId, items }) => (
   <ItemsOrNotesContainer>

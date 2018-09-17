@@ -8,11 +8,11 @@ import {
   fetchAllExercisesRequest,
   createRepertoireInstanceRequest,
   createExerciseInstanceRequest,
-} from '../../redux/items/items.actions';
+} from '../../../redux/items/items.actions';
 import {
   selectRepertoireForDropdown,
   selectExercisesForDropdown,
-} from '../../redux/items/items.selectors';
+} from '../../../redux/items/items.selectors';
 
 const VIEW = {
   DEFAULT: 'VIEW.DEFAULT',

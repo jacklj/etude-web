@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { generalNoteCreateRequest } from '../../redux/notes/notes.actions';
+import { generalNoteCreateRequest } from '../../../redux/notes/notes.actions';
 
 class AddGeneralNote extends Component {
   constructor(props) {
