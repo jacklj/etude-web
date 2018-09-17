@@ -15,6 +15,8 @@ import { selectEvent } from '../../redux/events/events.selectors';
 import { toHHMMSS } from '../../services/datetime';
 import AddGeneralNote from '../common/notes/AddGeneralNote';
 import GeneralNotes from '../common/notes/GeneralNotes';
+import AddItem from '../common/items/AddItem';
+import Items from '../common/items/Items';
 
 class PracticeSession extends Component {
   constructor(props) {
@@ -72,7 +74,7 @@ class PracticeSession extends Component {
     if (!practiceSession) {
       jsx = <div>Loading</div>;
     } else {
-      const { start, end, notes } = practiceSession;
+      const { start, end, notes, items } = practiceSession;
       const startFormatted = start && moment(start).format('H:mm dddd Do MMMM');
       const endFormatted = end && moment(end).format('H:mm dddd Do MMMM');
       const timer = typeof practiceSessionTimer === 'undefined' ? undefined : toHHMMSS(practiceSessionTimer);
@@ -103,8 +105,12 @@ class PracticeSession extends Component {
               Delete practice session
             </button>
           </div>
+          <h3>Notes</h3>
           <AddGeneralNote eventId={eventId} />
           <GeneralNotes notes={notes} />
+          <h3>Items</h3>
+          <AddItem eventId={eventId} />
+          <Items items={items} eventId={eventId} />
         </div>
       );
     }
