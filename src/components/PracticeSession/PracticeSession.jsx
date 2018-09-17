@@ -7,12 +7,10 @@ import moment from 'moment';
 import {
   deleteEventRequest,
   eventFetchRequest,
-  finishPracticingRequest,
-  startPracticingRequest,
   restartPracticeSession,
 } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
-import { toHHMMSS } from '../../services/datetime';
+import Timer from './Timer';
 import AddGeneralNote from '../common/notes/AddGeneralNote';
 import GeneralNotes from '../common/notes/GeneralNotes';
 import AddItem from '../common/items/AddItem';
@@ -23,8 +21,6 @@ class PracticeSession extends Component {
     super(props);
 
     this.deletePracticeSession = this.deletePracticeSession.bind(this);
-    this.finishPracticeSession = this.finishPracticeSession.bind(this);
-    this.startPracticeSession = this.startPracticeSession.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +30,9 @@ class PracticeSession extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // TODO 17/9/2018 extract the restart action dispatch logic into the (/a) saga
+    // Dispatches a RESTART action in case the timer was previously started but isn't running
+    // eg if you navigate directly to an in progress practice session
     if (
       // if the practiceSession object has just been got...
       this.props.practiceSession !== prevProps.practiceSession
@@ -57,16 +56,6 @@ class PracticeSession extends Component {
     }
   }
 
-  finishPracticeSession() {
-    const { practiceSession } = this.props;
-    this.props.finishPracticingRequest(practiceSession.event_id);
-  }
-
-  startPracticeSession() {
-    const { practiceSession } = this.props;
-    this.props.startPracticingRequest(practiceSession.event_id);
-  }
-
   render() {
     const { eventId, practiceSession, practiceSessionTimer } = this.props;
 
@@ -75,31 +64,16 @@ class PracticeSession extends Component {
       jsx = <div>Loading</div>;
     } else {
       const { start, end, notes, items } = practiceSession;
-      const startFormatted = start && moment(start).format('H:mm dddd Do MMMM');
-      const endFormatted = end && moment(end).format('H:mm dddd Do MMMM');
-      const timer = typeof practiceSessionTimer === 'undefined' ? undefined : toHHMMSS(practiceSessionTimer);
 
       jsx = (
         <div>
           <h3>Practice session</h3>
-          {start ? (
-            <div>Started.</div>
-          ) : (
-            <button type="button" onClick={this.startPracticeSession}>
-              Start
-            </button>
-          )}
-          <div>Start: {startFormatted}</div>
-          <div>{timer}</div>
-          <div>End: {endFormatted}</div>
-
-          {end ? (
-            <div>Finished.</div>
-          ) : (
-            <button type="button" onClick={this.finishPracticeSession}>
-              Finish
-            </button>
-          )}
+          <Timer
+            start={start}
+            end={end}
+            practiceSessionTimer={practiceSessionTimer}
+            eventId={eventId}
+          />
           <div>
             <button type="button" onClick={this.deletePracticeSession}>
               Delete practice session
@@ -128,8 +102,6 @@ PracticeSession.propTypes = {
   practiceSession: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   eventFetchRequest: PropTypes.func.isRequired,
   deleteEventRequest: PropTypes.func.isRequired,
-  finishPracticingRequest: PropTypes.func.isRequired,
-  startPracticingRequest: PropTypes.func.isRequired,
   restartPracticeSession: PropTypes.func.isRequired,
   practiceSessionTimer: PropTypes.number,
 };
@@ -144,8 +116,6 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = {
   deleteEventRequest,
   eventFetchRequest,
-  startPracticingRequest,
-  finishPracticingRequest,
   restartPracticeSession,
 };
 
