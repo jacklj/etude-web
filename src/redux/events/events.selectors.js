@@ -18,3 +18,12 @@ export const selectEvent = createSelector(
   [selectAllEventsAsObject, getEventIdFromProps],
   (events, eventId) => events[eventId],
 );
+
+export const selectInProgressEvent = createSelector(
+  selectAllEventsAsArray,
+  events => {
+    const inProgressEvents = events.filter(event => event.in_progress);
+    if (inProgressEvents.length === 0) return undefined;
+    return inProgressEvents[0];
+  },
+);

@@ -147,10 +147,10 @@ const eventsReducer = (state = initialState, action) => {
           [action.practiceSession.event_id]: action.practiceSession,
         },
       };
-    case ACTION_TYPES.PRACTICE_SESSION.RESTART: {
+    case ACTION_TYPES.PRACTICE_SESSION.TIMER.INITIALISE: {
       return {
         ...state,
-        practiceSessionTimer: action.initialTimeElapsed,
+        practiceSessionTimer: action.initialTime,
       };
     }
     case ACTION_TYPES.PRACTICE_SESSION.TIMER.TICK:
