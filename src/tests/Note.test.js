@@ -2,7 +2,7 @@
 import renderer from 'react-test-renderer';
 
 import React from 'react';
-import { Note } from '../components/Lesson/Note';
+import { Note } from '../components/common/notes/Note';
 
 test('Note renders correctly', () => {
   const component = renderer.create(
@@ -13,7 +13,7 @@ test('Note renders correctly', () => {
       type="TECHNICAL"
       id={1}
       eventId={1}
-      generalNoteUpdateRequest={() => ({})}
+      updateNoteRequest={() => ({})}
       noteDeleteRequest={() => ({})}
     />,
   );

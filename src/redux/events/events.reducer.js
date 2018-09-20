@@ -158,8 +158,8 @@ const eventsReducer = (state = initialState, action) => {
         ...state,
         practiceSessionTimer: state.practiceSessionTimer + 1,
       };
-    case notesActionTypes.NOTE.GENERAL.UPDATE.SUCCESS:
-    case notesActionTypes.NOTE.GENERAL.CREATE.SUCCESS: {
+    case notesActionTypes.NOTE.UPDATE.SUCCESS:
+    case notesActionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS: {
       const { note } = action;
       const eventId = note.event_id;
       return {

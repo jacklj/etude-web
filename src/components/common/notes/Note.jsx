@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Card, Label } from '../styledComponents';
 
-import { generalNoteUpdateRequest, noteDeleteRequest } from '../../../redux/notes/notes.actions';
+import { updateNoteRequest, noteDeleteRequest } from '../../../redux/notes/notes.actions';
 
 const VIEW = {
   DISPLAY: 'VIEW.DISPLAY',
@@ -76,7 +76,7 @@ export class Note extends Component {
       event_id: this.props.eventId,
     };
 
-    this.props.generalNoteUpdateRequest(updatedNote, id);
+    this.props.updateNoteRequest(updatedNote, id);
     this.setState({ currentView: VIEW.DISPLAY });
   }
 
@@ -147,14 +147,14 @@ Note.propTypes = {
   type: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   eventId: PropTypes.number.isRequired,
-  generalNoteUpdateRequest: PropTypes.func.isRequired,
+  updateNoteRequest: PropTypes.func.isRequired,
   noteDeleteRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
-  generalNoteUpdateRequest,
+  updateNoteRequest,
   noteDeleteRequest,
 };
 

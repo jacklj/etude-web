@@ -8,24 +8,27 @@ const initialState = {
 
 const locations = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION_TYPES.NOTE.GENERAL.CREATE.REQUEST:
+    case ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST:
+    case ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.ITEM.REQUEST:
       return {
         ...state,
         creatingNote: true,
       };
-    case ACTION_TYPES.NOTE.GENERAL.CREATE.SUCCESS:
-    case ACTION_TYPES.NOTE.GENERAL.CREATE.FAILURE:
+    case ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS:
+    case ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.FAILURE:
+    case ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.ITEM.SUCCESS:
+    case ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.ITEM.FAILURE:
       return {
         ...state,
         creatingNote: false,
       };
-    case ACTION_TYPES.NOTE.GENERAL.UPDATE.REQUEST:
+    case ACTION_TYPES.NOTE.UPDATE.REQUEST:
       return {
         ...state,
         updatingNote: true,
       };
-    case ACTION_TYPES.NOTE.GENERAL.UPDATE.SUCCESS:
-    case ACTION_TYPES.NOTE.GENERAL.UPDATE.FAILURE:
+    case ACTION_TYPES.NOTE.UPDATE.SUCCESS:
+    case ACTION_TYPES.NOTE.UPDATE.FAILURE:
       return {
         ...state,
         updatingNote: false,

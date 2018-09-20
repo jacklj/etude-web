@@ -9,7 +9,7 @@ import {
 } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
 import Timer from './Timer';
-import AddGeneralNote from '../common/notes/AddGeneralNote';
+import AddNoteToEvent from '../common/notes/AddNoteToEvent';
 import GeneralNotes from '../common/notes/GeneralNotes';
 import AddItem from '../common/items/AddItem';
 import Items from '../common/items/Items';
@@ -64,7 +64,7 @@ class PracticeSession extends Component {
             location={location}
           />
           <h3>Notes</h3>
-          <AddGeneralNote eventId={eventId} />
+          <AddNoteToEvent eventId={eventId} />
           <GeneralNotes notes={notes} />
           <h3>Items</h3>
           <AddItem eventId={eventId} />

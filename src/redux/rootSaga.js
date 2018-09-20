@@ -7,8 +7,8 @@ import updateEventSaga from './events/sagas/updateEvent.saga';
 import createLessonSaga from './events/sagas/lesson/createLesson.saga';
 import fetchLocationsSaga from './locations/locations.saga';
 import fetchPeopleSaga from './people/people.saga';
-import createGeneralNoteSaga from './notes/sagas/createGeneralNote.saga';
-import updateGeneralNoteSaga from './notes/sagas/updateGeneralNote.saga';
+import createNoteSaga from './notes/sagas/createNote.saga';
+import updateNoteSaga from './notes/sagas/updateNote.saga';
 import deleteNoteSaga from './notes/sagas/deleteNote.saga';
 import fetchRepertoireSaga from './items/sagas/fetchRepertoire.saga';
 import fetchExercisesSaga from './items/sagas/fetchExercises.saga';
@@ -28,8 +28,8 @@ export default function* rootSaga() {
     createLessonSaga(),
     fetchLocationsSaga(),
     fetchPeopleSaga(),
-    createGeneralNoteSaga(),
-    updateGeneralNoteSaga(),
+    createNoteSaga(),
+    updateNoteSaga(),
     deleteNoteSaga(),
     fetchRepertoireSaga(),
     fetchExercisesSaga(),

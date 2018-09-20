@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { generalNoteCreateRequest } from '../../../redux/notes/notes.actions';
+import { createNoteAndAddToEventRequest } from '../../../redux/notes/notes.actions';
 
-class AddGeneralNote extends Component {
+class AddNoteToEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ class AddGeneralNote extends Component {
       type,
       event_id: eventId,
     };
-    this.props.generalNoteCreateRequest(newNote, eventId);
+    this.props.createNoteAndAddToEventRequest(newNote, eventId);
     this.setState({
       editingNewNote: false,
     });
@@ -71,14 +71,14 @@ class AddGeneralNote extends Component {
   }
 }
 
-AddGeneralNote.defaultProps = {
+AddNoteToEvent.defaultProps = {
   eventId: undefined,
 };
 
-AddGeneralNote.propTypes = {
+AddNoteToEvent.propTypes = {
   isCreatingNote: PropTypes.bool.isRequired,
   eventId: PropTypes.number,
-  generalNoteCreateRequest: PropTypes.func.isRequired,
+  createNoteAndAddToEventRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -86,7 +86,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  generalNoteCreateRequest,
+  createNoteAndAddToEventRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddGeneralNote);
+export default connect(mapStateToProps, mapDispatchToProps)(AddNoteToEvent);

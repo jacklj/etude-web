@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import LessonDetails from './LessonDetails';
-import AddGeneralNote from '../common/notes/AddGeneralNote';
+import AddNoteToEvent from '../common/notes/AddNoteToEvent';
 import GeneralNotes from '../common/notes/GeneralNotes';
 import AddItem from '../common/items/AddItem';
 import Items from '../common/items/Items';
@@ -60,7 +60,7 @@ class Lesson extends Component {
             </button>
           </div>
           <h3>Notes</h3>
-          <AddGeneralNote eventId={eventId} />
+          <AddNoteToEvent eventId={eventId} />
           <GeneralNotes notes={notes} />
           <h3>Items</h3>
           <AddItem eventId={eventId} />

@@ -1,16 +1,21 @@
 export const ACTION_TYPES = {
   NOTE: {
-    GENERAL: {
-      CREATE: {
-        REQUEST: 'NOTE.GENERAL.CREATE.REQUEST',
-        SUCCESS: 'NOTE.GENERAL.CREATE.SUCCESS',
-        FAILURE: 'NOTE.GENERAL.CREATE.FAILURE',
+    CREATE_AND_ADD_TO: {
+      EVENT: {
+        REQUEST: 'NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST',
+        SUCCESS: 'NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS',
+        FAILURE: 'NOTE.CREATE_AND_ADD_TO.EVENT.FAILURE',
       },
-      UPDATE: {
-        REQUEST: 'NOTE.GENERAL.UPDATE.REQUEST',
-        SUCCESS: 'NOTE.GENERAL.UPDATE.SUCCESS',
-        FAILURE: 'NOTE.GENERAL.UPDATE.FAILURE',
+      ITEM: {
+        REQUEST: 'NOTE.CREATE_AND_ADD_TO.ITEM.REQUEST',
+        SUCCESS: 'NOTE.CREATE_AND_ADD_TO.ITEM.SUCCESS',
+        FAILURE: 'NOTE.CREATE_AND_ADD_TO.ITEM.FAILURE',
       },
+    },
+    UPDATE: {
+      REQUEST: 'NOTE.UPDATE.REQUEST',
+      SUCCESS: 'NOTE.UPDATE.SUCCESS',
+      FAILURE: 'NOTE.UPDATE.FAILURE',
     },
     DELETE: {
       REQUEST: 'NOTE.DELETE.REQUEST',
@@ -20,35 +25,51 @@ export const ACTION_TYPES = {
   },
 };
 
-export const generalNoteCreateRequest = (note, eventId) => ({
-  type: ACTION_TYPES.NOTE.GENERAL.CREATE.REQUEST,
+export const createNoteAndAddToEventRequest = (note, eventId) => ({
+  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST,
   note,
   eventId,
 });
 
-export const generalNoteCreateSuccess = note => ({
-  type: ACTION_TYPES.NOTE.GENERAL.CREATE.SUCCESS,
+export const createNoteAndAddToEventSuccess = note => ({
+  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS,
   note,
 });
 
-export const generalNoteCreateFailure = error => ({
-  type: ACTION_TYPES.NOTE.GENERAL.CREATE.FAILURE,
+export const createNoteAndAddToEventFailure = error => ({
+  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.FAILURE,
   error,
 });
 
-export const generalNoteUpdateRequest = (note, noteId) => ({
-  type: ACTION_TYPES.NOTE.GENERAL.UPDATE.REQUEST,
+export const createNoteAndAddToItemRequest = (note, itemId) => ({
+  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.ITEM.REQUEST,
+  note,
+  itemId,
+});
+
+export const createNoteAndAddToItemSuccess = note => ({
+  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.ITEM.SUCCESS,
+  note,
+});
+
+export const createNoteAndAddToItemFailure = error => ({
+  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.ITEM.FAILURE,
+  error,
+});
+
+export const updateNoteRequest = (note, noteId) => ({
+  type: ACTION_TYPES.NOTE.UPDATE.REQUEST,
   note,
   noteId,
 });
 
-export const generalNoteUpdateSuccess = note => ({
-  type: ACTION_TYPES.NOTE.GENERAL.UPDATE.SUCCESS,
+export const updateNoteSuccess = note => ({
+  type: ACTION_TYPES.NOTE.UPDATE.SUCCESS,
   note,
 });
 
-export const generalNoteUpdateFailure = error => ({
-  type: ACTION_TYPES.NOTE.GENERAL.UPDATE.FAILURE,
+export const updateNoteFailure = error => ({
+  type: ACTION_TYPES.NOTE.UPDATE.FAILURE,
   error,
 });
 
