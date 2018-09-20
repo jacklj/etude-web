@@ -13,6 +13,7 @@ import AddGeneralNote from '../common/notes/AddGeneralNote';
 import GeneralNotes from '../common/notes/GeneralNotes';
 import AddItem from '../common/items/AddItem';
 import Items from '../common/items/Items';
+import PracticeSessionDetails from './PracticeSessionDetails';
 
 class PracticeSession extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class PracticeSession extends Component {
     if (!practiceSession) {
       jsx = <div>Loading</div>;
     } else {
-      const { start, end, notes, items } = practiceSession;
+      const { start, end, notes, items, location, rating } = practiceSession;
 
       jsx = (
         <div>
@@ -57,6 +58,11 @@ class PracticeSession extends Component {
               Delete practice session
             </button>
           </div>
+          <PracticeSessionDetails
+            eventId={eventId}
+            rating={rating}
+            location={location}
+          />
           <h3>Notes</h3>
           <AddGeneralNote eventId={eventId} />
           <GeneralNotes notes={notes} />

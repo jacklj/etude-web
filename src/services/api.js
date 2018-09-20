@@ -39,6 +39,14 @@ export const updateLesson = (lesson, eventId) => fetch(`${baseApiUrl}/events/les
 
 export const getEvent = eventId => fetch(`${baseApiUrl}/events/${eventId}`).then(response => response.json());
 
+export const updateEvent = (event, eventId) => fetch(`${baseApiUrl}/events/${eventId}`, {
+  method: 'PUT',
+  body: JSON.stringify(event),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8', // need this for PUT or server thinks body is blank
+  },
+});
+
 export const getLocations = () => fetch(`${baseApiUrl}/locations`).then(response => response.json());
 
 export const getPeople = () => fetch(`${baseApiUrl}/people`).then(response => response.json());

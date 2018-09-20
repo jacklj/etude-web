@@ -3,6 +3,7 @@ import { all } from 'redux-saga/effects';
 import fetchAllEventsSaga from './events/sagas/fetchAllEvents.saga';
 import fetchEventSaga from './events/sagas/fetchEvent.saga';
 import deleteEventSaga from './events/sagas/deleteEvent.saga';
+import updateEventSaga from './events/sagas/updateEvent.saga';
 import updateLessonSaga from './events/sagas/lesson/updateLesson.saga';
 import createLessonSaga from './events/sagas/lesson/createLesson.saga';
 import fetchLocationsSaga from './locations/locations.saga';
@@ -24,6 +25,7 @@ export default function* rootSaga() {
     fetchAllEventsSaga(),
     fetchEventSaga(),
     deleteEventSaga(),
+    updateEventSaga(),
     updateLessonSaga(),
     createLessonSaga(),
     fetchLocationsSaga(),
