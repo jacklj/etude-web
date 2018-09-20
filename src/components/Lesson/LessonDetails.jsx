@@ -8,7 +8,7 @@ import DateTime from 'react-datetime';
 import Select from 'react-select';
 
 import { Label } from '../common/styledComponents';
-import { lessonUpdateRequest } from '../../redux/events/events.actions';
+import { updateEventRequest } from '../../redux/events/events.actions';
 import { locationsFetchRequest } from '../../redux/locations/locations.actions';
 import { peopleFetchRequest } from '../../redux/people/people.actions';
 import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
@@ -81,7 +81,7 @@ class LessonDetails extends Component {
       location_id: this.state.editingLocation.value,
       teacher_id: this.state.editingTeacher.value,
     };
-    this.props.lessonUpdateRequest(newLesson, this.props.eventId);
+    this.props.updateEventRequest(newLesson, this.props.eventId);
     this.setState({
       isEditing: false,
     });
@@ -214,7 +214,7 @@ LessonDetails.propTypes = {
   teacher: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   isLessonUpdating: PropTypes.bool.isRequired,
   locations: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
-  lessonUpdateRequest: PropTypes.func.isRequired,
+  updateEventRequest: PropTypes.func.isRequired,
   locationsFetchRequest: PropTypes.func.isRequired,
   peopleFetchRequest: PropTypes.func.isRequired,
   teachers: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -228,7 +228,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  lessonUpdateRequest,
+  updateEventRequest,
   locationsFetchRequest,
   peopleFetchRequest,
 };

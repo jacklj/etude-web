@@ -22,11 +22,6 @@ export const ACTION_TYPES = {
     },
   },
   LESSON: {
-    UPDATE: {
-      REQUEST: 'LESSON.UPDATE.REQUEST',
-      SUCCESS: 'LESSON.UPDATE.SUCCESS',
-      FAILURE: 'LESSON.UPDATE.FAILURE',
-    },
     CREATE: {
       REQUEST: 'LESSON.CREATE.REQUEST',
       SUCCESS: 'LESSON.CREATE.SUCCESS',
@@ -113,22 +108,6 @@ export const updateEventSuccess = event => ({
 
 export const updateEventFailure = error => ({
   type: ACTION_TYPES.EVENT.UPDATE.FAILURE,
-  error,
-});
-
-export const lessonUpdateRequest = (lesson, eventId) => ({
-  type: ACTION_TYPES.LESSON.UPDATE.REQUEST,
-  lesson,
-  eventId,
-});
-
-export const lessonUpdateSuccess = lesson => ({
-  type: ACTION_TYPES.LESSON.UPDATE.SUCCESS,
-  lesson,
-});
-
-export const lessonUpdateFailure = error => ({
-  type: ACTION_TYPES.LESSON.UPDATE.FAILURE,
   error,
 });
 

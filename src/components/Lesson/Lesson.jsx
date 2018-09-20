@@ -15,7 +15,6 @@ import { renderDuration } from '../../services/datetime';
 class Lesson extends Component {
   constructor(props) {
     super(props);
-
     this.deleteLesson = this.deleteLesson.bind(this);
   }
 

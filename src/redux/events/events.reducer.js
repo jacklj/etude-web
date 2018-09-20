@@ -91,25 +91,6 @@ const eventsReducer = (state = initialState, action) => {
         ...state,
         updatingEvent: false,
       };
-    case ACTION_TYPES.LESSON.UPDATE.REQUEST:
-      return {
-        ...state,
-        updatingEvent: true,
-      };
-    case ACTION_TYPES.LESSON.UPDATE.SUCCESS:
-      return {
-        ...state,
-        updatingEvent: false,
-        events: {
-          ...state.events,
-          [action.lesson.event_id]: action.lesson,
-        },
-      };
-    case ACTION_TYPES.LESSON.UPDATE.FAILURE:
-      return {
-        ...state,
-        updatingEvent: false,
-      };
     case ACTION_TYPES.LESSON.CREATE.REQUEST:
       return {
         ...state,

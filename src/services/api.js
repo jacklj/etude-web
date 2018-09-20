@@ -27,16 +27,6 @@ export const createPracticeSession = practiceSession => fetch(`${baseApiUrl}/eve
   .then(response => response.json())
   .catch(error => console.error('createPracticeSession Fetch Error =\n', error));
 
-export const updateLesson = (lesson, eventId) => fetch(`${baseApiUrl}/events/lessons/${eventId}`, {
-  method: 'PUT',
-  body: JSON.stringify(lesson),
-  headers: {
-    'Content-Type': 'application/json; charset=utf-8', // need this for PUT or server thinks body is blank
-  },
-})
-  .then(response => response.json())
-  .catch(error => console.error('updateLesson Fetch Error =\n', error));
-
 export const getEvent = eventId => fetch(`${baseApiUrl}/events/${eventId}`).then(response => response.json());
 
 export const updateEvent = (event, eventId) => fetch(`${baseApiUrl}/events/${eventId}`, {
