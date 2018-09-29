@@ -9,7 +9,7 @@ export const selectTeachersForDropdown = createSelector(
   session => session.People.all()
     .filter(person => person.role === 'Teacher')
     .toModelArray().map(teacher => ({
-      value: teacher.id,
+      value: teacher.person_id,
       label: `${teacher.first_name} ${teacher.surname}`,
     })),
 );

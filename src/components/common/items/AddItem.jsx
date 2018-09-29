@@ -9,10 +9,8 @@ import {
   createRepertoireInstanceRequest,
   createExerciseInstanceRequest,
 } from '../../../redux/items/items.actions';
-import {
-  selectRepertoireForDropdown,
-  selectExercisesForDropdown,
-} from '../../../redux/items/items.selectors';
+import { selectRepertoireForDropdown } from '../../../redux/reduxOrm/selectors/repertoire.selectors';
+import { selectExercisesForDropdown } from '../../../redux/reduxOrm/selectors/exercises.selectors';
 
 const VIEW = {
   DEFAULT: 'VIEW.DEFAULT',

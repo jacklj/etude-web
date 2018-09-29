@@ -11,6 +11,11 @@ class Events extends Model {
           Object.values(action.payload.events).forEach(event => SessionBoundEvents.create(event));
         }
         break;
+      case eventsActionTypes.EVENT.FETCH.SUCCESS:
+        if (ifObjectExistsAndIsNotEmpty(action.payload.events)) {
+          Object.values(action.payload.events).forEach(event => SessionBoundEvents.create(event));
+        }
+        break;
       default:
         break;
     }

@@ -1,4 +1,3 @@
-// selectors.js
 import { createSelector } from 'redux-orm';
 import orm from '../orm';
 import { dbStateSelector } from './common.selectors';

@@ -70,9 +70,9 @@ export const eventFetchRequest = eventId => ({
   eventId,
 });
 
-export const eventFetchSuccess = event => ({
+export const eventFetchSuccess = payload => ({
   type: ACTION_TYPES.EVENT.FETCH.SUCCESS,
-  event,
+  payload,
 });
 
 export const eventFetchFailure = error => ({
