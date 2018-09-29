@@ -6,12 +6,13 @@ import { lessonCreateSuccess, lessonCreateFailure, ACTION_TYPES } from '../../ev
 
 function* createLessonGenerator() {
   try {
-    const newLesson = yield call(createLesson);
-    const actionToDispatch = lessonCreateSuccess(newLesson);
+    const response = yield call(createLesson);
+    const actionToDispatch = lessonCreateSuccess(response);
     yield put(actionToDispatch);
 
     // navigate to lesson page
-    const { event_id: eventId } = newLesson;
+    // TODO 29th September 2018. Normalised response requires Object.keys(...)[0] - is this good?
+    const { event_id: eventId } = Object.keys(response.events)[0];
     yield put(push(`/lesson/${eventId}`));
   } catch (e) {
     const actionToDispatch = lessonCreateFailure(e);

@@ -40,9 +40,9 @@ export const fetchAllRepertoireRequest = () => ({
   type: ACTION_TYPES.REPERTOIRE.FETCH_ALL.REQUEST,
 });
 
-export const fetchAllRepertoireSuccess = repertoire => ({
+export const fetchAllRepertoireSuccess = payload => ({
   type: ACTION_TYPES.REPERTOIRE.FETCH_ALL.SUCCESS,
-  repertoire,
+  payload,
 });
 
 export const fetchAllRepertoireFailure = error => ({
@@ -54,9 +54,9 @@ export const fetchAllExercisesRequest = () => ({
   type: ACTION_TYPES.EXERCISES.FETCH_ALL.REQUEST,
 });
 
-export const fetchAllExercisesSuccess = exercises => ({
+export const fetchAllExercisesSuccess = payload => ({
   type: ACTION_TYPES.EXERCISES.FETCH_ALL.SUCCESS,
-  exercises,
+  payload,
 });
 
 export const fetchAllExercisesFailure = error => ({

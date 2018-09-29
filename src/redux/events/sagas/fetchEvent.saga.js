@@ -5,8 +5,8 @@ import { eventFetchSuccess, eventFetchFailure, ACTION_TYPES } from '../events.ac
 function* fetchEvent(action) {
   const { eventId } = action;
   try {
-    const event = yield call(getEvent, eventId);
-    const actionToDispatch = eventFetchSuccess(event);
+    const payload = yield call(getEvent, eventId);
+    const actionToDispatch = eventFetchSuccess(payload);
     yield put(actionToDispatch);
   } catch (e) {
     const actionToDispatch = eventFetchFailure(e);

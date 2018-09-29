@@ -4,8 +4,8 @@ import { fetchAllExercisesSuccess, fetchAllExercisesFailure, ACTION_TYPES } from
 
 function* fetchExercises() {
   try {
-    const exercises = yield call(getExercises);
-    const action = fetchAllExercisesSuccess(exercises);
+    const payload = yield call(getExercises);
+    const action = fetchAllExercisesSuccess(payload);
     yield put(action);
   } catch (e) {
     const action = fetchAllExercisesFailure(e);

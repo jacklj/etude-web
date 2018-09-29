@@ -4,8 +4,8 @@ import { fetchAllRepertoireSuccess, fetchAllRepertoireFailure, ACTION_TYPES } fr
 
 function* fetchRepertoire() {
   try {
-    const repertoire = yield call(getRepertoire);
-    const action = fetchAllRepertoireSuccess(repertoire);
+    const payload = yield call(getRepertoire);
+    const action = fetchAllRepertoireSuccess(payload);
     yield put(action);
   } catch (e) {
     const action = fetchAllRepertoireFailure(e);

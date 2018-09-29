@@ -7,17 +7,17 @@ const initialState = {
 
 const people = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION_TYPES.PEOPLE_FETCH.REQUEST:
+    case ACTION_TYPES.PEOPLE.FETCH.REQUEST:
       return {
         ...state,
         fetching: true,
       };
-    case ACTION_TYPES.PEOPLE_FETCH.SUCCESS:
+    case ACTION_TYPES.PEOPLE.FETCH.SUCCESS:
       return {
         people: action.people,
         fetching: false,
       };
-    case ACTION_TYPES.PEOPLE_FETCH.FAILURE:
+    case ACTION_TYPES.PEOPLE.FETCH.FAILURE:
       return {
         ...state,
         fetching: false,
