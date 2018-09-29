@@ -23,7 +23,6 @@ export const createPracticeSession = practiceSession => fetch(`${baseApiUrl}/eve
     'Content-Type': 'application/json; charset=utf-8',
   },
 })
-  .then(response => response.json())
   .catch(error => console.error('createPracticeSession Fetch Error =\n', error));
 
 export const getEvent = eventId => fetch(`${baseApiUrl}/events/${eventId}`)

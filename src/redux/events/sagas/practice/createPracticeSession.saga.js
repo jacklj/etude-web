@@ -11,16 +11,17 @@ import {
 function* createPracticeSessionGenerator() {
   try {
     const response = yield call(createPracticeSession);
-    const actionToDispatch = createPracticeSessionSuccess(response);
-    yield put(actionToDispatch);
-
-    // navigate to practice session page
-    const { event_id: eventId } = Object.values(response.events)[0];
-
-    yield put(push(`/practice_session/${eventId}`));
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(createPracticeSessionSuccess(body));
+      // navigate to practice session page
+      const { event_id: eventId } = Object.values(body.events)[0];
+      yield put(push(`/practice_session/${eventId}`));
+    } else {
+      yield put(createPracticeSessionFailure(body));
+    }
   } catch (e) {
-    const actionToDispatch = createPracticeSessionFailure(e);
-    yield put(actionToDispatch);
+    yield put(createPracticeSessionFailure(e));
   }
 }
 
