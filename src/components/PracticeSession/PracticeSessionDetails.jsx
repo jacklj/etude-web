@@ -7,7 +7,7 @@ import Select from 'react-select';
 import { Label } from '../common/styledComponents';
 import { updateEventRequest } from '../../redux/events/events.actions';
 import { locationsFetchRequest } from '../../redux/locations/locations.actions';
-import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
+import { selectLocationsForDropdown } from '../../redux/reduxOrm/selectors/locations.selectors';
 import { getLocationSelectOption } from '../../services/utils';
 
 class PracticeSessionDetails extends Component {

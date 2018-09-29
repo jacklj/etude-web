@@ -7,7 +7,7 @@ import {
   deleteEventRequest,
   eventFetchRequest,
 } from '../../redux/events/events.actions';
-import { selectEvent } from '../../redux/events/events.selectors';
+import { selectEvent } from '../../redux/reduxOrm/selectors/events.selectors';
 import Timer from './Timer';
 import AddNoteToEvent from '../common/notes/AddNoteToEvent';
 import GeneralNotes from '../common/notes/GeneralNotes';
