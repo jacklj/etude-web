@@ -1,7 +1,7 @@
 import { attr, Model } from 'redux-orm';
 
-import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
-import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
+import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
+import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 class People extends Model {
   static reducer(action, SessionBoundPeople) {

@@ -1,8 +1,8 @@
 import { attr, Model } from 'redux-orm';
 
-import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
-import { ACTION_TYPES as locationsActionTypes } from '../locations/locations.actions';
-import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
+import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
+import { ACTION_TYPES as locationsActionTypes } from '../../locations/locations.actions';
+import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 class Locations extends Model {
   static reducer(action, SessionBoundLocations) {
