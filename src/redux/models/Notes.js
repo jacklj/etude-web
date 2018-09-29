@@ -5,11 +5,12 @@ import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 class Notes extends Model {
-  static reducer(action, Notes, session) {
+  static reducer(action, SessionBoundNotes) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.notes)) {
-          Object.values(action.payload.notes).forEach(note => Notes.create(note));
+          Object.values(action.payload.notes)
+            .forEach(note => SessionBoundNotes.create(note));
         }
         break;
       case notesActionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS:
@@ -24,20 +25,18 @@ class Notes extends Model {
       default:
         break;
     }
-    // Return value is ignored.
-    return undefined;
+    return undefined; // Return value is ignored.
   }
 
   toString() {
     return `Note: ${this.note}`;
   }
-  // Declare any static or instance methods you need.
 }
+
 Notes.modelName = 'Notes';
 
-// Declare your related fields.
 Notes.fields = {
-  note_id: attr(), // non-relational field for any value; optional but highly recommended
+  note_id: attr(),
   note: attr(),
   score: attr(),
   type: attr(),

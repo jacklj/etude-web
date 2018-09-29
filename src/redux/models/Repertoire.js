@@ -4,30 +4,29 @@ import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 class Repertoire extends Model {
-  static reducer(action, Repertoire, session) {
+  static reducer(action, SessionBoundRepertoire) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.repertoire)) {
-          Object.values(action.payload.repertoire).forEach(repertoireItem => Repertoire.create(repertoireItem));
+          Object.values(action.payload.repertoire)
+            .forEach(repertoireItem => SessionBoundRepertoire.create(repertoireItem));
         }
         break;
       default:
         break;
     }
-    // Return value is ignored.
-    return undefined;
+    return undefined; // Return value is ignored.
   }
 
   toString() {
     return `Repertoire: ${this.name}`;
   }
-  // Declare any static or instance methods you need.
 }
+
 Repertoire.modelName = 'Repertoire';
 
-// Declare your related fields.
 Repertoire.fields = {
-  repertoire_id: attr(), // non-relational field for any value; optional but highly recommended
+  repertoire_id: attr(),
   name: attr(),
   composer_id: fk({ to: 'People', relatedName: 'compositions' }),
   composition_date: attr(),

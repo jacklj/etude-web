@@ -5,11 +5,12 @@ import { ACTION_TYPES as locationsActionTypes } from '../locations/locations.act
 import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 class Locations extends Model {
-  static reducer(action, Locations, session) {
+  static reducer(action, SessionBoundLocations) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.locations)) {
-          Object.values(action.payload.locations).forEach(location => Locations.create(location));
+          Object.values(action.payload.locations)
+            .forEach(location => SessionBoundLocations.create(location));
         }
         break;
       case locationsActionTypes.LOCATIONS_FETCH.SUCCESS:
@@ -18,20 +19,18 @@ class Locations extends Model {
       default:
         break;
     }
-    // Return value is ignored.
-    return undefined;
+    return undefined; // Return value is ignored.
   }
 
   toString() {
     return `Location: ${this.name}`;
   }
-  // Declare any static or instance methods you need.
 }
+
 Locations.modelName = 'Locations';
 
-// Declare your related fields.
 Locations.fields = {
-  location_id: attr(), // non-relational field for any value; optional but highly recommended
+  location_id: attr(),
   name: attr(),
   address_line_1: attr(),
   address_line_2: attr(),
@@ -44,6 +43,5 @@ Locations.fields = {
 Locations.options = {
   idAttribute: 'location_id',
 };
-
 
 export default Locations;

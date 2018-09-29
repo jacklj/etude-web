@@ -4,30 +4,27 @@ import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 class Events extends Model {
-  static reducer(action, Events, session) {
+  static reducer(action, SessionBoundEvents) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.events)) {
-          Object.values(action.payload.events).forEach(event => Events.create(event));
+          Object.values(action.payload.events).forEach(event => SessionBoundEvents.create(event));
         }
         break;
       default:
         break;
     }
-    // Return value is ignored.
-    return undefined;
+    return undefined; // Return value is ignored.
   }
 
   toString() {
     return `Event: ${this.start} - ${this.end}`;
   }
-  // Declare any static or instance methods you need.
 }
 Events.modelName = 'Events';
 
-// Declare your related fields.
 Events.fields = {
-  event_id: attr(), // non-relational field for any value; optional but highly recommended
+  event_id: attr(),
   start: attr(),
   end: attr(),
   type: attr(),

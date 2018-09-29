@@ -4,30 +4,29 @@ import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 class Exercises extends Model {
-  static reducer(action, Exercises, session) {
+  static reducer(action, SessionBoundExercises) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.exercises)) {
-          Object.values(action.payload.exercises).forEach(exercise => Exercises.create(exercise));
+          Object.values(action.payload.exercises)
+            .forEach(exercise => SessionBoundExercises.create(exercise));
         }
         break;
       default:
         break;
     }
-    // Return value is ignored.
-    return undefined;
+    return undefined; // Return value is ignored.
   }
 
   toString() {
     return `Exercise: ${this.name}`;
   }
-  // Declare any static or instance methods you need.
 }
+
 Exercises.modelName = 'Exercises';
 
-// Declare your related fields.
 Exercises.fields = {
-  exercise_id: attr(), // non-relational field for any value; optional but highly recommended
+  exercise_id: attr(),
   name: attr(),
   score: attr(),
   range_lowest_note: attr(),

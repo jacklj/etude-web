@@ -5,29 +5,28 @@ import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 // pluralised class name so it matches table name in db
 class RepOrExerciseInstances extends Model {
-  static reducer(action, RepOrExerciseInstances, session) {
+  static reducer(action, SessionBoundRepOrExerciseInstances) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.rep_or_exercise_instances)) {
           Object.values(action.payload.rep_or_exercise_instances)
-            .forEach(repOrExerciseInstance => RepOrExerciseInstances.create(repOrExerciseInstance));
+            .forEach(repOrExerciseInstance => SessionBoundRepOrExerciseInstances
+              .create(repOrExerciseInstance));
         }
         break;
       default:
         break;
     }
-    // Return value is ignored.
-    return undefined;
+    return undefined; // Return value is ignored.
   }
 
   toString() {
     return `RepOrExerciseInstance: ${this.rep_or_exercise_instance_id}`;
   }
-  // Declare any static or instance methods you need.
 }
+
 RepOrExerciseInstances.modelName = 'RepOrExerciseInstances';
 
-// Declare your related fields.
 RepOrExerciseInstances.fields = {
   rep_or_exercise_instance_id: attr(),
   event_id: fk({ to: 'Events', relatedName: 'rep or exercise instances' }),

@@ -1,33 +1,31 @@
-import { fk, attr, Model } from 'redux-orm';
+import { attr, Model } from 'redux-orm';
 
 import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 class People extends Model {
-  static reducer(action, People, session) {
+  static reducer(action, SessionBoundPeople) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.people)) {
-          Object.values(action.payload.people).forEach(person => People.create(person));
+          Object.values(action.payload.people).forEach(person => SessionBoundPeople.create(person));
         }
         break;
       default:
         break;
     }
-    // Return value is ignored.
-    return undefined;
+    return undefined; // Return value is ignored.
   }
 
   toString() {
     return `Person: ${this.first_name} ${this.surname}`;
   }
-  // Declare any static or instance methods you need.
 }
+
 People.modelName = 'People';
 
-// Declare your related fields.
 People.fields = {
-  person_id: attr(), // non-relational field for any value; optional but highly recommended
+  person_id: attr(),
   first_name: attr(),
   surname: attr(),
   role: attr(),
