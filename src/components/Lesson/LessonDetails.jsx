@@ -13,7 +13,7 @@ import { locationsFetchRequest } from '../../redux/locations/locations.actions';
 import { peopleFetchRequest } from '../../redux/people/people.actions';
 import { selectLocationsForDropdown } from '../../redux/reduxOrm/selectors/locations.selectors';
 import { selectTeachersForDropdown } from '../../redux/reduxOrm/selectors/people.selectors';
-import { getSelectOption } from '../../services/utils';
+import { getLocationSelectOption, getPersonSelectOption } from '../../services/utils';
 
 class LessonDetails extends Component {
   constructor(props) {
@@ -41,8 +41,10 @@ class LessonDetails extends Component {
 
   updateLessonDetails() {
     // set the editing state to be equal to the lesson data in redux (via this.props)
-    const editingLocation = this.props.location && getSelectOption(this.props.location, this.props.locations);
-    const editingTeacher = this.props.teacher && getSelectOption(this.props.teacher, this.props.teachers);
+    const editingLocation = this.props.location
+      && getLocationSelectOption(this.props.location, this.props.locations);
+    const editingTeacher = this.props.teacher
+      && getPersonSelectOption(this.props.teacher, this.props.teachers);
 
     this.setState({
       isEditing: true,
@@ -157,8 +159,10 @@ class LessonDetails extends Component {
       const start = moment(this.props.start); // need to wrap start and end in moment(), ...
       const end = moment(this.props.end); // or DateTime component doesn't work
       const { rating, type } = this.props;
-      const teacher = this.props.teacher && getSelectOption(this.props.teacher, this.props.teachers);
-      const location = this.props.location && getSelectOption(this.props.location, this.props.locations);
+      const teacher = this.props.teacher
+        && getPersonSelectOption(this.props.teacher, this.props.teachers);
+      const location = this.props.location
+        && getLocationSelectOption(this.props.location, this.props.locations);
 
       jsx = (
         <form>

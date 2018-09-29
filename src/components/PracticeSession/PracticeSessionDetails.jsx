@@ -8,7 +8,7 @@ import { Label } from '../common/styledComponents';
 import { updateEventRequest } from '../../redux/events/events.actions';
 import { locationsFetchRequest } from '../../redux/locations/locations.actions';
 import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
-import { getSelectOption } from '../../services/utils';
+import { getLocationSelectOption } from '../../services/utils';
 
 class PracticeSessionDetails extends Component {
   constructor(props) {
@@ -31,7 +31,8 @@ class PracticeSessionDetails extends Component {
 
   updatePracticeSessionDetails() {
     // set the editing state to be equal to the practiceSession data in redux (via this.props)
-    const editingLocation = this.props.location && getSelectOption(this.props.location, this.props.locations);
+    const editingLocation = this.props.location
+      && getLocationSelectOption(this.props.location, this.props.locations);
 
     this.setState({
       isEditing: true,
@@ -101,7 +102,8 @@ class PracticeSessionDetails extends Component {
       );
     } else {
       const { rating } = this.props;
-      const location = this.props.location && getSelectOption(this.props.location, this.props.locations);
+      const location = this.props.location
+        && getLocationSelectOption(this.props.location, this.props.locations);
 
       jsx = (
         <form>
