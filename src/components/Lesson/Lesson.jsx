@@ -9,7 +9,7 @@ import GeneralNotes from '../common/notes/GeneralNotes';
 import AddItem from '../common/items/AddItem';
 import Items from '../common/items/Items';
 import { eventFetchRequest, deleteEventRequest } from '../../redux/events/events.actions';
-import { selectEvent } from '../../redux/events/events.selectors';
+import { selectEvent } from '../../redux/reduxOrm/selectors/events.selectors';
 import { renderDuration } from '../../services/datetime';
 
 class Lesson extends Component {

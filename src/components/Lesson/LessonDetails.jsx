@@ -11,8 +11,8 @@ import { Label } from '../common/styledComponents';
 import { updateEventRequest } from '../../redux/events/events.actions';
 import { locationsFetchRequest } from '../../redux/locations/locations.actions';
 import { peopleFetchRequest } from '../../redux/people/people.actions';
-import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
-import { selectTeachersForDropdown } from '../../redux/people/people.selectors';
+import { selectLocationsForDropdown } from '../../redux/reduxOrm/selectors/locations.selectors';
+import { selectTeachersForDropdown } from '../../redux/reduxOrm/selectors/people.selectors';
 import { getSelectOption } from '../../services/utils';
 
 class LessonDetails extends Component {
