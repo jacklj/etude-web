@@ -43,3 +43,13 @@ export const selectEvent = createSelector(
     };
   },
 );
+
+export const selectInProgressEvent = createSelector(
+  orm,
+  dbStateSelector,
+  session => {
+    const inProgressEvents = session.Events.all().filter(event => event.in_progress);
+    if (inProgressEvents.length === 0) return undefined;
+    return inProgressEvents[0];
+  },
+);

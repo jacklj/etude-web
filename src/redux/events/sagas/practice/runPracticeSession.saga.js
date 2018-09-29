@@ -4,7 +4,7 @@ import {
 import moment from 'moment';
 
 import { finishPracticeSession } from '../../../../services/api';
-import { selectInProgressEvent } from '../../events.selectors';
+import { selectInProgressEvent } from '../../../reduxOrm/selectors/events.selectors';
 import {
   ACTION_TYPES,
   tickPracticeTimer,
