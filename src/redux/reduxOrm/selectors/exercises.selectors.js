@@ -11,3 +11,22 @@ export const selectExercisesForDropdown = createSelector(
     label: exercise.name,
   })),
 );
+
+const getExerciseIdFromProps = (state, props) => Number(props.exerciseId);
+
+export const selectExercise = createSelector(
+  orm,
+  dbStateSelector,
+  getExerciseIdFromProps,
+  (session, exerciseId) => {
+    const exercise = session.Exercises.withId(exerciseId);
+    if (!exercise) return undefined;
+    const obj = exercise.ref;
+
+    const teacherWhoCreatedIt = exercise.teacher_who_created_it_id.ref;
+    return {
+      ...obj,
+      teacherWhoCreatedIt,
+    };
+  },
+);

@@ -1,26 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { Name, Composer } from '../styledComponents';
+import { selectPiece } from '../../../redux/reduxOrm/selectors/repertoire.selectors';
 
 const Piece = ({
-  composerFirstName, composerSurname, largerWork, name,
-}) => (
-  <div>
-    <Name>{name}</Name>
-    <Composer>{`${largerWork} - ${composerFirstName} ${composerSurname}`}</Composer>
-  </div>
-);
+  piece,
+}) => {
+  if (!piece) return null;
+  const {
+    larger_work: largerWork,
+    name,
+    composer,
+  } = piece;
+  const { first_name: firstName, surname } = composer;
+  return (
+    <div>
+      <Name>{name}</Name>
+      {composer && <Composer>{`${largerWork} - ${firstName} ${surname}`}</Composer>}
+    </div>
+  );
+};
 
 Piece.defaultProps = {
-  largerWork: undefined,
+  piece: undefined,
 };
 
 Piece.propTypes = {
-  name: PropTypes.string.isRequired,
-  composerFirstName: PropTypes.string.isRequired,
-  composerSurname: PropTypes.string.isRequired,
-  largerWork: PropTypes.string,
+  piece: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
-export default Piece;
+const mapStateToProps = (state, ownProps) => ({
+  piece: selectPiece(state, ownProps),
+});
+
+export default connect(mapStateToProps)(Piece);
