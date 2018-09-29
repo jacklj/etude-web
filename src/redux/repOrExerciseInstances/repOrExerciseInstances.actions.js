@@ -70,9 +70,9 @@ export const createRepertoireInstanceRequest = (repertoireId, eventId) => ({
   eventId,
 });
 
-export const createRepertoireInstanceSuccess = repertoireInstance => ({
+export const createRepertoireInstanceSuccess = payload => ({
   type: ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.SUCCESS,
-  repertoireInstance,
+  payload,
 });
 
 export const createRepertoireInstanceFailure = error => ({
@@ -86,9 +86,9 @@ export const createExerciseInstanceRequest = (exerciseId, eventId) => ({
   eventId,
 });
 
-export const createExerciseInstanceSuccess = exerciseInstance => ({
+export const createExerciseInstanceSuccess = payload => ({
   type: ACTION_TYPES.EXERCISE_INSTANCE.CREATE.SUCCESS,
-  exerciseInstance,
+  payload,
 });
 
 export const createExerciseInstanceFailure = error => ({

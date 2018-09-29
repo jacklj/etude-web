@@ -9,12 +9,15 @@ import {
 function* createRepertoireInstanceGenerator(action) {
   const { repertoireId, eventId } = action;
   try {
-    const newRepertoireInstance = yield call(createRepertoireInstance, repertoireId, eventId);
-    const actionToDispatch = createRepertoireInstanceSuccess(newRepertoireInstance);
-    yield put(actionToDispatch);
+    const response = yield call(createRepertoireInstance, repertoireId, eventId);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(createRepertoireInstanceSuccess(body));
+    } else {
+      yield put(createRepertoireInstanceFailure(body));
+    }
   } catch (e) {
-    const actionToDispatch = createRepertoireInstanceFailure(e);
-    yield put(actionToDispatch);
+    yield put(createRepertoireInstanceFailure(e));
   }
 }
 

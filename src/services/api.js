@@ -78,7 +78,6 @@ export const createRepertoireInstance = (repertoireId, eventId) => fetch(`${base
     'Content-Type': 'application/json; charset=utf-8',
   },
 })
-  .then(response => response.json())
   .catch(error => console.error('createRepertoireInstance Fetch Error =\n', error));
 
 export const createExerciseInstance = (exerciseId, eventId) => fetch(`${baseApiUrl}/events/${eventId}/exercises`, {
@@ -88,7 +87,6 @@ export const createExerciseInstance = (exerciseId, eventId) => fetch(`${baseApiU
     'Content-Type': 'application/json; charset=utf-8',
   },
 })
-  .then(response => response.json())
   .catch(error => console.error('createExerciseInstance Fetch Error =\n', error));
 
 export const deleteRepOrExerciseInstance = repOrExerciseInstanceId => fetch(`${baseApiUrl}/repOrExerciseInstances/${repOrExerciseInstanceId}`, {

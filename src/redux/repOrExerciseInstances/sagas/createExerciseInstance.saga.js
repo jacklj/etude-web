@@ -9,12 +9,15 @@ import {
 function* createExerciseInstanceGenerator(action) {
   const { exerciseId, eventId } = action;
   try {
-    const newExerciseInstance = yield call(createExerciseInstance, exerciseId, eventId);
-    const actionToDispatch = createExerciseInstanceSuccess(newExerciseInstance);
-    yield put(actionToDispatch);
+    const response = yield call(createExerciseInstance, exerciseId, eventId);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(createExerciseInstanceSuccess(body));
+    } else {
+      yield put(createExerciseInstanceFailure(body));
+    }
   } catch (e) {
-    const actionToDispatch = createExerciseInstanceFailure(e);
-    yield put(actionToDispatch);
+    yield put(createExerciseInstanceFailure(e));
   }
 }
 
