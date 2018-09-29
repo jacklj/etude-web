@@ -1,4 +1,4 @@
-import { ACTION_TYPES } from './items.actions';
+import { ACTION_TYPES } from './repOrExerciseInstances.actions';
 
 const initialState = {
   repertoire: {},
@@ -7,7 +7,7 @@ const initialState = {
   fetchingExercises: false,
   creatingRepertoireInstance: false,
   creatingExerciseInstance: false,
-  deletingItem: false,
+  deletingRepOrExerciseInstance: false,
 };
 
 const locations = (state = initialState, action) => {
@@ -66,16 +66,16 @@ const locations = (state = initialState, action) => {
         ...state,
         creatingExerciseInstance: false,
       };
-    case ACTION_TYPES.ITEM.DELETE.REQUEST:
+    case ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.REQUEST:
       return {
         ...state,
-        deletingItem: true,
+        deletingRepOrExerciseInstance: true,
       };
-    case ACTION_TYPES.ITEM.DELETE.SUCCESS:
-    case ACTION_TYPES.ITEM.DELETE.FAILURE:
+    case ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.SUCCESS:
+    case ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.FAILURE:
       return {
         ...state,
-        deletingItem: false,
+        deletingRepOrExerciseInstance: false,
       };
     default:
       return state;

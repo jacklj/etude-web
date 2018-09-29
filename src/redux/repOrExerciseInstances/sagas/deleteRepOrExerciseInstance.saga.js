@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { deleteItem } from '../../../services/api';
-import { deleteItemSuccess, deleteItemFailure, ACTION_TYPES } from '../items.actions';
+import { deleteItemSuccess, deleteItemFailure, ACTION_TYPES } from '../repOrExerciseInstances.actions';
 
 function* deleteItemGenerator(action) {
   const { itemId, eventId } = action;

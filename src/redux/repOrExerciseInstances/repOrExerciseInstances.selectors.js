@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-const selectRepertoire = state => state.items.repertoire;
-const selectExercises = state => state.items.exercises;
+const selectRepertoire = state => state.repOrExerciseInstances.repertoire;
+const selectExercises = state => state.repOrExerciseInstances.exercises;
 
 export const selectRepertoireForDropdown = createSelector(
   selectRepertoire,

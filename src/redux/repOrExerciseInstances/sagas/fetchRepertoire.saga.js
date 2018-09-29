@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getRepertoire } from '../../../services/api';
-import { fetchAllRepertoireSuccess, fetchAllRepertoireFailure, ACTION_TYPES } from '../items.actions';
+import { fetchAllRepertoireSuccess, fetchAllRepertoireFailure, ACTION_TYPES } from '../repOrExerciseInstances.actions';
 
 function* fetchRepertoire() {
   try {

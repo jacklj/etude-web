@@ -4,7 +4,7 @@ import locations from './locations/locations.reducer';
 import people from './people/people.reducer';
 import notes from './notes/notes.reducer';
 import db from './reduxOrm/db.reducer';
-import items from './items/items.reducer';
+import repOrExerciseInstances from './repOrExerciseInstances/repOrExerciseInstances.reducer';
 
 export default combineReducers({
   events,
@@ -12,5 +12,5 @@ export default combineReducers({
   people,
   notes,
   db,
-  items,
+  repOrExerciseInstances,
 });

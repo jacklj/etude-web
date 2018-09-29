@@ -4,7 +4,7 @@ import {
   createExerciseInstanceSuccess,
   createExerciseInstanceFailure,
   ACTION_TYPES,
-} from '../items.actions';
+} from '../repOrExerciseInstances.actions';
 
 function* createExerciseInstanceGenerator(action) {
   const { exerciseId, eventId } = action;

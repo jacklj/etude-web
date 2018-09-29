@@ -4,7 +4,7 @@ import {
   createRepertoireInstanceSuccess,
   createRepertoireInstanceFailure,
   ACTION_TYPES,
-} from '../items.actions';
+} from '../repOrExerciseInstances.actions';
 
 function* createRepertoireInstanceGenerator(action) {
   const { repertoireId, eventId } = action;
