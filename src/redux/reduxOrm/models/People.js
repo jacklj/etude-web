@@ -1,6 +1,8 @@
 import { attr, Model } from 'redux-orm';
 
 import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
+import { ACTION_TYPES as peopleActionTypes } from '../../people/people.actions';
+
 import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 class People extends Model {
@@ -8,8 +10,11 @@ class People extends Model {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.people)) {
-          Object.values(action.payload.people).forEach(person => SessionBoundPeople.create(person));
+          Object.values(action.payload.people).forEach(person => SessionBoundPeople.upsert(person));
         }
+        break;
+      case peopleActionTypes.PEOPLE.FETCH.SUCCESS:
+        Object.values(action.payload.people).forEach(person => SessionBoundPeople.upsert(person));
         break;
       default:
         break;

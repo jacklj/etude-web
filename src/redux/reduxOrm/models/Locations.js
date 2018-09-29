@@ -8,13 +8,11 @@ class Locations extends Model {
   static reducer(action, SessionBoundLocations) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
+      case locationsActionTypes.LOCATIONS_FETCH.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.locations)) {
           Object.values(action.payload.locations)
-            .forEach(location => SessionBoundLocations.create(location));
+            .forEach(location => SessionBoundLocations.upsert(location));
         }
-        break;
-      case locationsActionTypes.LOCATIONS_FETCH.SUCCESS:
-        Object.values(action.locations).forEach(location => Locations.create(location));
         break;
       default:
         break;

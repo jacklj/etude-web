@@ -10,9 +10,9 @@ export const locationsFetchRequest = () => ({
   type: ACTION_TYPES.LOCATIONS_FETCH.REQUEST,
 });
 
-export const locationsFetchSuccess = locations => ({
+export const locationsFetchSuccess = payload => ({
   type: ACTION_TYPES.LOCATIONS_FETCH.SUCCESS,
-  locations,
+  payload,
 });
 
 export const locationsFetchFailure = error => ({

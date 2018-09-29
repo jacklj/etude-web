@@ -1,15 +1,18 @@
 import { fk, attr, Model } from 'redux-orm';
 
 import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
+import { ACTION_TYPES as repOrExerciseInstanceActionTypes } from '../../repOrExerciseInstances/repOrExerciseInstances.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 class Exercises extends Model {
   static reducer(action, SessionBoundExercises) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.FETCH.SUCCESS:
+      case repOrExerciseInstanceActionTypes.EXERCISES.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.exercises)) {
           Object.values(action.payload.exercises)
-            .forEach(exercise => SessionBoundExercises.create(exercise));
+            .forEach(exercise => SessionBoundExercises.upsert(exercise));
         }
         break;
       default:

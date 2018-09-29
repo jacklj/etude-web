@@ -14,7 +14,7 @@ function* fetchPeople() {
 }
 
 function* fetchPeopleSaga() {
-  yield takeLatest(ACTION_TYPES.PEOPLE_FETCH.REQUEST, fetchPeople);
+  yield takeLatest(ACTION_TYPES.PEOPLE.FETCH.REQUEST, fetchPeople);
 }
 
 export default fetchPeopleSaga;

@@ -1,6 +1,7 @@
 import { fk, attr, Model } from 'redux-orm';
 
 import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
+import { ACTION_TYPES as repOrExerciseInstancesActionTypes } from '../../repOrExerciseInstances/repOrExerciseInstances.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 // pluralised class name so it matches table name in db
@@ -11,8 +12,19 @@ class RepOrExerciseInstances extends Model {
         if (ifObjectExistsAndIsNotEmpty(action.payload.rep_or_exercise_instances)) {
           Object.values(action.payload.rep_or_exercise_instances)
             .forEach(repOrExerciseInstance => SessionBoundRepOrExerciseInstances
-              .create(repOrExerciseInstance));
+              .upsert(repOrExerciseInstance));
         }
+        break;
+      case repOrExerciseInstancesActionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.SUCCESS: {
+        const { repOrExerciseInstanceId } = action;
+        SessionBoundRepOrExerciseInstances.withId(repOrExerciseInstanceId).delete();
+        break;
+      }
+      case repOrExerciseInstancesActionTypes.REPERTOIRE_INSTANCE.CREATE.SUCCESS:
+      case repOrExerciseInstancesActionTypes.EXERCISE_INSTANCE.CREATE.SUCCESS:
+        Object.values(action.payload.rep_or_exercise_instances)
+          .forEach(repOrExerciseInstance => SessionBoundRepOrExerciseInstances
+            .create(repOrExerciseInstance));
         break;
       default:
         break;

@@ -10,17 +10,20 @@ class Notes extends Model {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.notes)) {
           Object.values(action.payload.notes)
-            .forEach(note => SessionBoundNotes.create(note));
+            .forEach(note => SessionBoundNotes.upsert(note));
         }
         break;
       case notesActionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS:
-        Notes.create(action.note);
+      case notesActionTypes.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.SUCCESS:
+        Object.values(action.payload.notes)
+          .forEach(note => SessionBoundNotes.create(note));
         break;
       case notesActionTypes.NOTE.UPDATE.SUCCESS:
-        Notes.withId(action.note.note_id).update(action.note);
+        Object.values(action.payload.notes)
+          .forEach(note => SessionBoundNotes.withId(note.note_id).update(note));
         break;
       case notesActionTypes.NOTE.DELETE.SUCCESS:
-        Notes.withId(action.note.note_id).delete();
+        SessionBoundNotes.withId(action.noteId).delete();
         break;
       default:
         break;

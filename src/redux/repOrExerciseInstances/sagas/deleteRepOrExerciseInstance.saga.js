@@ -1,21 +1,22 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { deleteItem } from '../../../services/api';
-import { deleteItemSuccess, deleteItemFailure, ACTION_TYPES } from '../repOrExerciseInstances.actions';
+import { deleteRepOrExerciseInstance } from '../../../services/api';
+import { deleteRepOrExerciseInstanceSuccess, deleteRepOrExerciseInstanceFailure, ACTION_TYPES } from '../repOrExerciseInstances.actions';
 
-function* deleteItemGenerator(action) {
+function* deleteRepOrExerciseInstanceGenerator(action) {
   const { itemId, eventId } = action;
   try {
-    yield call(deleteItem, itemId);
-    const actionToDispatch = deleteItemSuccess(itemId, eventId);
+    yield call(deleteRepOrExerciseInstance, itemId);
+    const actionToDispatch = deleteRepOrExerciseInstanceSuccess(itemId, eventId);
     yield put(actionToDispatch);
   } catch (e) {
-    const actionToDispatch = deleteItemFailure(e);
+    const actionToDispatch = deleteRepOrExerciseInstanceFailure(e);
     yield put(actionToDispatch);
   }
 }
 
-function* deleteItemSaga() {
-  yield takeLatest(ACTION_TYPES.ITEM.DELETE.REQUEST, deleteItemGenerator);
+function* deleteRepOrExerciseInstanceSaga() {
+  yield takeLatest(ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.REQUEST,
+    deleteRepOrExerciseInstanceGenerator);
 }
 
-export default deleteItemSaga;
+export default deleteRepOrExerciseInstanceSaga;

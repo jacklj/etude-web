@@ -101,9 +101,9 @@ export const updateEventRequest = (event, eventId) => ({
   eventId,
 });
 
-export const updateEventSuccess = event => ({
+export const updateEventSuccess = payload => ({
   type: ACTION_TYPES.EVENT.UPDATE.SUCCESS,
-  event,
+  payload,
 });
 
 export const updateEventFailure = error => ({
@@ -116,9 +116,9 @@ export const lessonCreateRequest = lesson => ({
   lesson,
 });
 
-export const lessonCreateSuccess = lesson => ({
+export const lessonCreateSuccess = payload => ({
   type: ACTION_TYPES.LESSON.CREATE.SUCCESS,
-  lesson,
+  payload,
 });
 
 export const lessonCreateFailure = error => ({
@@ -131,9 +131,9 @@ export const createPracticeSessionRequest = practiceSession => ({
   practiceSession,
 });
 
-export const createPracticeSessionSuccess = practiceSession => ({
+export const createPracticeSessionSuccess = payload => ({
   type: ACTION_TYPES.PRACTICE_SESSION.CREATE.SUCCESS,
-  practiceSession,
+  payload,
 });
 
 export const createPracticeSessionFailure = error => ({
@@ -146,9 +146,9 @@ export const startPracticingRequest = eventId => ({
   eventId,
 });
 
-export const startPracticingSuccess = practiceSession => ({
+export const startPracticingSuccess = payload => ({
   type: ACTION_TYPES.PRACTICE_SESSION.START.SUCCESS,
-  practiceSession,
+  payload,
 });
 
 export const startPracticingFailure = error => ({
@@ -161,9 +161,9 @@ export const finishPracticingRequest = eventId => ({
   eventId,
 });
 
-export const finishPracticingSuccess = practiceSession => ({
+export const finishPracticingSuccess = payload => ({
   type: ACTION_TYPES.PRACTICE_SESSION.FINISH.SUCCESS,
-  practiceSession,
+  payload,
 });
 
 export const finishPracticingFailure = error => ({

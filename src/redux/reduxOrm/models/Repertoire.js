@@ -1,15 +1,18 @@
 import { fk, attr, Model } from 'redux-orm';
 
 import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
+import { ACTION_TYPES as repOrExerciseInstanceActionTypes } from '../../repOrExerciseInstances/repOrExerciseInstances.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 class Repertoire extends Model {
   static reducer(action, SessionBoundRepertoire) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.FETCH.SUCCESS:
+      case repOrExerciseInstanceActionTypes.REPERTOIRE.FETCH_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.repertoire)) {
           Object.values(action.payload.repertoire)
-            .forEach(repertoireItem => SessionBoundRepertoire.create(repertoireItem));
+            .forEach(repertoireItem => SessionBoundRepertoire.upsert(repertoireItem));
         }
         break;
       default:

@@ -96,19 +96,19 @@ export const createExerciseInstanceFailure = error => ({
   error,
 });
 
-export const deleteItemRequest = (itemId, eventId) => ({
+export const deleteRepOrExerciseInstanceRequest = (repOrExerciseInstanceId, eventId) => ({
   type: ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.REQUEST,
-  itemId,
+  repOrExerciseInstanceId,
   eventId,
 });
 
-export const deleteItemSuccess = (itemId, eventId) => ({
+export const deleteRepOrExerciseInstanceSuccess = (repOrExerciseInstanceId, eventId) => ({
   type: ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.SUCCESS,
-  itemId,
+  repOrExerciseInstanceId,
   eventId,
 });
 
-export const deleteItemFailure = error => ({
+export const deleteRepOrExerciseInstanceFailure = error => ({
   type: ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.FAILURE,
   error,
 });

@@ -7,14 +7,31 @@ class Events extends Model {
   static reducer(action, SessionBoundEvents) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.FETCH.SUCCESS:
+        // create or update events in the response payload
+        if (ifObjectExistsAndIsNotEmpty(action.payload.events)) {
+          Object.values(action.payload.events).forEach(event => SessionBoundEvents.upsert(event));
+        }
+        break;
+      case eventsActionTypes.EVENT.UPDATE.SUCCESS:
+      case eventsActionTypes.PRACTICE_SESSION.START.SUCCESS:
+      case eventsActionTypes.PRACTICE_SESSION.FINISH.SUCCESS:
+        // update any events in the response payload
+        if (ifObjectExistsAndIsNotEmpty(action.payload.events)) {
+          Object.values(action.payload.events).forEach(event => {
+            SessionBoundEvents.withId(event.event_id).update(event);
+          });
+        }
+        break;
+      case eventsActionTypes.LESSON.CREATE.SUCCESS:
+      case eventsActionTypes.PRACTICE_SESSION.CREATE.SUCCESS:
+        // create any events in the response payload
         if (ifObjectExistsAndIsNotEmpty(action.payload.events)) {
           Object.values(action.payload.events).forEach(event => SessionBoundEvents.create(event));
         }
         break;
-      case eventsActionTypes.EVENT.FETCH.SUCCESS:
-        if (ifObjectExistsAndIsNotEmpty(action.payload.events)) {
-          Object.values(action.payload.events).forEach(event => SessionBoundEvents.create(event));
-        }
+      case eventsActionTypes.EVENT.DELETE.SUCCESS:
+        SessionBoundEvents.withId(action.eventId).delete();
         break;
       default:
         break;
