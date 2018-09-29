@@ -4,7 +4,7 @@ import { updateNoteSuccess, updateNoteFailure, ACTION_TYPES } from '../notes.act
 
 function* updateNoteGenerator(action) {
   const { note } = action;
-  const noteId = note.id;
+  const noteId = note.note_id;
   try {
     const updatedNote = yield call(updateNote, note, noteId);
     const actionToDispatch = updateNoteSuccess(updatedNote);

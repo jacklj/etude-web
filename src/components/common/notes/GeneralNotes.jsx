@@ -12,7 +12,7 @@ const GeneralNotes = ({ notes }) => (
         note={note.note}
         score={note.score}
         type={note.type}
-        id={note.note_id}
+        note_id={note.note_id}
         eventId={note.event_id}
       />
     ))}
