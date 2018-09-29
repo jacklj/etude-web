@@ -14,7 +14,6 @@ export const createLesson = lesson => fetch(`${baseApiUrl}/events/lessons`, {
     'Content-Type': 'application/json; charset=utf-8',
   },
 })
-  .then(response => response.json())
   .catch(error => console.error('createLesson Fetch Error =\n', error));
 
 export const createPracticeSession = practiceSession => fetch(`${baseApiUrl}/events/practice_sessions`, {

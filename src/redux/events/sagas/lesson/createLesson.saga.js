@@ -14,10 +14,9 @@ function* createLessonGenerator() {
     const body = yield response.json();
     if (response.status === 200) {
       yield put(lessonCreateSuccess(body));
-
       // TODO 29th September 2018. Normalised response requires
       // Object.values(...)[0] - is this good?
-      const { event_id: eventId } = Object.values(response.events)[0];
+      const { event_id: eventId } = Object.values(body.events)[0];
       // navigate to lesson page
       yield put(push(`/lesson/${eventId}`));
     } else {
