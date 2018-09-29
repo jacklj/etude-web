@@ -5,12 +5,15 @@ import { eventFetchSuccess, eventFetchFailure, ACTION_TYPES } from '../events.ac
 function* fetchEvent(action) {
   const { eventId } = action;
   try {
-    const payload = yield call(getEvent, eventId);
-    const actionToDispatch = eventFetchSuccess(payload);
-    yield put(actionToDispatch);
+    const response = yield call(getEvent, eventId);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(eventFetchSuccess(body));
+    } else {
+      yield put(eventFetchFailure(body));
+    }
   } catch (e) {
-    const actionToDispatch = eventFetchFailure(e);
-    yield put(actionToDispatch);
+    yield put(eventFetchFailure(e));
   }
 }
 

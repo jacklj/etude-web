@@ -27,7 +27,8 @@ export const createPracticeSession = practiceSession => fetch(`${baseApiUrl}/eve
   .then(response => response.json())
   .catch(error => console.error('createPracticeSession Fetch Error =\n', error));
 
-export const getEvent = eventId => fetch(`${baseApiUrl}/events/${eventId}`).then(response => response.json());
+export const getEvent = eventId => fetch(`${baseApiUrl}/events/${eventId}`)
+  .catch(error => console.error('getEvent Fetch Error =\n', error));
 
 export const updateEvent = (event, eventId) => fetch(`${baseApiUrl}/events/${eventId}`, {
   method: 'PUT',
