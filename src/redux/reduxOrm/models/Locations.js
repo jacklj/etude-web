@@ -8,6 +8,7 @@ class Locations extends Model {
   static reducer(action, SessionBoundLocations) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.FETCH.SUCCESS:
       case locationsActionTypes.LOCATIONS_FETCH.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.locations)) {
           Object.values(action.payload.locations)

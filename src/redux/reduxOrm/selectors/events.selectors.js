@@ -28,6 +28,7 @@ export const selectEvent = createSelector(
   getEventIdFromProps,
   (session, eventId) => {
     const event = session.Events.withId(eventId);
+    if (!event) return undefined;
     const obj = event.ref;
 
     // resolve foreign keys

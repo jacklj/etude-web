@@ -9,6 +9,7 @@ class People extends Model {
   static reducer(action, SessionBoundPeople) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.FETCH.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.people)) {
           Object.values(action.payload.people).forEach(person => SessionBoundPeople.upsert(person));
         }

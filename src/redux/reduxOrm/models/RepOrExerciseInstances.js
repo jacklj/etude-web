@@ -9,6 +9,7 @@ class RepOrExerciseInstances extends Model {
   static reducer(action, SessionBoundRepOrExerciseInstances) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.FETCH.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.rep_or_exercise_instances)) {
           Object.values(action.payload.rep_or_exercise_instances)
             .forEach(repOrExerciseInstance => SessionBoundRepOrExerciseInstances

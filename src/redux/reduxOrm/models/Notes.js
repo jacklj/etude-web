@@ -8,6 +8,7 @@ class Notes extends Model {
   static reducer(action, SessionBoundNotes) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.FETCH.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.notes)) {
           Object.values(action.payload.notes)
             .forEach(note => SessionBoundNotes.upsert(note));
