@@ -37,10 +37,12 @@ export const selectEvent = createSelector(
     // get their details themselves
     const teacher = event.teacher_id && event.teacher_id.ref;
     const location = event.location_id && event.location_id.ref;
+    const notes = event.notes.toRefArray();
     return {
       ...obj,
       teacher,
       location,
+      notes,
     };
   },
 );

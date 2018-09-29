@@ -6,17 +6,16 @@ import { ItemsOrNotesContainer } from '../styledComponents';
 
 const GeneralNotes = ({ notes }) => (
   <ItemsOrNotesContainer>
-    {notes
-      && Object.values(notes).map(note => (
-        <Note
-          key={note.note_id}
-          note={note.note}
-          score={note.score}
-          type={note.type}
-          id={note.note_id}
-          eventId={note.event_id}
-        />
-      ))}
+    {notes && notes.map(note => (
+      <Note
+        key={note.note_id}
+        note={note.note}
+        score={note.score}
+        type={note.type}
+        id={note.note_id}
+        eventId={note.event_id}
+      />
+    ))}
   </ItemsOrNotesContainer>
 );
 
@@ -25,7 +24,7 @@ GeneralNotes.defaultProps = {
 };
 
 GeneralNotes.propTypes = {
-  notes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  notes: PropTypes.array, // eslint-disable-line react/forbid-prop-types
 };
 
 export default GeneralNotes;
