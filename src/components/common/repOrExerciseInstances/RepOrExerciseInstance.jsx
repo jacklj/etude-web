@@ -7,30 +7,30 @@ import { ITEM_TYPES } from '../../../constants';
 import { Card } from '../styledComponents';
 import Exercise from './Exercise';
 import Piece from './Piece';
-import { deleteItemRequest } from '../../../redux/items/items.actions';
+import { deleteRepOrExerciseInstanceRequest } from '../../../redux/repOrExerciseInstances/repOrExerciseInstances.actions';
 
-class Item extends Component {
+class RepOrExerciseInstance extends Component {
   constructor(props) {
     super(props);
 
-    this.removeItemFromEvent = this.removeItemFromEvent.bind(this);
+    this.removeInstanceFromEvent = this.removeInstanceFromEvent.bind(this);
   }
 
-  removeItemFromEvent() {
-    const itemId = this.props.item.item_id;
+  removeInstanceFromEvent() {
+    const itemId = this.props.repOrExerciseInstance.rep_or_exercise_instance_id;
     const { eventId } = this.props;
-    this.props.deleteItemRequest(itemId, eventId);
+    this.props.deleteRepOrExerciseInstanceRequest(itemId, eventId);
   }
 
   render() {
-    const { item } = this.props;
+    const { repOrExerciseInstance } = this.props;
     let jsx;
-    switch (item.type) {
+    switch (repOrExerciseInstance.type) {
       case ITEM_TYPES.EXERCISE: {
-        const exercise = item;
+        const exercise = repOrExerciseInstance;
         jsx = (
           <Exercise
-            key={exercise.item_id}
+            key={exercise.rep_or_exercise_instance_id}
             name={exercise.name}
             details={exercise.details}
             score={exercise.score}
@@ -45,10 +45,10 @@ class Item extends Component {
         break;
       }
       case ITEM_TYPES.PIECE: {
-        const piece = item;
+        const piece = repOrExerciseInstance;
         jsx = (
           <Piece
-            key={piece.item_id}
+            key={piece.rep_or_exercise_instance_id}
             name={piece.name}
             composerFirstName={piece.composer.first_name}
             composerSurname={piece.composer.surname}
@@ -66,22 +66,22 @@ class Item extends Component {
     return (
       <Card>
         {jsx}
-        <button type="button" onClick={this.removeItemFromEvent}>Remove</button>
+        <button type="button" onClick={this.removeInstanceFromEvent}>Remove</button>
       </Card>
     );
   }
 }
 
-Item.propTypes = {
+RepOrExerciseInstance.propTypes = {
   eventId: PropTypes.number.isRequired,
-  item: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  deleteItemRequest: PropTypes.func.isRequired,
+  repOrExerciseInstance: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  deleteRepOrExerciseInstanceRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
-  deleteItemRequest,
+  deleteRepOrExerciseInstanceRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Item);
+export default connect(mapStateToProps, mapDispatchToProps)(RepOrExerciseInstance);

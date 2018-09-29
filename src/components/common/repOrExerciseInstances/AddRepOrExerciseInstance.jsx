@@ -8,7 +8,7 @@ import {
   fetchAllExercisesRequest,
   createRepertoireInstanceRequest,
   createExerciseInstanceRequest,
-} from '../../../redux/items/items.actions';
+} from '../../../redux/repOrExerciseInstances/repOrExerciseInstances.actions';
 import { selectRepertoireForDropdown } from '../../../redux/reduxOrm/selectors/repertoire.selectors';
 import { selectExercisesForDropdown } from '../../../redux/reduxOrm/selectors/exercises.selectors';
 
@@ -24,7 +24,7 @@ const initialState = {
   view: VIEW.DEFAULT,
 };
 
-class AddItem extends Component {
+class AddRepOrExerciseInstance extends Component {
   constructor(props) {
     super(props);
     this.state = { ...initialState };
@@ -135,11 +135,11 @@ class AddItem extends Component {
   }
 }
 
-AddItem.defaultProps = {
+AddRepOrExerciseInstance.defaultProps = {
   eventId: undefined,
 };
 
-AddItem.propTypes = {
+AddRepOrExerciseInstance.propTypes = {
   eventId: PropTypes.number,
   repertoire: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   exercises: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -164,4 +164,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AddItem);
+)(AddRepOrExerciseInstance);

@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import LessonDetails from './LessonDetails';
 import AddNoteToEvent from '../common/notes/AddNoteToEvent';
 import GeneralNotes from '../common/notes/GeneralNotes';
-import AddItem from '../common/items/AddItem';
-import Items from '../common/items/Items';
+import AddRepOrExerciseInstance from '../common/repOrExerciseInstances/AddRepOrExerciseInstance';
+import RepOrExerciseInstances from '../common/repOrExerciseInstances/RepOrExerciseInstances';
 import { eventFetchRequest, deleteEventRequest } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/reduxOrm/selectors/events.selectors';
 import { renderDuration } from '../../services/datetime';
@@ -39,9 +39,18 @@ class Lesson extends Component {
       jsx = <div>Loading</div>;
     } else {
       const {
-        start, end, type, rating, location, teacher, notes, items,
+        start,
+        end,
+        type,
+        rating,
+        location,
+        teacher,
+        notes,
+        repOrExerciseInstances,
       } = this.props.lesson;
-      const title = `Lesson${teacher ? ` with ${teacher.first_name} ${teacher.surname}` : ''}${start ? `, ${renderDuration(start, end)}` : ''}`;
+      const title = `Lesson${teacher ? ` with ${teacher.first_name} ${teacher.surname}` : ''}${
+        start ? `, ${renderDuration(start, end)}` : ''
+      }`;
       jsx = (
         <div>
           <h3>{title}</h3>
@@ -62,9 +71,12 @@ class Lesson extends Component {
           <h3>Notes</h3>
           <AddNoteToEvent eventId={eventId} />
           <GeneralNotes notes={notes} />
-          <h3>Items</h3>
-          <AddItem eventId={eventId} />
-          <Items items={items} eventId={eventId} />
+          <h3>Pieces and Exercises</h3>
+          <AddRepOrExerciseInstance eventId={eventId} />
+          <RepOrExerciseInstances
+            repOrExerciseInstances={repOrExerciseInstances}
+            eventId={eventId}
+          />
         </div>
       );
     }

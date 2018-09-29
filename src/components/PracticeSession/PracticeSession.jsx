@@ -11,8 +11,8 @@ import { selectEvent } from '../../redux/reduxOrm/selectors/events.selectors';
 import Timer from './Timer';
 import AddNoteToEvent from '../common/notes/AddNoteToEvent';
 import GeneralNotes from '../common/notes/GeneralNotes';
-import AddItem from '../common/items/AddItem';
-import Items from '../common/items/Items';
+import AddRepOrExerciseInstance from '../common/repOrExerciseInstances/AddRepOrExerciseInstance';
+import RepOrExerciseInstances from '../common/repOrExerciseInstances/RepOrExerciseInstances';
 import PracticeSessionDetails from './PracticeSessionDetails';
 
 class PracticeSession extends Component {
@@ -42,7 +42,7 @@ class PracticeSession extends Component {
     if (!practiceSession) {
       jsx = <div>Loading</div>;
     } else {
-      const { start, end, notes, items, location, rating } = practiceSession;
+      const { start, end, notes, repOrExerciseInstances, location, rating } = practiceSession;
 
       jsx = (
         <div>
@@ -66,9 +66,12 @@ class PracticeSession extends Component {
           <h3>Notes</h3>
           <AddNoteToEvent eventId={eventId} />
           <GeneralNotes notes={notes} />
-          <h3>Items</h3>
-          <AddItem eventId={eventId} />
-          <Items items={items} eventId={eventId} />
+          <h3>Pieces and Exercises</h3>
+          <AddRepOrExerciseInstance eventId={eventId} />
+          <RepOrExerciseInstances
+            repOrExerciseInstances={repOrExerciseInstances}
+            eventId={eventId}
+          />
         </div>
       );
     }
