@@ -4,8 +4,8 @@ import { allEventsFetchSuccess, allEventsFetchFailure, ACTION_TYPES } from '../e
 
 function* fetchAllEvents() {
   try {
-    const allEvents = yield call(getTimeline);
-    const action = allEventsFetchSuccess(allEvents);
+    const payload = yield call(getTimeline);
+    const action = allEventsFetchSuccess(payload);
     yield put(action);
   } catch (e) {
     const action = allEventsFetchFailure(e);

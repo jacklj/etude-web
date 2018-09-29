@@ -55,9 +55,9 @@ export const allEventsFetchRequest = () => ({
   type: ACTION_TYPES.EVENT.FETCH_ALL.REQUEST,
 });
 
-export const allEventsFetchSuccess = events => ({
+export const allEventsFetchSuccess = payload => ({
   type: ACTION_TYPES.EVENT.FETCH_ALL.SUCCESS,
-  events,
+  payload,
 });
 
 export const allEventsFetchFailure = error => ({

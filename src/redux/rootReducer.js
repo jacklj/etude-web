@@ -3,7 +3,7 @@ import events from './events/events.reducer';
 import locations from './locations/locations.reducer';
 import people from './people/people.reducer';
 import notes from './notes/notes.reducer';
-import notesOrmTest from './notes/notesOrmTest.reducer';
+import db from './models/notesOrmTest.reducer';
 import items from './items/items.reducer';
 
 export default combineReducers({
@@ -11,6 +11,6 @@ export default combineReducers({
   locations,
   people,
   notes,
-  notesOrmTest,
+  db,
   items,
 });
