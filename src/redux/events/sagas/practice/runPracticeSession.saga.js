@@ -16,7 +16,7 @@ import {
 const ONE_SECOND = 1000;
 
 const wait = ms => new Promise(resolve => {
-  setTimeout(() => resolve(), ms);
+  setTimeout(() => resolve(true), ms);
 });
 
 function* runPracticeSessionSaga() {
@@ -43,14 +43,14 @@ function* runPracticeSessionSaga() {
       yield put(initialiseTimer(initialTime)); // initialises the practice timer correctly
 
       while (true) {
-        const { stop } = yield race({
-          // TODO 17th September 2018 also stop practice session if it's successfully deleted
-          stop: take(ACTION_TYPES.PRACTICE_SESSION.FINISH.REQUEST),
+        const { tick, stop, deleteEvent } = yield race({
           tick: call(wait, ONE_SECOND),
+          stop: take(ACTION_TYPES.PRACTICE_SESSION.FINISH.REQUEST),
+          deleteEvent: take(ACTION_TYPES.EVENT.DELETE.SUCCESS), // in case inProgress event deleted
         });
-        if (!stop) {
+        if (tick) { // tick has resolved to true
           yield put(tickPracticeTimer());
-        } else {
+        } else if (stop) {
           // stop the practice session on the server
           try {
             const response = yield call(finishPracticeSession, stop.eventId);
@@ -60,7 +60,7 @@ function* runPracticeSessionSaga() {
               break; // exit the timer loop
             } else {
               yield put(finishPracticingFailure(body));
-              alert(
+              alert( // eslint-disable-line no-alert
                 "You can't finish a practice session before it's been started (but this shouldnt be able to happen)",
               );
               // dont exit the timer loop - keep timer going and wait for the next FINISH.REQUEST
@@ -69,6 +69,13 @@ function* runPracticeSessionSaga() {
             yield put(finishPracticingFailure(e));
             // dont exit the timer loop - keep timer goinh and wait for the next FINISH.REQUEST
           }
+        } else {
+          const deletedEventId = deleteEvent.eventId;
+          const inProgressEventId = inProgressEvent.event_id;
+          if (deletedEventId === inProgressEventId) {
+            break; // exit the timer loop
+          }
+          // else don't exit the timer loop - the deleted event wasnt the in progress one
         }
       }
     }
