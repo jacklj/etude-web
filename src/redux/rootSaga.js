@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 
-import fetchAllEventsSaga from './events/sagas/fetchAllEvents.saga';
-import fetchEventSaga from './events/sagas/fetchEvent.saga';
+import getAllEventsSaga from './events/sagas/getAllEvents.saga';
+import getEventSaga from './events/sagas/getEvent.saga';
 import deleteEventSaga from './events/sagas/deleteEvent.saga';
 import updateEventSaga from './events/sagas/updateEvent.saga';
 import createLessonSaga from './events/sagas/lesson/createLesson.saga';
@@ -21,8 +21,8 @@ import runPracticeSessionSaga from './events/sagas/practice/runPracticeSession.s
 
 export default function* rootSaga() {
   yield all([
-    fetchAllEventsSaga(),
-    fetchEventSaga(),
+    getAllEventsSaga(),
+    getEventSaga(),
     deleteEventSaga(),
     updateEventSaga(),
     createLessonSaga(),

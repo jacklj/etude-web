@@ -3,7 +3,7 @@ const env = process.env.NODE_ENV || 'development';
 const baseUrl = env === 'development' ? 'http://localhost:8080' : 'https://singprocess.herokuapp.com';
 const baseApiUrl = `${baseUrl}/api`;
 
-export const getTimeline = () => fetch(`${baseApiUrl}/events`).then(response => response.json());
+export const getAllEvents = () => fetch(`${baseApiUrl}/events`).then(response => response.json());
 
 export const getUpcomingRepertoire = () => fetch(`${baseApiUrl}/repertoire/upcoming`).then(response => response.json());
 

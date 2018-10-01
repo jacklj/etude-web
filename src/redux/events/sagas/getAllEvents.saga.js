@@ -1,10 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getTimeline } from '../../../services/api';
+import { getAllEvents } from '../../../services/api';
 import { allEventsFetchSuccess, allEventsFetchFailure, ACTION_TYPES } from '../events.actions';
 
-function* fetchAllEvents() {
+function* getAllEventsGenerator() {
   try {
-    const payload = yield call(getTimeline);
+    const payload = yield call(getAllEvents);
     const action = allEventsFetchSuccess(payload);
     yield put(action);
   } catch (e) {
@@ -13,8 +13,8 @@ function* fetchAllEvents() {
   }
 }
 
-function* fetchAllEventsSaga() {
-  yield takeLatest(ACTION_TYPES.EVENT.FETCH_ALL.REQUEST, fetchAllEvents);
+function* getAllEventsSaga() {
+  yield takeLatest(ACTION_TYPES.EVENT.FETCH_ALL.REQUEST, getAllEventsGenerator);
 }
 
-export default fetchAllEventsSaga;
+export default getAllEventsSaga;
