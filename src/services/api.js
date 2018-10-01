@@ -89,7 +89,7 @@ export const createExerciseInstance = (exerciseId, eventId) => fetch(`${baseApiU
 })
   .catch(error => console.error('createExerciseInstance Fetch Error =\n', error));
 
-export const deleteRepOrExerciseInstance = repOrExerciseInstanceId => fetch(`${baseApiUrl}/repOrExerciseInstances/${repOrExerciseInstanceId}`, {
+export const deleteRepOrExerciseInstance = repOrExerciseInstanceId => fetch(`${baseApiUrl}/rep_or_exercise_instances/${repOrExerciseInstanceId}`, {
   method: 'DELETE',
 })
   .catch(error => console.error('deleteRepOrExerciseInstance Fetch Error =\n', error));

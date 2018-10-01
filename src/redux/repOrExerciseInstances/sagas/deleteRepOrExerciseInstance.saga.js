@@ -3,11 +3,16 @@ import { deleteRepOrExerciseInstance } from '../../../services/api';
 import { deleteRepOrExerciseInstanceSuccess, deleteRepOrExerciseInstanceFailure, ACTION_TYPES } from '../repOrExerciseInstances.actions';
 
 function* deleteRepOrExerciseInstanceGenerator(action) {
-  const { itemId, eventId } = action;
+  const { repOrExerciseInstanceId, eventId } = action;
   try {
-    yield call(deleteRepOrExerciseInstance, itemId);
-    const actionToDispatch = deleteRepOrExerciseInstanceSuccess(itemId, eventId);
-    yield put(actionToDispatch);
+    const response = yield call(deleteRepOrExerciseInstance, repOrExerciseInstanceId);
+    if (response.status === 200) {
+      const actionToDispatch = deleteRepOrExerciseInstanceSuccess(repOrExerciseInstanceId, eventId);
+      yield put(actionToDispatch);
+    } else {
+      const body = yield response.json();
+      yield put(deleteRepOrExerciseInstanceFailure(body));
+    }
   } catch (e) {
     const actionToDispatch = deleteRepOrExerciseInstanceFailure(e);
     yield put(actionToDispatch);

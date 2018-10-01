@@ -14,9 +14,9 @@ class RepOrExerciseInstance extends Component {
   }
 
   removeInstanceFromEvent() {
-    const itemId = this.props.repOrExerciseInstance.rep_or_exercise_instance_id;
+    const repOrExerciseInstanceId = this.props.repOrExerciseInstance.rep_or_exercise_instance_id;
     const { eventId } = this.props;
-    this.props.deleteRepOrExerciseInstanceRequest(itemId, eventId);
+    this.props.deleteRepOrExerciseInstanceRequest(repOrExerciseInstanceId, eventId);
   }
 
   render() {
