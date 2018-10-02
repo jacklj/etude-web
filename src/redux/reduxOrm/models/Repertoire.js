@@ -2,6 +2,7 @@ import { fk, attr, Model } from 'redux-orm';
 
 import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
 import { ACTION_TYPES as repOrExerciseInstanceActionTypes } from '../../repOrExerciseInstances/repOrExerciseInstances.actions';
+import { actionTypes as repertoireActionTypes } from '../../repertoire/repertoire.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 class Repertoire extends Model {
@@ -10,6 +11,7 @@ class Repertoire extends Model {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
       case eventsActionTypes.EVENT.FETCH.SUCCESS:
       case repOrExerciseInstanceActionTypes.REPERTOIRE.FETCH_ALL.SUCCESS:
+      case repertoireActionTypes.UPCOMING_REPERTOIRE.GET.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.repertoire)) {
           Object.values(action.payload.repertoire)
             .forEach(repertoireItem => SessionBoundRepertoire.upsert(repertoireItem));

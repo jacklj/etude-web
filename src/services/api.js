@@ -5,7 +5,8 @@ const baseApiUrl = `${baseUrl}/api`;
 
 export const getAllEvents = () => fetch(`${baseApiUrl}/events`).then(response => response.json());
 
-export const getUpcomingRepertoire = () => fetch(`${baseApiUrl}/repertoire/upcoming`).then(response => response.json());
+export const getUpcomingRepertoire = () => fetch(`${baseApiUrl}/repertoire/upcoming`)
+  .catch(error => console.error('getUpcomingRepertoire Fetch Error =\n', error));
 
 export const createLesson = lesson => fetch(`${baseApiUrl}/events/lessons`, {
   method: 'POST',

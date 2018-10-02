@@ -2,7 +2,7 @@ import { attr, Model } from 'redux-orm';
 
 import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
 import { ACTION_TYPES as peopleActionTypes } from '../../people/people.actions';
-
+import { actionTypes as repertoireActionTypes } from '../../repertoire/repertoire.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 class People extends Model {
@@ -10,6 +10,7 @@ class People extends Model {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
       case eventsActionTypes.EVENT.FETCH.SUCCESS:
+      case repertoireActionTypes.UPCOMING_REPERTOIRE.GET.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.people)) {
           Object.values(action.payload.people).forEach(person => SessionBoundPeople.upsert(person));
         }

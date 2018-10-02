@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
-import { getUpcomingRepertoire } from '../../services/api';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getUpcomingRepertoireRequest } from '../../redux/repertoire/repertoire.actions';
 import UpcomingPiece from './UpcomingPiece';
 
 class UpcomingRep extends Component {
@@ -12,9 +13,7 @@ class UpcomingRep extends Component {
   }
 
   componentDidMount() {
-    getUpcomingRepertoire().then(
-      upcomingRep => Array.isArray(upcomingRep) && this.setState({ upcomingRep }),
-    );
+    this.props.getUpcomingRepertoireRequest();
   }
 
   render() {
@@ -36,4 +35,14 @@ class UpcomingRep extends Component {
   }
 }
 
-export default UpcomingRep;
+UpcomingRep.propTypes = {
+  getUpcomingRepertoireRequest: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = {
+  getUpcomingRepertoireRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpcomingRep);

@@ -2,6 +2,7 @@ import { fk, attr, Model } from 'redux-orm';
 
 import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
 import { ACTION_TYPES as repOrExerciseInstancesActionTypes } from '../../repOrExerciseInstances/repOrExerciseInstances.actions';
+import { actionTypes as repertoireActionTypes } from '../../repertoire/repertoire.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 // pluralised class name so it matches table name in db
@@ -10,6 +11,7 @@ class RepOrExerciseInstances extends Model {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
       case eventsActionTypes.EVENT.FETCH.SUCCESS:
+      case repertoireActionTypes.UPCOMING_REPERTOIRE.GET.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.rep_or_exercise_instances)) {
           Object.values(action.payload.rep_or_exercise_instances)
             .forEach(repOrExerciseInstance => SessionBoundRepOrExerciseInstances
