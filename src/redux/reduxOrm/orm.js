@@ -6,6 +6,7 @@ import People from './models/People';
 import Repertoire from './models/Repertoire';
 import Exercises from './models/Exercises';
 import RepOrExerciseInstances from './models/RepOrExerciseInstances';
+import OtherRepToWorkOn from './models/OtherRepToWorkOn';
 import PeopleAtEvents from './models/PeopleAtEvents';
 
 const orm = new ORM();
@@ -17,6 +18,7 @@ orm.register(
   Repertoire,
   Exercises,
   RepOrExerciseInstances,
+  OtherRepToWorkOn,
   PeopleAtEvents,
 );
 

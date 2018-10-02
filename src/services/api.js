@@ -3,7 +3,8 @@ const env = process.env.NODE_ENV || 'development';
 const baseUrl = env === 'development' ? 'http://localhost:8080' : 'https://singprocess.herokuapp.com';
 const baseApiUrl = `${baseUrl}/api`;
 
-export const getAllEvents = () => fetch(`${baseApiUrl}/events`).then(response => response.json());
+export const getAllEvents = () => fetch(`${baseApiUrl}/events`)
+  .then(response => response.json());
 
 export const getUpcomingRepertoire = () => fetch(`${baseApiUrl}/repertoire/upcoming`)
   .catch(error => console.error('getUpcomingRepertoire Fetch Error =\n', error));
@@ -37,11 +38,14 @@ export const updateEvent = (event, eventId) => fetch(`${baseApiUrl}/events/${eve
   },
 });
 
-export const getLocations = () => fetch(`${baseApiUrl}/locations`).then(response => response.json());
+export const getLocations = () => fetch(`${baseApiUrl}/locations`)
+  .then(response => response.json());
 
-export const getPeople = () => fetch(`${baseApiUrl}/people`).then(response => response.json());
+export const getPeople = () => fetch(`${baseApiUrl}/people`)
+  .then(response => response.json());
 
-export const getTeachers = () => fetch(`${baseApiUrl}/people/teachers`).then(response => response.json());
+export const getTeachers = () => fetch(`${baseApiUrl}/people/teachers`)
+  .then(response => response.json());
 
 export const createNote = note => fetch(`${baseApiUrl}/notes/`, {
   method: 'POST',
@@ -68,9 +72,11 @@ export const deleteNote = noteId => fetch(`${baseApiUrl}/notes/${noteId}`, {
 })
   .catch(error => console.error('deleteNote Fetch Error =\n', error));
 
-export const getRepertoire = () => fetch(`${baseApiUrl}/repertoire`).then(response => response.json());
+export const getRepertoire = () => fetch(`${baseApiUrl}/repertoire`)
+  .then(response => response.json());
 
-export const getExercises = () => fetch(`${baseApiUrl}/exercises`).then(response => response.json());
+export const getExercises = () => fetch(`${baseApiUrl}/exercises`)
+  .then(response => response.json());
 
 export const createRepertoireInstance = (repertoireId, eventId) => fetch(`${baseApiUrl}/events/${eventId}/repertoire`, {
   method: 'POST',
