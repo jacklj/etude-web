@@ -1,6 +1,7 @@
 import { fk, attr, Model } from 'redux-orm';
 
 import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
+import { actionTypes as repertoireActionTypes } from '../../repertoire/repertoire.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
 
 class Events extends Model {
@@ -8,6 +9,7 @@ class Events extends Model {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
       case eventsActionTypes.EVENT.FETCH.SUCCESS:
+      case repertoireActionTypes.UPCOMING_REPERTOIRE.GET.SUCCESS:
         // create or update events in the response payload
         if (ifObjectExistsAndIsNotEmpty(action.payload.events)) {
           Object.values(action.payload.events).forEach(event => SessionBoundEvents.upsert(event));

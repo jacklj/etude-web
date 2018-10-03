@@ -3,29 +3,24 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUpcomingRepertoireRequest } from '../../redux/repertoire/repertoire.actions';
 import UpcomingPiece from './UpcomingPiece';
+import { selectRepFromUpcomingEvents } from '../../redux/reduxOrm/selectors/repertoire.selectors';
 
 class UpcomingRep extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      upcomingRep: [],
-    };
-  }
-
   componentDidMount() {
     this.props.getUpcomingRepertoireRequest();
   }
 
   render() {
-    const { upcomingRep } = this.state;
+    const { upcomingRep } = this.props;
+    console.log(upcomingRep)
     return (
       <div>
-        {upcomingRep.map(piece => (
+        {upcomingRep && Object.values(upcomingRep).map(piece => (
           <UpcomingPiece
             key={`${piece.name}, ${piece.deadline}`}
             name={piece.name}
-            composerFirstName={piece.composer.first_name}
-            composerSurname={piece.composer.surname}
+            // composerFirstName={piece.composer.first_name}
+            // composerSurname={piece.composer.surname}
             largerWork={piece.larger_work}
             deadline={piece.deadline}
           />
@@ -34,12 +29,18 @@ class UpcomingRep extends Component {
     );
   }
 }
+UpcomingRep.defaultProps = {
+  upcomingRep: undefined,
+};
 
 UpcomingRep.propTypes = {
   getUpcomingRepertoireRequest: PropTypes.func.isRequired,
+  upcomingRep: PropTypes.array,
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  upcomingRep: selectRepFromUpcomingEvents(state),
+});
 
 const mapDispatchToProps = {
   getUpcomingRepertoireRequest,

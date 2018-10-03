@@ -45,8 +45,8 @@ RepOrExerciseInstances.modelName = 'RepOrExerciseInstances';
 RepOrExerciseInstances.fields = {
   rep_or_exercise_instance_id: attr(),
   event_id: fk({ to: 'Events', relatedName: 'repOrExerciseInstances' }),
-  repertoire_id: fk({ to: 'Repertoire', relatedName: 'instance' }),
-  exercise_id: fk({ to: 'Exercises', relatedName: 'instance' }),
+  repertoire_id: fk({ to: 'Repertoire', relatedName: 'instances' }),
+  exercise_id: fk({ to: 'Exercises', relatedName: 'instances' }),
 };
 
 RepOrExerciseInstances.options = {
