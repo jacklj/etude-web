@@ -5,7 +5,7 @@ import {
   createNoteAndAddToEventFailure,
   createNoteAndAddToRepOrExerciseInstanceSuccess,
   createNoteAndAddToRepOrExerciseInstanceFailure,
-  ACTION_TYPES,
+  actionTypes,
 } from '../notes.actions';
 
 // One saga, rather than 2, to see if it's more readable long term, and also
@@ -15,9 +15,9 @@ function* createNoteGenerator(action) {
   const { note, type } = action;
   const noteWithId = { ...note };
 
-  const isEventNote = type === ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST;
+  const isEventNote = type === actionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST;
   const isRepOrExerciseInstanceNote = type
-    === ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.REQUEST;
+    === actionTypes.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.REQUEST;
   if (isEventNote) {
     const { eventId } = action;
     noteWithId.event_id = eventId;
@@ -49,8 +49,8 @@ function* createNoteGenerator(action) {
 function* createNoteSaga() {
   yield takeLatest(
     [
-      ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST,
-      ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.REQUEST,
+      actionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST,
+      actionTypes.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.REQUEST,
     ],
     createNoteGenerator,
   );

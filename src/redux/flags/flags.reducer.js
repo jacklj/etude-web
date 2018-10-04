@@ -1,15 +1,19 @@
 import { actionTypes as exercisesActionTypes } from '../exercises/exercises.actions';
 import { actionTypes as locationsActionTypes } from '../locations/locations.actions';
 import { actionTypes as repertoireActionTypes } from '../repertoire/repertoire.actions';
+import { actionTypes as notesActionTypes } from '../notes/notes.actions';
 
 const initialState = {
   gettingUpcomingRepertoire: false,
   fetchingRepertoire: false,
   fetchingExercises: false,
   fetchingLocations: false,
+  creatingNote: false,
+  updatingNote: false,
+  deletingNote: false,
 };
 
-const eventsReducer = (state = initialState, action) => {
+const flagsReducer = (state = initialState, action) => {
   switch (action.type) {
     case repertoireActionTypes.UPCOMING_REPERTOIRE.GET.REQUEST:
       return {
@@ -30,7 +34,6 @@ const eventsReducer = (state = initialState, action) => {
     case repertoireActionTypes.REPERTOIRE.FETCH_ALL.SUCCESS:
       return {
         ...state,
-        // repertoire: action.repertoire,
         fetchingRepertoire: false,
       };
     case repertoireActionTypes.REPERTOIRE.FETCH_ALL.FAILURE:
@@ -46,7 +49,6 @@ const eventsReducer = (state = initialState, action) => {
     case exercisesActionTypes.EXERCISES.FETCH_ALL.SUCCESS:
       return {
         ...state,
-        // exercises: action.exercises,
         fetchingExercises: false,
       };
     case exercisesActionTypes.EXERCISES.FETCH_ALL.FAILURE:
@@ -61,6 +63,7 @@ const eventsReducer = (state = initialState, action) => {
       };
     case locationsActionTypes.LOCATIONS.FETCH.SUCCESS:
       return {
+        ...state,
         fetchingLocations: false,
       };
     case locationsActionTypes.LOCATIONS.FETCH.FAILURE:
@@ -68,9 +71,58 @@ const eventsReducer = (state = initialState, action) => {
         ...state,
         fetchingLocations: false,
       };
+    case notesActionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST:
+    case notesActionTypes.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.REQUEST:
+      return {
+        ...state,
+        creatingNote: true,
+      };
+    case notesActionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS:
+    case notesActionTypes.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.SUCCESS:
+      return {
+        ...state,
+        creatingNote: false,
+      };
+    case notesActionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.FAILURE:
+    case notesActionTypes.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.FAILURE:
+      return {
+        ...state,
+        creatingNote: false,
+      };
+    case notesActionTypes.NOTE.UPDATE.REQUEST:
+      return {
+        ...state,
+        updatingNote: true,
+      };
+    case notesActionTypes.NOTE.UPDATE.SUCCESS:
+      return {
+        ...state,
+        updatingNote: false,
+      };
+    case notesActionTypes.NOTE.UPDATE.FAILURE:
+      return {
+        ...state,
+        updatingNote: false,
+      };
+    case notesActionTypes.NOTE.DELETE.REQUEST:
+      return {
+        ...state,
+        deletingNote: true,
+      };
+    case notesActionTypes.NOTE.DELETE.SUCCESS: {
+      return {
+        ...state,
+        deletingNote: false,
+      };
+    }
+    case notesActionTypes.NOTE.DELETE.FAILURE:
+      return {
+        ...state,
+        deletingNote: false,
+      };
     default:
       return state;
   }
 };
 
-export default eventsReducer;
+export default flagsReducer;

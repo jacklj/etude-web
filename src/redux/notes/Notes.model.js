@@ -1,8 +1,8 @@
 import { fk, attr, Model } from 'redux-orm';
 
-import { ACTION_TYPES as notesActionTypes } from '../../notes/notes.actions';
-import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
-import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
+import { actionTypes as notesActionTypes } from './notes.actions';
+import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
+import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 class Notes extends Model {
   static reducer(action, SessionBoundNotes) {

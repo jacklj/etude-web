@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { deleteNote } from '../../../services/api';
-import { noteDeleteSuccess, noteDeleteFailure, ACTION_TYPES } from '../notes.actions';
+import { noteDeleteSuccess, noteDeleteFailure, actionTypes } from '../notes.actions';
 
 function* deleteNoteGenerator(action) {
   const { noteId, eventId } = action;
@@ -15,7 +15,7 @@ function* deleteNoteGenerator(action) {
 }
 
 function* deleteNoteSaga() {
-  yield takeLatest(ACTION_TYPES.NOTE.DELETE.REQUEST, deleteNoteGenerator);
+  yield takeLatest(actionTypes.NOTE.DELETE.REQUEST, deleteNoteGenerator);
 }
 
 export default deleteNoteSaga;

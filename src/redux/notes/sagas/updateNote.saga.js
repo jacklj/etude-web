@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { updateNote } from '../../../services/api';
-import { updateNoteSuccess, updateNoteFailure, ACTION_TYPES } from '../notes.actions';
+import { updateNoteSuccess, updateNoteFailure, actionTypes } from '../notes.actions';
 
 function* updateNoteGenerator(action) {
   const { note } = action;
@@ -16,7 +16,7 @@ function* updateNoteGenerator(action) {
 }
 
 function* updateNoteSaga() {
-  yield takeLatest(ACTION_TYPES.NOTE.UPDATE.REQUEST, updateNoteGenerator);
+  yield takeLatest(actionTypes.NOTE.UPDATE.REQUEST, updateNoteGenerator);
 }
 
 export default updateNoteSaga;
