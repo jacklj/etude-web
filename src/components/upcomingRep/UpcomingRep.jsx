@@ -14,13 +14,15 @@ class UpcomingRep extends Component {
     const { upcomingRep } = this.props;
     return (
       <div>
-        {upcomingRep && Object.values(upcomingRep).map(upcomingRepItem => (
-          <UpcomingPiece
-            key={`${upcomingRepItem.repertoire_id}`}
-            repertoireId={upcomingRepItem.repertoire_id}
-            deadline={upcomingRepItem.deadline}
-          />
-        ))}
+        {upcomingRep
+          ? Object.values(upcomingRep).map(upcomingRepItem => (
+            <UpcomingPiece
+              key={`${upcomingRepItem.repertoire_id}`}
+              repertoireId={upcomingRepItem.repertoire_id}
+              deadline={upcomingRepItem.deadline}
+            />
+          ))
+          : <div>No upcoming rep :)</div>}
       </div>
     );
   }
