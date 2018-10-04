@@ -3,7 +3,7 @@ import { createExerciseInstance } from '../../../services/api';
 import {
   createExerciseInstanceSuccess,
   createExerciseInstanceFailure,
-  ACTION_TYPES,
+  actionTypes,
 } from '../repOrExerciseInstances.actions';
 
 function* createExerciseInstanceGenerator(action) {
@@ -23,7 +23,7 @@ function* createExerciseInstanceGenerator(action) {
 
 function* createExerciseInstanceSaga() {
   yield takeLatest(
-    ACTION_TYPES.EXERCISE_INSTANCE.CREATE.REQUEST,
+    actionTypes.EXERCISE_INSTANCE.CREATE.REQUEST,
     createExerciseInstanceGenerator,
   );
 }

@@ -1,4 +1,4 @@
-export const ACTION_TYPES = {
+export const actionTypes = {
   REPERTOIRE_INSTANCE: {
     CREATE: {
       REQUEST: 'REPERTOIRE_INSTANCE.CREATE.REQUEST',
@@ -23,50 +23,50 @@ export const ACTION_TYPES = {
 };
 
 export const createRepertoireInstanceRequest = (repertoireId, eventId) => ({
-  type: ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.REQUEST,
+  type: actionTypes.REPERTOIRE_INSTANCE.CREATE.REQUEST,
   repertoireId,
   eventId,
 });
 
 export const createRepertoireInstanceSuccess = payload => ({
-  type: ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.SUCCESS,
+  type: actionTypes.REPERTOIRE_INSTANCE.CREATE.SUCCESS,
   payload,
 });
 
 export const createRepertoireInstanceFailure = error => ({
-  type: ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.FAILURE,
+  type: actionTypes.REPERTOIRE_INSTANCE.CREATE.FAILURE,
   error,
 });
 
 export const createExerciseInstanceRequest = (exerciseId, eventId) => ({
-  type: ACTION_TYPES.EXERCISE_INSTANCE.CREATE.REQUEST,
+  type: actionTypes.EXERCISE_INSTANCE.CREATE.REQUEST,
   exerciseId,
   eventId,
 });
 
 export const createExerciseInstanceSuccess = payload => ({
-  type: ACTION_TYPES.EXERCISE_INSTANCE.CREATE.SUCCESS,
+  type: actionTypes.EXERCISE_INSTANCE.CREATE.SUCCESS,
   payload,
 });
 
 export const createExerciseInstanceFailure = error => ({
-  type: ACTION_TYPES.EXERCISE_INSTANCE.CREATE.FAILURE,
+  type: actionTypes.EXERCISE_INSTANCE.CREATE.FAILURE,
   error,
 });
 
 export const deleteRepOrExerciseInstanceRequest = (repOrExerciseInstanceId, eventId) => ({
-  type: ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.REQUEST,
+  type: actionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.REQUEST,
   repOrExerciseInstanceId,
   eventId,
 });
 
 export const deleteRepOrExerciseInstanceSuccess = (repOrExerciseInstanceId, eventId) => ({
-  type: ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.SUCCESS,
+  type: actionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.SUCCESS,
   repOrExerciseInstanceId,
   eventId,
 });
 
 export const deleteRepOrExerciseInstanceFailure = error => ({
-  type: ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.FAILURE,
+  type: actionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.FAILURE,
   error,
 });

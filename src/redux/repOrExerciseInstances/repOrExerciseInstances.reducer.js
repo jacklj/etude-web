@@ -1,4 +1,4 @@
-import { ACTION_TYPES } from './repOrExerciseInstances.actions';
+import { actionTypes } from './repOrExerciseInstances.actions';
 
 const initialState = {
   // repertoire: {},
@@ -10,35 +10,35 @@ const initialState = {
 
 const locations = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.REQUEST:
+    case actionTypes.REPERTOIRE_INSTANCE.CREATE.REQUEST:
       return {
         ...state,
         creatingRepertoireInstance: true,
       };
-    case ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.SUCCESS:
-    case ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.FAILURE:
+    case actionTypes.REPERTOIRE_INSTANCE.CREATE.SUCCESS:
+    case actionTypes.REPERTOIRE_INSTANCE.CREATE.FAILURE:
       return {
         ...state,
         creatingRepertoireInstance: false,
       };
-    case ACTION_TYPES.EXERCISE_INSTANCE.CREATE.REQUEST:
+    case actionTypes.EXERCISE_INSTANCE.CREATE.REQUEST:
       return {
         ...state,
         creatingExerciseInstance: true,
       };
-    case ACTION_TYPES.EXERCISE_INSTANCE.CREATE.SUCCESS:
-    case ACTION_TYPES.EXERCISE_INSTANCE.CREATE.FAILURE:
+    case actionTypes.EXERCISE_INSTANCE.CREATE.SUCCESS:
+    case actionTypes.EXERCISE_INSTANCE.CREATE.FAILURE:
       return {
         ...state,
         creatingExerciseInstance: false,
       };
-    case ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.REQUEST:
+    case actionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.REQUEST:
       return {
         ...state,
         deletingRepOrExerciseInstance: true,
       };
-    case ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.SUCCESS:
-    case ACTION_TYPES.REP_OR_EXERCISE_INSTANCE.DELETE.FAILURE:
+    case actionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.SUCCESS:
+    case actionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.FAILURE:
       return {
         ...state,
         deletingRepOrExerciseInstance: false,

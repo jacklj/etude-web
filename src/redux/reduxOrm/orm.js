@@ -5,9 +5,9 @@ import Locations from '../locations/Locations.model';
 import Notes from '../notes/Notes.model';
 import People from '../people/People.model';
 import Repertoire from '../repertoire/Repertoire.model';
-import RepOrExerciseInstances from './models/RepOrExerciseInstances.model';
-import OtherRepToWorkOn from './models/OtherRepToWorkOn.model';
-import PeopleAtEvents from './models/PeopleAtEvents.model';
+import RepOrExerciseInstances from '../repOrExerciseInstances/RepOrExerciseInstances.model';
+import OtherRepToWorkOn from '../otherRepToWorkOn/OtherRepToWorkOn.model';
+import PeopleAtEvents from '../peopleAtEvents/PeopleAtEvents.model';
 
 const orm = new ORM();
 orm.register(

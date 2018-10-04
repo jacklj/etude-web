@@ -1,7 +1,7 @@
 import { fk, attr, Model } from 'redux-orm';
 
-import { actionTypes as repertoireActionTypes } from '../../repertoire/repertoire.actions';
-import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
+import { actionTypes as repertoireActionTypes } from '../repertoire/repertoire.actions';
+import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 // pluralised class name so it matches table name in db
 class OtherRepToWorkOn extends Model {

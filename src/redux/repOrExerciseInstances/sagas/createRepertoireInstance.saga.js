@@ -3,7 +3,7 @@ import { createRepertoireInstance } from '../../../services/api';
 import {
   createRepertoireInstanceSuccess,
   createRepertoireInstanceFailure,
-  ACTION_TYPES,
+  actionTypes,
 } from '../repOrExerciseInstances.actions';
 
 function* createRepertoireInstanceGenerator(action) {
@@ -23,7 +23,7 @@ function* createRepertoireInstanceGenerator(action) {
 
 function* createRepertoireInstanceSaga() {
   yield takeLatest(
-    ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.REQUEST,
+    actionTypes.REPERTOIRE_INSTANCE.CREATE.REQUEST,
     createRepertoireInstanceGenerator,
   );
 }
