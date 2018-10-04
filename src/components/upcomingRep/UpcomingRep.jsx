@@ -12,17 +12,13 @@ class UpcomingRep extends Component {
 
   render() {
     const { upcomingRep } = this.props;
-    console.log(upcomingRep)
     return (
       <div>
-        {upcomingRep && Object.values(upcomingRep).map(piece => (
+        {upcomingRep && Object.values(upcomingRep).map(upcomingRepItem => (
           <UpcomingPiece
-            key={`${piece.name}, ${piece.deadline}`}
-            name={piece.name}
-            // composerFirstName={piece.composer.first_name}
-            // composerSurname={piece.composer.surname}
-            largerWork={piece.larger_work}
-            deadline={piece.deadline}
+            key={`${upcomingRepItem.repertoire_id}`}
+            repertoireId={upcomingRepItem.repertoire_id}
+            deadline={upcomingRepItem.deadline}
           />
         ))}
       </div>
@@ -35,7 +31,7 @@ UpcomingRep.defaultProps = {
 
 UpcomingRep.propTypes = {
   getUpcomingRepertoireRequest: PropTypes.func.isRequired,
-  upcomingRep: PropTypes.array,
+  upcomingRep: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
 const mapStateToProps = state => ({
