@@ -7,8 +7,8 @@ import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 class Notes extends Model {
   static reducer(action, SessionBoundNotes) {
     switch (action.type) {
-      case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
-      case eventsActionTypes.EVENT.FETCH.SUCCESS:
+      case eventsActionTypes.EVENT.GET_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.GET.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.notes)) {
           Object.values(action.payload.notes)
             .forEach(note => SessionBoundNotes.upsert(note));

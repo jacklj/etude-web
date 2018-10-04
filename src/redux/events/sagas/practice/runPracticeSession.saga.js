@@ -26,8 +26,8 @@ function* runPracticeSessionSaga() {
       // user has just explicitly started a practice session
       actionTypes.PRACTICE_SESSION.START.SUCCESS,
       // events have been updated - an in progress practice session may exist
-      actionTypes.EVENT.FETCH.SUCCESS,
-      actionTypes.EVENT.FETCH_ALL.SUCCESS,
+      actionTypes.EVENT.GET.SUCCESS,
+      actionTypes.EVENT.GET_ALL.SUCCESS,
     ]);
 
     // check that there is an in progress practice session in the store

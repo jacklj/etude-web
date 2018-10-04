@@ -8,7 +8,7 @@ import AddNoteToEvent from '../common/notes/AddNoteToEvent';
 import GeneralNotes from '../common/notes/GeneralNotes';
 import AddRepOrExerciseInstance from '../common/repOrExerciseInstances/AddRepOrExerciseInstance';
 import RepOrExerciseInstances from '../common/repOrExerciseInstances/RepOrExerciseInstances';
-import { eventFetchRequest, deleteEventRequest } from '../../redux/events/events.actions';
+import { getEventRequest, deleteEventRequest } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/reduxOrm/selectors/events.selectors';
 import { renderDuration } from '../../services/datetime';
 
@@ -22,7 +22,7 @@ class Lesson extends Component {
     // getLesson to ensure it's up to date in the store (e.g. if user navigates
     // directly to a specific lesson page, so all lessons aren't already in the
     // store)
-    this.props.eventFetchRequest(this.props.eventId);
+    this.props.getEventRequest(this.props.eventId);
   }
 
   deleteLesson() {
@@ -91,7 +91,7 @@ Lesson.defaultProps = {
 Lesson.propTypes = {
   eventId: PropTypes.number.isRequired,
   lesson: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  eventFetchRequest: PropTypes.func.isRequired,
+  getEventRequest: PropTypes.func.isRequired,
   deleteEventRequest: PropTypes.func.isRequired,
 };
 
@@ -102,7 +102,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = {
-  eventFetchRequest,
+  getEventRequest,
   deleteEventRequest,
 };
 

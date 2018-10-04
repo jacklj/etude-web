@@ -7,8 +7,8 @@ import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 class Events extends Model {
   static reducer(action, SessionBoundEvents) {
     switch (action.type) {
-      case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
-      case eventsActionTypes.EVENT.FETCH.SUCCESS:
+      case eventsActionTypes.EVENT.GET_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.GET.SUCCESS:
       case repertoireActionTypes.UPCOMING_REPERTOIRE.GET.SUCCESS:
         // create or update events in the response payload
         if (ifObjectExistsAndIsNotEmpty(action.payload.events)) {

@@ -7,8 +7,8 @@ import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 class Locations extends Model {
   static reducer(action, SessionBoundLocations) {
     switch (action.type) {
-      case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
-      case eventsActionTypes.EVENT.FETCH.SUCCESS:
+      case eventsActionTypes.EVENT.GET_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.GET.SUCCESS:
       case locationsActionTypes.LOCATIONS.FETCH.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.locations)) {
           Object.values(action.payload.locations)

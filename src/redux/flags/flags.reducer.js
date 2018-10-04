@@ -147,32 +147,32 @@ const flagsReducer = (state = initialState, action) => {
         ...state,
         fetchingPeople: false,
       };
-    case eventsActionTypes.EVENT.FETCH_ALL.REQUEST:
+    case eventsActionTypes.EVENT.GET_ALL.REQUEST:
       return {
         ...state,
         fetchingAllEvents: true,
       };
-    case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
+    case eventsActionTypes.EVENT.GET_ALL.SUCCESS:
       return {
         ...state,
         fetchingAllEvents: false,
       };
-    case eventsActionTypes.EVENT.FETCH_ALL.FAILURE:
+    case eventsActionTypes.EVENT.GET_ALL.FAILURE:
       return {
         ...state,
         fetchingAllEvents: false,
       };
-    case eventsActionTypes.EVENT.FETCH.REQUEST:
+    case eventsActionTypes.EVENT.GET.REQUEST:
       return {
         ...state,
         fetchingEvent: true,
       };
-    case eventsActionTypes.EVENT.FETCH.SUCCESS:
+    case eventsActionTypes.EVENT.GET.SUCCESS:
       return {
         ...state,
         fetchingEvent: false,
       };
-    case eventsActionTypes.EVENT.FETCH.FAILURE:
+    case eventsActionTypes.EVENT.GET.FAILURE:
       return {
         ...state,
         fetchingEvent: false,

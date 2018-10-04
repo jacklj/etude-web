@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Nav, StyledLink } from './common/styledComponents';
-import { createPracticeSessionRequest, lessonCreateRequest } from '../redux/events/events.actions';
+import { createPracticeSessionRequest, createLessonRequest } from '../redux/events/events.actions';
 
 class Navigation extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Navigation extends Component {
   }
 
   createThenGoToNewLesson() {
-    this.props.lessonCreateRequest();
+    this.props.createLessonRequest();
   }
 
   render() {
@@ -38,14 +38,14 @@ class Navigation extends Component {
 
 Navigation.propTypes = {
   createPracticeSessionRequest: PropTypes.func.isRequired,
-  lessonCreateRequest: PropTypes.func.isRequired,
+  createLessonRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
   createPracticeSessionRequest,
-  lessonCreateRequest,
+  createLessonRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

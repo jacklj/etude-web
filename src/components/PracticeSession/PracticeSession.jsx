@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import {
   deleteEventRequest,
-  eventFetchRequest,
+  getEventRequest,
 } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/reduxOrm/selectors/events.selectors';
 import Timer from './Timer';
@@ -25,7 +25,7 @@ class PracticeSession extends Component {
     // getPracticeSession to ensure it's up to date in the store (e.g. if user navigates
     // directly to a specific practice session page)
     // TODO 17th Sept 2018 could extract this to a saga
-    this.props.eventFetchRequest(this.props.eventId);
+    this.props.getEventRequest(this.props.eventId);
   }
 
   deletePracticeSession() {
@@ -87,7 +87,7 @@ PracticeSession.defaultProps = {
 PracticeSession.propTypes = {
   eventId: PropTypes.number.isRequired,
   practiceSession: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  eventFetchRequest: PropTypes.func.isRequired,
+  getEventRequest: PropTypes.func.isRequired,
   deleteEventRequest: PropTypes.func.isRequired,
   practiceSessionTimer: PropTypes.number,
 };
@@ -101,7 +101,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   deleteEventRequest,
-  eventFetchRequest,
+  getEventRequest,
 };
 
 export default connect(

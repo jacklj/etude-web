@@ -1,14 +1,14 @@
 export const actionTypes = {
   EVENT: {
-    FETCH: {
-      REQUEST: 'EVENT.FETCH.REQUEST',
-      SUCCESS: 'EVENT.FETCH.SUCCESS',
-      FAILURE: 'EVENT.FETCH.FAILURE',
+    GET: {
+      REQUEST: 'EVENT.GET.REQUEST',
+      SUCCESS: 'EVENT.GET.SUCCESS',
+      FAILURE: 'EVENT.GET.FAILURE',
     },
-    FETCH_ALL: {
-      REQUEST: 'EVENT.FETCH_ALL.REQUEST',
-      SUCCESS: 'EVENT.FETCH_ALL.SUCCESS',
-      FAILURE: 'EVENT.FETCH_ALL.FAILURE',
+    GET_ALL: {
+      REQUEST: 'EVENT.GET_ALL.REQUEST',
+      SUCCESS: 'EVENT.GET_ALL.SUCCESS',
+      FAILURE: 'EVENT.GET_ALL.FAILURE',
     },
     DELETE: {
       REQUEST: 'EVENT.DELETE.REQUEST',
@@ -51,32 +51,32 @@ export const actionTypes = {
   },
 };
 
-export const allEventsFetchRequest = () => ({
-  type: actionTypes.EVENT.FETCH_ALL.REQUEST,
+export const getAllEventsRequest = () => ({
+  type: actionTypes.EVENT.GET_ALL.REQUEST,
 });
 
-export const allEventsFetchSuccess = payload => ({
-  type: actionTypes.EVENT.FETCH_ALL.SUCCESS,
+export const getAllEventsSuccess = payload => ({
+  type: actionTypes.EVENT.GET_ALL.SUCCESS,
   payload,
 });
 
-export const allEventsFetchFailure = error => ({
-  type: actionTypes.EVENT.FETCH_ALL.FAILURE,
+export const getAllEventsFailure = error => ({
+  type: actionTypes.EVENT.GET_ALL.FAILURE,
   error,
 });
 
-export const eventFetchRequest = eventId => ({
-  type: actionTypes.EVENT.FETCH.REQUEST,
+export const getEventRequest = eventId => ({
+  type: actionTypes.EVENT.GET.REQUEST,
   eventId,
 });
 
-export const eventFetchSuccess = payload => ({
-  type: actionTypes.EVENT.FETCH.SUCCESS,
+export const getEventSuccess = payload => ({
+  type: actionTypes.EVENT.GET.SUCCESS,
   payload,
 });
 
-export const eventFetchFailure = error => ({
-  type: actionTypes.EVENT.FETCH.FAILURE,
+export const getEventFailure = error => ({
+  type: actionTypes.EVENT.GET.FAILURE,
   error,
 });
 
@@ -111,17 +111,17 @@ export const updateEventFailure = error => ({
   error,
 });
 
-export const lessonCreateRequest = lesson => ({
+export const createLessonRequest = lesson => ({
   type: actionTypes.LESSON.CREATE.REQUEST,
   lesson,
 });
 
-export const lessonCreateSuccess = payload => ({
+export const createLessonSuccess = payload => ({
   type: actionTypes.LESSON.CREATE.SUCCESS,
   payload,
 });
 
-export const lessonCreateFailure = error => ({
+export const createLessonFailure = error => ({
   type: actionTypes.LESSON.CREATE.FAILURE,
   error,
 });

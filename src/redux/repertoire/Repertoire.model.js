@@ -7,8 +7,8 @@ import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 class Repertoire extends Model {
   static reducer(action, SessionBoundRepertoire) {
     switch (action.type) {
-      case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
-      case eventsActionTypes.EVENT.FETCH.SUCCESS:
+      case eventsActionTypes.EVENT.GET_ALL.SUCCESS:
+      case eventsActionTypes.EVENT.GET.SUCCESS:
       case repertoireActionTypes.REPERTOIRE.FETCH_ALL.SUCCESS:
       case repertoireActionTypes.UPCOMING_REPERTOIRE.GET.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.repertoire)) {
