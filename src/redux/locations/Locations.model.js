@@ -1,15 +1,15 @@
 import { attr, Model } from 'redux-orm';
 
-import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
-import { ACTION_TYPES as locationsActionTypes } from '../../locations/locations.actions';
-import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
+import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
+import { actionTypes as locationsActionTypes } from './locations.actions';
+import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 class Locations extends Model {
   static reducer(action, SessionBoundLocations) {
     switch (action.type) {
       case eventsActionTypes.EVENT.FETCH_ALL.SUCCESS:
       case eventsActionTypes.EVENT.FETCH.SUCCESS:
-      case locationsActionTypes.LOCATIONS_FETCH.SUCCESS:
+      case locationsActionTypes.LOCATIONS.FETCH.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.locations)) {
           Object.values(action.payload.locations)
             .forEach(location => SessionBoundLocations.upsert(location));

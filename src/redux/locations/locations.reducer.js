@@ -1,5 +1,5 @@
-import { ACTION_TYPES } from './locations.actions';
-// import { ACTION_TYPES as eventActionTypes } from '../actions/events.actions';
+import { actionTypes } from './locations.actions';
+// import { actionTypes as eventActionTypes } from '../actions/events.actions';
 // import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 const initialState = {
@@ -20,17 +20,17 @@ const locations = (state = initialState, action) => {
     //     };
     //   }
     //   return state;
-    case ACTION_TYPES.LOCATIONS_FETCH.REQUEST:
+    case actionTypes.LOCATIONS.FETCH.REQUEST:
       return {
         ...state,
         fetching: true,
       };
-    case ACTION_TYPES.LOCATIONS_FETCH.SUCCESS:
+    case actionTypes.LOCATIONS.FETCH.SUCCESS:
       return {
         // locations: action.locations,
         fetching: false,
       };
-    case ACTION_TYPES.LOCATIONS_FETCH.FAILURE:
+    case actionTypes.LOCATIONS.FETCH.FAILURE:
       return {
         ...state,
         fetching: false,

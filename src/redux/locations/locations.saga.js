@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getLocations } from '../../services/api';
-import { locationsFetchSuccess, locationsFetchFailure, ACTION_TYPES } from './locations.actions';
+import { locationsFetchSuccess, locationsFetchFailure, actionTypes } from './locations.actions';
 
 function* fetchLocations() {
   try {
@@ -14,7 +14,7 @@ function* fetchLocations() {
 }
 
 function* fetchLocationsSaga() {
-  yield takeLatest(ACTION_TYPES.LOCATIONS_FETCH.REQUEST, fetchLocations);
+  yield takeLatest(actionTypes.LOCATIONS.FETCH.REQUEST, fetchLocations);
 }
 
 export default fetchLocationsSaga;
