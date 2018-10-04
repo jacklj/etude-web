@@ -1,10 +1,12 @@
-import { actionTypes as repertoireActionTypes } from '../repertoire/repertoire.actions';
 import { actionTypes as exercisesActionTypes } from '../exercises/exercises.actions';
+import { actionTypes as locationsActionTypes } from '../locations/locations.actions';
+import { actionTypes as repertoireActionTypes } from '../repertoire/repertoire.actions';
 
 const initialState = {
   gettingUpcomingRepertoire: false,
   fetchingRepertoire: false,
   fetchingExercises: false,
+  fetchingLocations: false,
 };
 
 const eventsReducer = (state = initialState, action) => {
@@ -51,6 +53,20 @@ const eventsReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingExercises: false,
+      };
+    case locationsActionTypes.LOCATIONS.FETCH.REQUEST:
+      return {
+        ...state,
+        fetchingLocations: true,
+      };
+    case locationsActionTypes.LOCATIONS.FETCH.SUCCESS:
+      return {
+        fetchingLocations: false,
+      };
+    case locationsActionTypes.LOCATIONS.FETCH.FAILURE:
+      return {
+        ...state,
+        fetchingLocations: false,
       };
     default:
       return state;
