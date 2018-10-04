@@ -1,23 +1,23 @@
 export const actionTypes = {
   PEOPLE: {
-    FETCH: {
-      REQUEST: 'PEOPLE.FETCH.REQUEST',
-      SUCCESS: 'PEOPLE.FETCH.SUCCESS',
-      FAILURE: 'PEOPLE.FETCH.FAILURE',
+    GET_ALL: {
+      REQUEST: 'PEOPLE.GET_ALL.REQUEST',
+      SUCCESS: 'PEOPLE.GET_ALL.SUCCESS',
+      FAILURE: 'PEOPLE.GET_ALL.FAILURE',
     },
   },
 };
 
-export const peopleFetchRequest = () => ({
-  type: actionTypes.PEOPLE.FETCH.REQUEST,
+export const getAllPeopleRequest = () => ({
+  type: actionTypes.PEOPLE.GET_ALL.REQUEST,
 });
 
-export const peopleFetchSuccess = payload => ({
-  type: actionTypes.PEOPLE.FETCH.SUCCESS,
+export const getAllPeopleSuccess = payload => ({
+  type: actionTypes.PEOPLE.GET_ALL.SUCCESS,
   payload,
 });
 
-export const peopleFetchFailure = error => ({
-  type: actionTypes.PEOPLE.FETCH.FAILURE,
+export const getAllPeopleFailure = error => ({
+  type: actionTypes.PEOPLE.GET_ALL.FAILURE,
   error,
 });

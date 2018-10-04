@@ -132,17 +132,17 @@ const flagsReducer = (state = initialState, action) => {
         ...state,
         deletingNote: false,
       };
-    case peopleActionTypes.PEOPLE.FETCH.REQUEST:
+    case peopleActionTypes.PEOPLE.GET_ALL.REQUEST:
       return {
         ...state,
         fetchingPeople: true,
       };
-    case peopleActionTypes.PEOPLE.FETCH.SUCCESS:
+    case peopleActionTypes.PEOPLE.GET_ALL.SUCCESS:
       return {
         ...state,
         fetchingPeople: false,
       };
-    case peopleActionTypes.PEOPLE.FETCH.FAILURE:
+    case peopleActionTypes.PEOPLE.GET_ALL.FAILURE:
       return {
         ...state,
         fetchingPeople: false,

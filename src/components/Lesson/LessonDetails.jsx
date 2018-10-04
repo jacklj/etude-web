@@ -10,7 +10,7 @@ import Select from 'react-select';
 import { Label } from '../common/styledComponents';
 import { updateEventRequest } from '../../redux/events/events.actions';
 import { getAllLocationsRequest } from '../../redux/locations/locations.actions';
-import { peopleFetchRequest } from '../../redux/people/people.actions';
+import { getAllPeopleRequest } from '../../redux/people/people.actions';
 import { selectLocationsForDropdown } from '../../redux/reduxOrm/selectors/locations.selectors';
 import { selectTeachersForDropdown } from '../../redux/reduxOrm/selectors/people.selectors';
 import { getLocationSelectOption, getPersonSelectOption } from '../../services/utils';
@@ -36,7 +36,7 @@ class LessonDetails extends Component {
 
   componentDidMount() {
     this.props.getAllLocationsRequest();
-    this.props.peopleFetchRequest();
+    this.props.getAllPeopleRequest();
   }
 
   updateLessonDetails() {
@@ -220,7 +220,7 @@ LessonDetails.propTypes = {
   locations: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   updateEventRequest: PropTypes.func.isRequired,
   getAllLocationsRequest: PropTypes.func.isRequired,
-  peopleFetchRequest: PropTypes.func.isRequired,
+  getAllPeopleRequest: PropTypes.func.isRequired,
   teachers: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
@@ -234,7 +234,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   updateEventRequest,
   getAllLocationsRequest,
-  peopleFetchRequest,
+  getAllPeopleRequest,
 };
 
 export default connect(
