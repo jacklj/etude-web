@@ -1,4 +1,4 @@
-export const ACTION_TYPES = {
+export const actionTypes = {
   PEOPLE: {
     FETCH: {
       REQUEST: 'PEOPLE.FETCH.REQUEST',
@@ -9,15 +9,15 @@ export const ACTION_TYPES = {
 };
 
 export const peopleFetchRequest = () => ({
-  type: ACTION_TYPES.PEOPLE.FETCH.REQUEST,
+  type: actionTypes.PEOPLE.FETCH.REQUEST,
 });
 
 export const peopleFetchSuccess = payload => ({
-  type: ACTION_TYPES.PEOPLE.FETCH.SUCCESS,
+  type: actionTypes.PEOPLE.FETCH.SUCCESS,
   payload,
 });
 
 export const peopleFetchFailure = error => ({
-  type: ACTION_TYPES.PEOPLE.FETCH.FAILURE,
+  type: actionTypes.PEOPLE.FETCH.FAILURE,
   error,
 });

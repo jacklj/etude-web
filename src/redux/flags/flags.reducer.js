@@ -2,6 +2,7 @@ import { actionTypes as exercisesActionTypes } from '../exercises/exercises.acti
 import { actionTypes as locationsActionTypes } from '../locations/locations.actions';
 import { actionTypes as repertoireActionTypes } from '../repertoire/repertoire.actions';
 import { actionTypes as notesActionTypes } from '../notes/notes.actions';
+import { actionTypes as peopleActionTypes } from '../people/people.actions';
 
 const initialState = {
   gettingUpcomingRepertoire: false,
@@ -11,6 +12,7 @@ const initialState = {
   creatingNote: false,
   updatingNote: false,
   deletingNote: false,
+  fetchingPeople: false,
 };
 
 const flagsReducer = (state = initialState, action) => {
@@ -119,6 +121,22 @@ const flagsReducer = (state = initialState, action) => {
       return {
         ...state,
         deletingNote: false,
+      };
+    case peopleActionTypes.PEOPLE.FETCH.REQUEST:
+      return {
+        ...state,
+        fetchingPeople: true,
+      };
+    case peopleActionTypes.PEOPLE.FETCH.SUCCESS:
+      return {
+        // people: action.people,
+        ...state,
+        fetchingPeople: false,
+      };
+    case peopleActionTypes.PEOPLE.FETCH.FAILURE:
+      return {
+        ...state,
+        fetchingPeople: false,
       };
     default:
       return state;

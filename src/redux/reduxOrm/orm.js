@@ -3,7 +3,7 @@ import Events from '../events/Events.model';
 import Exercises from '../exercises/Exercises.model';
 import Locations from '../locations/Locations.model';
 import Notes from '../notes/Notes.model';
-import People from './models/People.model';
+import People from '../people/People.model';
 import Repertoire from '../repertoire/Repertoire.model';
 import RepOrExerciseInstances from './models/RepOrExerciseInstances.model';
 import OtherRepToWorkOn from './models/OtherRepToWorkOn.model';
