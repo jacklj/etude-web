@@ -4,6 +4,7 @@ import { actionTypes as repertoireActionTypes } from '../repertoire/repertoire.a
 import { actionTypes as notesActionTypes } from '../notes/notes.actions';
 import { actionTypes as peopleActionTypes } from '../people/people.actions';
 import { actionTypes as eventsActionTypes } from '../events/events.actions';
+import { actionTypes as repOrExerciseInstancesActionTypes } from '../repOrExerciseInstances/repOrExerciseInstances.actions';
 
 const initialState = {
   gettingUpcomingRepertoire: false,
@@ -19,6 +20,9 @@ const initialState = {
   updatingEvent: false,
   deletingEvent: false,
   creatingLesson: false,
+  creatingRepertoireInstance: false,
+  creatingExerciseInstance: false,
+  deletingRepOrExerciseInstance: false,
 };
 
 const flagsReducer = (state = initialState, action) => {
@@ -233,6 +237,39 @@ const flagsReducer = (state = initialState, action) => {
       return {
         ...state,
         creatingPracticeSession: false,
+      };
+    case repOrExerciseInstancesActionTypes.REPERTOIRE_INSTANCE.CREATE.REQUEST:
+      return {
+        ...state,
+        creatingRepertoireInstance: true,
+      };
+    case repOrExerciseInstancesActionTypes.REPERTOIRE_INSTANCE.CREATE.SUCCESS:
+    case repOrExerciseInstancesActionTypes.REPERTOIRE_INSTANCE.CREATE.FAILURE:
+      return {
+        ...state,
+        creatingRepertoireInstance: false,
+      };
+    case repOrExerciseInstancesActionTypes.EXERCISE_INSTANCE.CREATE.REQUEST:
+      return {
+        ...state,
+        creatingExerciseInstance: true,
+      };
+    case repOrExerciseInstancesActionTypes.EXERCISE_INSTANCE.CREATE.SUCCESS:
+    case repOrExerciseInstancesActionTypes.EXERCISE_INSTANCE.CREATE.FAILURE:
+      return {
+        ...state,
+        creatingExerciseInstance: false,
+      };
+    case repOrExerciseInstancesActionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.REQUEST:
+      return {
+        ...state,
+        deletingRepOrExerciseInstance: true,
+      };
+    case repOrExerciseInstancesActionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.SUCCESS:
+    case repOrExerciseInstancesActionTypes.REP_OR_EXERCISE_INSTANCE.DELETE.FAILURE:
+      return {
+        ...state,
+        deletingRepOrExerciseInstance: false,
       };
     default:
       return state;
