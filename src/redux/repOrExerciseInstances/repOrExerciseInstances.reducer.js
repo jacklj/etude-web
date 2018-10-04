@@ -1,8 +1,8 @@
 import { ACTION_TYPES } from './repOrExerciseInstances.actions';
 
 const initialState = {
-  repertoire: {},
-  exercises: {},
+  // repertoire: {},
+  // exercises: {},
   fetchingRepertoire: false,
   fetchingExercises: false,
   creatingRepertoireInstance: false,
@@ -20,7 +20,7 @@ const locations = (state = initialState, action) => {
     case ACTION_TYPES.REPERTOIRE.FETCH_ALL.SUCCESS:
       return {
         ...state,
-        repertoire: action.repertoire,
+        // repertoire: action.repertoire,
         fetchingRepertoire: false,
       };
     case ACTION_TYPES.REPERTOIRE.FETCH_ALL.FAILURE:
@@ -36,7 +36,7 @@ const locations = (state = initialState, action) => {
     case ACTION_TYPES.EXERCISES.FETCH_ALL.SUCCESS:
       return {
         ...state,
-        exercises: action.exercises,
+        // exercises: action.exercises,
         fetchingExercises: false,
       };
     case ACTION_TYPES.EXERCISES.FETCH_ALL.FAILURE:

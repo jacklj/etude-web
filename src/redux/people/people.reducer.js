@@ -1,7 +1,7 @@
 import { ACTION_TYPES } from './people.actions';
 
 const initialState = {
-  people: [],
+  // people: [],
   fetching: false,
 };
 
@@ -14,7 +14,8 @@ const people = (state = initialState, action) => {
       };
     case ACTION_TYPES.PEOPLE.FETCH.SUCCESS:
       return {
-        people: action.people,
+        // people: action.people,
+        ...state,
         fetching: false,
       };
     case ACTION_TYPES.PEOPLE.FETCH.FAILURE:

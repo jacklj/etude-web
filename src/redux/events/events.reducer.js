@@ -1,9 +1,9 @@
 import { ACTION_TYPES } from './events.actions';
-import { ACTION_TYPES as notesActionTypes } from '../notes/notes.actions';
-import { ACTION_TYPES as itemsActionTypes } from '../items/items.actions';
+// import { ACTION_TYPES as notesActionTypes } from '../notes/notes.actions';
+// import { ACTION_TYPES as repOrExerciseInstancesActionTypes } from '../repOrExerciseInstances/repOrExerciseInstances.actions';
 
 const initialState = {
-  events: {}, // indexed by eventId
+  // events: {}, // indexed by eventId
   fetchingAllEvents: false,
   fetchingEvent: false,
   updatingEvent: false,
@@ -20,15 +20,12 @@ const eventsReducer = (state = initialState, action) => {
         ...state,
         fetchingAllEvents: true,
       };
-    case ACTION_TYPES.EVENT.FETCH_ALL.SUCCESS: {
-      // transform events from array to object, indexed by event_id
-      const { events } = action;
+    case ACTION_TYPES.EVENT.FETCH_ALL.SUCCESS:
       return {
         ...state,
-        events,
+        // events: action.payload.events,
         fetchingAllEvents: false,
       };
-    }
     case ACTION_TYPES.EVENT.FETCH_ALL.FAILURE:
       return {
         ...state,
@@ -43,10 +40,10 @@ const eventsReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingEvent: false,
-        events: {
-          ...state.events,
-          [action.event.event_id]: action.event,
-        },
+        // events: {
+        //   ...state.events,
+        //   [action.event.event_id]: action.event,
+        // },
       };
     case ACTION_TYPES.EVENT.FETCH.FAILURE:
       return {
@@ -59,12 +56,12 @@ const eventsReducer = (state = initialState, action) => {
         deletingEvent: true,
       };
     case ACTION_TYPES.EVENT.DELETE.SUCCESS: {
-      const newEvents = { ...state.events };
-      delete newEvents[action.eventId];
+      // const newEvents = { ...state.events };
+      // delete newEvents[action.eventId];
       return {
         ...state,
         deletingEvent: false,
-        events: newEvents,
+        // events: newEvents,
       };
     }
     case ACTION_TYPES.EVENT.DELETE.FAILURE:
@@ -81,10 +78,10 @@ const eventsReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingEvent: false,
-        events: {
-          ...state.events,
-          [action.event.event_id]: action.event,
-        },
+        // events: {
+        //   ...state.events,
+        //   [action.event.event_id]: action.event,
+        // },
       };
     case ACTION_TYPES.EVENT.UPDATE.FAILURE:
       return {
@@ -100,10 +97,10 @@ const eventsReducer = (state = initialState, action) => {
       return {
         ...state,
         creatingLesson: false,
-        events: {
-          ...state.events,
-          [action.lesson.event_id]: action.lesson,
-        },
+        // events: {
+        //   ...state.events,
+        //   [action.lesson.event_id]: action.lesson,
+        // },
       };
     case ACTION_TYPES.LESSON.CREATE.FAILURE:
       return {
@@ -119,10 +116,10 @@ const eventsReducer = (state = initialState, action) => {
       return {
         ...state,
         creatingPracticeSession: false,
-        events: {
-          ...state.events,
-          [action.practiceSession.event_id]: action.practiceSession,
-        },
+        // events: {
+        //   ...state.events,
+        //   [action.practiceSession.event_id]: action.practiceSession,
+        // },
       };
     case ACTION_TYPES.PRACTICE_SESSION.CREATE.FAILURE:
       return {
@@ -133,19 +130,19 @@ const eventsReducer = (state = initialState, action) => {
       return {
         ...state,
         practiceSessionTimer: 0,
-        events: {
-          ...state.events,
-          [action.practiceSession.event_id]: action.practiceSession,
-        },
+        // events: {
+        //   ...state.events,
+        //   [action.practiceSession.event_id]: action.practiceSession,
+        // },
       };
     case ACTION_TYPES.PRACTICE_SESSION.FINISH.SUCCESS:
       return {
         ...state,
         practiceSessionTimer: undefined,
-        events: {
-          ...state.events,
-          [action.practiceSession.event_id]: action.practiceSession,
-        },
+        // events: {
+        //   ...state.events,
+        //   [action.practiceSession.event_id]: action.practiceSession,
+        // },
       };
     case ACTION_TYPES.PRACTICE_SESSION.TIMER.INITIALISE: {
       return {
@@ -158,92 +155,92 @@ const eventsReducer = (state = initialState, action) => {
         ...state,
         practiceSessionTimer: state.practiceSessionTimer + 1,
       };
-    case notesActionTypes.NOTE.UPDATE.SUCCESS:
-    case notesActionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS: {
-      const { note } = action;
-      const eventId = note.event_id;
-      return {
-        ...state,
-        events: {
-          ...state.events,
-          [eventId]: {
-            ...state.events[eventId],
-            notes: {
-              ...state.events[eventId].notes,
-              [note.note_id]: note,
-            },
-          },
-        },
-      };
-    }
-    case notesActionTypes.NOTE.DELETE.SUCCESS: {
-      const { noteId, eventId } = action;
-      const newNotes = { ...state.events[eventId].notes };
-      delete newNotes[noteId];
-      return {
-        ...state,
-        events: {
-          ...state.events,
-          [eventId]: {
-            ...state.events[eventId],
-            notes: newNotes,
-          },
-        },
-      };
-    }
-    case itemsActionTypes.ITEM.DELETE.SUCCESS: {
-      const { itemId, eventId } = action;
-      const newItems = { ...state.events[eventId].items };
-      delete newItems[itemId];
-      return {
-        ...state,
-        events: {
-          ...state.events,
-          [eventId]: {
-            ...state.events[eventId],
-            items: newItems,
-          },
-        },
-      };
-    }
-    case itemsActionTypes.REPERTOIRE_INSTANCE.CREATE.SUCCESS: {
-      const { repertoireInstance } = action;
-      const itemId = repertoireInstance.item_id;
-      const eventId = repertoireInstance.event_id;
-
-      return {
-        ...state,
-        events: {
-          ...state.events,
-          [eventId]: {
-            ...state.events[eventId],
-            items: {
-              ...state.events[eventId].items,
-              [itemId]: repertoireInstance,
-            },
-          },
-        },
-      };
-    }
-    case itemsActionTypes.EXERCISE_INSTANCE.CREATE.SUCCESS: {
-      const { exerciseInstance } = action;
-      const itemId = exerciseInstance.item_id;
-      const eventId = exerciseInstance.event_id;
-
-      return {
-        ...state,
-        events: {
-          ...state.events,
-          [eventId]: {
-            ...state.events[eventId],
-            items: {
-              ...state.events[eventId].items,
-              [itemId]: exerciseInstance,
-            },
-          },
-        },
-      };
-    }
+    // case notesActionTypes.NOTE.UPDATE.SUCCESS:
+    // case notesActionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS: {
+    //   const { note } = action;
+    //   const eventId = note.event_id;
+    //   return {
+    //     ...state,
+    //     events: {
+    //       ...state.events,
+    //       [eventId]: {
+    //         ...state.events[eventId],
+    //         notes: {
+    //           ...state.events[eventId].notes,
+    //           [note.note_id]: note,
+    //         },
+    //       },
+    //     },
+    //   };
+    // }
+    // case notesActionTypes.NOTE.DELETE.SUCCESS: {
+    //   const { noteId, eventId } = action;
+    //   const newNotes = { ...state.events[eventId].notes };
+    //   delete newNotes[noteId];
+    //   return {
+    //     ...state,
+    //     events: {
+    //       ...state.events,
+    //       [eventId]: {
+    //         ...state.events[eventId],
+    //         notes: newNotes,
+    //       },
+    //     },
+    //   };
+    // }
+    // case repOrExerciseInstancesActionTypes.ITEM.DELETE.SUCCESS: {
+    //   const { itemId, eventId } = action;
+    //   const newItems = { ...state.events[eventId].items };
+    //   delete newItems[itemId];
+    //   return {
+    //     ...state,
+    //     events: {
+    //       ...state.events,
+    //       [eventId]: {
+    //         ...state.events[eventId],
+    //         items: newItems,
+    //       },
+    //     },
+    //   };
+    // }
+    // case repOrExerciseInstancesActionTypes.REPERTOIRE_INSTANCE.CREATE.SUCCESS: {
+    //   const { repertoireInstance } = action;
+    //   const itemId = repertoireInstance.item_id;
+    //   const eventId = repertoireInstance.event_id;
+    //
+    //   return {
+    //     ...state,
+    //     events: {
+    //       ...state.events,
+    //       [eventId]: {
+    //         ...state.events[eventId],
+    //         items: {
+    //           ...state.events[eventId].items,
+    //           [itemId]: repertoireInstance,
+    //         },
+    //       },
+    //     },
+    //   };
+    // }
+    // case repOrExerciseInstancesActionTypes.EXERCISE_INSTANCE.CREATE.SUCCESS: {
+    //   const { exerciseInstance } = action;
+    //   const itemId = exerciseInstance.item_id;
+    //   const eventId = exerciseInstance.event_id;
+    //
+    //   return {
+    //     ...state,
+    //     events: {
+    //       ...state.events,
+    //       [eventId]: {
+    //         ...state.events[eventId],
+    //         items: {
+    //           ...state.events[eventId].items,
+    //           [itemId]: exerciseInstance,
+    //         },
+    //       },
+    //     },
+    //   };
+    // }
     default:
       return state;
   }
