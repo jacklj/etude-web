@@ -14,7 +14,7 @@ test('Note renders correctly', () => {
       id={1}
       eventId={1}
       updateNoteRequest={() => ({})}
-      noteDeleteRequest={() => ({})}
+      deleteNoteRequest={() => ({})}
     />,
   );
   const tree = component.toJSON();

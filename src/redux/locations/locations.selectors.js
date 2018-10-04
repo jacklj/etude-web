@@ -1,12 +1,13 @@
 /* eslint-disable import/prefer-default-export */
-import { createSelector } from 'reselect';
-
-const selectLocations = state => state.locations.locations;
+import { createSelector } from 'redux-orm';
+import orm from '../reduxOrm/orm';
+import { dbStateSelector } from '../../services/common.selectors';
 
 export const selectLocationsForDropdown = createSelector(
-  selectLocations,
-  locations => locations.map(location => ({
-    value: location.id,
+  orm,
+  dbStateSelector,
+  session => session.Locations.all().toModelArray().map(location => ({
+    value: location.location_id,
     label: location.name,
   })),
 );

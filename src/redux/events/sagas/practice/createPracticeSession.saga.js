@@ -5,26 +5,28 @@ import { createPracticeSession } from '../../../../services/api';
 import {
   createPracticeSessionSuccess,
   createPracticeSessionFailure,
-  ACTION_TYPES,
+  actionTypes,
 } from '../../events.actions';
 
 function* createPracticeSessionGenerator() {
   try {
-    const newPracticeSession = yield call(createPracticeSession);
-    const actionToDispatch = createPracticeSessionSuccess(newPracticeSession);
-    yield put(actionToDispatch);
-
-    // navigate to practice session page
-    const { event_id: eventId } = newPracticeSession;
-    yield put(push(`/practice_session/${eventId}`));
+    const response = yield call(createPracticeSession);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(createPracticeSessionSuccess(body));
+      // navigate to practice session page
+      const { event_id: eventId } = Object.values(body.events)[0];
+      yield put(push(`/practice_session/${eventId}`));
+    } else {
+      yield put(createPracticeSessionFailure(body));
+    }
   } catch (e) {
-    const actionToDispatch = createPracticeSessionFailure(e);
-    yield put(actionToDispatch);
+    yield put(createPracticeSessionFailure(e));
   }
 }
 
 function* createPracticeSessionSaga() {
-  yield takeLatest(ACTION_TYPES.PRACTICE_SESSION.CREATE.REQUEST, createPracticeSessionGenerator);
+  yield takeLatest(actionTypes.PRACTICE_SESSION.CREATE.REQUEST, createPracticeSessionGenerator);
 }
 
 export default createPracticeSessionSaga;

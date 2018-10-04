@@ -2,25 +2,33 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import { createLesson } from '../../../../services/api';
-import { lessonCreateSuccess, lessonCreateFailure, ACTION_TYPES } from '../../events.actions';
+import { createLessonSuccess, createLessonFailure, actionTypes } from '../../events.actions';
+import { EVENT_TYPES } from '../../../../constants';
 
 function* createLessonGenerator() {
+  const newEvent = {
+    type: EVENT_TYPES.LESSON,
+  };
   try {
-    const newLesson = yield call(createLesson);
-    const actionToDispatch = lessonCreateSuccess(newLesson);
-    yield put(actionToDispatch);
-
-    // navigate to lesson page
-    const { event_id: eventId } = newLesson;
-    yield put(push(`/lesson/${eventId}`));
+    const response = yield call(createLesson, newEvent);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(createLessonSuccess(body));
+      // TODO 29th September 2018. Normalised response requires
+      // Object.values(...)[0] - is this good?
+      const { event_id: eventId } = Object.values(body.events)[0];
+      // navigate to lesson page
+      yield put(push(`/lesson/${eventId}`));
+    } else {
+      yield put(createLessonFailure(body));
+    }
   } catch (e) {
-    const actionToDispatch = lessonCreateFailure(e);
-    yield put(actionToDispatch);
+    yield put(createLessonFailure(e));
   }
 }
 
 function* createLessonSaga() {
-  yield takeLatest(ACTION_TYPES.LESSON.CREATE.REQUEST, createLessonGenerator);
+  yield takeLatest(actionTypes.LESSON.CREATE.REQUEST, createLessonGenerator);
 }
 
 export default createLessonSaga;

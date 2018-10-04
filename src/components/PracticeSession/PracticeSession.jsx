@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 
 import {
   deleteEventRequest,
-  eventFetchRequest,
+  getEventRequest,
 } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
 import Timer from './Timer';
 import AddNoteToEvent from '../common/notes/AddNoteToEvent';
 import GeneralNotes from '../common/notes/GeneralNotes';
-import AddItem from '../common/items/AddItem';
-import Items from '../common/items/Items';
+import AddRepOrExerciseInstance from '../common/repOrExerciseInstances/AddRepOrExerciseInstance';
+import RepOrExerciseInstances from '../common/repOrExerciseInstances/RepOrExerciseInstances';
 import PracticeSessionDetails from './PracticeSessionDetails';
 
 class PracticeSession extends Component {
@@ -25,7 +25,7 @@ class PracticeSession extends Component {
     // getPracticeSession to ensure it's up to date in the store (e.g. if user navigates
     // directly to a specific practice session page)
     // TODO 17th Sept 2018 could extract this to a saga
-    this.props.eventFetchRequest(this.props.eventId);
+    this.props.getEventRequest(this.props.eventId);
   }
 
   deletePracticeSession() {
@@ -42,7 +42,7 @@ class PracticeSession extends Component {
     if (!practiceSession) {
       jsx = <div>Loading</div>;
     } else {
-      const { start, end, notes, items, location, rating } = practiceSession;
+      const { start, end, notes, repOrExerciseInstances, location, rating } = practiceSession;
 
       jsx = (
         <div>
@@ -66,9 +66,12 @@ class PracticeSession extends Component {
           <h3>Notes</h3>
           <AddNoteToEvent eventId={eventId} />
           <GeneralNotes notes={notes} />
-          <h3>Items</h3>
-          <AddItem eventId={eventId} />
-          <Items items={items} eventId={eventId} />
+          <h3>Pieces and Exercises</h3>
+          <AddRepOrExerciseInstance eventId={eventId} />
+          <RepOrExerciseInstances
+            repOrExerciseInstances={repOrExerciseInstances}
+            eventId={eventId}
+          />
         </div>
       );
     }
@@ -84,7 +87,7 @@ PracticeSession.defaultProps = {
 PracticeSession.propTypes = {
   eventId: PropTypes.number.isRequired,
   practiceSession: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  eventFetchRequest: PropTypes.func.isRequired,
+  getEventRequest: PropTypes.func.isRequired,
   deleteEventRequest: PropTypes.func.isRequired,
   practiceSessionTimer: PropTypes.number,
 };
@@ -93,12 +96,12 @@ const mapStateToProps = (state, ownProps) => ({
   // ownProps isn't recursive - just props supplied from 'above'
   eventId: Number(ownProps.match.params.id),
   practiceSession: selectEvent(state, ownProps),
-  practiceSessionTimer: state.events.practiceSessionTimer,
+  practiceSessionTimer: state.practiceSessionTimer,
 });
 
 const mapDispatchToProps = {
   deleteEventRequest,
-  eventFetchRequest,
+  getEventRequest,
 };
 
 export default connect(

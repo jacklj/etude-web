@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { updateEvent } from '../../../services/api';
-import { updateEventSuccess, updateEventFailure, ACTION_TYPES } from '../events.actions';
+import { updateEventSuccess, updateEventFailure, actionTypes } from '../events.actions';
 
 function* updateEventGenerator(action) {
   const { event, eventId } = action;
@@ -22,7 +22,7 @@ function* updateEventGenerator(action) {
 }
 
 function* updateEventSaga() {
-  yield takeLatest(ACTION_TYPES.EVENT.UPDATE.REQUEST, updateEventGenerator);
+  yield takeLatest(actionTypes.EVENT.UPDATE.REQUEST, updateEventGenerator);
 }
 
 export default updateEventSaga;

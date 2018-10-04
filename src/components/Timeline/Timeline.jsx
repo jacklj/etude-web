@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Event from './Event';
-import { allEventsFetchRequest, createPracticeSessionRequest } from '../../redux/events/events.actions';
-import { selectAllEventsAsArray } from '../../redux/events/events.selectors';
+import { getAllEventsRequest, createPracticeSessionRequest } from '../../redux/events/events.actions';
+import { selectAllEvents } from '../../redux/events/events.selectors';
 
 class Timeline extends Component {
   componentDidMount() {
-    this.props.allEventsFetchRequest();
+    this.props.getAllEventsRequest();
   }
 
   render() {
@@ -26,17 +26,17 @@ class Timeline extends Component {
 }
 
 Timeline.propTypes = {
-  allEventsFetchRequest: PropTypes.func.isRequired,
+  getAllEventsRequest: PropTypes.func.isRequired,
   allEvents: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   // TODO 13/8/2018 JackLJ improve proptype definitions
 };
 
 const mapStateToProps = state => ({
-  allEvents: selectAllEventsAsArray(state),
+  allEvents: selectAllEvents(state),
 });
 
 const mapDispatchToProps = {
-  allEventsFetchRequest,
+  getAllEventsRequest,
   createPracticeSessionRequest,
 };
 

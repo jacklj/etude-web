@@ -4,12 +4,12 @@ import { startPracticeSession } from '../../../../services/api';
 import {
   startPracticingSuccess,
   startPracticingFailure,
-  ACTION_TYPES,
+  actionTypes,
 } from '../../events.actions';
 
 function* startPracticeSessionSaga() {
   while (true) {
-    const action = yield take(ACTION_TYPES.PRACTICE_SESSION.START.REQUEST);
+    const action = yield take(actionTypes.PRACTICE_SESSION.START.REQUEST);
     try {
       const response = yield call(startPracticeSession, action.eventId);
       const body = yield response.json();

@@ -82,7 +82,7 @@ AddNoteToEvent.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isCreatingNote: state.notes.creatingNote,
+  isCreatingNote: state.flags.creatingNote,
 });
 
 const mapDispatchToProps = {

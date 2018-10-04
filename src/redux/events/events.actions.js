@@ -1,14 +1,14 @@
-export const ACTION_TYPES = {
+export const actionTypes = {
   EVENT: {
-    FETCH: {
-      REQUEST: 'EVENT.FETCH.REQUEST',
-      SUCCESS: 'EVENT.FETCH.SUCCESS',
-      FAILURE: 'EVENT.FETCH.FAILURE',
+    GET: {
+      REQUEST: 'EVENT.GET.REQUEST',
+      SUCCESS: 'EVENT.GET.SUCCESS',
+      FAILURE: 'EVENT.GET.FAILURE',
     },
-    FETCH_ALL: {
-      REQUEST: 'EVENT.FETCH_ALL.REQUEST',
-      SUCCESS: 'EVENT.FETCH_ALL.SUCCESS',
-      FAILURE: 'EVENT.FETCH_ALL.FAILURE',
+    GET_ALL: {
+      REQUEST: 'EVENT.GET_ALL.REQUEST',
+      SUCCESS: 'EVENT.GET_ALL.SUCCESS',
+      FAILURE: 'EVENT.GET_ALL.FAILURE',
     },
     DELETE: {
       REQUEST: 'EVENT.DELETE.REQUEST',
@@ -51,131 +51,131 @@ export const ACTION_TYPES = {
   },
 };
 
-export const allEventsFetchRequest = () => ({
-  type: ACTION_TYPES.EVENT.FETCH_ALL.REQUEST,
+export const getAllEventsRequest = () => ({
+  type: actionTypes.EVENT.GET_ALL.REQUEST,
 });
 
-export const allEventsFetchSuccess = events => ({
-  type: ACTION_TYPES.EVENT.FETCH_ALL.SUCCESS,
-  events,
+export const getAllEventsSuccess = payload => ({
+  type: actionTypes.EVENT.GET_ALL.SUCCESS,
+  payload,
 });
 
-export const allEventsFetchFailure = error => ({
-  type: ACTION_TYPES.EVENT.FETCH_ALL.FAILURE,
+export const getAllEventsFailure = error => ({
+  type: actionTypes.EVENT.GET_ALL.FAILURE,
   error,
 });
 
-export const eventFetchRequest = eventId => ({
-  type: ACTION_TYPES.EVENT.FETCH.REQUEST,
+export const getEventRequest = eventId => ({
+  type: actionTypes.EVENT.GET.REQUEST,
   eventId,
 });
 
-export const eventFetchSuccess = event => ({
-  type: ACTION_TYPES.EVENT.FETCH.SUCCESS,
-  event,
+export const getEventSuccess = payload => ({
+  type: actionTypes.EVENT.GET.SUCCESS,
+  payload,
 });
 
-export const eventFetchFailure = error => ({
-  type: ACTION_TYPES.EVENT.FETCH.FAILURE,
+export const getEventFailure = error => ({
+  type: actionTypes.EVENT.GET.FAILURE,
   error,
 });
 
 export const deleteEventRequest = eventId => ({
-  type: ACTION_TYPES.EVENT.DELETE.REQUEST,
+  type: actionTypes.EVENT.DELETE.REQUEST,
   eventId,
 });
 
 export const deleteEventSuccess = eventId => ({
-  type: ACTION_TYPES.EVENT.DELETE.SUCCESS,
+  type: actionTypes.EVENT.DELETE.SUCCESS,
   eventId,
 });
 
 export const deleteEventFailure = error => ({
-  type: ACTION_TYPES.EVENT.DELETE.FAILURE,
+  type: actionTypes.EVENT.DELETE.FAILURE,
   error,
 });
 
 export const updateEventRequest = (event, eventId) => ({
-  type: ACTION_TYPES.EVENT.UPDATE.REQUEST,
+  type: actionTypes.EVENT.UPDATE.REQUEST,
   event,
   eventId,
 });
 
-export const updateEventSuccess = event => ({
-  type: ACTION_TYPES.EVENT.UPDATE.SUCCESS,
-  event,
+export const updateEventSuccess = payload => ({
+  type: actionTypes.EVENT.UPDATE.SUCCESS,
+  payload,
 });
 
 export const updateEventFailure = error => ({
-  type: ACTION_TYPES.EVENT.UPDATE.FAILURE,
+  type: actionTypes.EVENT.UPDATE.FAILURE,
   error,
 });
 
-export const lessonCreateRequest = lesson => ({
-  type: ACTION_TYPES.LESSON.CREATE.REQUEST,
+export const createLessonRequest = lesson => ({
+  type: actionTypes.LESSON.CREATE.REQUEST,
   lesson,
 });
 
-export const lessonCreateSuccess = lesson => ({
-  type: ACTION_TYPES.LESSON.CREATE.SUCCESS,
-  lesson,
+export const createLessonSuccess = payload => ({
+  type: actionTypes.LESSON.CREATE.SUCCESS,
+  payload,
 });
 
-export const lessonCreateFailure = error => ({
-  type: ACTION_TYPES.LESSON.CREATE.FAILURE,
+export const createLessonFailure = error => ({
+  type: actionTypes.LESSON.CREATE.FAILURE,
   error,
 });
 
 export const createPracticeSessionRequest = practiceSession => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.CREATE.REQUEST,
+  type: actionTypes.PRACTICE_SESSION.CREATE.REQUEST,
   practiceSession,
 });
 
-export const createPracticeSessionSuccess = practiceSession => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.CREATE.SUCCESS,
-  practiceSession,
+export const createPracticeSessionSuccess = payload => ({
+  type: actionTypes.PRACTICE_SESSION.CREATE.SUCCESS,
+  payload,
 });
 
 export const createPracticeSessionFailure = error => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.CREATE.FAILURE,
+  type: actionTypes.PRACTICE_SESSION.CREATE.FAILURE,
   error,
 });
 
 export const startPracticingRequest = eventId => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.START.REQUEST,
+  type: actionTypes.PRACTICE_SESSION.START.REQUEST,
   eventId,
 });
 
-export const startPracticingSuccess = practiceSession => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.START.SUCCESS,
-  practiceSession,
+export const startPracticingSuccess = payload => ({
+  type: actionTypes.PRACTICE_SESSION.START.SUCCESS,
+  payload,
 });
 
 export const startPracticingFailure = error => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.START.FAILURE,
+  type: actionTypes.PRACTICE_SESSION.START.FAILURE,
   error,
 });
 
 export const finishPracticingRequest = eventId => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.FINISH.REQUEST,
+  type: actionTypes.PRACTICE_SESSION.FINISH.REQUEST,
   eventId,
 });
 
-export const finishPracticingSuccess = practiceSession => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.FINISH.SUCCESS,
-  practiceSession,
+export const finishPracticingSuccess = payload => ({
+  type: actionTypes.PRACTICE_SESSION.FINISH.SUCCESS,
+  payload,
 });
 
 export const finishPracticingFailure = error => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.FINISH.FAILURE,
+  type: actionTypes.PRACTICE_SESSION.FINISH.FAILURE,
   error,
 });
 
 export const initialiseTimer = initialTime => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.TIMER.INITIALISE,
+  type: actionTypes.PRACTICE_SESSION.TIMER.INITIALISE,
   initialTime,
 });
 
 export const tickPracticeTimer = () => ({
-  type: ACTION_TYPES.PRACTICE_SESSION.TIMER.TICK,
+  type: actionTypes.PRACTICE_SESSION.TIMER.TICK,
 });

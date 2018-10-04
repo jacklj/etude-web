@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Card, Label } from '../styledComponents';
 
-import { updateNoteRequest, noteDeleteRequest } from '../../../redux/notes/notes.actions';
+import { updateNoteRequest, deleteNoteRequest } from '../../../redux/notes/notes.actions';
 
 const VIEW = {
   DISPLAY: 'VIEW.DISPLAY',
@@ -37,8 +37,8 @@ export class Note extends Component {
 
   deleteNote(event) {
     event.preventDefault();
-    const { id: noteId, eventId } = this.props;
-    this.props.noteDeleteRequest(noteId, eventId);
+    const { note_id: noteId, eventId } = this.props;
+    this.props.deleteNoteRequest(noteId, eventId);
     // no need to change the view, as this component will disappear!
   }
 
@@ -66,17 +66,16 @@ export class Note extends Component {
       editingNote,
       editingScore,
     } = this.state;
-    const { id } = this.props;
 
     const updatedNote = {
       note: editingNote,
       score: editingScore,
       type: this.props.type,
-      id: this.props.id,
+      note_id: this.props.note_id,
       event_id: this.props.eventId,
     };
 
-    this.props.updateNoteRequest(updatedNote, id);
+    this.props.updateNoteRequest(updatedNote, this.props.note_id);
     this.setState({ currentView: VIEW.DISPLAY });
   }
 
@@ -145,17 +144,17 @@ Note.propTypes = {
   note: PropTypes.string.isRequired,
   score: PropTypes.string,
   type: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  note_id: PropTypes.number.isRequired,
   eventId: PropTypes.number.isRequired,
   updateNoteRequest: PropTypes.func.isRequired,
-  noteDeleteRequest: PropTypes.func.isRequired,
+  deleteNoteRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
   updateNoteRequest,
-  noteDeleteRequest,
+  deleteNoteRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Note);

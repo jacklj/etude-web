@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 
+import { getAllRepertoireRequest } from '../../../redux/repertoire/repertoire.actions';
+import { getAllExercisesRequest } from '../../../redux/exercises/exercises.actions';
 import {
-  fetchAllRepertoireRequest,
-  fetchAllExercisesRequest,
   createRepertoireInstanceRequest,
   createExerciseInstanceRequest,
-} from '../../../redux/items/items.actions';
-import {
-  selectRepertoireForDropdown,
-  selectExercisesForDropdown,
-} from '../../../redux/items/items.selectors';
+} from '../../../redux/repOrExerciseInstances/repOrExerciseInstances.actions';
+import { selectRepertoireForDropdown } from '../../../redux/repertoire/repertoire.selectors';
+import { selectExercisesForDropdown } from '../../../redux/exercises/exercises.selectors';
 
 const VIEW = {
   DEFAULT: 'VIEW.DEFAULT',
@@ -26,7 +24,7 @@ const initialState = {
   view: VIEW.DEFAULT,
 };
 
-class AddItem extends Component {
+class AddRepOrExerciseInstance extends Component {
   constructor(props) {
     super(props);
     this.state = { ...initialState };
@@ -40,8 +38,8 @@ class AddItem extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchAllRepertoireRequest();
-    this.props.fetchAllExercisesRequest();
+    this.props.getAllRepertoireRequest();
+    this.props.getAllExercisesRequest();
   }
 
   handleCustomComponentChange(name) {
@@ -137,16 +135,16 @@ class AddItem extends Component {
   }
 }
 
-AddItem.defaultProps = {
+AddRepOrExerciseInstance.defaultProps = {
   eventId: undefined,
 };
 
-AddItem.propTypes = {
+AddRepOrExerciseInstance.propTypes = {
   eventId: PropTypes.number,
   repertoire: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   exercises: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
-  fetchAllRepertoireRequest: PropTypes.func.isRequired,
-  fetchAllExercisesRequest: PropTypes.func.isRequired,
+  getAllRepertoireRequest: PropTypes.func.isRequired,
+  getAllExercisesRequest: PropTypes.func.isRequired,
   createRepertoireInstanceRequest: PropTypes.func.isRequired,
   createExerciseInstanceRequest: PropTypes.func.isRequired,
 };
@@ -157,8 +155,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchAllRepertoireRequest,
-  fetchAllExercisesRequest,
+  getAllRepertoireRequest,
+  getAllExercisesRequest,
   createRepertoireInstanceRequest,
   createExerciseInstanceRequest,
 };
@@ -166,4 +164,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AddItem);
+)(AddRepOrExerciseInstance);

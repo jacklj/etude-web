@@ -1,0 +1,44 @@
+export const actionTypes = {
+  REPERTOIRE: {
+    GET_ALL: {
+      REQUEST: 'REPERTOIRE.GET_ALL.REQUEST',
+      SUCCESS: 'REPERTOIRE.GET_ALL.SUCCESS',
+      FAILURE: 'REPERTOIRE.GET_ALL.FAILURE',
+    },
+  },
+  UPCOMING_REPERTOIRE: {
+    GET: {
+      REQUEST: 'UPCOMING_REPERTOIRE.GET.REQUEST',
+      SUCCESS: 'UPCOMING_REPERTOIRE.GET.SUCCESS',
+      FAILURE: 'UPCOMING_REPERTOIRE.GET.FAILURE',
+    },
+  },
+};
+
+export const getAllRepertoireRequest = () => ({
+  type: actionTypes.REPERTOIRE.GET_ALL.REQUEST,
+});
+
+export const getAllRepertoireSuccess = payload => ({
+  type: actionTypes.REPERTOIRE.GET_ALL.SUCCESS,
+  payload,
+});
+
+export const getAllRepertoireFailure = error => ({
+  type: actionTypes.REPERTOIRE.GET_ALL.FAILURE,
+  error,
+});
+
+export const getUpcomingRepertoireRequest = () => ({
+  type: actionTypes.UPCOMING_REPERTOIRE.GET.REQUEST,
+});
+
+export const getUpcomingRepertoireSuccess = payload => ({
+  type: actionTypes.UPCOMING_REPERTOIRE.GET.SUCCESS,
+  payload,
+});
+
+export const getUpcomingRepertoireFailure = error => ({
+  type: actionTypes.UPCOMING_REPERTOIRE.GET.FAILURE,
+  error,
+});

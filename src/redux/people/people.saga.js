@@ -1,20 +1,20 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getPeople } from '../../services/api';
-import { peopleFetchSuccess, peopleFetchFailure, ACTION_TYPES } from './people.actions';
+import { getAllPeopleSuccess, getAllPeopleFailure, actionTypes } from './people.actions';
 
 function* fetchPeople() {
   try {
     const people = yield call(getPeople);
-    const action = peopleFetchSuccess(people);
+    const action = getAllPeopleSuccess(people);
     yield put(action);
   } catch (e) {
-    const action = peopleFetchFailure(e);
+    const action = getAllPeopleFailure(e);
     yield put(action);
   }
 }
 
 function* fetchPeopleSaga() {
-  yield takeLatest(ACTION_TYPES.PEOPLE_FETCH.REQUEST, fetchPeople);
+  yield takeLatest(actionTypes.PEOPLE.GET_ALL.REQUEST, fetchPeople);
 }
 
 export default fetchPeopleSaga;

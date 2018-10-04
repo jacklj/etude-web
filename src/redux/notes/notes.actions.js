@@ -1,4 +1,4 @@
-export const ACTION_TYPES = {
+export const actionTypes = {
   NOTE: {
     CREATE_AND_ADD_TO: {
       EVENT: {
@@ -6,10 +6,10 @@ export const ACTION_TYPES = {
         SUCCESS: 'NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS',
         FAILURE: 'NOTE.CREATE_AND_ADD_TO.EVENT.FAILURE',
       },
-      ITEM: {
-        REQUEST: 'NOTE.CREATE_AND_ADD_TO.ITEM.REQUEST',
-        SUCCESS: 'NOTE.CREATE_AND_ADD_TO.ITEM.SUCCESS',
-        FAILURE: 'NOTE.CREATE_AND_ADD_TO.ITEM.FAILURE',
+      REP_OR_EXERCISE_INSTANCE: {
+        REQUEST: 'NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.REQUEST',
+        SUCCESS: 'NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.SUCCESS',
+        FAILURE: 'NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.FAILURE',
       },
     },
     UPDATE: {
@@ -26,66 +26,66 @@ export const ACTION_TYPES = {
 };
 
 export const createNoteAndAddToEventRequest = (note, eventId) => ({
-  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST,
+  type: actionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.REQUEST,
   note,
   eventId,
 });
 
-export const createNoteAndAddToEventSuccess = note => ({
-  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS,
-  note,
+export const createNoteAndAddToEventSuccess = payload => ({
+  type: actionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.SUCCESS,
+  payload,
 });
 
 export const createNoteAndAddToEventFailure = error => ({
-  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.EVENT.FAILURE,
+  type: actionTypes.NOTE.CREATE_AND_ADD_TO.EVENT.FAILURE,
   error,
 });
 
-export const createNoteAndAddToItemRequest = (note, itemId) => ({
-  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.ITEM.REQUEST,
+export const createNoteAndAddToRepOrExerciseInstanceRequest = (note, repOrExerciseInstanceId) => ({
+  type: actionTypes.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.REQUEST,
   note,
-  itemId,
+  repOrExerciseInstanceId,
 });
 
-export const createNoteAndAddToItemSuccess = note => ({
-  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.ITEM.SUCCESS,
-  note,
+export const createNoteAndAddToRepOrExerciseInstanceSuccess = payload => ({
+  type: actionTypes.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.SUCCESS,
+  payload,
 });
 
-export const createNoteAndAddToItemFailure = error => ({
-  type: ACTION_TYPES.NOTE.CREATE_AND_ADD_TO.ITEM.FAILURE,
+export const createNoteAndAddToRepOrExerciseInstanceFailure = error => ({
+  type: actionTypes.NOTE.CREATE_AND_ADD_TO.REP_OR_EXERCISE_INSTANCE.FAILURE,
   error,
 });
 
 export const updateNoteRequest = (note, noteId) => ({
-  type: ACTION_TYPES.NOTE.UPDATE.REQUEST,
+  type: actionTypes.NOTE.UPDATE.REQUEST,
   note,
   noteId,
 });
 
-export const updateNoteSuccess = note => ({
-  type: ACTION_TYPES.NOTE.UPDATE.SUCCESS,
-  note,
+export const updateNoteSuccess = payload => ({
+  type: actionTypes.NOTE.UPDATE.SUCCESS,
+  payload,
 });
 
 export const updateNoteFailure = error => ({
-  type: ACTION_TYPES.NOTE.UPDATE.FAILURE,
+  type: actionTypes.NOTE.UPDATE.FAILURE,
   error,
 });
 
-export const noteDeleteRequest = (noteId, eventId) => ({
-  type: ACTION_TYPES.NOTE.DELETE.REQUEST,
+export const deleteNoteRequest = (noteId, eventId) => ({
+  type: actionTypes.NOTE.DELETE.REQUEST,
   noteId,
   eventId,
 });
 
-export const noteDeleteSuccess = (noteId, eventId) => ({
-  type: ACTION_TYPES.NOTE.DELETE.SUCCESS,
+export const deleteNoteSuccess = (noteId, eventId) => ({
+  type: actionTypes.NOTE.DELETE.SUCCESS,
   noteId,
   eventId,
 });
 
-export const noteDeleteFailure = error => ({
-  type: ACTION_TYPES.NOTE.DELETE.FAILURE,
+export const deleteNoteFailure = error => ({
+  type: actionTypes.NOTE.DELETE.FAILURE,
   error,
 });
