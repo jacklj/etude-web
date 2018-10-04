@@ -96,7 +96,7 @@ const mapStateToProps = (state, ownProps) => ({
   // ownProps isn't recursive - just props supplied from 'above'
   eventId: Number(ownProps.match.params.id),
   practiceSession: selectEvent(state, ownProps),
-  practiceSessionTimer: state.practiceSessionTimer.practiceSessionTimer,
+  practiceSessionTimer: state.practiceSessionTimer,
 });
 
 const mapDispatchToProps = {
