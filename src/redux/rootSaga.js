@@ -10,15 +10,15 @@ import fetchPeopleSaga from './people/people.saga';
 import createNoteSaga from './notes/sagas/createNote.saga';
 import updateNoteSaga from './notes/sagas/updateNote.saga';
 import deleteNoteSaga from './notes/sagas/deleteNote.saga';
-import fetchRepertoireSaga from './repOrExerciseInstances/sagas/fetchRepertoire.saga';
-import fetchExercisesSaga from './repOrExerciseInstances/sagas/fetchExercises.saga';
+import fetchRepertoireSaga from './repertoire/sagas/fetchRepertoire.saga';
+import getUpcomingRepSaga from './repertoire/sagas/getUpcomingRep.saga';
+import fetchExercisesSaga from './exercises/fetchExercises.saga';
 import createRepertoireInstanceSaga from './repOrExerciseInstances/sagas/createRepertoireInstance.saga';
 import createExerciseInstanceSaga from './repOrExerciseInstances/sagas/createExerciseInstance.saga';
 import deleteRepOrExerciseInstanceSaga from './repOrExerciseInstances/sagas/deleteRepOrExerciseInstance.saga';
 import createPracticeSessionSaga from './events/sagas/practice/createPracticeSession.saga';
 import startPracticeSessionSaga from './events/sagas/practice/startPracticeSession.saga';
 import runPracticeSessionSaga from './events/sagas/practice/runPracticeSession.saga';
-import getUpcomingRepSaga from './repertoire/getUpcomingRep.saga';
 
 export default function* rootSaga() {
   yield all([

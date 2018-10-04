@@ -3,8 +3,6 @@ import { ACTION_TYPES } from './repOrExerciseInstances.actions';
 const initialState = {
   // repertoire: {},
   // exercises: {},
-  fetchingRepertoire: false,
-  fetchingExercises: false,
   creatingRepertoireInstance: false,
   creatingExerciseInstance: false,
   deletingRepOrExerciseInstance: false,
@@ -12,38 +10,6 @@ const initialState = {
 
 const locations = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION_TYPES.REPERTOIRE.FETCH_ALL.REQUEST:
-      return {
-        ...state,
-        fetchingRepertoire: true,
-      };
-    case ACTION_TYPES.REPERTOIRE.FETCH_ALL.SUCCESS:
-      return {
-        ...state,
-        // repertoire: action.repertoire,
-        fetchingRepertoire: false,
-      };
-    case ACTION_TYPES.REPERTOIRE.FETCH_ALL.FAILURE:
-      return {
-        ...state,
-        fetchingRepertoire: false,
-      };
-    case ACTION_TYPES.EXERCISES.FETCH_ALL.REQUEST:
-      return {
-        ...state,
-        fetchingExercises: true,
-      };
-    case ACTION_TYPES.EXERCISES.FETCH_ALL.SUCCESS:
-      return {
-        ...state,
-        // exercises: action.exercises,
-        fetchingExercises: false,
-      };
-    case ACTION_TYPES.EXERCISES.FETCH_ALL.FAILURE:
-      return {
-        ...state,
-        fetchingExercises: false,
-      };
     case ACTION_TYPES.REPERTOIRE_INSTANCE.CREATE.REQUEST:
       return {
         ...state,

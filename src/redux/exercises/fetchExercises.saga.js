@@ -1,6 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getExercises } from '../../../services/api';
-import { fetchAllExercisesSuccess, fetchAllExercisesFailure, ACTION_TYPES } from '../repOrExerciseInstances.actions';
+
+import { getExercises } from '../../services/api';
+import {
+  fetchAllExercisesSuccess,
+  fetchAllExercisesFailure,
+  actionTypes,
+} from './exercises.actions';
 
 function* fetchExercises() {
   try {
@@ -14,7 +19,7 @@ function* fetchExercises() {
 }
 
 function* fetchExercisesSaga() {
-  yield takeLatest(ACTION_TYPES.EXERCISES.FETCH_ALL.REQUEST, fetchExercises);
+  yield takeLatest(actionTypes.EXERCISES.FETCH_ALL.REQUEST, fetchExercises);
 }
 
 export default fetchExercisesSaga;

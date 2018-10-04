@@ -1,6 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getRepertoire } from '../../../services/api';
-import { fetchAllRepertoireSuccess, fetchAllRepertoireFailure, ACTION_TYPES } from '../repOrExerciseInstances.actions';
+import {
+  fetchAllRepertoireSuccess,
+  fetchAllRepertoireFailure,
+  actionTypes,
+} from '../repertoire.actions';
 
 function* fetchRepertoire() {
   try {
@@ -14,7 +18,7 @@ function* fetchRepertoire() {
 }
 
 function* fetchRepertoireSaga() {
-  yield takeLatest(ACTION_TYPES.REPERTOIRE.FETCH_ALL.REQUEST, fetchRepertoire);
+  yield takeLatest(actionTypes.REPERTOIRE.FETCH_ALL.REQUEST, fetchRepertoire);
 }
 
 export default fetchRepertoireSaga;

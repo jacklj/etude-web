@@ -1,8 +1,8 @@
 import { fk, attr, Model } from 'redux-orm';
 
-import { ACTION_TYPES as eventsActionTypes } from '../../events/events.actions';
-import { actionTypes as repertoireActionTypes } from '../../repertoire/repertoire.actions';
-import { ifObjectExistsAndIsNotEmpty } from '../../../services/utils';
+import { ACTION_TYPES as eventsActionTypes } from './events.actions';
+import { actionTypes as repertoireActionTypes } from '../repertoire/repertoire.actions';
+import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 
 class Events extends Model {
   static reducer(action, SessionBoundEvents) {

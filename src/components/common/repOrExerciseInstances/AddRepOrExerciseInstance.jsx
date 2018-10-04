@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 
+import { fetchAllRepertoireRequest } from '../../../redux/repertoire/repertoire.actions';
+import { fetchAllExercisesRequest } from '../../../redux/exercises/exercises.actions';
 import {
-  fetchAllRepertoireRequest,
-  fetchAllExercisesRequest,
   createRepertoireInstanceRequest,
   createExerciseInstanceRequest,
 } from '../../../redux/repOrExerciseInstances/repOrExerciseInstances.actions';

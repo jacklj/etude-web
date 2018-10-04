@@ -1,6 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getUpcomingRepertoire } from '../../services/api';
-import { getUpcomingRepertoireSuccess, getUpcomingRepertoireFailure, actionTypes } from './repertoire.actions';
+import { getUpcomingRepertoire } from '../../../services/api';
+import {
+  getUpcomingRepertoireSuccess,
+  getUpcomingRepertoireFailure,
+  actionTypes,
+} from '../repertoire.actions';
 
 function* getUpcomingRepertoireGenerator() {
   try {
