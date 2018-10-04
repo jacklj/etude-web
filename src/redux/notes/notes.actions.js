@@ -73,19 +73,19 @@ export const updateNoteFailure = error => ({
   error,
 });
 
-export const noteDeleteRequest = (noteId, eventId) => ({
+export const deleteNoteRequest = (noteId, eventId) => ({
   type: actionTypes.NOTE.DELETE.REQUEST,
   noteId,
   eventId,
 });
 
-export const noteDeleteSuccess = (noteId, eventId) => ({
+export const deleteNoteSuccess = (noteId, eventId) => ({
   type: actionTypes.NOTE.DELETE.SUCCESS,
   noteId,
   eventId,
 });
 
-export const noteDeleteFailure = error => ({
+export const deleteNoteFailure = error => ({
   type: actionTypes.NOTE.DELETE.FAILURE,
   error,
 });

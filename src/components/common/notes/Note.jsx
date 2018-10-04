@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Card, Label } from '../styledComponents';
 
-import { updateNoteRequest, noteDeleteRequest } from '../../../redux/notes/notes.actions';
+import { updateNoteRequest, deleteNoteRequest } from '../../../redux/notes/notes.actions';
 
 const VIEW = {
   DISPLAY: 'VIEW.DISPLAY',
@@ -38,7 +38,7 @@ export class Note extends Component {
   deleteNote(event) {
     event.preventDefault();
     const { note_id: noteId, eventId } = this.props;
-    this.props.noteDeleteRequest(noteId, eventId);
+    this.props.deleteNoteRequest(noteId, eventId);
     // no need to change the view, as this component will disappear!
   }
 
@@ -147,14 +147,14 @@ Note.propTypes = {
   note_id: PropTypes.number.isRequired,
   eventId: PropTypes.number.isRequired,
   updateNoteRequest: PropTypes.func.isRequired,
-  noteDeleteRequest: PropTypes.func.isRequired,
+  deleteNoteRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
   updateNoteRequest,
-  noteDeleteRequest,
+  deleteNoteRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Note);
