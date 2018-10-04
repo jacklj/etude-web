@@ -9,7 +9,7 @@ class Locations extends Model {
     switch (action.type) {
       case eventsActionTypes.EVENT.GET_ALL.SUCCESS:
       case eventsActionTypes.EVENT.GET.SUCCESS:
-      case locationsActionTypes.LOCATIONS.FETCH.SUCCESS:
+      case locationsActionTypes.LOCATIONS.GET_ALL.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.locations)) {
           Object.values(action.payload.locations)
             .forEach(location => SessionBoundLocations.upsert(location));

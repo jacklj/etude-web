@@ -6,7 +6,7 @@ import Select from 'react-select';
 
 import { Label } from '../common/styledComponents';
 import { updateEventRequest } from '../../redux/events/events.actions';
-import { locationsFetchRequest } from '../../redux/locations/locations.actions';
+import { getAllLocationsRequest } from '../../redux/locations/locations.actions';
 import { selectLocationsForDropdown } from '../../redux/reduxOrm/selectors/locations.selectors';
 import { getLocationSelectOption } from '../../services/utils';
 
@@ -26,7 +26,7 @@ class PracticeSessionDetails extends Component {
   }
 
   componentDidMount() {
-    this.props.locationsFetchRequest();
+    this.props.getAllLocationsRequest();
   }
 
   updatePracticeSessionDetails() {
@@ -137,7 +137,7 @@ PracticeSessionDetails.propTypes = {
   isPracticeSessionUpdating: PropTypes.bool.isRequired,
   locations: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   updateEventRequest: PropTypes.func.isRequired,
-  locationsFetchRequest: PropTypes.func.isRequired,
+  getAllLocationsRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -148,7 +148,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   updateEventRequest,
-  locationsFetchRequest,
+  getAllLocationsRequest,
 };
 
 export default connect(

@@ -68,17 +68,17 @@ const flagsReducer = (state = initialState, action) => {
         ...state,
         fetchingExercises: false,
       };
-    case locationsActionTypes.LOCATIONS.FETCH.REQUEST:
+    case locationsActionTypes.LOCATIONS.GET_ALL.REQUEST:
       return {
         ...state,
         fetchingLocations: true,
       };
-    case locationsActionTypes.LOCATIONS.FETCH.SUCCESS:
+    case locationsActionTypes.LOCATIONS.GET_ALL.SUCCESS:
       return {
         ...state,
         fetchingLocations: false,
       };
-    case locationsActionTypes.LOCATIONS.FETCH.FAILURE:
+    case locationsActionTypes.LOCATIONS.GET_ALL.FAILURE:
       return {
         ...state,
         fetchingLocations: false,

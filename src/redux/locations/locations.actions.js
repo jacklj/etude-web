@@ -1,23 +1,23 @@
 export const actionTypes = {
   LOCATIONS: {
-    FETCH: {
-      REQUEST: 'LOCATIONS.FETCH.REQUEST',
-      SUCCESS: 'LOCATIONS.FETCH.SUCCESS',
-      FAILURE: 'LOCATIONS.FETCH.FAILURE',
+    GET_ALL: {
+      REQUEST: 'LOCATIONS.GET_ALL.REQUEST',
+      SUCCESS: 'LOCATIONS.GET_ALL.SUCCESS',
+      FAILURE: 'LOCATIONS.GET_ALL.FAILURE',
     },
   },
 };
 
-export const locationsFetchRequest = () => ({
-  type: actionTypes.LOCATIONS.FETCH.REQUEST,
+export const getAllLocationsRequest = () => ({
+  type: actionTypes.LOCATIONS.GET_ALL.REQUEST,
 });
 
-export const locationsFetchSuccess = payload => ({
-  type: actionTypes.LOCATIONS.FETCH.SUCCESS,
+export const getAllLocationsSuccess = payload => ({
+  type: actionTypes.LOCATIONS.GET_ALL.SUCCESS,
   payload,
 });
 
-export const locationsFetchFailure = error => ({
-  type: actionTypes.LOCATIONS.FETCH.FAILURE,
+export const getAllLocationsFailure = error => ({
+  type: actionTypes.LOCATIONS.GET_ALL.FAILURE,
   error,
 });
