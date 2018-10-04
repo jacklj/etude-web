@@ -53,17 +53,17 @@ const flagsReducer = (state = initialState, action) => {
         ...state,
         fetchingRepertoire: false,
       };
-    case exercisesActionTypes.EXERCISES.FETCH_ALL.REQUEST:
+    case exercisesActionTypes.EXERCISES.GET_ALL.REQUEST:
       return {
         ...state,
         fetchingExercises: true,
       };
-    case exercisesActionTypes.EXERCISES.FETCH_ALL.SUCCESS:
+    case exercisesActionTypes.EXERCISES.GET_ALL.SUCCESS:
       return {
         ...state,
         fetchingExercises: false,
       };
-    case exercisesActionTypes.EXERCISES.FETCH_ALL.FAILURE:
+    case exercisesActionTypes.EXERCISES.GET_ALL.FAILURE:
       return {
         ...state,
         fetchingExercises: false,

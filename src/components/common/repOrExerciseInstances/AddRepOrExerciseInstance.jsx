@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 
 import { fetchAllRepertoireRequest } from '../../../redux/repertoire/repertoire.actions';
-import { fetchAllExercisesRequest } from '../../../redux/exercises/exercises.actions';
+import { getAllExercisesRequest } from '../../../redux/exercises/exercises.actions';
 import {
   createRepertoireInstanceRequest,
   createExerciseInstanceRequest,
@@ -39,7 +39,7 @@ class AddRepOrExerciseInstance extends Component {
 
   componentDidMount() {
     this.props.fetchAllRepertoireRequest();
-    this.props.fetchAllExercisesRequest();
+    this.props.getAllExercisesRequest();
   }
 
   handleCustomComponentChange(name) {
@@ -144,7 +144,7 @@ AddRepOrExerciseInstance.propTypes = {
   repertoire: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   exercises: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   fetchAllRepertoireRequest: PropTypes.func.isRequired,
-  fetchAllExercisesRequest: PropTypes.func.isRequired,
+  getAllExercisesRequest: PropTypes.func.isRequired,
   createRepertoireInstanceRequest: PropTypes.func.isRequired,
   createExerciseInstanceRequest: PropTypes.func.isRequired,
 };
@@ -156,7 +156,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchAllRepertoireRequest,
-  fetchAllExercisesRequest,
+  getAllExercisesRequest,
   createRepertoireInstanceRequest,
   createExerciseInstanceRequest,
 };

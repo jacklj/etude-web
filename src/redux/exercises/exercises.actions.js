@@ -1,23 +1,23 @@
 export const actionTypes = {
   EXERCISES: {
-    FETCH_ALL: {
-      REQUEST: 'EXERCISES.FETCH_ALL.REQUEST',
-      SUCCESS: 'EXERCISES.FETCH_ALL.SUCCESS',
-      FAILURE: 'EXERCISES.FETCH_ALL.FAILURE',
+    GET_ALL: {
+      REQUEST: 'EXERCISES.GET_ALL.REQUEST',
+      SUCCESS: 'EXERCISES.GET_ALL.SUCCESS',
+      FAILURE: 'EXERCISES.GET_ALL.FAILURE',
     },
   },
 };
 
-export const fetchAllExercisesRequest = () => ({
-  type: actionTypes.EXERCISES.FETCH_ALL.REQUEST,
+export const getAllExercisesRequest = () => ({
+  type: actionTypes.EXERCISES.GET_ALL.REQUEST,
 });
 
-export const fetchAllExercisesSuccess = payload => ({
-  type: actionTypes.EXERCISES.FETCH_ALL.SUCCESS,
+export const getAllExercisesSuccess = payload => ({
+  type: actionTypes.EXERCISES.GET_ALL.SUCCESS,
   payload,
 });
 
-export const fetchAllExercisesFailure = error => ({
-  type: actionTypes.EXERCISES.FETCH_ALL.FAILURE,
+export const getAllExercisesFailure = error => ({
+  type: actionTypes.EXERCISES.GET_ALL.FAILURE,
   error,
 });
