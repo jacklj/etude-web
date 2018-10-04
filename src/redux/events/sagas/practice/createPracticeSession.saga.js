@@ -5,7 +5,7 @@ import { createPracticeSession } from '../../../../services/api';
 import {
   createPracticeSessionSuccess,
   createPracticeSessionFailure,
-  ACTION_TYPES,
+  actionTypes,
 } from '../../events.actions';
 
 function* createPracticeSessionGenerator() {
@@ -26,7 +26,7 @@ function* createPracticeSessionGenerator() {
 }
 
 function* createPracticeSessionSaga() {
-  yield takeLatest(ACTION_TYPES.PRACTICE_SESSION.CREATE.REQUEST, createPracticeSessionGenerator);
+  yield takeLatest(actionTypes.PRACTICE_SESSION.CREATE.REQUEST, createPracticeSessionGenerator);
 }
 
 export default createPracticeSessionSaga;

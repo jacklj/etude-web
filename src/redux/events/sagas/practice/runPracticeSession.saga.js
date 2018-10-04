@@ -6,7 +6,7 @@ import moment from 'moment';
 import { finishPracticeSession } from '../../../../services/api';
 import { selectInProgressEvent } from '../../../reduxOrm/selectors/events.selectors';
 import {
-  ACTION_TYPES,
+  actionTypes,
   tickPracticeTimer,
   finishPracticingSuccess,
   finishPracticingFailure,
@@ -24,10 +24,10 @@ function* runPracticeSessionSaga() {
     // start the practice session either if just started successfully, or if restarting
     yield take([
       // user has just explicitly started a practice session
-      ACTION_TYPES.PRACTICE_SESSION.START.SUCCESS,
+      actionTypes.PRACTICE_SESSION.START.SUCCESS,
       // events have been updated - an in progress practice session may exist
-      ACTION_TYPES.EVENT.FETCH.SUCCESS,
-      ACTION_TYPES.EVENT.FETCH_ALL.SUCCESS,
+      actionTypes.EVENT.FETCH.SUCCESS,
+      actionTypes.EVENT.FETCH_ALL.SUCCESS,
     ]);
 
     // check that there is an in progress practice session in the store
@@ -45,8 +45,8 @@ function* runPracticeSessionSaga() {
       while (true) {
         const { tick, stop, deleteEvent } = yield race({
           tick: call(wait, ONE_SECOND),
-          stop: take(ACTION_TYPES.PRACTICE_SESSION.FINISH.REQUEST),
-          deleteEvent: take(ACTION_TYPES.EVENT.DELETE.SUCCESS), // in case inProgress event deleted
+          stop: take(actionTypes.PRACTICE_SESSION.FINISH.REQUEST),
+          deleteEvent: take(actionTypes.EVENT.DELETE.SUCCESS), // in case inProgress event deleted
         });
         if (tick) { // tick has resolved to true
           yield put(tickPracticeTimer());

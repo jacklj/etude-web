@@ -228,7 +228,7 @@ const mapStateToProps = state => ({
   // ownProps isn't recursive - just props supplied from 'above'
   locations: selectLocationsForDropdown(state),
   teachers: selectTeachersForDropdown(state),
-  isLessonUpdating: state.events.updatingEvent,
+  isLessonUpdating: state.flags.updatingEvent,
 });
 
 const mapDispatchToProps = {

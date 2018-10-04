@@ -1,6 +1,6 @@
 import { attr, Model } from 'redux-orm';
 
-import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
+import { actionTypes as eventsActionTypes } from '../events/events.actions';
 import { actionTypes as locationsActionTypes } from './locations.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';
 

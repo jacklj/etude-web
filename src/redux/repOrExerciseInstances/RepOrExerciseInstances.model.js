@@ -1,6 +1,6 @@
 import { fk, attr, Model } from 'redux-orm';
 
-import { ACTION_TYPES as eventsActionTypes } from '../events/events.actions';
+import { actionTypes as eventsActionTypes } from '../events/events.actions';
 import { actionTypes as repOrExerciseInstancesActionTypes } from './repOrExerciseInstances.actions';
 import { actionTypes as repertoireActionTypes } from '../repertoire/repertoire.actions';
 import { ifObjectExistsAndIsNotEmpty } from '../../services/utils';

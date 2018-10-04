@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getEvent } from '../../../services/api';
-import { eventFetchSuccess, eventFetchFailure, ACTION_TYPES } from '../events.actions';
+import { eventFetchSuccess, eventFetchFailure, actionTypes } from '../events.actions';
 
 function* getEventGenerator(action) {
   const { eventId } = action;
@@ -18,7 +18,7 @@ function* getEventGenerator(action) {
 }
 
 function* getEventSaga() {
-  yield takeLatest(ACTION_TYPES.EVENT.FETCH.REQUEST, getEventGenerator);
+  yield takeLatest(actionTypes.EVENT.FETCH.REQUEST, getEventGenerator);
 }
 
 export default getEventSaga;

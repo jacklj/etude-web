@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import { deleteEvent } from '../../../services/api';
-import { deleteEventSuccess, deleteEventFailure, ACTION_TYPES } from '../events.actions';
+import { deleteEventSuccess, deleteEventFailure, actionTypes } from '../events.actions';
 
 function* deleteEventGenerator(action) {
   const { eventId } = action;
@@ -24,7 +24,7 @@ function* deleteEventGenerator(action) {
 }
 
 function* deleteEventSaga() {
-  yield takeLatest(ACTION_TYPES.EVENT.DELETE.REQUEST, deleteEventGenerator);
+  yield takeLatest(actionTypes.EVENT.DELETE.REQUEST, deleteEventGenerator);
 }
 
 export default deleteEventSaga;
