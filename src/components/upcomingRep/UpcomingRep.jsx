@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUpcomingRepertoireRequest } from '../../redux/repertoire/repertoire.actions';
 import UpcomingPiece from './UpcomingPiece';
-import { selectRepFromUpcomingEvents } from '../../redux/reduxOrm/selectors/repertoire.selectors';
+import { selectAllRepToWorkOn } from '../../redux/reduxOrm/selectors/repertoire.selectors';
 
 class UpcomingRep extends Component {
   componentDidMount() {
@@ -39,7 +39,7 @@ UpcomingRep.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  upcomingRep: selectRepFromUpcomingEvents(state),
+  upcomingRep: selectAllRepToWorkOn(state),
 });
 
 const mapDispatchToProps = {
