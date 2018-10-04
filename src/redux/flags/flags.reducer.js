@@ -38,17 +38,17 @@ const flagsReducer = (state = initialState, action) => {
         ...state,
         gettingUpcomingRepertoire: false,
       };
-    case repertoireActionTypes.REPERTOIRE.FETCH_ALL.REQUEST:
+    case repertoireActionTypes.REPERTOIRE.GET_ALL.REQUEST:
       return {
         ...state,
         fetchingRepertoire: true,
       };
-    case repertoireActionTypes.REPERTOIRE.FETCH_ALL.SUCCESS:
+    case repertoireActionTypes.REPERTOIRE.GET_ALL.SUCCESS:
       return {
         ...state,
         fetchingRepertoire: false,
       };
-    case repertoireActionTypes.REPERTOIRE.FETCH_ALL.FAILURE:
+    case repertoireActionTypes.REPERTOIRE.GET_ALL.FAILURE:
       return {
         ...state,
         fetchingRepertoire: false,

@@ -1,9 +1,9 @@
 export const actionTypes = {
   REPERTOIRE: {
-    FETCH_ALL: {
-      REQUEST: 'REPERTOIRE.FETCH_ALL.REQUEST',
-      SUCCESS: 'REPERTOIRE.FETCH_ALL.SUCCESS',
-      FAILURE: 'REPERTOIRE.FETCH_ALL.FAILURE',
+    GET_ALL: {
+      REQUEST: 'REPERTOIRE.GET_ALL.REQUEST',
+      SUCCESS: 'REPERTOIRE.GET_ALL.SUCCESS',
+      FAILURE: 'REPERTOIRE.GET_ALL.FAILURE',
     },
   },
   UPCOMING_REPERTOIRE: {
@@ -15,17 +15,17 @@ export const actionTypes = {
   },
 };
 
-export const fetchAllRepertoireRequest = () => ({
-  type: actionTypes.REPERTOIRE.FETCH_ALL.REQUEST,
+export const getAllRepertoireRequest = () => ({
+  type: actionTypes.REPERTOIRE.GET_ALL.REQUEST,
 });
 
-export const fetchAllRepertoireSuccess = payload => ({
-  type: actionTypes.REPERTOIRE.FETCH_ALL.SUCCESS,
+export const getAllRepertoireSuccess = payload => ({
+  type: actionTypes.REPERTOIRE.GET_ALL.SUCCESS,
   payload,
 });
 
-export const fetchAllRepertoireFailure = error => ({
-  type: actionTypes.REPERTOIRE.FETCH_ALL.FAILURE,
+export const getAllRepertoireFailure = error => ({
+  type: actionTypes.REPERTOIRE.GET_ALL.FAILURE,
   error,
 });
 
