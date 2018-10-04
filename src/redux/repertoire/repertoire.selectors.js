@@ -1,8 +1,8 @@
 import moment from 'moment';
 import { createSelector as createReduxOrmSelector } from 'redux-orm';
-import { createSelector as createReselectSelector } from 'reselect'
-import orm from '../orm';
-import { dbStateSelector } from './common.selectors';
+import { createSelector as createReselectSelector } from 'reselect';
+import orm from '../reduxOrm/orm';
+import { dbStateSelector } from '../../services/common.selectors';
 
 export const selectRepertoireForDropdown = createReduxOrmSelector(
   orm,

@@ -9,7 +9,7 @@ import GeneralNotes from '../common/notes/GeneralNotes';
 import AddRepOrExerciseInstance from '../common/repOrExerciseInstances/AddRepOrExerciseInstance';
 import RepOrExerciseInstances from '../common/repOrExerciseInstances/RepOrExerciseInstances';
 import { getEventRequest, deleteEventRequest } from '../../redux/events/events.actions';
-import { selectEvent } from '../../redux/reduxOrm/selectors/events.selectors';
+import { selectEvent } from '../../redux/events/events.selectors';
 import { renderDuration } from '../../services/datetime';
 
 class Lesson extends Component {

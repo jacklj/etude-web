@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import { getUpcomingRepertoireRequest } from '../../redux/repertoire/repertoire.actions';
 import UpcomingPiece from './UpcomingPiece';
-import { selectAllRepToWorkOn } from '../../redux/reduxOrm/selectors/repertoire.selectors';
+import { selectAllRepToWorkOn } from '../../redux/repertoire/repertoire.selectors';
 
 class UpcomingRep extends Component {
   componentDidMount() {

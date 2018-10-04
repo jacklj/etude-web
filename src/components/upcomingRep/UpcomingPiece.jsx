@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
 
-import { selectPiece } from '../../redux/reduxOrm/selectors/repertoire.selectors';
+import { selectPiece } from '../../redux/repertoire/repertoire.selectors';
 import { Name, Composer } from '../common/styledComponents';
 
 const Card = styled.div`

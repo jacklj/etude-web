@@ -1,6 +1,6 @@
 import { createSelector } from 'redux-orm';
-import orm from '../orm';
-import { dbStateSelector } from './common.selectors';
+import orm from '../reduxOrm/orm';
+import { dbStateSelector } from '../../services/common.selectors';
 
 
 export const selectAllEvents = createSelector(

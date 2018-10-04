@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Name, Composer } from '../styledComponents';
-import { selectPiece } from '../../../redux/reduxOrm/selectors/repertoire.selectors';
+import { selectPiece } from '../../../redux/repertoire/repertoire.selectors';
 
 const Piece = ({
   piece,

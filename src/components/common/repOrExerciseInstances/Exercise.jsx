@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import vextab from 'vextab/releases/vextab-div'; // eslint-disable-line no-unused-vars
 
 import { Name, TeacherWhoCreatedIt } from '../styledComponents';
-import { selectExercise } from '../../../redux/reduxOrm/selectors/exercises.selectors';
+import { selectExercise } from '../../../redux/exercises/exercises.selectors';
 
 const Exercise = ({
   exercise,
