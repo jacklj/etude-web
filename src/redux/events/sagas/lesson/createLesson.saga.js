@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 
 import { createLesson } from '../../../../services/api';
 import { createLessonSuccess, createLessonFailure, actionTypes } from '../../events.actions';
-import { EVENT_TYPES } from '../../../../constants';
+import { EVENT_TYPES } from '../../../../services/constants';
 
 function* createLessonGenerator() {
   const newEvent = {

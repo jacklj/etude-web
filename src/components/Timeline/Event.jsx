@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import StarRatingComponent from 'react-star-rating-component';
 import { Link } from 'react-router-dom';
 
-import { EVENT_TYPES } from '../../constants';
+import { EVENT_TYPES } from '../../services/constants';
 import { Title } from '../common/styledComponents';
 import { renderDuration } from '../../services/datetime';
 
