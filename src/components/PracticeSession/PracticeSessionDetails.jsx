@@ -143,7 +143,7 @@ PracticeSessionDetails.propTypes = {
 const mapStateToProps = state => ({
   // ownProps isn't recursive - just props supplied from 'above'
   locations: selectLocationsForDropdown(state),
-  isPracticeSessionUpdating: state.flags.updatingEvent,
+  isPracticeSessionUpdating: state.flags.events.updatingEvent,
 });
 
 const mapDispatchToProps = {
