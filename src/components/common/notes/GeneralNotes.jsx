@@ -12,8 +12,7 @@ const GeneralNotes = ({ notes }) => (
         note={note.note}
         score={note.score}
         type={note.type}
-        note_id={note.note_id}
-        eventId={note.event_id}
+        noteId={note.note_id}
       />
     ))}
   </ItemsOrNotesContainer>

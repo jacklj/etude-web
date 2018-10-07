@@ -37,8 +37,8 @@ export class Note extends Component {
 
   deleteNote(event) {
     event.preventDefault();
-    const { note_id: noteId, eventId } = this.props;
-    this.props.deleteNoteRequest(noteId, eventId);
+    const { noteId } = this.props;
+    this.props.deleteNoteRequest(noteId);
     // no need to change the view, as this component will disappear!
   }
 
@@ -71,11 +71,10 @@ export class Note extends Component {
       note: editingNote,
       score: editingScore,
       type: this.props.type,
-      note_id: this.props.note_id,
-      event_id: this.props.eventId,
+      note_id: this.props.noteId,
     };
 
-    this.props.updateNoteRequest(updatedNote, this.props.note_id);
+    this.props.updateNoteRequest(updatedNote, this.props.noteId);
     this.setState({ currentView: VIEW.DISPLAY });
   }
 
@@ -144,8 +143,7 @@ Note.propTypes = {
   note: PropTypes.string.isRequired,
   score: PropTypes.string,
   type: PropTypes.string.isRequired,
-  note_id: PropTypes.number.isRequired,
-  eventId: PropTypes.number.isRequired,
+  noteId: PropTypes.number.isRequired,
   updateNoteRequest: PropTypes.func.isRequired,
   deleteNoteRequest: PropTypes.func.isRequired,
 };

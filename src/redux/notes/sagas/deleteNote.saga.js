@@ -3,14 +3,17 @@ import { deleteNote } from '../../../services/api';
 import { deleteNoteSuccess, deleteNoteFailure, actionTypes } from '../notes.actions';
 
 function* deleteNoteGenerator(action) {
-  const { noteId, eventId } = action;
+  const { noteId } = action;
   try {
-    yield call(deleteNote, noteId);
-    const actionToDispatch = deleteNoteSuccess(noteId, eventId);
-    yield put(actionToDispatch);
+    const response = yield call(deleteNote, noteId);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(deleteNoteSuccess(noteId));
+    } else {
+      yield put(deleteNoteFailure(body));
+    }
   } catch (e) {
-    const actionToDispatch = deleteNoteFailure(e);
-    yield put(actionToDispatch);
+    yield put(deleteNoteFailure(e));
   }
 }
 
