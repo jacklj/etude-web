@@ -30,11 +30,20 @@ function* createNoteGenerator(action) {
 
   let actionToDispatch;
   try {
-    const newNote = yield call(createNote, noteWithId);
-    if (isEventNote) {
-      actionToDispatch = createNoteAndAddToEventSuccess(newNote);
-    } else if (isRepOrExerciseInstanceNote) {
-      actionToDispatch = createNoteAndAddToRepOrExerciseInstanceSuccess(newNote);
+    const response = yield call(createNote, noteWithId);
+    const body = yield response.json();
+    if (response.status === 200) {
+      if (isEventNote) {
+        actionToDispatch = createNoteAndAddToEventSuccess(body);
+      } else if (isRepOrExerciseInstanceNote) {
+        actionToDispatch = createNoteAndAddToRepOrExerciseInstanceSuccess(body);
+      }
+    } else { // fail http code
+      if (isEventNote) { // eslint-disable-line no-lonely-if
+        actionToDispatch = createNoteAndAddToEventFailure(body);
+      } else if (isRepOrExerciseInstanceNote) {
+        actionToDispatch = createNoteAndAddToRepOrExerciseInstanceFailure(body);
+      }
     }
   } catch (e) {
     if (isEventNote) {

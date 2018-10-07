@@ -54,7 +54,6 @@ export const createNote = note => fetch(`${baseApiUrl}/notes/`, {
     'Content-Type': 'application/json; charset=utf-8',
   },
 })
-  .then(response => response.json())
   .catch(error => console.error('createNote Fetch Error =\n', error));
 
 export const updateNote = (note, noteId) => fetch(`${baseApiUrl}/notes/${noteId}`, {
