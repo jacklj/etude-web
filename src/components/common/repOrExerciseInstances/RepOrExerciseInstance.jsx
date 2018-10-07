@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Card } from '../styledComponents';
 import Exercise from './Exercise';
 import Piece from './Piece';
+import AddNoteToRepOrExerciseInstance from '../notes/AddNoteToRepOrExerciseInstance';
 import { deleteRepOrExerciseInstanceRequest } from '../../../redux/repOrExerciseInstances/repOrExerciseInstances.actions';
 
 class RepOrExerciseInstance extends Component {
@@ -21,6 +22,7 @@ class RepOrExerciseInstance extends Component {
 
   render() {
     const { repOrExerciseInstance } = this.props;
+    const { rep_or_exercise_instance_id: repOrExerciseInstanceId } = repOrExerciseInstance;
     let jsx;
     if (repOrExerciseInstance.exercise_id) {
       const exercise = repOrExerciseInstance;
@@ -34,6 +36,7 @@ class RepOrExerciseInstance extends Component {
     return (
       <Card>
         {jsx}
+        <AddNoteToRepOrExerciseInstance repOrExerciseInstanceId={repOrExerciseInstanceId} />
         <button type="button" onClick={this.removeInstanceFromEvent}>Remove</button>
       </Card>
     );
