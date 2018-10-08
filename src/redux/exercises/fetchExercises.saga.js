@@ -9,12 +9,15 @@ import {
 
 function* fetchExercises() {
   try {
-    const payload = yield call(getExercises);
-    const action = getAllExercisesSuccess(payload);
-    yield put(action);
+    const response = yield call(getExercises);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(getAllExercisesSuccess(body));
+    } else {
+      yield put(getAllExercisesFailure(body));
+    }
   } catch (e) {
-    const action = getAllExercisesFailure(e);
-    yield put(action);
+    yield put(getAllExercisesFailure(e));
   }
 }
 

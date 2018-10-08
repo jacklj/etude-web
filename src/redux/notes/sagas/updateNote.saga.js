@@ -6,12 +6,15 @@ function* updateNoteGenerator(action) {
   const { note } = action;
   const noteId = note.note_id;
   try {
-    const updatedNote = yield call(updateNote, note, noteId);
-    const actionToDispatch = updateNoteSuccess(updatedNote);
-    yield put(actionToDispatch);
+    const response = yield call(updateNote, note, noteId);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(updateNoteSuccess(body));
+    } else {
+      yield put(updateNoteFailure(body));
+    }
   } catch (e) {
-    const actionToDispatch = updateNoteFailure(e);
-    yield put(actionToDispatch);
+    yield put(updateNoteFailure(e));
   }
 }
 

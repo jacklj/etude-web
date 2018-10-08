@@ -8,12 +8,15 @@ import {
 
 function* fetchRepertoire() {
   try {
-    const payload = yield call(getRepertoire);
-    const action = getAllRepertoireSuccess(payload);
-    yield put(action);
+    const response = yield call(getRepertoire);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(getAllRepertoireSuccess(body));
+    } else {
+      yield put(getAllRepertoireFailure(body));
+    }
   } catch (e) {
-    const action = getAllRepertoireFailure(e);
-    yield put(action);
+    yield put(getAllRepertoireFailure(e));
   }
 }
 

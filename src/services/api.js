@@ -3,8 +3,7 @@ const env = process.env.NODE_ENV || 'development';
 const baseUrl = env === 'development' ? 'http://localhost:8080' : 'https://singprocess.herokuapp.com';
 const baseApiUrl = `${baseUrl}/api`;
 
-export const getAllEvents = () => fetch(`${baseApiUrl}/events`)
-  .then(response => response.json());
+export const getAllEvents = () => fetch(`${baseApiUrl}/events`);
 
 export const getUpcomingRepertoire = () => fetch(`${baseApiUrl}/repertoire/upcoming`)
   .catch(error => console.error('getUpcomingRepertoire Fetch Error =\n', error));
@@ -38,14 +37,9 @@ export const updateEvent = (event, eventId) => fetch(`${baseApiUrl}/events/${eve
   },
 });
 
-export const getLocations = () => fetch(`${baseApiUrl}/locations`)
-  .then(response => response.json());
+export const getLocations = () => fetch(`${baseApiUrl}/locations`);
 
-export const getPeople = () => fetch(`${baseApiUrl}/people`)
-  .then(response => response.json());
-
-export const getTeachers = () => fetch(`${baseApiUrl}/people/teachers`)
-  .then(response => response.json());
+export const getPeople = () => fetch(`${baseApiUrl}/people`);
 
 export const createNote = note => fetch(`${baseApiUrl}/notes/`, {
   method: 'POST',
@@ -63,7 +57,6 @@ export const updateNote = (note, noteId) => fetch(`${baseApiUrl}/notes/${noteId}
     'Content-Type': 'application/json; charset=utf-8', // need this for PUT or server thinks body is blank
   },
 })
-  .then(response => response.json())
   .catch(error => console.error('editNote Fetch Error =\n', error));
 
 export const deleteNote = noteId => fetch(`${baseApiUrl}/notes/${noteId}`, {
@@ -71,11 +64,9 @@ export const deleteNote = noteId => fetch(`${baseApiUrl}/notes/${noteId}`, {
 })
   .catch(error => console.error('deleteNote Fetch Error =\n', error));
 
-export const getRepertoire = () => fetch(`${baseApiUrl}/repertoire`)
-  .then(response => response.json());
+export const getRepertoire = () => fetch(`${baseApiUrl}/repertoire`);
 
-export const getExercises = () => fetch(`${baseApiUrl}/exercises`)
-  .then(response => response.json());
+export const getExercises = () => fetch(`${baseApiUrl}/exercises`);
 
 export const createRepertoireInstance = (repertoireId, eventId) => fetch(`${baseApiUrl}/events/${eventId}/repertoire`, {
   method: 'POST',

@@ -4,12 +4,15 @@ import { getAllEventsSuccess, getAllEventsFailure, actionTypes } from '../events
 
 function* getAllEventsGenerator() {
   try {
-    const payload = yield call(getAllEvents);
-    const action = getAllEventsSuccess(payload);
-    yield put(action);
+    const response = yield call(getAllEvents);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(getAllEventsSuccess(body));
+    } else {
+      yield put(getAllEventsFailure(body));
+    }
   } catch (e) {
-    const action = getAllEventsFailure(e);
-    yield put(action);
+    yield put(getAllEventsFailure(e));
   }
 }
 

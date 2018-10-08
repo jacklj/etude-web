@@ -4,12 +4,15 @@ import { getAllLocationsSuccess, getAllLocationsFailure, actionTypes } from './l
 
 function* fetchLocations() {
   try {
-    const locations = yield call(getLocations);
-    const action = getAllLocationsSuccess(locations);
-    yield put(action);
+    const response = yield call(getLocations);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(getAllLocationsSuccess(body));
+    } else {
+      yield put(getAllLocationsFailure(body));
+    }
   } catch (e) {
-    const action = getAllLocationsFailure(e);
-    yield put(action);
+    yield put(getAllLocationsFailure(e));
   }
 }
 

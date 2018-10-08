@@ -4,12 +4,15 @@ import { getAllPeopleSuccess, getAllPeopleFailure, actionTypes } from './people.
 
 function* fetchPeople() {
   try {
-    const people = yield call(getPeople);
-    const action = getAllPeopleSuccess(people);
-    yield put(action);
+    const response = yield call(getPeople);
+    const body = yield response.json();
+    if (response.status === 200) {
+      yield put(getAllPeopleSuccess(body));
+    } else {
+      yield put(getAllPeopleFailure(body));
+    }
   } catch (e) {
-    const action = getAllPeopleFailure(e);
-    yield put(action);
+    yield put(getAllPeopleFailure(e));
   }
 }
 
