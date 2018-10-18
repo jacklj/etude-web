@@ -5,6 +5,7 @@ import getEventSaga from './events/sagas/getEvent.saga';
 import deleteEventSaga from './events/sagas/deleteEvent.saga';
 import updateEventSaga from './events/sagas/updateEvent.saga';
 import createLessonSaga from './events/sagas/lesson/createLesson.saga';
+import createPerformanceSaga from './events/sagas/performance/createPerformance.saga';
 import fetchLocationsSaga from './locations/locations.saga';
 import fetchPeopleSaga from './people/people.saga';
 import createNoteSaga from './notes/sagas/createNote.saga';
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     deleteEventSaga(),
     updateEventSaga(),
     createLessonSaga(),
+    createPerformanceSaga(),
     fetchLocationsSaga(),
     fetchPeopleSaga(),
     createNoteSaga(),

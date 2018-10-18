@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Nav, StyledLink } from './common/styledComponents';
-import { createPracticeSessionRequest, createLessonRequest } from '../redux/events/events.actions';
+import {
+  createPracticeSessionRequest,
+  createLessonRequest,
+  createPerformanceRequest,
+} from '../redux/events/events.actions';
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
     this.createThenGoToNewPracticeSession = this.createThenGoToNewPracticeSession.bind(this);
     this.createThenGoToNewLesson = this.createThenGoToNewLesson.bind(this);
+    this.createThenGoToNewPerformance = this.createThenGoToNewPerformance.bind(this);
   }
 
   createThenGoToNewPracticeSession() {
@@ -23,6 +28,10 @@ class Navigation extends Component {
     this.props.createLessonRequest();
   }
 
+  createThenGoToNewPerformance() {
+    this.props.createPerformanceRequest();
+  }
+
   render() {
     return (
       <Nav>
@@ -31,6 +40,7 @@ class Navigation extends Component {
         | New:
         <button type="button" onClick={this.createThenGoToNewLesson}>Add lesson</button>
         <button type="button" onClick={this.createThenGoToNewPracticeSession}>Add practice session</button>
+        <button type="button" onClick={this.createThenGoToNewPerformance}>Add performance</button>
       </Nav>
     );
   }
@@ -39,6 +49,7 @@ class Navigation extends Component {
 Navigation.propTypes = {
   createPracticeSessionRequest: PropTypes.func.isRequired,
   createLessonRequest: PropTypes.func.isRequired,
+  createPerformanceRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({});
@@ -46,6 +57,7 @@ const mapStateToProps = () => ({});
 const mapDispatchToProps = {
   createPracticeSessionRequest,
   createLessonRequest,
+  createPerformanceRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

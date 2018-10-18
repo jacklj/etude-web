@@ -28,6 +28,13 @@ export const actionTypes = {
       FAILURE: 'LESSON.CREATE.FAILURE',
     },
   },
+  PERFORMANCE: {
+    CREATE: {
+      REQUEST: 'PERFORMANCE.CREATE.REQUEST',
+      SUCCESS: 'PERFORMANCE.CREATE.SUCCESS',
+      FAILURE: 'PERFORMANCE.CREATE.FAILURE',
+    },
+  },
   PRACTICE_SESSION: {
     CREATE: {
       REQUEST: 'PRACTICE_SESSION.CREATE.REQUEST',
@@ -123,6 +130,21 @@ export const createLessonSuccess = payload => ({
 
 export const createLessonFailure = error => ({
   type: actionTypes.LESSON.CREATE.FAILURE,
+  error,
+});
+
+export const createPerformanceRequest = performance => ({
+  type: actionTypes.PERFORMANCE.CREATE.REQUEST,
+  performance,
+});
+
+export const createPerformanceSuccess = payload => ({
+  type: actionTypes.PERFORMANCE.CREATE.SUCCESS,
+  payload,
+});
+
+export const createPerformanceFailure = error => ({
+  type: actionTypes.PERFORMANCE.CREATE.FAILURE,
   error,
 });
 

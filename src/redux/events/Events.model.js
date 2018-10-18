@@ -27,6 +27,7 @@ class Events extends Model {
         break;
       case eventsActionTypes.LESSON.CREATE.SUCCESS:
       case eventsActionTypes.PRACTICE_SESSION.CREATE.SUCCESS:
+      case eventsActionTypes.PERFORMANCE.CREATE.SUCCESS:
         // create any events in the response payload
         if (ifObjectExistsAndIsNotEmpty(action.payload.events)) {
           Object.values(action.payload.events).forEach(event => SessionBoundEvents.create(event));

@@ -26,6 +26,15 @@ export const createPracticeSession = practiceSession => fetch(`${baseApiUrl}/eve
 })
   .catch(error => console.error('createPracticeSession Fetch Error =\n', error));
 
+export const createPerformance = performance => fetch(`${baseApiUrl}/events/performances`, {
+  method: 'POST',
+  body: JSON.stringify(performance),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+})
+  .catch(error => console.error('createPracticeSession Fetch Error =\n', error));
+
 export const getEvent = eventId => fetch(`${baseApiUrl}/events/${eventId}`)
   .catch(error => console.error('getEvent Fetch Error =\n', error));
 
