@@ -72,15 +72,15 @@ class Performance extends Component {
               Delete performance
             </button>
           </div>
-          <h3>Notes</h3>
-          <AddNoteToEvent eventId={eventId} />
-          <GeneralNotes notes={notes} />
           <h3>Repertoire</h3>
           <AddRepOrExerciseInstance eventId={eventId} />
           <RepOrExerciseInstances
             repOrExerciseInstances={repOrExerciseInstances}
             eventId={eventId}
           />
+          <h3>Notes</h3>
+          <AddNoteToEvent eventId={eventId} />
+          <GeneralNotes notes={notes} />
         </div>
       );
     }
