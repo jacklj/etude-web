@@ -11,6 +11,7 @@ import Timeline from './components/Timeline/Timeline';
 import Lesson from './components/Lesson/Lesson';
 import PracticeSession from './components/PracticeSession/PracticeSession';
 import UpcomingRep from './components/upcomingRep/UpcomingRep';
+import Performance from './components/Performance/Performance';
 
 const Container = styled.div`
   background-color: rgb(238, 238, 238);
@@ -42,6 +43,7 @@ const App = ({ store }) => (
         <Route path="/upcoming-rep" component={UpcomingRep} />
         <Route path="/lesson/:id" component={Lesson} />
         <Route path="/practice_session/:id" component={PracticeSession} />
+        <Route path="/performance/:id" component={Performance} />
       </Container>
     </ConnectedRouter>
   </Provider>
