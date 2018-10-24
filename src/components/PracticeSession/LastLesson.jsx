@@ -12,7 +12,7 @@ function LastLesson({ lesson }) {
     <div>
       <h4>{title}</h4>
       <h5>{start}</h5>
-      <GeneralNotes notes={notes} />
+      <GeneralNotes notes={notes} editable={false} />
     </div>
   );
 }

@@ -94,8 +94,12 @@ export class Note extends Component {
             <div>{note}</div>
             <div>{score}</div>
             <div>{type}</div>
-            <button type="button" onClick={this.showEditNote}>Edit</button>
-            <button type="button" onClick={this.showDeleteNote}>Delete</button>
+            {this.props.editable && (
+              <div>
+                <button type="button" onClick={this.showEditNote}>Edit</button>
+                <button type="button" onClick={this.showDeleteNote}>Delete</button>
+              </div>
+            )}
           </div>
         );
         break;
@@ -137,6 +141,7 @@ export class Note extends Component {
 
 Note.defaultProps = {
   score: '',
+  editable: true,
 };
 
 Note.propTypes = {
@@ -146,6 +151,7 @@ Note.propTypes = {
   noteId: PropTypes.number.isRequired,
   updateNoteRequest: PropTypes.func.isRequired,
   deleteNoteRequest: PropTypes.func.isRequired,
+  editable: PropTypes.bool,
 };
 
 const mapStateToProps = () => ({});
