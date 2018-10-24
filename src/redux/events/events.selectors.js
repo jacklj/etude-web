@@ -1,7 +1,9 @@
 import { createSelector } from 'redux-orm';
+import moment from 'moment';
+
 import orm from '../reduxOrm/orm';
 import { dbStateSelector } from '../../services/common.selectors';
-
+import { EVENT_TYPES } from '../../services/constants';
 
 export const selectAllEvents = createSelector(
   orm, // first argument: the ORM
@@ -58,5 +60,35 @@ export const selectInProgressEvent = createSelector(
       .toRefArray();
     if (inProgressEvents.length === 0) return undefined;
     return inProgressEvents[0];
+  },
+);
+
+function getMostRecentEvent(events) {
+  let mostRecentEvent = events[0];
+  events.forEach(event => {
+    if (moment(event.ref.start).isAfter(mostRecentEvent.ref.start)) {
+      mostRecentEvent = event;
+    }
+  });
+  return mostRecentEvent;
+}
+
+export const selectLastLesson = createSelector(
+  orm,
+  dbStateSelector,
+  session => {
+    // get all lessons
+    const lessons = session.Events.all()
+      .filter(event => event.type === EVENT_TYPES.LESSON)
+      .toModelArray();
+
+    const mostRecentLesson = getMostRecentEvent(lessons);
+    const obj = mostRecentLesson.ref;
+    const notes = mostRecentLesson.notes && mostRecentLesson.notes.toRefArray();
+
+    return {
+      ...obj,
+      notes,
+    };
   },
 );

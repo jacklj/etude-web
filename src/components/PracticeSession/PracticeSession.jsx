@@ -9,6 +9,7 @@ import {
 } from '../../redux/events/events.actions';
 import { selectEvent } from '../../redux/events/events.selectors';
 import Timer from './Timer';
+import LastLesson from './LastLesson';
 import AddNoteToEvent from '../common/notes/AddNoteToEvent';
 import GeneralNotes from '../common/notes/GeneralNotes';
 import AddRepOrExerciseInstance from '../common/repOrExerciseInstances/AddRepOrExerciseInstance';
@@ -63,6 +64,7 @@ class PracticeSession extends Component {
             rating={rating}
             location={location}
           />
+          <LastLesson />
           <h3>Notes</h3>
           <AddNoteToEvent eventId={eventId} />
           <GeneralNotes notes={notes} />
