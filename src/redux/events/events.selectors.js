@@ -92,3 +92,23 @@ export const selectLastLesson = createSelector(
     };
   },
 );
+
+export const selectFiveRecentPracticeSessionsWithNotes = createSelector(
+  orm,
+  dbStateSelector,
+  session => {
+    // get all practice sessions
+    const practiceSessions = session.Events.all()
+      .filter(event => event.type === EVENT_TYPES.PRACTICE)
+      .toModelArray()
+      .map(practiceSession => {
+        const obj = practiceSession.ref;
+        const notes = practiceSession.notes && practiceSession.notes.toRefArray()
+        return {
+          ...obj,
+          notes,
+        };
+      });
+    return practiceSessions;
+  },
+);

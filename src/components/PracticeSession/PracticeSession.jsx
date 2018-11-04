@@ -15,6 +15,7 @@ import GeneralNotes from '../common/notes/GeneralNotes';
 import AddRepOrExerciseInstance from '../common/repOrExerciseInstances/AddRepOrExerciseInstance';
 import RepOrExerciseInstances from '../common/repOrExerciseInstances/RepOrExerciseInstances';
 import PracticeSessionDetails from './PracticeSessionDetails';
+import RecentPracticeSessions from './RecentPracticeSessions';
 
 class PracticeSession extends Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class PracticeSession extends Component {
             location={location}
           />
           <LastLesson />
+          <RecentPracticeSessions />
           <h3>Notes</h3>
           <AddNoteToEvent eventId={eventId} />
           <GeneralNotes notes={notes} />
