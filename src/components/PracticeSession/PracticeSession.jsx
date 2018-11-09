@@ -44,7 +44,7 @@ class PracticeSession extends Component {
     if (!practiceSession) {
       jsx = <div>Loading</div>;
     } else {
-      const { start, end, notes, repOrExerciseInstances, location, rating } = practiceSession;
+      const { start, end, notes, repOrExerciseInstances, location, rating, in_progress: inProgress } = practiceSession;
 
       jsx = (
         <div>
@@ -65,8 +65,10 @@ class PracticeSession extends Component {
             rating={rating}
             location={location}
           />
-          <LastLesson />
-          <RecentPracticeSessions />
+          {inProgress && [
+            <LastLesson />,
+            <RecentPracticeSessions />,
+          ]}
           <h3>Notes</h3>
           <AddNoteToEvent eventId={eventId} />
           <GeneralNotes notes={notes} />
