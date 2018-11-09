@@ -5,6 +5,8 @@ import orm from '../reduxOrm/orm';
 import { dbStateSelector } from '../../services/common.selectors';
 import { EVENT_TYPES } from '../../services/constants';
 
+const isArrayEmpty = array => (array === undefined || array.length === 0);
+
 export const selectAllEvents = createSelector(
   orm, // first argument: the ORM
   dbStateSelector, // second argument:the db state selector
@@ -101,14 +103,18 @@ export const selectFiveRecentPracticeSessionsWithNotes = createSelector(
     const practiceSessions = session.Events.all()
       .filter(event => event.type === EVENT_TYPES.PRACTICE)
       .toModelArray()
+      .filter(practiceSession => !isArrayEmpty(practiceSession.notes.toRefArray()))
+      .sort((a, b) => moment(a.start).isAfter(b.start))
+      .slice(0, 3)
       .map(practiceSession => {
         const obj = practiceSession.ref;
-        const notes = practiceSession.notes && practiceSession.notes.toRefArray()
+        const notes = practiceSession.notes.toRefArray();
         return {
           ...obj,
           notes,
         };
       });
+
     return practiceSessions;
   },
 );
