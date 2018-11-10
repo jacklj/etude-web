@@ -14,6 +14,7 @@ import { getAllPeopleRequest } from '../../redux/people/people.actions';
 import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
 import { selectTeachersForDropdown } from '../../redux/people/people.selectors';
 import { getLocationSelectOption, getPersonSelectOption } from '../../services/utils';
+import { EVENT_TYPES } from '../../services/constants';
 
 class LessonDetails extends Component {
   constructor(props) {
@@ -21,7 +22,6 @@ class LessonDetails extends Component {
     this.state = {
       editingStart: '',
       editingEnd: '',
-      editingType: '',
       editingRating: undefined,
       editingLocation: undefined,
       editingTeacher: undefined,
@@ -50,7 +50,6 @@ class LessonDetails extends Component {
       isEditing: true,
       editingStart: this.props.start,
       editingEnd: this.props.end,
-      editingType: this.props.type,
       editingRating: this.props.rating,
       editingLocation,
       editingTeacher,
@@ -78,7 +77,7 @@ class LessonDetails extends Component {
     const newLesson = {
       start: this.state.editingStart,
       end: this.state.editingEnd,
-      type: this.state.editingType,
+      type: EVENT_TYPES.LESSON,
       rating: Number(this.state.editingRating),
       location_id: this.state.editingLocation.value,
       teacher_id: this.state.editingTeacher.value,
@@ -95,7 +94,7 @@ class LessonDetails extends Component {
       const editingStart = moment(this.state.editingStart);
       const editingEnd = moment(this.state.editingEnd);
       const {
-        editingType, editingRating, editingLocation, editingTeacher,
+        editingRating, editingLocation, editingTeacher,
       } = this.state;
 
       jsx = (
@@ -112,15 +111,6 @@ class LessonDetails extends Component {
             <DateTime
               value={editingEnd}
               onChange={this.handleCustomComponentChange('editingEnd')}
-            />
-          </Label>
-          <Label>
-            type:
-            <input
-              type="text"
-              name="editingType"
-              value={editingType}
-              onChange={this.handleHTMLElementChange}
             />
           </Label>
           <Label>
@@ -158,7 +148,7 @@ class LessonDetails extends Component {
     } else {
       const start = moment(this.props.start); // need to wrap start and end in moment(), ...
       const end = moment(this.props.end); // or DateTime component doesn't work
-      const { rating, type } = this.props;
+      const { rating } = this.props;
       const teacher = this.props.teacher
         && getPersonSelectOption(this.props.teacher, this.props.teachers);
       const location = this.props.location
@@ -173,10 +163,6 @@ class LessonDetails extends Component {
           <Label>
             end:
             <DateTime value={end} readOnly />
-          </Label>
-          <Label>
-            type:
-            <input type="text" name="type" value={type} readOnly />
           </Label>
           <Label>
             rating:
@@ -212,7 +198,6 @@ LessonDetails.propTypes = {
   eventId: PropTypes.number.isRequired,
   start: PropTypes.string,
   end: PropTypes.string,
-  type: PropTypes.string.isRequired,
   rating: PropTypes.number,
   location: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   teacher: PropTypes.object, // eslint-disable-line react/forbid-prop-types
