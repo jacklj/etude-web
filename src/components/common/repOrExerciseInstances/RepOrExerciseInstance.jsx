@@ -6,6 +6,7 @@ import { Card } from '../styledComponents';
 import Exercise from './Exercise';
 import Piece from './Piece';
 import AddNoteToRepOrExerciseInstance from '../notes/AddNoteToRepOrExerciseInstance';
+import RepOrExerciseInstanceNotes from '../notes/RepOrExerciseInstanceNotes';
 import { deleteRepOrExerciseInstanceRequest } from '../../../redux/repOrExerciseInstances/repOrExerciseInstances.actions';
 
 class RepOrExerciseInstance extends Component {
@@ -37,6 +38,7 @@ class RepOrExerciseInstance extends Component {
       <Card>
         {jsx}
         <AddNoteToRepOrExerciseInstance repOrExerciseInstanceId={repOrExerciseInstanceId} />
+        <RepOrExerciseInstanceNotes repOrExerciseInstanceId={repOrExerciseInstanceId} />
         <button type="button" onClick={this.removeInstanceFromEvent}>Remove</button>
       </Card>
     );
