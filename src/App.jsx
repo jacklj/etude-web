@@ -4,6 +4,9 @@ import { Provider } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { ConnectedRouter } from 'connected-react-router';
+// set moment locale to be British English, so on the date pickers, weeks start
+// on Monday (in US english, they start on Sunday).
+import enGB from 'moment/locale/en-gb'; // eslint-disable-line no-unused-vars
 
 import { history } from './redux/store';
 import Navigation from './components/Navigation';
