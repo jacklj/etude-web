@@ -15,17 +15,22 @@ import { getAllPeopleRequest } from '../../redux/people/people.actions';
 import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
 import { getLocationSelectOption } from '../../services/utils';
 import { EVENT_TYPES } from '../../services/constants';
-import { createPerformanceTypeSelectOptionObject, performanceTypesForSelectInput } from '../../services/display';
+import {
+  createPerformanceTypeSelectOptionObject,
+  performanceTypesForSelectInput,
+} from '../../services/display';
 
 class PerformanceDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      editingName: '',
       editingStart: '',
       editingEnd: '',
       editingPerformanceType: '',
       editingRating: undefined,
       editingLocation: undefined,
+      editingDetails: '',
       isEditing: false,
     };
 
@@ -42,17 +47,18 @@ class PerformanceDetails extends Component {
 
   updatePerformanceDetails() {
     // set the editing state to be equal to the performance data in redux (via this.props)
-    const editingLocation = this.props.location
-      && getLocationSelectOption(this.props.location, this.props.locations);
+    const editingLocation = this.props.location && getLocationSelectOption(this.props.location, this.props.locations);
     const performanceType = this.props.performanceType
       && createPerformanceTypeSelectOptionObject(this.props.performanceType);
     this.setState({
       isEditing: true,
+      editingName: this.props.name || '',
       editingStart: this.props.start,
       editingEnd: this.props.end,
       editingPerformanceType: performanceType,
       editingRating: this.props.rating,
       editingLocation,
+      editingDetails: this.props.details || '',
     });
   }
 
@@ -75,12 +81,15 @@ class PerformanceDetails extends Component {
     event.preventDefault();
 
     const newPerformance = {
+      name: this.state.editingName,
+      details: this.state.editingDetails,
       start: this.state.editingStart,
       end: this.state.editingEnd,
       type: EVENT_TYPES.PERFORMANCE,
-      performance_type: this.state.editingPerformanceType.value,
+      performance_type: this.state.editingPerformanceType
+        && this.state.editingPerformanceType.value,
       rating: Number(this.state.editingRating),
-      location_id: this.state.editingLocation.value,
+      location_id: this.state.editingLocation && this.state.editingLocation.value,
     };
     this.props.updateEventRequest(newPerformance, this.props.eventId);
     this.setState({
@@ -93,10 +102,25 @@ class PerformanceDetails extends Component {
     if (this.state.isEditing || this.props.isPerformanceUpdating) {
       const editingStart = moment(this.state.editingStart);
       const editingEnd = moment(this.state.editingEnd);
-      const { editingPerformanceType, editingRating, editingLocation } = this.state;
+      const {
+        editingName,
+        editingPerformanceType,
+        editingRating,
+        editingLocation,
+        editingDetails,
+      } = this.state;
 
       jsx = (
         <form onSubmit={this.handleSubmit}>
+          <Label>
+            name:
+            <input
+              type="text"
+              name="editingName"
+              value={editingName}
+              onChange={this.handleHTMLElementChange}
+            />
+          </Label>
           <Label>
             start:
             <DateTime
@@ -136,6 +160,14 @@ class PerformanceDetails extends Component {
               options={this.props.locations}
             />
           </Label>
+          <Label>
+            details:
+            <textarea
+              name="editingDetails"
+              value={editingDetails}
+              onChange={this.handleHTMLElementChange}
+            />
+          </Label>
           {this.props.isPerformanceUpdating ? (
             <div>Updating...</div>
           ) : (
@@ -146,14 +178,17 @@ class PerformanceDetails extends Component {
     } else {
       const start = moment(this.props.start); // need to wrap start and end in moment(), ...
       const end = moment(this.props.end); // or DateTime component doesn't work
-      const { rating } = this.props;
-      const location = this.props.location && getLocationSelectOption(
-        this.props.location, this.props.locations,
-      );
+      const { details, name, rating } = this.props;
+      const location = this.props.location
+        && getLocationSelectOption(this.props.location, this.props.locations);
       const performanceType = this.props.performanceType
         && createPerformanceTypeSelectOptionObject(this.props.performanceType);
       jsx = (
         <form>
+          <Label>
+            name:
+            <input type="text" name="name" value={name || ''} readOnly />
+          </Label>
           <Label>
             start:
             <DateTime value={start} readOnly />
@@ -179,6 +214,14 @@ class PerformanceDetails extends Component {
             location:
             <Select name="location_id" value={location} options={this.props.locations} readOnly />
           </Label>
+          <Label>
+            details:
+            <textarea
+              name="details"
+              value={details || ''}
+              readOnly
+            />
+          </Label>
           <button type="button" onClick={this.updatePerformanceDetails}>
             Edit
           </button>
@@ -194,15 +237,18 @@ PerformanceDetails.defaultProps = {
   end: undefined,
   rating: undefined,
   location: undefined,
+  name: undefined,
+  details: undefined,
+  performanceType: undefined,
 };
 
 PerformanceDetails.propTypes = {
   eventId: PropTypes.number.isRequired,
   start: PropTypes.string,
   end: PropTypes.string,
-  performanceType: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  details: PropTypes.string.isRequired,
+  performanceType: PropTypes.string,
+  name: PropTypes.string,
+  details: PropTypes.string,
   rating: PropTypes.number,
   location: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   isPerformanceUpdating: PropTypes.bool.isRequired,
