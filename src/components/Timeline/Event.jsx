@@ -63,16 +63,12 @@ const Event = ({ event }) => {
       );
       break;
     }
-    case EVENT_TYPES.CONCERT: {
-      jsx = <Title>{`Concert: ${event.name}`}</Title>;
-      break;
-    }
-    case EVENT_TYPES.OPERA: {
-      jsx = <Title>{`Opera: ${event.name}`}</Title>;
-      break;
-    }
-    case EVENT_TYPES.RECITAL: {
-      jsx = <Title>{`Recital: ${event.name}`}</Title>;
+    case EVENT_TYPES.PERFORMANCE: {
+      jsx = (
+        <TitleLink to={`/performance/${eventId}`}>
+          {`Performance: ${event.name}`}
+        </TitleLink>
+      );
       break;
     }
     case EVENT_TYPES.OTHER: {
