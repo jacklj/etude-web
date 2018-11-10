@@ -13,8 +13,9 @@ import { updateEventRequest } from '../../redux/events/events.actions';
 import { getAllLocationsRequest } from '../../redux/locations/locations.actions';
 import { getAllPeopleRequest } from '../../redux/people/people.actions';
 import { selectLocationsForDropdown } from '../../redux/locations/locations.selectors';
-import { getLocationSelectOption, getPersonSelectOption } from '../../services/utils';
+import { getLocationSelectOption } from '../../services/utils';
 import { EVENT_TYPES } from '../../services/constants';
+import { createPerformanceTypeSelectOptionObject, performanceTypesForSelectInput } from '../../services/display';
 
 class PerformanceDetails extends Component {
   constructor(props) {
@@ -43,12 +44,13 @@ class PerformanceDetails extends Component {
     // set the editing state to be equal to the performance data in redux (via this.props)
     const editingLocation = this.props.location
       && getLocationSelectOption(this.props.location, this.props.locations);
-
+    const performanceType = this.props.performanceType
+      && createPerformanceTypeSelectOptionObject(this.props.performanceType);
     this.setState({
       isEditing: true,
       editingStart: this.props.start,
       editingEnd: this.props.end,
-      editingPerformanceType: this.props.performanceType,
+      editingPerformanceType: performanceType,
       editingRating: this.props.rating,
       editingLocation,
     });
@@ -76,7 +78,7 @@ class PerformanceDetails extends Component {
       start: this.state.editingStart,
       end: this.state.editingEnd,
       type: EVENT_TYPES.PERFORMANCE,
-      performance_type: this.state.editingPerformanceType,
+      performance_type: this.state.editingPerformanceType.value,
       rating: Number(this.state.editingRating),
       location_id: this.state.editingLocation.value,
     };
@@ -91,9 +93,7 @@ class PerformanceDetails extends Component {
     if (this.state.isEditing || this.props.isPerformanceUpdating) {
       const editingStart = moment(this.state.editingStart);
       const editingEnd = moment(this.state.editingEnd);
-      const {
-        editingType, editingPerformanceType, editingRating, editingLocation,
-      } = this.state;
+      const { editingPerformanceType, editingRating, editingLocation } = this.state;
 
       jsx = (
         <form onSubmit={this.handleSubmit}>
@@ -113,11 +113,10 @@ class PerformanceDetails extends Component {
           </Label>
           <Label>
             performance type:
-            <input
-              type="text"
-              name="editingPerformanceType"
+            <Select
               value={editingPerformanceType}
-              onChange={this.handleHTMLElementChange}
+              onChange={this.handleCustomComponentChange('editingPerformanceType')}
+              options={performanceTypesForSelectInput}
             />
           </Label>
           <Label>
@@ -147,10 +146,12 @@ class PerformanceDetails extends Component {
     } else {
       const start = moment(this.props.start); // need to wrap start and end in moment(), ...
       const end = moment(this.props.end); // or DateTime component doesn't work
-      const { rating, performanceType } = this.props;
-      const location = this.props.location
-        && getLocationSelectOption(this.props.location, this.props.locations);
-
+      const { rating } = this.props;
+      const location = this.props.location && getLocationSelectOption(
+        this.props.location, this.props.locations,
+      );
+      const performanceType = this.props.performanceType
+        && createPerformanceTypeSelectOptionObject(this.props.performanceType);
       jsx = (
         <form>
           <Label>
@@ -163,7 +164,12 @@ class PerformanceDetails extends Component {
           </Label>
           <Label>
             performance type:
-            <input type="text" name="performanceType" value={performanceType} readOnly />
+            <Select
+              name="performance_type"
+              value={performanceType}
+              options={performanceTypesForSelectInput}
+              readOnly
+            />
           </Label>
           <Label>
             rating:

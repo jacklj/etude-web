@@ -1,4 +1,4 @@
-import { EVENT_TYPES } from './constants';
+import { EVENT_TYPES, PERFORMANCE_TYPES } from './constants';
 
 const eventTypeDisplayMap = {
   [EVENT_TYPES.LESSON]: 'Lesson',
@@ -10,6 +10,25 @@ const eventTypeDisplayMap = {
   [EVENT_TYPES.OTHER]: 'Other',
 };
 
-export const renderEventType = ( // eslint-disable-line import/prefer-default-export
-  eventTypeConstant,
-) => eventTypeDisplayMap[eventTypeConstant];
+export const renderEventType = eventTypeConstant => eventTypeDisplayMap[eventTypeConstant];
+
+const performanceTypesForRendering = {
+  [PERFORMANCE_TYPES.CONCERT]: 'Concert',
+  [PERFORMANCE_TYPES.OPERA]: 'Opera',
+  [PERFORMANCE_TYPES.RECITAL]: 'Recital',
+  [PERFORMANCE_TYPES.COMPETITION]: 'Competition',
+  [PERFORMANCE_TYPES.AUDITION]: 'Audition',
+};
+
+export const renderPerformanceType = performanceType => performanceTypesForRendering[
+  performanceType
+];
+
+export const createPerformanceTypeSelectOptionObject = performanceType => ({
+  value: performanceType,
+  label: renderPerformanceType(performanceType),
+});
+
+export const performanceTypesForSelectInput = Object.values(PERFORMANCE_TYPES).map(
+  createPerformanceTypeSelectOptionObject,
+);
