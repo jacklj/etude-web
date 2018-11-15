@@ -9,6 +9,8 @@ import { selectComposersForDropdown } from '../../redux/people/people.selectors'
 import { addNewRepertoireRequest } from '../../redux/repertoire/repertoire.actions';
 import { getAllPeopleRequest } from '../../redux/people/people.actions';
 import { repertoireTypesForSelectInput } from '../../services/display';
+import { REPERTOIRE_TYPES } from '../../services/constants';
+
 
 class AddNewRepertoire extends Component {
   constructor(props) {
@@ -22,6 +24,10 @@ class AddNewRepertoire extends Component {
       type: undefined,
     };
 
+    this.isOpera = this.isOpera.bind(this);
+    this.isOratorio = this.isOratorio.bind(this);
+    this.isSong = this.isSong.bind(this);
+    this.renderLargerWorkLabel = this.renderLargerWorkLabel.bind(this);
     this.handleHTMLElementChange = this.handleHTMLElementChange.bind(this);
     this.handleCustomComponentChange = this.handleCustomComponentChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,17 +57,49 @@ class AddNewRepertoire extends Component {
 
     const newRepertoire = {
       name: this.state.name,
-      largerWork: this.state.largerWork,
-      composer: this.state.composer.value,
-      compositionDate: this.state.compositionDate,
-      characterThatSingsIt: this.state.characterThatSingsIt,
-      type: this.state.type.value,
+      larger_work: this.state.largerWork,
+      composer_id: this.state.composer && this.state.composer.value,
+      composition_date: this.state.compositionDate,
+      character_that_sings_it: this.state.characterThatSingsIt,
+      type: this.state.type && this.state.type.value,
     };
     this.props.addNewRepertoireRequest(newRepertoire);
   }
 
+  isOpera() {
+    return (
+      this.state.type
+      && (this.state.type.value === REPERTOIRE_TYPES.OPERA.ARIA
+        || this.state.type.value === REPERTOIRE_TYPES.OPERA.RECIT
+        || this.state.type.value === REPERTOIRE_TYPES.OPERA.RECIT_AND_ARIA)
+    );
+  }
+
+  isOratorio() {
+    return (
+      this.state.type
+      && (this.state.type.value === REPERTOIRE_TYPES.ORATORIO.ARIA
+        || this.state.type.value === REPERTOIRE_TYPES.ORATORIO.RECIT
+        || this.state.type.value === REPERTOIRE_TYPES.ORATORIO.RECIT_AND_ARIA)
+    );
+  }
+
+  isSong() {
+    return this.state.type && this.state.type.value === REPERTOIRE_TYPES.SONG;
+  }
+
+  renderLargerWorkLabel() {
+    const defaultTitle = 'Larger work:';
+    if (!this.state.type) return defaultTitle;
+    if (this.isSong()) return 'Song cycle:';
+    if (this.isOpera()) return 'Opera:';
+    if (this.isOratorio()) return 'Oratorio:';
+    return defaultTitle;
+  }
+
   render() {
     const { name, largerWork, composer, compositionDate, characterThatSingsIt, type } = this.state;
+
     return (
       <div>
         <h2>Add new repertoire</h2>
@@ -86,17 +124,19 @@ class AddNewRepertoire extends Component {
               options={repertoireTypesForSelectInput}
             />
           </Label>
+          {this.state.type && this.isOpera() && (
+            <Label>
+            Character in opera:
+              <input
+                type="text"
+                name="characterThatSingsIt"
+                value={characterThatSingsIt}
+                onChange={this.handleHTMLElementChange}
+              />
+            </Label>
+          )}
           <Label>
-            character that sings it:
-            <input
-              type="text"
-              name="characterThatSingsIt"
-              value={characterThatSingsIt}
-              onChange={this.handleHTMLElementChange}
-            />
-          </Label>
-          <Label>
-            larger work:
+            {this.renderLargerWorkLabel()}
             <input
               type="text"
               name="largerWork"

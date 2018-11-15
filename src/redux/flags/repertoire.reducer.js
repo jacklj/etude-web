@@ -3,6 +3,7 @@ import { actionTypes as repertoireActionTypes } from '../repertoire/repertoire.a
 const initialState = {
   gettingUpcomingRepertoire: false,
   fetchingRepertoire: false,
+  isCreatingRepertoire: false,
 };
 
 const flagsReducer = (state = initialState, action) => {
@@ -32,6 +33,21 @@ const flagsReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingRepertoire: false,
+      };
+    case repertoireActionTypes.REPERTOIRE.CREATE.REQUEST:
+      return {
+        ...state,
+        isCreatingRepertoire: true,
+      };
+    case repertoireActionTypes.REPERTOIRE.CREATE.SUCCESS:
+      return {
+        ...state,
+        isCreatingRepertoire: false,
+      };
+    case repertoireActionTypes.REPERTOIRE.CREATE.FAILURE:
+      return {
+        ...state,
+        isCreatingRepertoire: false,
       };
     default:
       return state;

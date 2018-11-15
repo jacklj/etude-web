@@ -120,3 +120,12 @@ export const deleteEvent = eventId => fetch(`${baseApiUrl}/events/${eventId}`, {
   method: 'DELETE',
 })
   .catch(error => console.error('deleteEvent Fetch Error =\n', error));
+
+export const createNewRepertoire = newRepertoire => fetch(`${baseApiUrl}/repertoire`, {
+  method: 'POST',
+  body: JSON.stringify(newRepertoire),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+})
+  .catch(error => console.error('createNewRepertoire Fetch Error =\n', error));

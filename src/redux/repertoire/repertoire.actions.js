@@ -5,6 +5,11 @@ export const actionTypes = {
       SUCCESS: 'REPERTOIRE.GET_ALL.SUCCESS',
       FAILURE: 'REPERTOIRE.GET_ALL.FAILURE',
     },
+    CREATE: {
+      REQUEST: 'REPERTOIRE.CREATE.REQUEST',
+      SUCCESS: 'REPERTOIRE.CREATE.SUCCESS',
+      FAILURE: 'REPERTOIRE.CREATE.FAILURE',
+    },
   },
   UPCOMING_REPERTOIRE: {
     GET: {
@@ -40,5 +45,20 @@ export const getUpcomingRepertoireSuccess = payload => ({
 
 export const getUpcomingRepertoireFailure = error => ({
   type: actionTypes.UPCOMING_REPERTOIRE.GET.FAILURE,
+  error,
+});
+
+export const addNewRepertoireRequest = newRepertoire => ({
+  type: actionTypes.REPERTOIRE.CREATE.REQUEST,
+  newRepertoire,
+});
+
+export const addNewRepertoireSuccess = payload => ({
+  type: actionTypes.REPERTOIRE.CREATE.SUCCESS,
+  payload,
+});
+
+export const addNewRepertoireFailure = error => ({
+  type: actionTypes.REPERTOIRE.CREATE.FAILURE,
   error,
 });

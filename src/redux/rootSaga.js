@@ -20,6 +20,7 @@ import deleteRepOrExerciseInstanceSaga from './repOrExerciseInstances/sagas/dele
 import createPracticeSessionSaga from './events/sagas/practice/createPracticeSession.saga';
 import startPracticeSessionSaga from './events/sagas/practice/startPracticeSession.saga';
 import runPracticeSessionSaga from './events/sagas/practice/runPracticeSession.saga';
+import createNewRepertoireSaga from './repertoire/sagas/createRepertoire.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -43,5 +44,6 @@ export default function* rootSaga() {
     startPracticeSessionSaga(),
     runPracticeSessionSaga(),
     getUpcomingRepSaga(),
+    createNewRepertoireSaga(),
   ]);
 }

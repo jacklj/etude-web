@@ -11,6 +11,7 @@ class Repertoire extends Model {
       case eventsActionTypes.EVENT.GET.SUCCESS:
       case repertoireActionTypes.REPERTOIRE.GET_ALL.SUCCESS:
       case repertoireActionTypes.UPCOMING_REPERTOIRE.GET.SUCCESS:
+      case repertoireActionTypes.REPERTOIRE.CREATE.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.repertoire)) {
           Object.values(action.payload.repertoire)
             .forEach(repertoireItem => SessionBoundRepertoire.upsert(repertoireItem));
