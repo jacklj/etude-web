@@ -13,3 +13,14 @@ export const selectTeachersForDropdown = createSelector(
       label: `${teacher.first_name} ${teacher.surname}`,
     })),
 );
+
+export const selectComposersForDropdown = createSelector(
+  orm,
+  dbStateSelector,
+  session => session.People.all()
+    .filter(person => person.role === 'Composer')
+    .toModelArray().map(composer => ({
+      value: composer.person_id,
+      label: `${composer.surname}, ${composer.first_name}`,
+    })),
+);

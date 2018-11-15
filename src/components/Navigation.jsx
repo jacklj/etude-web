@@ -41,6 +41,7 @@ class Navigation extends Component {
         <button type="button" onClick={this.createThenGoToNewLesson}>Add lesson</button>
         <button type="button" onClick={this.createThenGoToNewPracticeSession}>Add practice session</button>
         <button type="button" onClick={this.createThenGoToNewPerformance}>Add performance</button>
+        <StyledLink to="/add-rep">Add rep</StyledLink>
       </Nav>
     );
   }

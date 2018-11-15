@@ -1,4 +1,4 @@
-import { EVENT_TYPES, PERFORMANCE_TYPES } from './constants';
+import { EVENT_TYPES, PERFORMANCE_TYPES, REPERTOIRE_TYPES } from './constants';
 
 const eventTypeDisplayMap = {
   [EVENT_TYPES.LESSON]: 'Lesson',
@@ -32,3 +32,20 @@ export const createPerformanceTypeSelectOptionObject = performanceType => ({
 export const performanceTypesForSelectInput = Object.values(PERFORMANCE_TYPES).map(
   createPerformanceTypeSelectOptionObject,
 );
+
+const repertoireTypesForRendering = {
+  [REPERTOIRE_TYPES.OPERA.ARIA]: 'Opera Aria',
+  [REPERTOIRE_TYPES.OPERA.RECIT]: 'Opera Recit',
+  [REPERTOIRE_TYPES.OPERA.RECIT_AND_ARIA]: 'Opera Recit and Aria',
+  [REPERTOIRE_TYPES.ORATORIO.ARIA]: 'Oratorio Aria',
+  [REPERTOIRE_TYPES.ORATORIO.RECIT]: 'Oratorio Recit',
+  [REPERTOIRE_TYPES.ORATORIO.RECIT_AND_ARIA]: 'Oratorio Recit and Aria',
+  [REPERTOIRE_TYPES.CONCERT_ARIA]: 'Concert Aria',
+  [REPERTOIRE_TYPES.SONG]: 'Song',
+};
+
+export const repertoireTypesForSelectInput = Object.keys(repertoireTypesForRendering)
+  .map(repType => ({
+    value: repType,
+    label: repertoireTypesForRendering[repType],
+  }));
