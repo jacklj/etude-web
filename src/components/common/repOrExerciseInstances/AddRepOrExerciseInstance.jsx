@@ -38,8 +38,9 @@ class AddRepOrExerciseInstance extends Component {
   }
 
   componentDidMount() {
-    this.props.getAllRepertoireRequest();
-    this.props.getAllExercisesRequest();
+    const { canAddExercises, canAddRepertoire } = this.props;
+    if (canAddRepertoire) this.props.getAllRepertoireRequest();
+    if (canAddExercises) this.props.getAllExercisesRequest();
   }
 
   handleCustomComponentChange(name) {
@@ -81,7 +82,7 @@ class AddRepOrExerciseInstance extends Component {
   }
 
   render() {
-    const { repertoire, exercises } = this.props;
+    const { repertoire, exercises, canAddRepertoire, canAddExercises } = this.props;
     const { exercise, piece, view } = this.state;
     let jsx;
 
@@ -89,12 +90,16 @@ class AddRepOrExerciseInstance extends Component {
       case VIEW.DEFAULT:
         jsx = (
           <div>
-            <button type="button" onClick={this.showAddPiece}>
-              Add piece
-            </button>
-            <button type="button" onClick={this.showAddExercise}>
-              Add exercise
-            </button>
+            {canAddRepertoire && (
+              <button type="button" onClick={this.showAddPiece}>
+                Add piece
+              </button>
+            )}
+            {canAddExercises && (
+              <button type="button" onClick={this.showAddExercise}>
+                Add exercise
+              </button>
+            )}
           </div>
         );
         break;
@@ -137,6 +142,8 @@ class AddRepOrExerciseInstance extends Component {
 
 AddRepOrExerciseInstance.defaultProps = {
   eventId: undefined,
+  canAddRepertoire: true,
+  canAddExercises: true,
 };
 
 AddRepOrExerciseInstance.propTypes = {
@@ -147,6 +154,8 @@ AddRepOrExerciseInstance.propTypes = {
   getAllExercisesRequest: PropTypes.func.isRequired,
   createRepertoireInstanceRequest: PropTypes.func.isRequired,
   createExerciseInstanceRequest: PropTypes.func.isRequired,
+  canAddRepertoire: PropTypes.bool,
+  canAddExercises: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({

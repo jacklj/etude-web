@@ -73,7 +73,11 @@ class Performance extends Component {
             </button>
           </div>
           <h3>Repertoire</h3>
-          <AddRepOrExerciseInstance eventId={eventId} />
+          <AddRepOrExerciseInstance
+            eventId={eventId}
+            canAddRepertoire
+            canAddExercises={false}
+          />
           <RepOrExerciseInstances
             repOrExerciseInstances={repOrExerciseInstances}
             eventId={eventId}
