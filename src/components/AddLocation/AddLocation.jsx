@@ -1,40 +1,57 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import DateTime from 'react-datetime';
-import Select from 'react-select';
 
-import { Label } from '../common/styledComponents';
-import { selectComposersForDropdown } from '../../redux/people/people.selectors';
-import { addNewRepertoireRequest } from '../../redux/repertoire/repertoire.actions';
-import { getAllPeopleRequest } from '../../redux/people/people.actions';
-import { repertoireTypesForSelectInput } from '../../services/display';
-import { REPERTOIRE_TYPES } from '../../services/constants';
+import { addLocationRequest } from '../../redux/locations/locations.actions';
+import { TextInputSection } from '../common/forms';
 
+const locationFields = [
+  {
+    label: 'name',
+    name: 'name',
+  },
+  {
+    label: 'address line 1',
+    name: 'address_line_1',
+  },
+  {
+    label: 'address line 2',
+    name: 'address_line_2',
+  },
+  {
+    label: 'address line 3',
+    name: 'address_line_3',
+  },
+  {
+    label: 'town/city',
+    name: 'town_city',
+  },
+  {
+    label: 'postcode',
+    name: 'postcode',
+  },
+  {
+    label: 'website',
+    name: 'website',
+  },
+];
 
-class AddNewRepertoire extends Component {
+const generateInitialState = fields => fields.reduce((initialState, field) => ({
+  ...initialState,
+  [field.name]: '',
+}), {});
+
+class AddLocation extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: '',
-      largerWork: '',
-      composer: undefined,
-      compositionDate: undefined,
-      characterThatSingsIt: '',
-      type: undefined,
-    };
+    // NB all state is assumed to be newlocation fields, so its all dispatched
+    // in the addNewLocationRequest action. If you add anything else to the state,
+    // change this!
+    this.state = generateInitialState(locationFields);
 
-    this.isOpera = this.isOpera.bind(this);
-    this.isOratorio = this.isOratorio.bind(this);
-    this.isSong = this.isSong.bind(this);
-    this.renderLargerWorkLabel = this.renderLargerWorkLabel.bind(this);
     this.handleHTMLElementChange = this.handleHTMLElementChange.bind(this);
-    this.handleCustomComponentChange = this.handleCustomComponentChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.getAllPeopleRequest();
+    this.TextInputSection = TextInputSection(this.handleHTMLElementChange);
   }
 
   handleHTMLElementChange(event) {
@@ -46,117 +63,28 @@ class AddNewRepertoire extends Component {
     });
   }
 
-  handleCustomComponentChange(name) {
-    return value => this.setState({
-      [name]: value,
-    });
-  }
-
   handleSubmit(event) {
     event.preventDefault();
-
-    const newRepertoire = {
-      name: this.state.name,
-      larger_work: this.state.largerWork,
-      composer_id: this.state.composer && this.state.composer.value,
-      composition_date: this.state.compositionDate,
-      character_that_sings_it: this.state.characterThatSingsIt,
-      type: this.state.type && this.state.type.value,
-    };
-    this.props.addNewRepertoireRequest(newRepertoire);
-  }
-
-  isOpera() {
-    return (
-      this.state.type
-      && (this.state.type.value === REPERTOIRE_TYPES.OPERA.ARIA
-        || this.state.type.value === REPERTOIRE_TYPES.OPERA.RECIT
-        || this.state.type.value === REPERTOIRE_TYPES.OPERA.RECIT_AND_ARIA)
-    );
-  }
-
-  isOratorio() {
-    return (
-      this.state.type
-      && (this.state.type.value === REPERTOIRE_TYPES.ORATORIO.ARIA
-        || this.state.type.value === REPERTOIRE_TYPES.ORATORIO.RECIT
-        || this.state.type.value === REPERTOIRE_TYPES.ORATORIO.RECIT_AND_ARIA)
-    );
-  }
-
-  isSong() {
-    return this.state.type && this.state.type.value === REPERTOIRE_TYPES.SONG;
-  }
-
-  renderLargerWorkLabel() {
-    const defaultTitle = 'Larger work:';
-    if (!this.state.type) return defaultTitle;
-    if (this.isSong()) return 'Song cycle:';
-    if (this.isOpera()) return 'Opera:';
-    if (this.isOratorio()) return 'Oratorio:';
-    return defaultTitle;
+    const newLocation = { ...this.state };
+    this.props.addLocationRequest(newLocation);
   }
 
   render() {
-    const { name, largerWork, composer, compositionDate, characterThatSingsIt, type } = this.state;
-
     return (
       <div>
         <h2>Add new repertoire</h2>
         <form onSubmit={this.handleSubmit}>
-          <Label>
-            name:
-            <input type="text" name="name" value={name} onChange={this.handleHTMLElementChange} />
-          </Label>
-          <Label>
-            composer:
-            <Select
-              value={composer}
-              onChange={this.handleCustomComponentChange('composer')}
-              options={this.props.composers}
-            />
-          </Label>
-          <Label>
-            type:
-            <Select
-              value={type}
-              onChange={this.handleCustomComponentChange('type')}
-              options={repertoireTypesForSelectInput}
-            />
-          </Label>
-          {this.state.type && this.isOpera() && (
-            <Label>
-            Character in opera:
-              <input
-                type="text"
-                name="characterThatSingsIt"
-                value={characterThatSingsIt}
-                onChange={this.handleHTMLElementChange}
-              />
-            </Label>
-          )}
-          <Label>
-            {this.renderLargerWorkLabel()}
-            <input
-              type="text"
-              name="largerWork"
-              value={largerWork}
+          {locationFields.map(field => (
+            <TextInputSection
+              {...field}
+              value={this.state[field.name]}
               onChange={this.handleHTMLElementChange}
             />
-          </Label>
-          <Label>
-            composition date:
-            <DateTime
-              timeFormat={false}
-              value={compositionDate}
-              onChange={this.handleCustomComponentChange('compositionDate')}
-            />
-          </Label>
-
-          {this.props.isCreatingRepertoire ? (
-            <div>Adding repertoire...</div>
+          ))}
+          {this.props.isCreatingLocation ? (
+            <div>Adding location...</div>
           ) : (
-            <input type="submit" value="Add repertoire" />
+            <input type="submit" value="Add location" />
           )}
         </form>
       </div>
@@ -164,26 +92,23 @@ class AddNewRepertoire extends Component {
   }
 }
 
-AddNewRepertoire.defaultProps = {};
+AddLocation.defaultProps = {};
 
-AddNewRepertoire.propTypes = {
-  addNewRepertoireRequest: PropTypes.func.isRequired,
-  getAllPeopleRequest: PropTypes.func.isRequired,
+AddLocation.propTypes = {
+  addLocationRequest: PropTypes.func.isRequired,
   composers: PropTypes.array.isRequired, // eslint-disable-line  react/forbid-prop-types
-  isCreatingRepertoire: PropTypes.bool.isRequired,
+  isCreatingLocation: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  composers: selectComposersForDropdown(state),
-  isCreatingRepertoire: state.flags.repertoire.isCreatingRepertoire,
+  isCreatingLocation: state.flags.repertoire.isCreatingLocation,
 });
 
 const mapDispatchToProps = {
-  addNewRepertoireRequest,
-  getAllPeopleRequest,
+  addLocationRequest,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AddNewRepertoire);
+)(AddLocation);

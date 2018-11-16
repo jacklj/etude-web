@@ -16,6 +16,7 @@ import PracticeSession from './components/PracticeSession/PracticeSession';
 import UpcomingRep from './components/upcomingRep/UpcomingRep';
 import Performance from './components/Performance/Performance';
 import AddNewRepertoire from './components/AddNewRepertoire/AddNewRepertoire';
+import AddLocation from './components/AddLocation/AddLocation';
 
 const Container = styled.div`
   background-color: rgb(238, 238, 238);
@@ -49,6 +50,7 @@ const App = ({ store }) => (
         <Route path="/practice_session/:id" component={PracticeSession} />
         <Route path="/performance/:id" component={Performance} />
         <Route path="/add-rep" component={AddNewRepertoire} />
+        <Route path="/add-location" component={AddLocation} />
       </Container>
     </ConnectedRouter>
   </Provider>
