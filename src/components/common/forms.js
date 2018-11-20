@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Label } from './styledComponents';
 
-export const TextInputSection = ({ name, value, onChange }) => (
+export const TextInputSection = ({ label, name, value, onChange }) => (
   <Label>
-    {name}:
+    {label}:
     <input
       type="text"
       name={name}
