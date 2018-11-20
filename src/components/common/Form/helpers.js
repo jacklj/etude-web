@@ -1,0 +1,4 @@
+export const FIELD_TYPES = {
+  TEXT: 'FIELD_TYPES.TEXT',
+  SELECT: 'FIELD_TYPES.SELECT',
+};

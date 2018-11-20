@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { TextInputSection } from './forms.jsx';
+import TextInputSection from './TextInputSection';
 
 const generateInitialState = fields => fields.reduce((initialState, field) => ({
   ...initialState,

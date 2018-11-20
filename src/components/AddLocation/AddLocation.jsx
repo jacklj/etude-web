@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { addLocationRequest } from '../../redux/locations/locations.actions';
-import Form from '../common/Form';
-import { FIELD_TYPES } from '../common/forms.jsx';
+import Form from '../common/Form/Form';
+import { FIELD_TYPES } from '../common/Form/helpers';
 
 const addLocationFields = [
   {
