@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getPeople } from '../../services/api';
-import { getAllPeopleSuccess, getAllPeopleFailure, actionTypes } from './people.actions';
+
+import { getPeople } from '../../../services/api';
+import { getAllPeopleSuccess, getAllPeopleFailure, actionTypes } from '../people.actions';
 
 function* fetchPeople() {
   try {

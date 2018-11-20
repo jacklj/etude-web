@@ -17,6 +17,7 @@ import UpcomingRep from './components/upcomingRep/UpcomingRep';
 import Performance from './components/Performance/Performance';
 import AddNewRepertoire from './components/AddXPages/AddNewRepertoire';
 import AddLocation from './components/AddXPages/AddLocation';
+import AddPerson from './components/AddXPages/AddPerson';
 
 const Container = styled.div`
   background-color: rgb(238, 238, 238);
@@ -51,6 +52,7 @@ const App = ({ store }) => (
         <Route path="/performance/:id" component={Performance} />
         <Route path="/add-rep" component={AddNewRepertoire} />
         <Route path="/add-location" component={AddLocation} />
+        <Route path="/add-person" component={AddPerson} />
       </Container>
     </ConnectedRouter>
   </Provider>

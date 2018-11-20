@@ -16,6 +16,7 @@ class People extends Model {
         }
         break;
       case peopleActionTypes.PEOPLE.GET_ALL.SUCCESS:
+      case peopleActionTypes.PEOPLE.CREATE.SUCCESS:
         Object.values(action.payload.people).forEach(person => SessionBoundPeople.upsert(person));
         break;
       default:

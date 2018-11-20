@@ -50,6 +50,15 @@ export const getLocations = () => fetch(`${baseApiUrl}/locations`);
 
 export const getPeople = () => fetch(`${baseApiUrl}/people`);
 
+export const createPerson = person => fetch(`${baseApiUrl}/people/`, {
+  method: 'POST',
+  body: JSON.stringify(person),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+})
+  .catch(error => console.error('createPerson Fetch Error =\n', error));
+
 export const createNote = note => fetch(`${baseApiUrl}/notes/`, {
   method: 'POST',
   body: JSON.stringify(note),

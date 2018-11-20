@@ -7,7 +7,8 @@ import updateEventSaga from './events/sagas/updateEvent.saga';
 import createLessonSaga from './events/sagas/lesson/createLesson.saga';
 import createPerformanceSaga from './events/sagas/performance/createPerformance.saga';
 import fetchLocationsSaga from './locations/locations.saga';
-import fetchPeopleSaga from './people/people.saga';
+import fetchPeopleSaga from './people/sagas/getAllPeople.saga';
+import createPersonSaga from './people/sagas/createPerson.saga';
 import createNoteSaga from './notes/sagas/createNote.saga';
 import updateNoteSaga from './notes/sagas/updateNote.saga';
 import deleteNoteSaga from './notes/sagas/deleteNote.saga';
@@ -32,6 +33,7 @@ export default function* rootSaga() {
     createPerformanceSaga(),
     fetchLocationsSaga(),
     fetchPeopleSaga(),
+    createPersonSaga(),
     createNoteSaga(),
     updateNoteSaga(),
     deleteNoteSaga(),
