@@ -48,6 +48,15 @@ export const updateEvent = (event, eventId) => fetch(`${baseApiUrl}/events/${eve
 
 export const getLocations = () => fetch(`${baseApiUrl}/locations`);
 
+export const createLocation = location => fetch(`${baseApiUrl}/locations/`, {
+  method: 'POST',
+  body: JSON.stringify(location),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+})
+  .catch(error => console.error('createLocation Fetch Error =\n', error));
+
 export const getPeople = () => fetch(`${baseApiUrl}/people`);
 
 export const createPerson = person => fetch(`${baseApiUrl}/people/`, {
