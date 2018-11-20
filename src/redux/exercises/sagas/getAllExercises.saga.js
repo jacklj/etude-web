@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getExercises } from '../../services/api';
+import { getExercises } from '../../../services/api';
 import {
   getAllExercisesSuccess,
   getAllExercisesFailure,
   actionTypes,
-} from './exercises.actions';
+} from '../exercises.actions';
 
 function* fetchExercises() {
   try {
