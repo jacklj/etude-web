@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
+import DateTime from 'react-datetime';
+import Select from 'react-select';
 
-import TextInputSection from './TextInputSection';
-
-const generateInitialState = fields => fields.reduce((initialState, field) => ({
-  ...initialState,
-  [field.name]: '',
-}), {});
+import { FIELD_TYPES, generateInitialState, createNewEntityObject } from './helpers';
+import { Label } from '../styledComponents';
 
 export default class Form extends Component {
   constructor(props) {
@@ -37,22 +35,68 @@ export default class Form extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const newEntity = { ...this.state };
+    const newEntity = createNewEntityObject(this.state);
     this.props.addEntityRequest(newEntity);
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        {this.props.fields.map(field => (
-          <TextInputSection
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            value={this.state[field.name]}
-            onChange={this.handleHTMLElementChange}
-          />
-        ))}
+        {this.props.fields.map(field => {
+          if (field.shouldDisplay && !!field.shouldDisplay(this.state)) return undefined;
+          let fieldComponent;
+          switch (field.type) {
+            case FIELD_TYPES.TEXT: {
+              fieldComponent = (
+                <input
+                  type="text"
+                  name={field.name}
+                  value={this.state[field.name]}
+                  onChange={this.handleHTMLElementChange}
+                />
+              );
+              break;
+            }
+            case FIELD_TYPES.SELECT: {
+              fieldComponent = (
+                <Select
+                  value={this.state[field.name]}
+                  onChange={this.handleCustomComponentChange(field.name)}
+                  options={field.options}
+                />
+              );
+              break;
+            }
+            case FIELD_TYPES.DATE: {
+              fieldComponent = (
+                <DateTime
+                  timeFormat={false}
+                  value={this.state[field.name]}
+                  onChange={this.handleCustomComponentChange(field.name)}
+                />
+              );
+              break;
+            }
+            case FIELD_TYPES.DATETIME: {
+              fieldComponent = (
+                <DateTime
+                  value={this.state[field.name]}
+                  onChange={this.handleCustomComponentChange(field.name)}
+                />
+              );
+              break;
+            }
+            default:
+              return undefined;
+          }
+          const label = typeof field.label === 'string' ? field.label : field.label(this.state);
+          return (
+            <Label key={field.name}>
+              {label}:
+              {fieldComponent}
+            </Label>
+          )
+        })}
         {this.props.isCreatingFlag ? (
           <div>{this.props.loadingMessage}</div>
         ) : (

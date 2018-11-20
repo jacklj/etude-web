@@ -49,3 +49,26 @@ export const repertoireTypesForSelectInput = Object.keys(repertoireTypesForRende
     value: repType,
     label: repertoireTypesForRendering[repType],
   }));
+
+const isOpera = repertoireType => (
+  repertoireType === REPERTOIRE_TYPES.OPERA.ARIA
+  || repertoireType === REPERTOIRE_TYPES.OPERA.RECIT
+  || repertoireType === REPERTOIRE_TYPES.OPERA.RECIT_AND_ARIA);
+
+const isOratorio = repertoireType => (
+  repertoireType === REPERTOIRE_TYPES.ORATORIO.ARIA
+  || repertoireType === REPERTOIRE_TYPES.ORATORIO.RECIT
+  || repertoireType === REPERTOIRE_TYPES.ORATORIO.RECIT_AND_ARIA);
+
+const isSong = repertoireType => repertoireType === REPERTOIRE_TYPES.SONG;
+
+export const renderLargerWorkLabel = state => {
+  const defaultTitle = 'Larger work:';
+  if (!state.type) return defaultTitle;
+  if (isSong(state.type.value)) return 'Song cycle:';
+  if (isOpera(state.type.value)) return 'Opera:';
+  if (isOratorio(state.type.value)) return 'Oratorio:';
+  return defaultTitle;
+};
+
+export const isOperaFromState = state => state.type && isOpera(state.type.value);
