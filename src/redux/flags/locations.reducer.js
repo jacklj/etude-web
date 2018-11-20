@@ -2,6 +2,7 @@ import { actionTypes as locationsActionTypes } from '../locations/locations.acti
 
 const initialState = {
   fetchingLocations: false,
+  creatingLocation: false,
 };
 
 const flagsReducer = (state = initialState, action) => {
@@ -20,6 +21,21 @@ const flagsReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingLocations: false,
+      };
+    case locationsActionTypes.LOCATIONS.CREATE.REQUEST:
+      return {
+        ...state,
+        creatingLocation: true,
+      };
+    case locationsActionTypes.LOCATIONS.CREATE.SUCCESS:
+      return {
+        ...state,
+        creatingLocation: false,
+      };
+    case locationsActionTypes.LOCATIONS.CREATE.FAILURE:
+      return {
+        ...state,
+        creatingLocation: false,
       };
     default:
       return state;
