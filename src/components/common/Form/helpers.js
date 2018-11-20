@@ -1,11 +1,18 @@
 export const FIELD_TYPES = {
   TEXT: 'FIELD_TYPES.TEXT',
   SELECT: 'FIELD_TYPES.SELECT',
+  DATE: 'FIELD_TYPES.DATE',
+  DATETIME: 'FIELD_TYPES.DATETIME',
+};
+
+const fieldInitialValue = fieldType => {
+  if (fieldType === FIELD_TYPES.TEXT) return '';
+  return undefined;
 };
 
 export const generateInitialState = fields => fields.reduce((initialState, field) => ({
   ...initialState,
-  [field.name]: '',
+  [field.name]: fieldInitialValue(field.type),
 }), {});
 
 export const createNewEntityObject = state => {
