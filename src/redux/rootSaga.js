@@ -6,7 +6,7 @@ import deleteEventSaga from './events/sagas/deleteEvent.saga';
 import updateEventSaga from './events/sagas/updateEvent.saga';
 import createLessonSaga from './events/sagas/lesson/createLesson.saga';
 import createPerformanceSaga from './events/sagas/performance/createPerformance.saga';
-import fetchLocationsSaga from './locations/locations.saga';
+import fetchLocationsSaga from './locations/sagas/getAllLocations.saga';
 import fetchPeopleSaga from './people/sagas/getAllPeople.saga';
 import createPersonSaga from './people/sagas/createPerson.saga';
 import createNoteSaga from './notes/sagas/createNote.saga';

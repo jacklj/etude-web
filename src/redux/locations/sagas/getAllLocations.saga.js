@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getLocations } from '../../services/api';
-import { getAllLocationsSuccess, getAllLocationsFailure, actionTypes } from './locations.actions';
+import { getLocations } from '../../../services/api';
+import { getAllLocationsSuccess, getAllLocationsFailure, actionTypes } from '../locations.actions';
 
 function* fetchLocations() {
   try {
