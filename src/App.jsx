@@ -15,8 +15,8 @@ import Lesson from './components/Lesson/Lesson';
 import PracticeSession from './components/PracticeSession/PracticeSession';
 import UpcomingRep from './components/upcomingRep/UpcomingRep';
 import Performance from './components/Performance/Performance';
-import AddNewRepertoire from './components/AddNewRepertoire/AddNewRepertoire';
-import AddLocation from './components/AddLocation/AddLocation';
+import AddNewRepertoire from './components/AddXPages/AddNewRepertoire';
+import AddLocation from './components/AddXPages/AddLocation';
 
 const Container = styled.div`
   background-color: rgb(238, 238, 238);
