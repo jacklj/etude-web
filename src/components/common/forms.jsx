@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 
 import { Label } from './styledComponents';
 
+export const FIELD_TYPES = {
+  TEXT: 'FIELD_TYPES.TEXT',
+  SELECT: 'FIELD_TYPES.SELECT',
+};
+
 export const TextInputSection = ({ label, name, value, onChange }) => (
   <Label>
     {label}:

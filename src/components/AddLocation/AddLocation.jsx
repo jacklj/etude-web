@@ -1,107 +1,72 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { addLocationRequest } from '../../redux/locations/locations.actions';
-import { TextInputSection } from '../common/forms';
+import Form from '../common/Form';
+import { FIELD_TYPES } from '../common/forms.jsx';
 
-const locationFields = [
+const addLocationFields = [
   {
     label: 'name',
     name: 'name',
+    type: FIELD_TYPES.TEXT,
   },
   {
     label: 'address line 1',
     name: 'address_line_1',
+    type: FIELD_TYPES.TEXT,
   },
   {
     label: 'address line 2',
     name: 'address_line_2',
+    type: FIELD_TYPES.TEXT,
   },
   {
     label: 'address line 3',
     name: 'address_line_3',
+    type: FIELD_TYPES.TEXT,
   },
   {
     label: 'town/city',
     name: 'town_city',
+    type: FIELD_TYPES.TEXT,
   },
   {
     label: 'postcode',
     name: 'postcode',
+    type: FIELD_TYPES.TEXT,
   },
   {
     label: 'website',
     name: 'website',
+    type: FIELD_TYPES.TEXT,
   },
 ];
 
-const generateInitialState = fields => fields.reduce((initialState, field) => ({
-  ...initialState,
-  [field.name]: '',
-}), {});
+const AddLocation = props => (
+  <div>
+    <h2>Add new repertoire</h2>
+    <Form
+      fields={addLocationFields}
+      addEntityRequest={props.addLocationRequest}
+      isCreatingFlag={props.creatingLocation}
+      loadingMessage="Adding location..."
+      submitButtonText="Add location"
+    />
+  </div>
+);
 
-class AddLocation extends Component {
-  constructor(props) {
-    super(props);
-    // NB all state is assumed to be newlocation fields, so its all dispatched
-    // in the addNewLocationRequest action. If you add anything else to the state,
-    // change this!
-    this.state = generateInitialState(locationFields);
-
-    this.handleHTMLElementChange = this.handleHTMLElementChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.TextInputSection = TextInputSection(this.handleHTMLElementChange);
-  }
-
-  handleHTMLElementChange(event) {
-    const { target } = event;
-    const { name, value } = target;
-
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const newLocation = { ...this.state };
-    this.props.addLocationRequest(newLocation);
-  }
-
-  render() {
-    return (
-      <div>
-        <h2>Add new repertoire</h2>
-        <form onSubmit={this.handleSubmit}>
-          {locationFields.map(field => (
-            <TextInputSection
-              {...field}
-              value={this.state[field.name]}
-              onChange={this.handleHTMLElementChange}
-            />
-          ))}
-          {this.props.isCreatingLocation ? (
-            <div>Adding location...</div>
-          ) : (
-            <input type="submit" value="Add location" />
-          )}
-        </form>
-      </div>
-    );
-  }
-}
 
 AddLocation.defaultProps = {};
 
 AddLocation.propTypes = {
   addLocationRequest: PropTypes.func.isRequired,
-  composers: PropTypes.array.isRequired, // eslint-disable-line  react/forbid-prop-types
-  isCreatingLocation: PropTypes.bool.isRequired,
+  creatingLocation: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  isCreatingLocation: state.flags.repertoire.isCreatingLocation,
+  creatingLocation: state.flags.locations.creatingLocation,
 });
 
 const mapDispatchToProps = {
