@@ -95,6 +95,16 @@ export const getRepertoire = () => fetch(`${baseApiUrl}/repertoire`);
 
 export const getExercises = () => fetch(`${baseApiUrl}/exercises`);
 
+export const createExercise = exercise => fetch(`${baseApiUrl}/exercises`, {
+  method: 'POST',
+  body: JSON.stringify(exercise),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+})
+  .catch(error => console.error('createExercise Fetch Error =\n', error));
+
+
 export const createRepertoireInstance = (repertoireId, eventId) => fetch(`${baseApiUrl}/events/${eventId}/repertoire`, {
   method: 'POST',
   body: JSON.stringify({ repertoireId }),

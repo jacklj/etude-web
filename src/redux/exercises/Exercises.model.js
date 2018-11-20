@@ -10,6 +10,7 @@ class Exercises extends Model {
       case eventsActionTypes.EVENT.GET_ALL.SUCCESS:
       case eventsActionTypes.EVENT.GET.SUCCESS:
       case exercisesActionTypes.EXERCISES.GET_ALL.SUCCESS:
+      case exercisesActionTypes.EXERCISES.CREATE.SUCCESS:
         if (ifObjectExistsAndIsNotEmpty(action.payload.exercises)) {
           Object.values(action.payload.exercises)
             .forEach(exercise => SessionBoundExercises.upsert(exercise));

@@ -16,6 +16,7 @@ import deleteNoteSaga from './notes/sagas/deleteNote.saga';
 import fetchRepertoireSaga from './repertoire/sagas/fetchRepertoire.saga';
 import getUpcomingRepSaga from './repertoire/sagas/getUpcomingRep.saga';
 import fetchExercisesSaga from './exercises/sagas/getAllExercises.saga';
+import createExerciseSaga from './exercises/sagas/createExercise.saga';
 import createRepertoireInstanceSaga from './repOrExerciseInstances/sagas/createRepertoireInstance.saga';
 import createExerciseInstanceSaga from './repOrExerciseInstances/sagas/createExerciseInstance.saga';
 import deleteRepOrExerciseInstanceSaga from './repOrExerciseInstances/sagas/deleteRepOrExerciseInstance.saga';
@@ -41,6 +42,7 @@ export default function* rootSaga() {
     deleteNoteSaga(),
     fetchRepertoireSaga(),
     fetchExercisesSaga(),
+    createExerciseSaga(),
     createRepertoireInstanceSaga(),
     createExerciseInstanceSaga(),
     deleteRepOrExerciseInstanceSaga(),

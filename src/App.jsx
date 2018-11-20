@@ -16,6 +16,7 @@ import PracticeSession from './components/PracticeSession/PracticeSession';
 import UpcomingRep from './components/upcomingRep/UpcomingRep';
 import Performance from './components/Performance/Performance';
 import AddNewRepertoire from './components/AddXPages/AddNewRepertoire';
+import AddExercise from './components/AddXPages/AddExercise';
 import AddLocation from './components/AddXPages/AddLocation';
 import AddPerson from './components/AddXPages/AddPerson';
 
@@ -51,6 +52,7 @@ const App = ({ store }) => (
         <Route path="/practice_session/:id" component={PracticeSession} />
         <Route path="/performance/:id" component={Performance} />
         <Route path="/add-rep" component={AddNewRepertoire} />
+        <Route path="/add-exercise" component={AddExercise} />
         <Route path="/add-location" component={AddLocation} />
         <Route path="/add-person" component={AddPerson} />
       </Container>

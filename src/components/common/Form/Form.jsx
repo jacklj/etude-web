@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import DateTime from 'react-datetime';
 import Select from 'react-select';
+import vextab from 'vextab/releases/vextab-div'; // eslint-disable-line no-unused-vars
 
 import { FIELD_TYPES, generateInitialState, createNewEntityObject } from './helpers';
 import { Label } from '../styledComponents';
+import ScoreInput from './ScoreInput';
 
 export default class Form extends Component {
   constructor(props) {
@@ -82,6 +84,16 @@ export default class Form extends Component {
                 <DateTime
                   value={this.state[field.name]}
                   onChange={this.handleCustomComponentChange(field.name)}
+                />
+              );
+              break;
+            }
+            case FIELD_TYPES.SCORE: {
+              fieldComponent = (
+                <ScoreInput
+                  name={field.name}
+                  value={this.state[field.name]}
+                  onChange={this.handleHTMLElementChange}
                 />
               );
               break;

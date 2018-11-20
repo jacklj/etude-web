@@ -3,10 +3,12 @@ export const FIELD_TYPES = {
   SELECT: 'FIELD_TYPES.SELECT',
   DATE: 'FIELD_TYPES.DATE',
   DATETIME: 'FIELD_TYPES.DATETIME',
+  SCORE: 'FIELD_TYPES.SCORE',
 };
 
 const fieldInitialValue = fieldType => {
   if (fieldType === FIELD_TYPES.TEXT) return '';
+  if (fieldType === FIELD_TYPES.SCORE) return '';
   return undefined;
 };
 
