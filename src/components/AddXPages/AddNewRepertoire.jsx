@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import { selectComposersForDropdown } from '../../redux/people/people.selectors';
 import { addNewRepertoireRequest } from '../../redux/repertoire/repertoire.actions';
-import { getAllPeopleRequest } from '../../redux/people/people.actions';
 import { repertoireTypesForSelectInput, renderLargerWorkLabel, isOperaFromState } from '../../services/display';
 import { FIELD_TYPES } from '../common/Form/helpers';
 import Form from '../common/Form/Form';
