@@ -43,7 +43,7 @@ export default class Form extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         {this.props.fields.map(field => {
-          if (field.shouldDisplay && !!field.shouldDisplay(this.state)) return undefined;
+          if (field.shouldDisplay && !field.shouldDisplay(this.state)) return undefined;
           let fieldComponent;
           switch (field.type) {
             case FIELD_TYPES.TEXT: {
