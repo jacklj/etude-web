@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import CreatableSelect from 'react-select/lib/Creatable';
 import Select from 'react-select';
 
 import { getAllRepertoireRequest } from '../../../redux/repertoire/repertoire.actions';
@@ -32,9 +33,10 @@ class AddRepOrExerciseInstance extends Component {
     this.showAddPiece = this.showAddPiece.bind(this);
     this.showAddExercise = this.showAddExercise.bind(this);
     this.cancelAddingItem = this.cancelAddingItem.bind(this);
-    this.handleCustomComponentChange = this.handleCustomComponentChange.bind(this);
+    this.handleExercisesDropdownChange = this.handleExercisesDropdownChange.bind(this);
     this.handlePieceInstanceSubmit = this.handlePieceInstanceSubmit.bind(this);
     this.handleExerciseInstanceSubmit = this.handleExerciseInstanceSubmit.bind(this);
+    this.handleRepertoireDropdownChange = this.handleRepertoireDropdownChange.bind(this);
   }
 
   componentDidMount() {
@@ -43,10 +45,26 @@ class AddRepOrExerciseInstance extends Component {
     if (canAddExercises) this.props.getAllExercisesRequest();
   }
 
-  handleCustomComponentChange(name) {
-    return value => this.setState({
-      [name]: value,
-    });
+  handleRepertoireDropdownChange(newValue, actionMeta) {
+    if (actionMeta.action === 'select-option') {
+      this.setState({
+        piece: newValue,
+      });
+    } else if (actionMeta.action === 'create-option') {
+      console.log("Add a new repertoire!: ", newValue.value)
+      // open add repertoire page, with the name of the repertoire
+      // already filled out from what the user has entered here
+    }
+  }
+
+
+  handleExercisesDropdownChange(name) {
+    return value => {
+      console.log(value);
+      this.setState({
+        [name]: value,
+      });
+    }
   }
 
   handlePieceInstanceSubmit(event) {
@@ -106,10 +124,12 @@ class AddRepOrExerciseInstance extends Component {
       case VIEW.ADD_PIECE:
         jsx = (
           <form onSubmit={this.handlePieceInstanceSubmit}>
-            <Select
-              value={piece}
+            {/* NB CreatableSelect seems to manage its own state - don't need
+                   to pass a value prop */}
+            <CreatableSelect
+              isClearable
+              onChange={this.handleRepertoireDropdownChange}
               options={repertoire}
-              onChange={this.handleCustomComponentChange('piece')}
             />
             <button type="button" onClick={this.cancelAddingItem}>
               Cancel
@@ -124,7 +144,7 @@ class AddRepOrExerciseInstance extends Component {
             <Select
               value={exercise}
               options={exercises}
-              onChange={this.handleCustomComponentChange('exercise')}
+              onChange={this.handleExercisesDropdownChange('exercise')}
             />
             <button type="button" onClick={this.cancelAddingItem}>
               Cancel

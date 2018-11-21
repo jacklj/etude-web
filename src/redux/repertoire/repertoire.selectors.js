@@ -8,7 +8,7 @@ export const selectRepertoireForDropdown = createReduxOrmSelector(
   orm,
   dbStateSelector,
   session => session.Repertoire.all().toModelArray().map(piece => ({
-    value: piece.repertoire_id,
+    value: piece.repertoire_id.toString(), // otherwise we get select/creatable bug
     label: `${piece.name} - ${piece.composer_id ? piece.composer_id.surname : console.log(piece, piece.composer_id)}`,
   })),
 );
