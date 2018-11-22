@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CreatableSelect from 'react-select/lib/Creatable';
 import Select from 'react-select';
 
-import { getAllRepertoireRequest } from '../../../redux/repertoire/repertoire.actions';
+import { getAllRepertoireRequest, createRepertoireFromRepSelector } from '../../../redux/repertoire/repertoire.actions';
 import { getAllExercisesRequest } from '../../../redux/exercises/exercises.actions';
 import {
   createRepertoireInstanceRequest,
@@ -51,9 +51,11 @@ class AddRepOrExerciseInstance extends Component {
         piece: newValue,
       });
     } else if (actionMeta.action === 'create-option') {
-      console.log("Add a new repertoire!: ", newValue.value)
       // open add repertoire page, with the name of the repertoire
       // already filled out from what the user has entered here
+      const newRepertoireName = newValue.value;
+      console.log("Add a new repertoire!: ", newRepertoireName)
+      this.props.createRepertoireFromRepSelector(newRepertoireName);
     }
   }
 
@@ -101,7 +103,7 @@ class AddRepOrExerciseInstance extends Component {
 
   render() {
     const { repertoire, exercises, canAddRepertoire, canAddExercises } = this.props;
-    const { exercise, piece, view } = this.state;
+    const { exercise, view } = this.state;
     let jsx;
 
     switch (view) {
@@ -174,6 +176,7 @@ AddRepOrExerciseInstance.propTypes = {
   getAllExercisesRequest: PropTypes.func.isRequired,
   createRepertoireInstanceRequest: PropTypes.func.isRequired,
   createExerciseInstanceRequest: PropTypes.func.isRequired,
+  createRepertoireFromRepSelector: PropTypes.func.isRequired,
   canAddRepertoire: PropTypes.bool,
   canAddExercises: PropTypes.bool,
 };
@@ -188,6 +191,7 @@ const mapDispatchToProps = {
   getAllExercisesRequest,
   createRepertoireInstanceRequest,
   createExerciseInstanceRequest,
+  createRepertoireFromRepSelector,
 };
 
 export default connect(

@@ -10,6 +10,7 @@ export const actionTypes = {
       SUCCESS: 'REPERTOIRE.CREATE.SUCCESS',
       FAILURE: 'REPERTOIRE.CREATE.FAILURE',
     },
+    CREATE_FROM_REP_SELECTOR: 'REPERTOIRE.CREATE_FROM_REP_SELECTOR',
   },
   UPCOMING_REPERTOIRE: {
     GET: {
@@ -61,4 +62,9 @@ export const addNewRepertoireSuccess = payload => ({
 export const addNewRepertoireFailure = error => ({
   type: actionTypes.REPERTOIRE.CREATE.FAILURE,
   error,
+});
+
+export const createRepertoireFromRepSelector = repertoireName => ({
+  type: actionTypes.REPERTOIRE.CREATE_FROM_REP_SELECTOR,
+  repertoireName,
 });
