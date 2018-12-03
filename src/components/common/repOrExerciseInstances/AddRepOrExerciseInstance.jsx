@@ -55,7 +55,7 @@ class AddRepOrExerciseInstance extends Component {
       // already filled out from what the user has entered here
       const newRepertoireName = newValue.value;
       console.log("Add a new repertoire!: ", newRepertoireName)
-      this.props.createRepertoireFromRepSelector(newRepertoireName);
+      this.props.createRepertoireFromRepSelector(newRepertoireName, this.props.eventId);
     }
   }
 

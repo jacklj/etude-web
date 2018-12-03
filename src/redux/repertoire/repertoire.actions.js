@@ -64,7 +64,8 @@ export const addNewRepertoireFailure = error => ({
   error,
 });
 
-export const createRepertoireFromRepSelector = repertoireName => ({
+export const createRepertoireFromRepSelector = (repertoireName, eventId) => ({
   type: actionTypes.REPERTOIRE.CREATE_FROM_REP_SELECTOR,
   repertoireName,
+  eventId,
 });

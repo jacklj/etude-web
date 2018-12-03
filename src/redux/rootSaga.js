@@ -24,6 +24,7 @@ import createPracticeSessionSaga from './events/sagas/practice/createPracticeSes
 import startPracticeSessionSaga from './events/sagas/practice/startPracticeSession.saga';
 import runPracticeSessionSaga from './events/sagas/practice/runPracticeSession.saga';
 import createNewRepertoireSaga from './repertoire/sagas/createRepertoire.saga';
+import createRepFromRepSelectorSaga from './repertoire/sagas/createRepFromRepSelector.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -51,5 +52,6 @@ export default function* rootSaga() {
     runPracticeSessionSaga(),
     getUpcomingRepSaga(),
     createNewRepertoireSaga(),
+    createRepFromRepSelectorSaga(),
   ]);
 }
