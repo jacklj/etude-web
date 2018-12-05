@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { ConnectedRouter } from 'connected-react-router';
 // set moment locale to be British English, so on the date pickers, weeks start
@@ -10,18 +9,13 @@ import enGB from 'moment/locale/en-gb'; // eslint-disable-line no-unused-vars
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
 
 import { history } from './redux/store';
 import NavigationDrawer from './components/NavigationDrawer/NavigationDrawer';
@@ -114,22 +108,6 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2,
   },
 });
-const Container = styled.div`
-  background-color: rgb(238, 238, 238);
-  padding-bottom: 50px;
-`;
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  color: palevioletred;
-`;
-
-const Header = styled.header`
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-`;
 
 class App extends Component {
   state = {
@@ -204,15 +182,6 @@ class App extends Component {
               <Route path="/add-person" component={AddPerson} />
             </main>
           </div>
-
-          {/* <Container>
-            <Header>
-              <Title>Etude</Title>
-            </Header>
-            <Navigation />
-            <hr />
-
-          </Container> */}
         </ConnectedRouter>
       </Provider>
     );
