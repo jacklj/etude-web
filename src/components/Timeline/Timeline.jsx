@@ -7,10 +7,6 @@ import { getAllEventsRequest, createPracticeSessionRequest } from '../../redux/e
 import { selectAllEvents } from '../../redux/events/events.selectors';
 
 class Timeline extends Component {
-  componentDidMount() {
-    this.props.getAllEventsRequest();
-  }
-
   render() {
     return (
       <div>

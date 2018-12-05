@@ -29,6 +29,7 @@ import AddNewRepertoire from './components/AddXPages/AddNewRepertoire';
 import AddExercise from './components/AddXPages/AddExercise';
 import AddLocation from './components/AddXPages/AddLocation';
 import AddPerson from './components/AddXPages/AddPerson';
+import { getAllEventsRequest } from './redux/events/events.actions';
 
 const drawerWidth = 240;
 
@@ -110,6 +111,11 @@ const styles = theme => ({
 });
 
 class App extends Component {
+  componentDidMount() {
+    // use dispatch function directly as the App component isn't a connected component
+    this.props.store.dispatch(getAllEventsRequest());
+  }
+
   state = {
     open: true,
   };
