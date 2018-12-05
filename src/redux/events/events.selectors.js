@@ -83,11 +83,11 @@ export const selectLastLesson = createSelector(
     const lessons = session.Events.all()
       .filter(event => event.type === EVENT_TYPES.LESSON)
       .toModelArray();
+    if (!lessons || lessons.length === 0) return undefined;
 
     const mostRecentLesson = getMostRecentEvent(lessons);
     const obj = mostRecentLesson.ref;
     const notes = mostRecentLesson.notes && mostRecentLesson.notes.toRefArray();
-
     return {
       ...obj,
       notes,

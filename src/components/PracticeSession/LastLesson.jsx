@@ -6,6 +6,7 @@ import GeneralNotes from '../common/notes/GeneralNotes';
 import { selectLastLesson } from '../../redux/events/events.selectors';
 
 function LastLesson({ lesson }) {
+  if (!lesson) return null;
   const { notes, start, teacher } = lesson;
   const title = `Last lesson${teacher ? `: ${teacher.first_name} ${teacher.surname}` : ''}`;
   return (
@@ -17,8 +18,12 @@ function LastLesson({ lesson }) {
   );
 }
 
+LastLesson.defaultProps = {
+  lesson: undefined,
+};
+
 LastLesson.propTypes = {
-  lesson: PropTypes.object.isRequired,
+  lesson: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
