@@ -7,13 +7,14 @@ import { selectFiveRecentPracticeSessionsWithNotes } from '../../redux/events/ev
 
 const RecentPracticeSessions = ({ recentPracticeSessions }) => (
   <div>
-    {recentPracticeSessions.map(practiceSession => (
+    <h4>Recent practice sessions:</h4>
+    {recentPracticeSessions.length > 0 ? recentPracticeSessions.map(practiceSession => (
       <RecentPracticeSession
         start={practiceSession.start}
         location={practiceSession.location}
         notes={practiceSession.notes}
       />
-    ))}
+    )) : <div>No recent practice sessions</div>}
   </div>
 );
 
