@@ -66,8 +66,8 @@ class PracticeSession extends Component {
             location={location}
           />
           {inProgress && [
-            <LastLesson />,
-            <RecentPracticeSessions />,
+            <LastLesson key={1} />,
+            <RecentPracticeSessions key={2} />,
           ]}
           <h3>Notes</h3>
           <AddNoteToEvent eventId={eventId} />
