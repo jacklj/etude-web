@@ -76,17 +76,20 @@ function getMostRecentEvent(events) {
   return mostRecentEvent;
 }
 
-export const selectLastLesson = createSelector(
+const selectAllLessons = createSelector(
   orm,
   dbStateSelector,
-  session => {
-    // get all lessons
-    const lessons = session.Events.all()
-      .filter(event => event.type === EVENT_TYPES.LESSON)
-      .toModelArray();
-    if (!lessons || lessons.length === 0) return undefined;
+  session => session.Events.all()
+    .filter(event => event.type === EVENT_TYPES.LESSON)
+    .toModelArray(),
+);
 
-    const mostRecentLesson = getMostRecentEvent(lessons);
+export const selectLastLesson = createReselectSelector(
+  selectAllLessons,
+  allLessons => {
+    if (!allLessons || allLessons.length === 0) return undefined;
+
+    const mostRecentLesson = getMostRecentEvent(allLessons);
     const obj = mostRecentLesson.ref;
     const notes = mostRecentLesson.notes && mostRecentLesson.notes.toRefArray();
     return {
