@@ -1,4 +1,5 @@
 import { createSelector } from 'redux-orm';
+import { createSelector as createReselectSelector } from 'reselect';
 import moment from 'moment';
 
 import orm from '../reduxOrm/orm';
@@ -95,26 +96,29 @@ export const selectLastLesson = createSelector(
   },
 );
 
-export const selectFiveRecentPracticeSessionsWithNotes = createSelector(
+const selectAllPracticeSessions = createSelector(
   orm,
   dbStateSelector,
-  session => {
-    // get all practice sessions
-    const practiceSessions = session.Events.all()
-      .filter(event => event.type === EVENT_TYPES.PRACTICE)
-      .toModelArray()
-      .filter(practiceSession => !isArrayEmpty(practiceSession.notes.toRefArray()))
-      .sort((a, b) => moment(a.start).isAfter(b.start))
-      .slice(0, 3)
-      .map(practiceSession => {
-        const obj = practiceSession.ref;
-        const notes = practiceSession.notes.toRefArray();
-        return {
-          ...obj,
-          notes,
-        };
-      });
+  session => session.Events.all()
+    .filter(event => event.type === EVENT_TYPES.PRACTICE)
+    .toModelArray(),
+);
 
-    return practiceSessions;
+export const selectThreeRecentPracticeSessionsWithNotes = createReselectSelector(
+  selectAllPracticeSessions,
+  allPracticeSessions => {
+    const withNotes = allPracticeSessions
+      .filter(practiceSession => !isArrayEmpty(practiceSession.notes.toRefArray()));
+    const sortByDate = withNotes.sort((a, b) => moment(a.start).isAfter(b.start));
+    const threeMostRecent = sortByDate.slice(0, 3);
+    const practiceSessionObjectsWithNotes = threeMostRecent.map(practiceSession => {
+      const obj = practiceSession.ref;
+      const notes = practiceSession.notes.toRefArray();
+      return {
+        ...obj,
+        notes,
+      };
+    });
+    return practiceSessionObjectsWithNotes;
   },
 );

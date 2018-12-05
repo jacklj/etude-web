@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import RecentPracticeSession from './RecentPracticeSession';
-import { selectFiveRecentPracticeSessionsWithNotes } from '../../redux/events/events.selectors';
+import { selectThreeRecentPracticeSessionsWithNotes } from '../../redux/events/events.selectors';
 
 const RecentPracticeSessions = ({ recentPracticeSessions }) => (
   <div>
@@ -23,7 +23,7 @@ RecentPracticeSessions.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  recentPracticeSessions: selectFiveRecentPracticeSessionsWithNotes(state),
+  recentPracticeSessions: selectThreeRecentPracticeSessionsWithNotes(state),
 });
 
 export default connect(mapStateToProps)(RecentPracticeSessions);
