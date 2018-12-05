@@ -13,6 +13,7 @@ const RecentPracticeSessions = ({ recentPracticeSessions }) => (
         start={practiceSession.start}
         location={practiceSession.location}
         notes={practiceSession.notes}
+        key={`${practiceSession.start} - ${practiceSession.end}`}
       />
     )) : <div>No recent practice sessions</div>}
   </div>
