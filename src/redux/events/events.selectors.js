@@ -132,9 +132,9 @@ const selectPracticeSessionsInTheLast7Days = createReselectSelector(
 const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 export const daysOfTheWeekForLast7Days = () => {
-  const todayAsNumber = moment().weekday(); // Mon is 1, Tue is 2 etc
-  const oneWeekAgoTillSunday = daysOfWeek.slice(todayAsNumber - 1);
-  const mondayToToday = daysOfWeek.slice(0, todayAsNumber);
+  const todayAsNumber = moment().weekday(); // Mon is 0, Tue is 1 etc
+  const oneWeekAgoTillSunday = daysOfWeek.slice(todayAsNumber + 1);
+  const mondayToToday = daysOfWeek.slice(0, todayAsNumber + 1);
   return [...oneWeekAgoTillSunday, ...mondayToToday];
 };
 
@@ -148,7 +148,9 @@ const calculatePracticeTimesPerDayForLast7Days = createReselectSelector(
       const end = moment(practiceSession.end);
       const durationInMinutes = end.diff(start, 'minutes');
       // counts the day on which the practice session is started as the session's date
-      const differenceFromTodayInDays = today.diff(start, 'days');
+      // convert to start of 'start' datetime so that if it was yesterday, there's
+      // a diff of at least 24h
+      const differenceFromTodayInDays = today.diff(start.startOf('day'), 'days');
       results[6 - differenceFromTodayInDays] += durationInMinutes;
     });
     return results;
