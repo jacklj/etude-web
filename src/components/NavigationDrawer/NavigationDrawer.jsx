@@ -5,9 +5,15 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
-import LayersIcon from '@material-ui/icons/Layers';
+import PersonIcon from '@material-ui/icons/Person';
+import MusicVideoIcon from '@material-ui/icons/MusicVideo';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import CodeIcon from '@material-ui/icons/Code';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -70,17 +76,17 @@ class NavigationDrawer extends Component {
           />
           <NavigationItem
             link="/events"
-            icon={<LayersIcon />}
+            icon={<EventNoteIcon />}
             text="All events"
           />
           <NavigationItem
             link="/upcoming-rep"
-            icon={<ShoppingCartIcon />}
+            icon={<QueueMusicIcon />}
             text="Upcoming rep"
           />
           <NavigationItem
             onClick={this.createThenGoToNewPracticeSession}
-            icon={<PeopleIcon />}
+            icon={<FitnessCenterIcon />}
             text="Start Practicing"
           />
         </List>
@@ -89,7 +95,7 @@ class NavigationDrawer extends Component {
           <ListSubheader inset>Add stuff</ListSubheader>
           <NavigationItem
             onClick={this.createThenGoToNewLesson}
-            icon={<PeopleIcon />}
+            icon={<MusicVideoIcon />}
             text="Add lesson"
           />
           <NavigationItem
@@ -99,22 +105,22 @@ class NavigationDrawer extends Component {
           />
           <NavigationItem
             link="/add-rep"
-            icon={<ShoppingCartIcon />}
+            icon={<MusicNoteIcon />}
             text="Add rep"
           />
           <NavigationItem
             link="/add-exercise"
-            icon={<ShoppingCartIcon />}
+            icon={<CodeIcon />}
             text="Add exercise"
           />
           <NavigationItem
             link="/add-location"
-            icon={<ShoppingCartIcon />}
+            icon={<LocationCityIcon />}
             text="Add location"
           />
           <NavigationItem
             link="/add-person"
-            icon={<ShoppingCartIcon />}
+            icon={<PersonIcon />}
             text="Add person"
           />
         </List>
