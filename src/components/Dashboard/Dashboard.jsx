@@ -7,7 +7,7 @@ import SimpleTable from './SimpleTable';
 const Dashboard = () => (
   <div>
     <Typography variant="h4" gutterBottom component="h2">
-      Orders
+      Practice in the last week
     </Typography>
     <Typography component="div" style={{ marginLeft: -22 }}>
       <SimpleLineChart />

@@ -6,23 +6,24 @@ import orm from '../reduxOrm/orm';
 import { dbStateSelector } from '../../services/common.selectors';
 import { EVENT_TYPES } from '../../services/constants';
 
-const isArrayEmpty = array => (array === undefined || array.length === 0);
+const isArrayEmpty = array => array === undefined || array.length === 0;
 
 export const selectAllEvents = createSelector(
   orm, // first argument: the ORM
   dbStateSelector, // second argument:the db state selector
-  session => session.Events.all().toModelArray().map(event => {
-    const obj = event.ref; // reference to raw object in the store
-
-    // resolve foreign keys
-    const teacher = event.teacher_id && event.teacher_id.ref;
-    const location = event.location_id && event.location_id.ref;
-    return {
-      ...obj,
-      teacher,
-      location,
-    };
-  }),
+  session => session.Events.all()
+    .toModelArray()
+    .map(event => {
+      const obj = event.ref; // reference to raw object in the store
+      // resolve foreign keys
+      const teacher = event.teacher_id && event.teacher_id.ref;
+      const location = event.location_id && event.location_id.ref;
+      return {
+        ...obj,
+        teacher,
+        location,
+      };
+    }),
 );
 
 const getEventIdFromProps = (state, props) => Number(props.match.params.id);
@@ -54,17 +55,13 @@ export const selectEvent = createSelector(
   },
 );
 
-export const selectInProgressEvent = createSelector(
-  orm,
-  dbStateSelector,
-  session => {
-    const inProgressEvents = session.Events.all()
-      .filter(event => event.in_progress)
-      .toRefArray();
-    if (inProgressEvents.length === 0) return undefined;
-    return inProgressEvents[0];
-  },
-);
+export const selectInProgressEvent = createSelector(orm, dbStateSelector, session => {
+  const inProgressEvents = session.Events.all()
+    .filter(event => event.in_progress)
+    .toRefArray();
+  if (inProgressEvents.length === 0) return undefined;
+  return inProgressEvents[0];
+});
 
 function getMostRecentEvent(events) {
   let mostRecentEvent = events[0];
@@ -76,28 +73,21 @@ function getMostRecentEvent(events) {
   return mostRecentEvent;
 }
 
-const selectAllLessons = createSelector(
-  orm,
-  dbStateSelector,
-  session => session.Events.all()
-    .filter(event => event.type === EVENT_TYPES.LESSON)
-    .toModelArray(),
-);
+const selectAllLessons = createSelector(orm, dbStateSelector, session => session.Events.all()
+  .filter(event => event.type === EVENT_TYPES.LESSON)
+  .toModelArray());
 
-export const selectLastLesson = createReselectSelector(
-  selectAllLessons,
-  allLessons => {
-    if (!allLessons || allLessons.length === 0) return undefined;
+export const selectLastLesson = createReselectSelector(selectAllLessons, allLessons => {
+  if (!allLessons || allLessons.length === 0) return undefined;
 
-    const mostRecentLesson = getMostRecentEvent(allLessons);
-    const obj = mostRecentLesson.ref;
-    const notes = mostRecentLesson.notes && mostRecentLesson.notes.toRefArray();
-    return {
-      ...obj,
-      notes,
-    };
-  },
-);
+  const mostRecentLesson = getMostRecentEvent(allLessons);
+  const obj = mostRecentLesson.ref;
+  const notes = mostRecentLesson.notes && mostRecentLesson.notes.toRefArray();
+  return {
+    ...obj,
+    notes,
+  };
+});
 
 const selectAllPracticeSessions = createSelector(
   orm,
@@ -110,8 +100,9 @@ const selectAllPracticeSessions = createSelector(
 export const selectThreeRecentPracticeSessionsWithNotes = createReselectSelector(
   selectAllPracticeSessions,
   allPracticeSessions => {
-    const withNotes = allPracticeSessions
-      .filter(practiceSession => !isArrayEmpty(practiceSession.notes.toRefArray()));
+    const withNotes = allPracticeSessions.filter(
+      practiceSession => !isArrayEmpty(practiceSession.notes.toRefArray()),
+    );
     const sortByDate = withNotes.sort((a, b) => moment(a.start).isAfter(b.start));
     const threeMostRecent = sortByDate.slice(0, 3);
     const practiceSessionObjectsWithNotes = threeMostRecent.map(practiceSession => {
@@ -123,5 +114,55 @@ export const selectThreeRecentPracticeSessionsWithNotes = createReselectSelector
       };
     });
     return practiceSessionObjectsWithNotes;
+  },
+);
+
+const selectPracticeSessionsInTheLast7Days = createReselectSelector(
+  selectAllPracticeSessions,
+  allPracticeSessions => {
+    const sevenDaysAgo = moment()
+      .subtract(7, 'days')
+      .startOf('day');
+    return allPracticeSessions.filter(
+      practiceSession => practiceSession.end && moment(practiceSession.end).isAfter(sevenDaysAgo),
+    );
+  },
+);
+
+const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+export const daysOfTheWeekForLast7Days = () => {
+  const todayAsNumber = moment().weekday(); // Mon is 1, Tue is 2 etc
+  const oneWeekAgoTillSunday = daysOfWeek.slice(todayAsNumber - 1);
+  const mondayToToday = daysOfWeek.slice(0, todayAsNumber);
+  return [...oneWeekAgoTillSunday, ...mondayToToday];
+};
+
+const calculatePracticeTimesPerDayForLast7Days = createReselectSelector(
+  selectPracticeSessionsInTheLast7Days,
+  practiceSessionsInTheLast7Days => {
+    const today = moment();
+    const results = [0, 0, 0, 0, 0, 0, 0];
+    practiceSessionsInTheLast7Days.forEach(practiceSession => {
+      const start = moment(practiceSession.start);
+      const end = moment(practiceSession.end);
+      const durationInMinutes = end.diff(start, 'minutes');
+      // counts the day on which the practice session is started as the session's date
+      const differenceFromTodayInDays = today.diff(start, 'days');
+      results[6 - differenceFromTodayInDays] += durationInMinutes;
+    });
+    return results;
+  },
+);
+
+export const calculateGraphData = createReselectSelector(
+  calculatePracticeTimesPerDayForLast7Days,
+  practiceTimesPerDayForLast7Days => {
+    const dayNames = daysOfTheWeekForLast7Days();
+    const results = practiceTimesPerDayForLast7Days.map((practiceTime, key) => ({
+      name: dayNames[key],
+      'Practice Time': practiceTime,
+    }));
+    return results;
   },
 );
