@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import SimpleLineChart from './SimpleLineChart';
-import SimpleTable from './SimpleTable';
+// import SimpleTable from './SimpleTable';
 
 const Dashboard = () => (
   <div>
@@ -12,12 +12,12 @@ const Dashboard = () => (
     <Typography component="div" style={{ marginLeft: -22 }}>
       <SimpleLineChart />
     </Typography>
-    <Typography variant="h4" gutterBottom component="h2">
+    {/* <Typography variant="h4" gutterBottom component="h2">
       Products
     </Typography>
     <div style={{ height: 320 }}>
       <SimpleTable />
-    </div>
+    </div> */}
   </div>
 );
 
