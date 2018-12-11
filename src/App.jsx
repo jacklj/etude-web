@@ -6,18 +6,11 @@ import { ConnectedRouter } from 'connected-react-router';
 // set moment locale to be British English, so on the date pickers, weeks start
 // on Monday (in US english, they start on Sunday).
 import enGB from 'moment/locale/en-gb'; // eslint-disable-line no-unused-vars
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import { history } from './redux/store';
+import AppHeaderBar from './components/AppHeaderBar';
 import NavigationDrawer from './components/NavigationDrawer/NavigationDrawer';
 import Dashboard from './components/Dashboard/Dashboard';
 import Timeline from './components/Timeline/Timeline';
@@ -111,14 +104,14 @@ const styles = theme => ({
 });
 
 class App extends Component {
+  state = {
+    open: true,
+  };
+
   componentDidMount() {
     // use dispatch function directly as the App component isn't a connected component
     this.props.store.dispatch(getAllEventsRequest());
   }
-
-  state = {
-    open: true,
-  };
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -135,45 +128,16 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <div className={classes.root}>
             <CssBaseline />
-            <AppBar
-              position="absolute"
-              className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
-            >
-              <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
-                <IconButton
-                  color="inherit"
-                  aria-label="Open drawer"
-                  onClick={this.handleDrawerOpen}
-                  className={classNames(
-                    classes.menuButton,
-                    this.state.open && classes.menuButtonHidden,
-                  )}
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Typography
-                  component="h1"
-                  variant="h6"
-                  color="inherit"
-                  noWrap
-                  className={classes.title}
-                >
-                  Dashboard
-                </Typography>
-                <IconButton color="inherit">
-                  <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
-              </Toolbar>
-            </AppBar>
-            <NavigationDrawer
+            <AppHeaderBar
               isOpen={this.state.open}
               classes={classes}
               handleDrawerOpen={this.handleDrawerOpen}
+            />
+            <NavigationDrawer
+              isOpen={this.state.open}
+              classes={classes}
               handleDrawerClose={this.handleDrawerClose}
             />
-
             <main className={classes.content}>
               <div className={classes.appBarSpacer} />
               <Route exact path="/" component={Dashboard} />
@@ -196,7 +160,7 @@ class App extends Component {
 
 App.propTypes = {
   store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default withStyles(styles)(App);
