@@ -1,105 +1,147 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import StarRatingComponent from 'react-star-rating-component';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import red from '@material-ui/core/colors/red';
+import Button from '@material-ui/core/Button';
 
 import { EVENT_TYPES } from '../../services/constants';
-import { Title } from '../common/styledComponents';
 import { renderDuration } from '../../services/datetime';
 
-const Card = styled.div`
-  background-color: rgb(250, 250, 250);
-  display: block;
-  padding: 10px;
-  margin: 20px;
-  border-radius: 3px;
-  box-shadow: 0px 2px 5px 0px grey;
-  width: 400px;
-`;
-
-const TitleLink = styled(Link)`
-  color: rgb(90, 90, 90);
-  font-size: 1.1em;
-`;
-
-const Duration = styled.div`
-  color: rgb(90, 90, 90);
-  font-size: 1.1em;
-`;
-
-const Location = styled.div`
-  color: rgb(90, 90, 90);
-  font-size: 1.1em;
-`;
+const styles = theme => ({
+  card: {
+    maxWidth: 700,
+    marginBottom: 20,
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  actions: {
+    display: 'flex',
+  },
+  avatar: {
+    backgroundColor: red[500],
+  },
+});
 
 const renderName = person => `${person.first_name} ${person.surname}`;
 
-const Event = ({ event }) => {
+const renderTitleAndIconLetterAndLinkPath = event => {
   const {
-    event_id: eventId, end, location, rating, start, type,
+    event_id: eventId, type,
   } = event;
-  const duration = start ? renderDuration(start, end) : undefined;
-  let jsx;
-
+  let title;
+  let iconLetter;
+  let linkPath;
   switch (type) {
     case EVENT_TYPES.LESSON: {
-      jsx = (
-        <TitleLink to={`/lesson/${eventId}`}>
-          {`Lesson${event.teacher ? ` with ${renderName(event.teacher)}` : ''}`}
-        </TitleLink>
-      );
+      title = `Lesson${event.teacher ? ` with ${renderName(event.teacher)}` : ''}`;
+      iconLetter = 'L';
+      linkPath = `/lesson/${eventId}`;
       break;
     }
     case EVENT_TYPES.MASTERCLASS: {
-      jsx = <Title>{`Masterclass with ${renderName(event.teacher)}`}</Title>;
+      title = `Masterclass with ${renderName(event.teacher)}`;
+      iconLetter = 'M';
       break;
     }
     case EVENT_TYPES.PRACTICE: {
-      jsx = (
-        <TitleLink to={`/practice_session/${eventId}`}>
-          {`Practice${event.location ? ` at ${event.location.name}` : ''}`}
-        </TitleLink>
-      );
+      title = `Practice${event.location ? ` at ${event.location.name}` : ''}`;
+      iconLetter = 'P';
+      linkPath = `/practice_session/${eventId}`;
       break;
     }
     case EVENT_TYPES.PERFORMANCE: {
-      jsx = (
-        <TitleLink to={`/performance/${eventId}`}>
-          {`Performance: ${event.name}`}
-        </TitleLink>
-      );
+      title = `Performance: ${event.name}`;
+      iconLetter = 'P';
+      linkPath = `/performance/${eventId}`;
       break;
     }
     case EVENT_TYPES.OTHER: {
-      jsx = <Title>{`Other: ${event.name}`}</Title>;
+      title = `Other: ${event.name}`;
+      iconLetter = 'O';
       break;
     }
     default:
+      title = 'Event';
+      iconLetter = 'E';
       break;
   }
 
+  return {
+    title,
+    iconLetter,
+    linkPath,
+  };
+};
+
+const renderSubtitles = event => {
+  const {
+    end, location, start,
+  } = event;
+  const duration = start ? renderDuration(start, end) : undefined;
   return (
-    <Card>
-      <div>
-        {jsx}
-        {duration && <Duration>{duration}</Duration>}
-        {location && <Location>{location.name}</Location>}
-        <div>
-          <StarRatingComponent
-            name="EventRating" /* name of the radio input, it is required */
-            value={rating} /* number of selected icon (`0` - none, `1` - first) */
-            starCount={5} /* number of icons in rating, default `5` */
-            editing={false} /* is component available for editing, default `true` */
-          />
-        </div>
-      </div>
-    </Card>
+    <div>
+      <div>{duration}</div>
+      {location && <div>{location.name}</div>}
+    </div>
   );
 };
+
+const Event = ({ classes, event }) => {
+  const { rating } = event;
+  const { title, iconLetter, linkPath } = renderTitleAndIconLetterAndLinkPath(event);
+  const linkButtonProps = linkPath ? { component: Link, to: linkPath } : {};
+  const subheader = renderSubtitles(event);
+
+  return (
+    <Card className={classes.card}>
+      <CardHeader
+        avatar={(
+          <Avatar aria-label="Recipe" className={classes.avatar}>
+            {iconLetter}
+          </Avatar>
+        )}
+        title={title}
+        subheader={subheader}
+      />
+      <CardContent>
+        <StarRatingComponent
+          name="EventRating" /* name of the radio input, it is required */
+          value={rating} /* number of selected icon (`0` - none, `1` - first) */
+          starCount={5} /* number of icons in rating, default `5` */
+          editing={false} /* is component available for editing, default `true` */
+        />
+        <Typography>
+          Exercises: Exercise 1, excercise 2...
+        </Typography>
+        <Typography>
+        Repertoire: Piece 1, piece 2...
+        </Typography>
+        <Typography>
+          Notes: Semi occluded, with relaxed and vertical sound - not force placed. Then I feel
+          a slight air pressure...
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" color="primary" {...linkButtonProps}>
+          View / Edit
+        </Button>
+      </CardActions>
+    </Card>
+  );
+}
 
 Event.propTypes = {
   event: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default Event;
+export default withStyles(styles)(Event);
