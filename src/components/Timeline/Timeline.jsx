@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Event from './Event';
+import EventSummaryCard from './EventSummaryCard';
 import { getAllEventsRequest, createPracticeSessionRequest } from '../../redux/events/events.actions';
 import { selectAllEvents } from '../../redux/events/events.selectors';
 
 const Timeline = ({ allEvents }) => (
   <div>
     {allEvents.map(event => (
-      <Event
+      <EventSummaryCard
         key={event.event_id}
         event={event}
       />

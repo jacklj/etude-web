@@ -96,7 +96,7 @@ const renderSubtitles = event => {
   );
 };
 
-const Event = ({ classes, event }) => {
+const EventSummaryCard = ({ classes, event }) => {
   const { rating } = event;
   const { title, iconLetter, linkPath } = renderTitleAndIconLetterAndLinkPath(event);
   const linkButtonProps = linkPath ? { component: Link, to: linkPath } : {};
@@ -144,4 +144,4 @@ Event.propTypes = {
   event: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default withStyles(styles)(Event);
+export default withStyles(styles)(EventSummaryCard);
