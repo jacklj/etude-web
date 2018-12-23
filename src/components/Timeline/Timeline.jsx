@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import EventSummaryCard from './EventSummaryCard';
+import EventSummaryCard from './EventSummaryCard/EventSummaryCard';
 import { getAllEventsRequest, createPracticeSessionRequest } from '../../redux/events/events.actions';
 import { selectAllEvents } from '../../redux/events/events.selectors';
 
