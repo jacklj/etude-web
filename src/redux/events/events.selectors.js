@@ -18,10 +18,29 @@ export const selectAllEvents = createSelector(
       // resolve foreign keys
       const teacher = event.teacher_id && event.teacher_id.ref;
       const location = event.location_id && event.location_id.ref;
+      const notes = event.notes.toRefArray();
+      const { repOrExerciseInstances } = event;
+
+      const exercises = [];
+      const pieces = [];
+      repOrExerciseInstances.all().toModelArray().forEach(roei => {
+        if (roei.exercise_id) {
+          const exercise = roei.exercise_id.ref;
+          exercises.push(exercise);
+        } else if (roei.repertoire_id) {
+          const piece = roei.repertoire_id.ref;
+          pieces.push(piece);
+        } else {
+          throw new Error("Invalid ")
+        }
+      });
       return {
         ...obj,
         teacher,
         location,
+        exercises,
+        pieces,
+        notes,
       };
     }),
 );
