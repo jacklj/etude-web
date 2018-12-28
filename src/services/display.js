@@ -72,3 +72,13 @@ export const renderLargerWorkLabel = state => {
 };
 
 export const isOperaFromState = state => state.type && isOpera(state.type.value);
+
+export const renderItemWithNamePropertyList = items => {
+  const initialValue = '';
+  let result = items.reduce((accumulator, item) => {
+    const { name } = item;
+    return `${accumulator}${name}, `;
+  }, initialValue);
+  result = result.slice(0, -2);
+  return result;
+};

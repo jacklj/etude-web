@@ -44,7 +44,7 @@ class PracticeSession extends Component {
     if (!practiceSession) {
       jsx = <div>Loading</div>;
     } else {
-      const { start, end, notes, repOrExerciseInstances, location, rating, in_progress: inProgress } = practiceSession;
+      const { start, end, notes, repOrExerciseInstances, location, rating } = practiceSession;
 
       jsx = (
         <div>
@@ -65,10 +65,6 @@ class PracticeSession extends Component {
             rating={rating}
             location={location}
           />
-          {inProgress && [
-            <LastLesson />,
-            <RecentPracticeSessions />,
-          ]}
           <h3>Notes</h3>
           <AddNoteToEvent eventId={eventId} />
           <GeneralNotes notes={notes} />
@@ -78,6 +74,13 @@ class PracticeSession extends Component {
             repOrExerciseInstances={repOrExerciseInstances}
             eventId={eventId}
           />
+          {!end && (
+            <div>
+              <h4>Recent lesson and practice notes</h4>
+              <LastLesson />
+              <RecentPracticeSessions />
+            </div>
+          )}
         </div>
       );
     }

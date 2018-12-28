@@ -1,29 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Event from './Event';
+import EventSummaryCard from './EventSummaryCard/EventSummaryCard';
 import { getAllEventsRequest, createPracticeSessionRequest } from '../../redux/events/events.actions';
 import { selectAllEvents } from '../../redux/events/events.selectors';
 
-class Timeline extends Component {
-  componentDidMount() {
-    this.props.getAllEventsRequest();
-  }
-
-  render() {
-    return (
-      <div>
-        {this.props.allEvents.map(event => (
-          <Event
-            key={event.event_id}
-            event={event}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+const Timeline = ({ allEvents }) => (
+  <div>
+    {allEvents.map(event => (
+      <EventSummaryCard
+        key={event.event_id}
+        event={event}
+      />
+    ))}
+  </div>
+);
 
 Timeline.propTypes = {
   getAllEventsRequest: PropTypes.func.isRequired,

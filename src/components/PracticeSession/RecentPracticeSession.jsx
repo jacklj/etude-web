@@ -13,10 +13,16 @@ const RecentPracticeSession = ({ notes, start, location }) => {
   );
 };
 
+RecentPracticeSession.defaultProps = {
+  notes: undefined,
+  start: undefined,
+  location: undefined,
+};
+
 RecentPracticeSession.propTypes = {
-  notes: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
-  start: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
+  notes: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  start: PropTypes.string,
+  location: PropTypes.string,
 };
 
 export default RecentPracticeSession;
