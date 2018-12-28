@@ -100,7 +100,6 @@ const renderSubtitles = event => {
 
 const EventSummaryCard = ({ classes, event }) => {
   const { rating, exercises, pieces, notes } = event;
-  console.log(event)
   const { title, iconLetter, linkPath } = renderTitleAndIconLetterAndLinkPath(event);
   const linkButtonProps = linkPath ? { component: Link, to: linkPath } : {};
   const subheader = renderSubtitles(event);
@@ -136,8 +135,9 @@ const EventSummaryCard = ({ classes, event }) => {
   );
 };
 
-Event.propTypes = {
+EventSummaryCard.propTypes = {
   event: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default withStyles(styles)(EventSummaryCard);

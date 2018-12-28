@@ -12,4 +12,8 @@ const ExercisesSummary = ({ exercises }) => {
   return <Typography>{`Exercises: ${summaryList}`}</Typography>;
 };
 
+ExercisesSummary.propTypes = {
+  exercises: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+};
+
 export default ExercisesSummary;
