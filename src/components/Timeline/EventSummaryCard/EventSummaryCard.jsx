@@ -8,12 +8,14 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import Button from '@material-ui/core/Button';
 
 import { EVENT_TYPES } from '../../../services/constants';
 import { renderDuration } from '../../../services/datetime';
+import ExercisesSummary from './ExercisesSummary';
+import RepertoireSummary from './RepertoireSummary';
+import NotesSummary from './NotesSummary';
 
 const styles = theme => ({
   card: {
@@ -33,73 +35,6 @@ const styles = theme => ({
 });
 
 const renderName = person => `${person.first_name} ${person.surname}`;
-
-const renderItemWithNamePropertyList = items => {
-  const initialValue = '';
-  let result = items.reduce((accumulator, item) => {
-    const { name } = item;
-    return `${accumulator}${name}, `;
-  }, initialValue);
-  result = result.slice(0, -2);
-  return result;
-};
-
-const ExercisesSummary = ({ exercises }) => {
-  if (!exercises || exercises.length === 0) {
-    return null;
-  }
-  return (
-    <Typography>
-      {`Exercises: ${renderItemWithNamePropertyList(exercises)}`}
-    </Typography>
-  );
-};
-
-const RepertoireSummary = ({ repertoire }) => {
-  if (!repertoire || repertoire.length === 0) {
-    return null;
-  }
-  return (
-    <Typography>
-      {`Repertoire: ${renderItemWithNamePropertyList(repertoire)}`}
-    </Typography>
-  );
-};
-
-const getFirstXwordsOfString = (string, x) => {
-  const words = string.split(' ');
-  const numberOfWordsInNote = words.length;
-  const limit = numberOfWordsInNote > x ? x : numberOfWordsInNote;
-  let result = '';
-  for (let i = 0; i < limit; i += 1) {
-    result += `${words[i]} `;
-  }
-  result.slice(0, -1);
-  return result;
-}
-
-const renderNotesSummaryList = notes => {
-  const initialValue = '';
-  let result = notes.reduce((accumulator, note) => {
-    const { note: noteText } = note;
-    const firstTenWordsOfNote = `${getFirstXwordsOfString(noteText, 10)}...`;
-    return `${accumulator}${firstTenWordsOfNote}, `;
-  }, initialValue);
-  result = result.slice(0, -2);
-  return result;
-};
-
-const NotesSummary = ({ notes }) => {
-  if (!notes || notes.length === 0) {
-    return null;
-  }
-  console.log("notes", notes)
-  return (
-    <Typography>
-      {`Notes: ${renderNotesSummaryList(notes)}`}
-    </Typography>
-  );
-};
 
 const renderTitleAndIconLetterAndLinkPath = event => {
   const {
