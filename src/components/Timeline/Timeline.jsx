@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import EventSummaryCard from './EventSummaryCard/EventSummaryCard';
-import { getAllEventsRequest, createPracticeSessionRequest } from '../../redux/events/events.actions';
 import { selectAllEvents } from '../../redux/events/events.selectors';
 
 const Timeline = ({ allEvents }) => (
@@ -18,7 +17,6 @@ const Timeline = ({ allEvents }) => (
 );
 
 Timeline.propTypes = {
-  getAllEventsRequest: PropTypes.func.isRequired,
   allEvents: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   // TODO 13/8/2018 JackLJ improve proptype definitions
 };
@@ -27,9 +25,4 @@ const mapStateToProps = state => ({
   allEvents: selectAllEvents(state),
 });
 
-const mapDispatchToProps = {
-  getAllEventsRequest,
-  createPracticeSessionRequest,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Timeline);
+export default connect(mapStateToProps)(Timeline);
