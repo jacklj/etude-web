@@ -104,6 +104,11 @@ class NavigationDrawer extends Component {
             text="Add performance"
           />
           <NavigationItem
+            link="/all-rep"
+            icon={<MusicNoteIcon />}
+            text="All repertoire"
+          />
+          <NavigationItem
             link="/add-rep"
             icon={<MusicNoteIcon />}
             text="Add rep"

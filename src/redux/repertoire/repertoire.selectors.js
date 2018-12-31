@@ -4,10 +4,29 @@ import { createSelector as createReselectSelector } from 'reselect';
 import orm from '../reduxOrm/orm';
 import { dbStateSelector } from '../../services/common.selectors';
 
-export const selectRepertoireForDropdown = createReduxOrmSelector(
+const selectAllRepertoire = createReduxOrmSelector(
   orm,
   dbStateSelector,
-  session => session.Repertoire.all().toModelArray().map(piece => ({
+  session => session.Repertoire.all().toModelArray(),
+);
+
+export const selectAllRepertoireForTable = createReselectSelector(
+  selectAllRepertoire,
+  allRepertoire => allRepertoire.map(piece => {
+    const obj = { ...piece.ref };
+    let composer = '';
+    if (piece.composer_id) {
+      composer = piece.composer_id.ref.surname;
+    }
+    delete obj.composer_id;
+    obj.composer = composer;
+    return Object.values(obj);
+  }),
+);
+
+export const selectRepertoireForDropdown = createReselectSelector(
+  selectAllRepertoire,
+  allRepertoire => allRepertoire.map(piece => ({
     value: piece.repertoire_id.toString(), // otherwise we get select/creatable bug
     label: `${piece.name} - ${piece.composer_id ? piece.composer_id.surname : console.log(piece, piece.composer_id)}`,
   })),

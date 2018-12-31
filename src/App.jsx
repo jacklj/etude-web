@@ -23,6 +23,7 @@ import AddExercise from './components/AddXPages/AddExercise';
 import AddLocation from './components/AddXPages/AddLocation';
 import AddPerson from './components/AddXPages/AddPerson';
 import { getAllEventsRequest } from './redux/events/events.actions';
+import AllRepertoire from './components/AllRepertoire';
 
 const drawerWidth = 240;
 
@@ -142,6 +143,7 @@ class App extends Component {
               <div className={classes.appBarSpacer} />
               <Route exact path="/" component={Dashboard} />
               <Route exact path="/events" component={Timeline} />
+              <Route exact path="/all-rep" component={AllRepertoire} />
               <Route path="/upcoming-rep" component={UpcomingRep} />
               <Route path="/lesson/:id" component={Lesson} />
               <Route path="/practice_session/:id" component={PracticeSession} />
