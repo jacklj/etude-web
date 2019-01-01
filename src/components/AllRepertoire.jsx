@@ -19,7 +19,12 @@ const columns = [
 ];
 
 const options = {
-  filterType: 'checkbox',
+  filterType: 'multiselect',
+  print: false,
+  download: false,
+  viewColumns: false,
+  selectableRows: false,
+  responsive: 'scroll',
 };
 
 class AllRepertoire extends Component {
