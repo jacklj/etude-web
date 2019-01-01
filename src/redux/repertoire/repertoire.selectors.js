@@ -13,14 +13,26 @@ const selectAllRepertoire = createReduxOrmSelector(
 export const selectAllRepertoireForTable = createReselectSelector(
   selectAllRepertoire,
   allRepertoire => allRepertoire.map(piece => {
-    const obj = { ...piece.ref };
+    // N.B. piece is a redux-orm Model object
+    const obj = piece.ref;
     let composer = '';
     if (piece.composer_id) {
       composer = piece.composer_id.ref.surname;
     }
-    delete obj.composer_id;
-    obj.composer = composer;
-    return Object.values(obj);
+
+    // order: id, name, character, larger work, composer, type, composition date, 
+    // date added, date last edited
+    const result = [];
+    result[0] = obj.repertoire_id;
+    result[1] = obj.name;
+    result[2] = obj.character_that_sings_it;
+    result[3] = obj.larger_work;
+    result[4] = composer;
+    result[5] = obj.type;
+    result[6] = obj.composition_date;
+    result[7] = obj.created_at;
+    result[8] = obj.updated_at;
+    return result;
   }),
 );
 

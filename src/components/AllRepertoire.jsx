@@ -6,16 +6,28 @@ import MUIDataTable from 'mui-datatables';
 import { selectAllRepertoireForTable } from '../redux/repertoire/repertoire.selectors';
 import { getAllRepertoireRequest } from '../redux/repertoire/repertoire.actions';
 
+// order: id, name, character, larger work, composer, type, composition date, date added, date last edited
 const columns = [
-  'ID',
-  'Name',
-  'Composition date',
-  'Larger work',
+  {
+    name: 'ID',
+    options: {
+      filter: false,
+      display: 'false',
+    },
+  },
+  {
+    name: 'Name',
+    options: {
+      filter: false,
+    },
+  },
   'Character',
+  'Larger work',
+  'Composer',
   'Type',
+  'Composition date',
   'Date added',
   'Date last edited',
-  'Composer',
 ];
 
 const options = {
