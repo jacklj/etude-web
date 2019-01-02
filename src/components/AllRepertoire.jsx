@@ -5,8 +5,10 @@ import MUIDataTable from 'mui-datatables';
 
 import { selectAllRepertoireForTable } from '../redux/repertoire/repertoire.selectors';
 import { getAllRepertoireRequest } from '../redux/repertoire/repertoire.actions';
+import { getAllPeopleRequest } from '../redux/people/people.actions';
 
-// order: id, name, character, larger work, composer, type, composition date, date added, date last edited
+// order: id, name, character, larger work, composer, type, composition date, 
+// date added, date last edited
 const columns = [
   {
     name: 'ID',
@@ -42,6 +44,7 @@ const options = {
 class AllRepertoire extends Component {
   componentDidMount() {
     this.props.getAllRepertoireRequest();
+    this.props.getAllPeopleRequest();
   }
 
   render() {
@@ -62,6 +65,7 @@ class AllRepertoire extends Component {
 AllRepertoire.propTypes = {
   allRepertoire: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   getAllRepertoireRequest: PropTypes.func.isRequired,
+  getAllPeopleRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -70,6 +74,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getAllRepertoireRequest,
+  getAllPeopleRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllRepertoire);
