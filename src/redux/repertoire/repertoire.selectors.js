@@ -4,15 +4,18 @@ import { createSelector as createReselectSelector } from 'reselect';
 import orm from '../reduxOrm/orm';
 import { dbStateSelector } from '../../services/common.selectors';
 
-const selectAllRepertoire = createReduxOrmSelector(
+export const selectAllRepertoireForTable = createReduxOrmSelector(
   orm,
   dbStateSelector,
-  session => session.Repertoire.all().toModelArray(),
-);
-
-export const selectAllRepertoireForTable = createReselectSelector(
-  selectAllRepertoire,
-  allRepertoire => allRepertoire.map(piece => {
+  // N.B. we can't use the selectAllRepertoire reduxOrm selector here. redux-orm selectors use
+  // "smart memoization" - any models accessed via relations in the selector will be 'watched'
+  // for changes (and iff they change, the selector will recompute). If we use selectAllRepertoire,
+  // and then compose the output of that into a reselect selector,
+  // redux-orm has no way of knowing what models are accessed via relations
+  // in the latter selector, so the selector won't recompute when those models accessed via
+  // relations change their data. Therefore, if accessing models via relations, you must do
+  // it all in one redux-orm selector.
+  session => session.Repertoire.all().toModelArray().map(piece => {
     // N.B. piece is a redux-orm Model object
     const obj = piece.ref;
     let composer = '';
@@ -36,9 +39,12 @@ export const selectAllRepertoireForTable = createReselectSelector(
   }),
 );
 
-export const selectRepertoireForDropdown = createReselectSelector(
-  selectAllRepertoire,
-  allRepertoire => allRepertoire.map(piece => ({
+export const selectRepertoireForDropdown = createReduxOrmSelector(
+  orm,
+  dbStateSelector,
+  // N.B. we can't use a selectAllRepertoire reduxOrm selector here, then feed it into a reselect selector.
+  // See selectAllRepertoireForTable (above) for explanation.
+  session => session.Repertoire.all().toModelArray().map(piece => ({
     value: piece.repertoire_id.toString(), // otherwise we get select/creatable bug
     label: `${piece.name} - ${piece.composer_id ? piece.composer_id.surname : console.log(piece, piece.composer_id)}`,
   })),
