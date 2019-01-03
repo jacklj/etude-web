@@ -2,10 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MUIDataTable from 'mui-datatables';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import { selectAllRepertoireForTable } from '../redux/repertoire/repertoire.selectors';
 import { getAllRepertoireRequest } from '../redux/repertoire/repertoire.actions';
 import { getAllPeopleRequest } from '../redux/people/people.actions';
+
+
+const getMuiTheme = () => createMuiTheme({
+  overrides: {
+    MUIDataTableHeadCell: {
+      root: {
+        '&:nth-child(2)': {
+          width: 400
+        },
+      },
+    },
+    MUIDataTableBodyCell: {
+      root: {
+        backgroundColor: "red",
+        width: "50px"
+      },
+    },
+  },
+});
 
 // order: id, name, character, larger work, composer, type, composition date, 
 // date added, date last edited
@@ -51,12 +71,14 @@ class AllRepertoire extends Component {
     const { allRepertoire } = this.props;
     return (
       <div>
-        <MUIDataTable
-          title="Repertoire"
-          data={allRepertoire}
-          columns={columns}
-          options={options}
-        />
+        <MuiThemeProvider theme={getMuiTheme()}>
+          <MUIDataTable
+            title="Repertoire"
+            data={allRepertoire}
+            columns={columns}
+            options={options}
+          />
+        </MuiThemeProvider>
       </div>
     );
   }
