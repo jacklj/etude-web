@@ -33,7 +33,7 @@ export const performanceTypesForSelectInput = Object.values(PERFORMANCE_TYPES).m
   createPerformanceTypeSelectOptionObject,
 );
 
-const repertoireTypesForRendering = {
+export const repertoireTypesForRendering = {
   [REPERTOIRE_TYPES.OPERA.ARIA]: 'Opera Aria',
   [REPERTOIRE_TYPES.OPERA.RECIT]: 'Opera Recit',
   [REPERTOIRE_TYPES.OPERA.RECIT_AND_ARIA]: 'Opera Recit and Aria',

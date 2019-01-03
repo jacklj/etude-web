@@ -3,6 +3,7 @@ import { createSelector as createReduxOrmSelector } from 'redux-orm';
 import { createSelector as createReselectSelector } from 'reselect';
 import orm from '../reduxOrm/orm';
 import { dbStateSelector } from '../../services/common.selectors';
+import { repertoireTypesForRendering } from '../../services/display';
 
 export const selectAllRepertoireForTable = createReduxOrmSelector(
   orm,
@@ -31,10 +32,10 @@ export const selectAllRepertoireForTable = createReduxOrmSelector(
     result[2] = obj.character_that_sings_it;
     result[3] = obj.larger_work;
     result[4] = composer;
-    result[5] = obj.type;
     result[6] = obj.composition_date;
     result[7] = obj.created_at;
     result[8] = obj.updated_at;
+    result[5] = repertoireTypesForRendering[obj.type];
     return result;
   }),
 );
