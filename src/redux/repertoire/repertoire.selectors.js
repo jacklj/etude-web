@@ -4,6 +4,7 @@ import { createSelector as createReselectSelector } from 'reselect';
 import orm from '../reduxOrm/orm';
 import { dbStateSelector } from '../../services/common.selectors';
 import { repertoireTypesForRendering } from '../../services/display';
+import { renderCreateEditTimestamp } from '../../services/datetime';
 
 export const selectAllRepertoireForTable = createReduxOrmSelector(
   orm,
@@ -34,8 +35,8 @@ export const selectAllRepertoireForTable = createReduxOrmSelector(
     result[4] = composer;
     result[5] = repertoireTypesForRendering[obj.type];
     result[6] = moment(obj.composition_date).format('YYYY');
-    result[7] = moment(obj.created_at).format('HH:mma D/M/YYYY');
-    result[8] = moment(obj.updated_at).format('HH:mma D/M/YYYY');
+    result[7] = renderCreateEditTimestamp(obj.created_at);
+    result[8] = renderCreateEditTimestamp(obj.updated_at);
     return result;
   }),
 );

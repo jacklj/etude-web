@@ -49,3 +49,5 @@ export const toHHMMSS = (timeInSeconds) => {
   if (seconds < 10) { seconds = `0${seconds}`; }
   return `${hours}:${minutes}:${seconds}`;
 };
+
+export const renderCreateEditTimestamp = datetime => moment(datetime).format('HH:mma D/M/YYYY');
