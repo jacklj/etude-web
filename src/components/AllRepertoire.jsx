@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MUIDataTable from 'mui-datatables';
+import { push } from 'connected-react-router';
 
 import { selectAllRepertoireForTable } from '../redux/repertoire/repertoire.selectors';
 import { getAllRepertoireRequest } from '../redux/repertoire/repertoire.actions';
@@ -32,16 +33,20 @@ const columns = [
   'Date last edited',
 ];
 
-const options = {
-  filterType: 'multiselect',
-  print: false,
-  download: false,
-  viewColumns: false,
-  selectableRows: false,
-  responsive: 'scroll',
-};
-
 class AllRepertoire extends Component {
+  options = {
+    filterType: 'multiselect',
+    print: false,
+    download: false,
+    viewColumns: false,
+    selectableRows: false,
+    responsive: 'scroll',
+    onRowClick: (rowData) => {
+      const repId = rowData[0];
+      this.props.push(`/rep/${repId}`);
+    },
+  };
+
   componentDidMount() {
     this.props.getAllRepertoireRequest();
     this.props.getAllPeopleRequest();
@@ -55,7 +60,7 @@ class AllRepertoire extends Component {
           title="Repertoire"
           data={allRepertoire}
           columns={columns}
-          options={options}
+          options={this.options}
         />
       </div>
     );
@@ -66,6 +71,7 @@ AllRepertoire.propTypes = {
   allRepertoire: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   getAllRepertoireRequest: PropTypes.func.isRequired,
   getAllPeopleRequest: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -75,6 +81,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getAllRepertoireRequest,
   getAllPeopleRequest,
+  push,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllRepertoire);
