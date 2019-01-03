@@ -33,9 +33,9 @@ export const selectAllRepertoireForTable = createReduxOrmSelector(
     result[3] = obj.larger_work;
     result[4] = composer;
     result[6] = obj.composition_date;
-    result[7] = obj.created_at;
-    result[8] = obj.updated_at;
     result[5] = repertoireTypesForRendering[obj.type];
+    result[7] = moment(obj.created_at).format('h:mm:ss a, dddd, Do MMMM YYYY');
+    result[8] = moment(obj.updated_at).format('h:mm:ss a, dddd, Do MMMM YYYY');
     return result;
   }),
 );
