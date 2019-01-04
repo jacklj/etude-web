@@ -93,6 +93,9 @@ export const deleteNote = noteId => fetch(`${baseApiUrl}/notes/${noteId}`, {
 
 export const getRepertoire = () => fetch(`${baseApiUrl}/repertoire`);
 
+export const getRepertoireItem = repertoireId => fetch(`${baseApiUrl}/repertoire/${repertoireId}`)
+  .catch(error => console.error('getRepertoireItem Fetch Error =\n', error));
+
 export const getExercises = () => fetch(`${baseApiUrl}/exercises`);
 
 export const createExercise = exercise => fetch(`${baseApiUrl}/exercises`, {

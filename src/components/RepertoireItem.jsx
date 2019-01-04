@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 
 import { Name, Composer } from './common/styledComponents';
 import { selectRepItemForRepItemPage } from '../redux/repertoire/repertoire.selectors';
-
+import { getRepertoireRequest } from '../redux/repertoire/repertoire.actions';
 
 class RepertoireItem extends Component {
   componentDidMount() {
     // getRepertoireItemRequest to ensure it's up to date in the store (e.g. if user navigates
     // directly to a specific repItem page, so all repItems aren't already in the
     // store)
-    // this.props.getRepertoireItemRequest(this.props.repertoireId);
+    console.log("props", this.props)
+    this.props.getRepertoireRequest(this.props.repertoireId);
   }
 
   render() {
@@ -48,14 +49,19 @@ RepertoireItem.defaultProps = {
 };
 
 RepertoireItem.propTypes = {
+  repertoireId: PropTypes.number.isRequired,
   repItem: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  getRepertoireRequest: PropTypes.func.isRequired,
 };
-
 
 const mapStateToProps = (state, ownProps) => ({
   // N.B. ownProps isn't recursive - just props supplied from 'above'
-  // repertoireId: Number(ownProps.match.params.id),
+  repertoireId: Number(ownProps.match.params.id),
   repItem: selectRepItemForRepItemPage(state, ownProps),
 });
 
-export default connect(mapStateToProps)(RepertoireItem);
+const mapDispatchToProps = {
+  getRepertoireRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RepertoireItem);

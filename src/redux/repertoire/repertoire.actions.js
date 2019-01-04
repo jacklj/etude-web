@@ -1,5 +1,10 @@
 export const actionTypes = {
   REPERTOIRE: {
+    GET: {
+      REQUEST: 'REPERTOIRE.GET.REQUEST',
+      SUCCESS: 'REPERTOIRE.GET.SUCCESS',
+      FAILURE: 'REPERTOIRE.GET.FAILURE',
+    },
     GET_ALL: {
       REQUEST: 'REPERTOIRE.GET_ALL.REQUEST',
       SUCCESS: 'REPERTOIRE.GET_ALL.SUCCESS',
@@ -20,6 +25,21 @@ export const actionTypes = {
     },
   },
 };
+
+export const getRepertoireRequest = repertoireItemId => ({
+  type: actionTypes.REPERTOIRE.GET.REQUEST,
+  repertoireItemId,
+});
+
+export const getRepertoireSuccess = payload => ({
+  type: actionTypes.REPERTOIRE.GET.SUCCESS,
+  payload,
+});
+
+export const getRepertoireFailure = error => ({
+  type: actionTypes.REPERTOIRE.GET.FAILURE,
+  error,
+});
 
 export const getAllRepertoireRequest = () => ({
   type: actionTypes.REPERTOIRE.GET_ALL.REQUEST,
