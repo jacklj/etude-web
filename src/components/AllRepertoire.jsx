@@ -43,7 +43,7 @@ class AllRepertoire extends Component {
     responsive: 'scroll',
     onRowClick: (rowData) => {
       const repId = rowData[0];
-      this.props.push(`/rep/${repId}`);
+      this.props.push(`/repertoire/${repId}`);
     },
   };
 

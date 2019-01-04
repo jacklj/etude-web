@@ -1,0 +1,51 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { Name, Composer } from './common/styledComponents';
+import { selectRepItemForRepItemPage } from '../redux/repertoire/repertoire.selectors';
+
+
+class RepertoireItem extends Component {
+  componentDidMount() {
+    // getRepertoireItemRequest to ensure it's up to date in the store (e.g. if user navigates
+    // directly to a specific repItem page, so all repItems aren't already in the
+    // store)
+    // this.props.getRepertoireItemRequest(this.props.repertoireId);
+  }
+
+  render() {
+    const { repItem } = this.props;
+
+    if (!repItem) return null;
+    const {
+      larger_work: largerWork,
+      name,
+      composer,
+    } = repItem;
+    const { first_name: firstName, surname } = composer;
+    return (
+      <div>
+        <Name>{name}</Name>
+        {composer && <Composer>{`${largerWork} - ${firstName} ${surname}`}</Composer>}
+      </div>
+    );
+  }
+}
+
+RepertoireItem.defaultProps = {
+  repItem: undefined,
+};
+
+RepertoireItem.propTypes = {
+  repItem: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+};
+
+
+const mapStateToProps = (state, ownProps) => ({
+  // N.B. ownProps isn't recursive - just props supplied from 'above'
+  // repertoireId: Number(ownProps.match.params.id),
+  repItem: selectRepItemForRepItemPage(state, ownProps),
+});
+
+export default connect(mapStateToProps)(RepertoireItem);

@@ -71,6 +71,25 @@ export const selectPiece = createReduxOrmSelector(
   },
 );
 
+const getIdFromParams = (state, props) => Number(props.match.params.id);
+
+export const selectRepItemForRepItemPage = createReduxOrmSelector(
+  orm,
+  dbStateSelector,
+  getIdFromParams,
+  (session, repertoireId) => {
+    const piece = session.Repertoire.withId(repertoireId);
+    if (!piece) return undefined;
+    const obj = piece.ref;
+
+    const composer = piece.composer_id.ref;
+    return {
+      ...obj,
+      composer,
+    };
+  },
+);
+
 const addToResultsOrUpdateExistingItem = (newRepertoireId, newDeadline, results) => {
   if (results[newRepertoireId]) {
     // this piece is already in the results - should we update the

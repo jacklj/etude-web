@@ -24,6 +24,7 @@ import AddLocation from './components/AddXPages/AddLocation';
 import AddPerson from './components/AddXPages/AddPerson';
 import { getAllEventsRequest } from './redux/events/events.actions';
 import AllRepertoire from './components/AllRepertoire';
+import RepertoireItem from './components/RepertoireItem';
 
 const drawerWidth = 240;
 
@@ -149,6 +150,7 @@ class App extends Component {
               <Route path="/practice_session/:id" component={PracticeSession} />
               <Route path="/performance/:id" component={Performance} />
               <Route path="/add-rep" component={AddNewRepertoire} />
+              <Route path="/repertoire/:id" component={RepertoireItem} />
               <Route path="/add-exercise" component={AddExercise} />
               <Route path="/add-location" component={AddLocation} />
               <Route path="/add-person" component={AddPerson} />
