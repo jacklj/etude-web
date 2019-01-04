@@ -22,12 +22,22 @@ class RepertoireItem extends Component {
       larger_work: largerWork,
       name,
       composer,
+      composition_date: compositionDate,
+      character_that_sings_it: characterThatSingsIt,
+      created_at: createdAt,
+      updated_at: updatedAt,
+      type,
     } = repItem;
     const { first_name: firstName, surname } = composer;
     return (
       <div>
         <Name>{name}</Name>
         {composer && <Composer>{`${largerWork} - ${firstName} ${surname}`}</Composer>}
+        <div>{compositionDate}</div>
+        <div>{characterThatSingsIt}</div>
+        <div>{createdAt}</div>
+        <div>{updatedAt}</div>
+        <div>{type}</div>
       </div>
     );
   }
